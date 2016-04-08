@@ -1,0 +1,337 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// website_servicequal.class - Class for accessing website servcie qual data
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "audit.class";
+
+class website_servicequal {
+  
+  var $qual_id;
+  var $level;
+  var $street_number;
+  var $street_name;
+  var $locality;
+  var $state;
+  var $postcode;
+  var $dt;
+  var $pass;
+  var $status;
+  var $result_nbn_wireless;
+  var $result_nbn_fiber;
+  var $result_adsl_onnet;
+  var $result_adsl_offnet;
+
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function staticip() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function website_servicequal() { 
+    
+  
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->qual_id = strtoupper($this->qual_id);
+    if (!$this->qual_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->qual_id) {
+      
+      $query = "SELECT * FROM website_servicequal WHERE qual_id = " . $this->db->quote($this->qual_id);
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+         if ( $row ) { 
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+          }
+        }
+      }    
+    }
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->qual_id = strtolower($this->qual_id);
+  
+    // Check we have an static qual_id
+    if (!$this->qual_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT qual_id FROM website_servicequal WHERE qual_id = " . $this->db->quote($this->qual_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+  /* function exist_recent_qual()
+  **
+  ** DESCRIPTION: checks to see if a recent qual of an address exists to stop duplicate lookup
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist_recent_qual() {
+  
+      
+    $query = "SELECT qual_id FROM website_servicequal WHERE level = " . $this->db->quote($this->level);
+    $query .= " AND street_number = " . $this->db->quote($this->street_number);
+    $query .= " AND street_name = " . $this->db->quote($this->street_name);
+    $query .= " AND locality = " . $this->db->quote($this->locality);
+    $query .= " AND state = " . $this->db->quote($this->state);
+    $query .= " AND postcode = " . $this->db->quote($this->postcode);
+    $query .= " AND status = 'complete' and dt >= NOW() - interval 7 day ORDER BY qual_id desc LIMIT 1";
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (website_servicequal::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Create the qualification
+    $query = "INSERT INTO website_servicequal (level, street_number, street_name, locality, state, postcode, dt, pass, status)";
+    $query .= " VALUES (" . $this->db->quote($this->level) . "," . $this->db->quote($this->street_number) . "," . $this->db->quote($this->street_name) . "," . $this->db->quote($this->locality) . "," . $this->db->quote($this->state) . "," . $this->db->quote($this->postcode) . ",NOW()," . $this->db->quote($this->pass) . "," . $this->db->quote('pending') . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      $this->qual_id = $this->db->fetch_insert_id();
+
+      $this->load();
+      
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (website_servicequal::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!website_servicequal::exist()) {
+      return 0;
+      
+    }
+
+    $query = "UPDATE website_servicequal SET status = " . $this->db->quote($this->status) . ", result_nbn_wireless = " . $this->db->quote($this->result_nbn_wireless) . ", result_nbn_fiber = " . $this->db->quote($this->result_nbn_fiber) . ", result_adsl_onnet = " . $this->db->quote($this->result_adsl_onnet) . ", result_adsl_offnet = " . $this->db->quote($this->result_adsl_offnet);
+    $query .= " WHERE qual_id = " . $this->db->quote($this->qual_id);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  **   */
+  function validate() {
+
+    $validate = new validate();
+    
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+  
+
+
+}
+

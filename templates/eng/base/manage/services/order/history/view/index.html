@@ -1,0 +1,104 @@
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">View Order: </span></h2>
+<p></p>
+[ <a href="/base/manage/services/order/history/?service_id={SERVICE_ID}">Back to Order History</a> ]
+<h3>Order# {ORDER_ID}</h3>
+<font color="red" name="error_message" id="error_message">{ERROR_MSG}</font>
+<font color="green">{SUCCESS_MSG}</font><br/>
+<strong>Summary:</strong><br/>
+<form action="{SELF}?order_id={ORDER_ID}" method="POST">
+	<div>
+		<div style="display:inline-block; width:150px;">
+			Date Ordered:
+		</div>
+		<div style="display:inline-block;">
+			{START}
+		</div>
+	</div>
+	<div>
+		<div style="display:inline-block; width:150px;">
+			Address:
+		</div>
+		<div style="display:inline-block;">
+			{ORDER_ADDRESS}
+		</div>
+	</div>
+	{CHANGE_RETAIL_PLAN}
+	<div>
+		<div style="display:inline-block; width:150px;">
+			Order Contact:
+		</div>
+		<div style="display:inline-block;">
+			{ORDER_CONTACT_FORMAT}
+		</div>
+	</div>
+	<div>
+		<div style="display:inline-block; width:150px;">
+			Order Contact Number:
+		</div>
+		<div style="display:inline-block;">
+			{ORDER_CONTACT_NUMBER_FORMAT}
+		</div>
+	</div>
+	<div>
+		<div style="display:inline-block; width:150px;">
+			Status:
+		</div>
+		<div style="display:inline-block;">
+			{STATUS}
+		</div>
+	</div>
+	{STATUS_ROW}<br/>
+	{SAVE_BUTTON}
+	{WITHDRAW_BUTTON}
+	<div class="bubble" name="onhold_div" id="onhold_div" style="visibility:hidden;position: absolute;z-index: 10;">
+		<span>Notes:</span><br/>
+		<textarea name="onhold_notes" id="onhold_notes" placeholder="Add Text Here..." style="width: 270px; height: 170px; margin-left: 1px;"></textarea>
+	</div>
+	<div class="progressbar_container">
+		<span class="activityStep">
+			{PROGRESSBAR_SUBMISSION}
+			<div class="activityHeading">Order Submission</div>
+			<div class="displayDate">{DATE_SUBMISSION}</div>
+		</span>
+		<span class="activityStep">
+			{PROGRESSBAR_ACCEPTANCE}
+			<div class="activityHeading">Order Acceptance</div>
+			<div class="displayDate">{DATE_ACCEPTANCE}</div>
+		</span>
+		<span class="activityStep">
+			{PROGRESSBAR_PROVISIONING}
+			<div class="activityHeading">Order Provisioning</div>
+			<div class="displayDate">{DATE_PROVISIONING}</div>
+		</span>
+		<span class="activityStep">
+			{PROGRESSBAR_COMPLETION}
+			<div class="activityHeading">Order Completion</div>
+			<div class="displayDate">Scheduled for {DATE_ESTIMATED}</div>
+		</span>
+	</div>
+</form>
+<div class="comments_container">
+	<strong>Comments:</strong>
+	{COMMENT_BOX}
+	<br/>
+	{COMMENT_FORM}
+</div>
+<script type="text/javascript">
+// on_hold_notes();
+function on_hold_notes(){
+
+	var a = document.querySelector("select#change_status").value;
+
+	if ( a == "on hold") {
+		document.querySelector('div #onhold_div').style.visibility='visible';
+	} else {
+		document.querySelector('div #onhold_div').style.visibility='hidden';
+	}
+}
+</script>

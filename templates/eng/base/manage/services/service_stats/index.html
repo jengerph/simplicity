@@ -1,0 +1,85 @@
+
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+
+</style><body topmargin="0">
+<h2><span class="bodytest">View  Service Statistics: </span></h2>
+<p>[ <a href="/base/manage/services/?service_id={SERVICE_ID}">&#9664;Back to Service</a> | <a href="/base/manage/services/edit/?service_id={SERVICE_ID}">Edit Service</a> | <a href="/base/manage/services/usage/?service_id={SERVICE_ID}">Service Usage</a> | <a href="/base/manage/services/sessions/?service_id={SERVICE_ID}">Sessions</a>{SERVICE_STATS_LINK} ]</p>
+<p><span>[<a href="/base/manage/services/service_stats/rebuild/?service_id={SERVICE_ID}">Rebuild Port</a> | <a href="/base/manage/services/service_stats/change_profile/?service_id={SERVICE_ID}">Change Line Profile</a> ]</span></p>
+<div style="display:inline-block;">
+  <table class="service_stats">
+    <tr>
+      <th colspan="2" style="padding-left: 5px;">General Information</th>
+    </tr>
+    <tr>
+      <td>Service Number</td>
+      <td>{SERVICE_ID}</td>
+    </tr>
+    <tr>
+      <td>Speed</td>
+      <td>{SPEED}</td>
+    </tr>
+    <tr>
+      <td>Exchange</td>
+      <td>{ECHANGE_CODE}</td>
+    </tr>
+    <tr>
+      <td>Transmission Mode</td>
+      <td>{TRANSMISSION_MODE}</td>
+    </tr>
+  </table>
+
+  <table class="service_stats">
+    <tr>
+      <th colspan="2" style="padding-left: 5px;">Radius Data</th>
+    </tr>
+    <tr>
+      <td>Username</td>
+      <td>{USERNAME}</td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td>{PASSWORD}</td>
+    </tr>
+  </table>
+</div>
+<div style="display:inline-block;vertical-align:top">
+  <table class="service_stats">
+    <tr>
+      <th colspan="3" style="padding-left: 5px;">Line Statistics</th>
+    </tr>
+    <tr>
+      <td></td>
+      <td><strong>Downstream</strong></td>
+      <td><strong>Upstream</strong></td>
+    </tr>
+    <tr>
+      <td>Line Bit Rate</td>
+      <td>{LBR_DOWN}</td>
+      <td>{LBR_UP}</td>
+    </tr>
+    <tr>
+      <td>Output Power</td>
+      <td>{OP_DOWN}</td>
+      <td>{OP_UP}</td>
+    </tr>
+    <tr>
+      <td>Attenuation</td>
+      <td>{ATTENUATION_DOWN}</td>
+      <td>{ATTENUATION_UP}</td>
+    </tr>
+    <tr>
+      <td>SNR Margin</td>
+      <td>{SNRM_DOWN}</td>
+      <td>{SNRM_UP}</td>
+    </tr>
+    <tr>
+      <td>Stability Profile</td>
+      <td></td>
+      <td>{SP_UP}</td>
+    </tr>
+  </table>
+</div>

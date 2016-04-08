@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/QualificationID.xsd" />
+    <xsd:include schemaLocation="AccessQualification.xsd" />
+    <xsd:include schemaLocation="SiteAddress.xsd" />
+    <xsd:include schemaLocation="NbnSiteAddress.xsd" />
+    <xsd:include schemaLocation="QualificationSiteDetails.xsd" />
+    <xsd:include schemaLocation="CableDetails.xsd" />
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/TelstraRegion.xsd" />
+
+    <xsd:element name="QualifyProductResponse" type="wsg:QualifyProductResponse" />
+
+    <xsd:complexType name="QualifyProductResponse">
+        <xsd:sequence>
+            <xsd:element name="qualificationID" type="wsg:QualificationID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each qualification</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="siteDetails" type="wsg:QualificationSiteDetails" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Qualification response relating to the service location</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="siteAddress" type="wsg:SiteAddress" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Address details as recorded by line provider</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="telstraCableDetails" type="wsg:CableDetails" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Cable details as recorded by Telstra</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="telstraRegion" type="wsg:TelstraRegion" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Telstra Region for the site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accessQualificationList" type="wsg:AccessQualification" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Qualification response relating to supported accesses for the product</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="possibleNbnSites" type="wsg:NbnSiteAddress" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">List of potential NBN Localities if no exact match is found</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

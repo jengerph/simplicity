@@ -1,0 +1,363 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// orders_states.class - Class for accessing orders_states details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "audit.class";
+
+class orders_states {
+
+  var $state_id;
+  var $state_name;
+  var $date_estimated;
+  var $date_completed;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function orders_states() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function orders_states() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->state_id = strtoupper($this->state_id);
+
+    if (!$this->state_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->state_id) {
+      
+      $query = "SELECT * FROM orders_states WHERE state_id = " . $this->db->quote($this->state_id);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+        $row = $this->db->fetch_row_array($result);
+        if (isset($row)) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->state_id = strtolower($this->state_id);
+  
+    // Check we have an user
+    if (!$this->state_id) {
+    
+      return 0;
+      
+    }
+
+    $query = "SELECT * FROM orders_states WHERE state_id = " . $this->db->quote($this->state_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+    // Validate
+    if (orders_states::validate()) {
+    
+      // return 0;
+      
+    }
+
+    $Date = date('Y-m-d');
+    $this->date_estimated =  date('Y-m-d',strtotime($Date. ' + 21 days'));
+
+    // Create the property search
+    $query = "INSERT INTO orders_states (order_id, state_name, date_estimated, date_completed)";
+    $query .= " VALUES (" . $this->db->quote($this->order_id) . "," . $this->db->quote($this->state_name) . "," . $this->db->quote($this->date_estimated) . "," . $this->db->quote($this->date_completed) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"order_states",$this->order_id);
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+/* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+
+    // Check if id exists    
+    if (!orders_states::exist()) {
+      return 0;
+      
+    }
+
+    $query = "UPDATE orders_states SET date_completed = " . $this->db->quote($this->date_completed);
+    $query .= " WHERE state_id = " . $this->db->quote($this->state_id);
+    
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+    $this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+    
+    // Prepare the query
+    $query = "DELETE FROM orders_states WHERE state_id = " . $this->db->quote($this->state_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+    
+    if ( !$this->order_id ) {
+
+      return 240;
+
+    }
+
+    if ( !$this->state_name ) {
+
+      return 241;
+
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_by_order_id()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of plan attributes with correpsonding details
+  ** 
+  */
+
+  function get_by_order_id(){
+      
+      $a = array();
+      
+      $query = "SELECT * FROM orders_states WHERE order_id = " . $this->db->quote($this->order_id);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+}
+

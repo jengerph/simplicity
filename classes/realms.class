@@ -1,0 +1,378 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// realms.class - Class for accessing services details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "audit.class";
+
+class realms {
+  
+  var $wholesaler_id;
+  var $realm;
+  var $type_id;
+
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function services() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function realms() { 
+    
+  
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->wholesaler_id = strtoupper($this->wholesaler_id);
+    if (!$this->wholesaler_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->wholesaler_id) {
+      
+      $query = "SELECT * FROM wholesaler_realms WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+         if ( $row ) { 
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+          }
+        }
+      }    
+    }
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->wholesaler_id = strtolower($this->wholesaler_id);
+  
+    // Check we have an user
+    if (!$this->wholesaler_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT wholesaler_id FROM wholesaler_realms WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (realms::validate()) {
+    
+      return 0;
+      
+    }
+
+
+    $realms = new realms();
+
+    // Create the property search
+    $query = "INSERT INTO wholesaler_realms (wholesaler_id, realm, type_id)";
+    $query .= " VALUES (" . $this->db->quote($this->wholesaler_id) . "," . $this->db->quote($this->realm) . "," . $this->db->quote($this->type_id) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      $this->load();
+      
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"realms",$this->wholesaler_id);
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    $validate = new validate();
+
+    if (!$this->wholesaler_id ) {
+      return 100;
+    }
+
+    if ( !$this->type_id ) {
+      return 130;
+    }
+
+    if ( !$validate->fqdn($this->realm) ) {
+      return 220;
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_all()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of services with correpsonding details
+  ** 
+  */
+
+  function get_my_realms(){
+      $a = array();
+      if ( !$this->wholesaler_id ) {
+        return 0;
+      }
+
+      if ( $this->type_id == '1' || $this->type_id == '2' ) {
+        $query = "SELECT * FROM wholesaler_realms WHERE wholesaler_id=" . $this->db->quote($this->wholesaler_id) . " AND (type_id='1' OR type_id='2')";
+      } else {
+        $query = "SELECT * FROM wholesaler_realms WHERE wholesaler_id=" . $this->db->quote($this->wholesaler_id) . " AND type_id=" . $this->db->quote($this->type_id);
+      }
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_all()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of services with correpsonding details
+  ** 
+  */
+
+  function get_my_realms2(){
+      $a = array();
+      if ( !$this->wholesaler_id ) {
+        return 0;
+      }
+
+      $query = "SELECT * FROM wholesaler_realms WHERE wholesaler_id=" . $this->db->quote($this->wholesaler_id);
+
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function delete()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of services with correpsonding details
+  ** 
+  */
+
+  function delete(){
+
+    // Prepare the query
+    $query = "DELETE FROM wholesaler_realms WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id) . " AND realm = " . $this->db->quote($this->realm) . "AND type_id = " . $this->db->quote($this->type_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+
+  }
+
+ /* function realm_lists()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - array
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function realm_lists( $name, $array ){
+      
+    $list = '<select name="' . $name . '" id="' . $name . '">'; 
+    $list .= '<option value="0">Select Realm</option>';
+
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+          $key = $array[$x]["realm"];
+          $key = str_replace('.', '', $key);
+          $key = strtoupper($key);
+          $list .= "<option value='" . $array[$x]["realm"] . "' {REALM_". $key ."_SELECT}>" . $array[$x]["realm"] . "</option>";
+      }
+
+      $list .= '</select>';
+
+    }
+
+      return $list; 
+
+  }
+
+}
+

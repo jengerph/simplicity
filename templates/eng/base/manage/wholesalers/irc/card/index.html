@@ -1,0 +1,248 @@
+<!-- tablesorter -->
+<link rel="stylesheet" href="/templates/theme.blue.css">
+<script src="/templates/jquery.tablesorter.js"></script>
+<script src="/templates/jquery.tablesorter.widgets.js"></script>
+<!-- inside range filter type -->
+<script src="/templates/widget-filter-type-insideRange.js"></script>
+<link rel="stylesheet" href="/templates/addons/pager/jquery.tablesorter.pager.css">
+<script src="/templates/addons/pager/jquery.tablesorter.pager.js"></script>
+
+<style>
+#types { width: 100%; }
+#lightbox{
+	visibility:hidden;
+	position:fixed;
+	background:white;
+	border:2px solid #3c3c3c;
+	color:black;
+	z-index:500;
+	width: 400px;
+	height:100px;
+	padding:20px;
+}
+
+.dimmer{
+	background: #000;
+	position: fixed;
+	opacity: .5;
+	top: 0;
+	z-index:99;
+}
+#outerpopdiv{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+}​
+</style>
+<script>
+$(function(){
+	$('#types').tablesorter();
+});
+function show_div(){
+	$( ".loader" ).css( "visibility", function( index ) {
+	  return 'visible';
+	});
+	return true;
+}
+</script>
+	<script id="js">$(function(){
+
+	var $table = $('table'),
+	// define pager options
+	pagerOptions = {
+		// target the pager markup - see the HTML block below
+		container: $(".pager"),
+		// output string - default is '{page}/{totalPages}'; possible variables: {page}, {totalPages}, {startRow}, {endRow} and {totalRows}
+		// output: '{startRow} - {endRow} / {filteredRows} ({totalRows})',
+		// if true, the table will remain the same height no matter how many records are displayed. The space is made up by an empty
+		// table row set to a height to compensate; default is false
+		fixedHeight: true,
+		// remove rows from the table to speed up the sort of large tables.
+		// setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
+		removeRows: false,
+		// go to page selector - select dropdown that sets the current page
+		cssGoto: '.gotoPage'
+	};
+
+	// Initialize tablesorter
+	// ***********************
+	$table
+		.tablesorter({
+			theme: 'blue',
+			headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
+			widthFixed: true,
+			widgets: ['zebra', 'filter']
+		})
+
+		// initialize the pager plugin
+		// ****************************
+		.tablesorterPager(pagerOptions);
+
+		// Add two new rows using the "addRows" method
+		// the "update" method doesn't work here because not all rows are
+		// present in the table when the pager is applied ("removeRows" is false)
+		// ***********************************************************************
+		// var r, $row, num = 50,
+		// 	row = '<tr><td>Student{i}</td><td>{m}</td><td>{g}</td><td>{r}</td><td>{r}</td><td>{r}</td><td>{r}</td><td><button type="button" class="remove" title="Remove this row">X</button></td></tr>' +
+		// 		'<tr><td>Student{j}</td><td>{m}</td><td>{g}</td><td>{r}</td><td>{r}</td><td>{r}</td><td>{r}</td><td><button type="button" class="remove" title="Remove this row">X</button></td></tr>';
+		// $('button:contains(Add)').click(function(){
+		// 	// add two rows of random data!
+		// 	r = row.replace(/\{[gijmr]\}/g, function(m){
+		// 		return {
+		// 			'{i}' : num + 1,
+		// 			'{j}' : num + 2,
+		// 			'{r}' : Math.round(Math.random() * 100),
+		// 			'{g}' : Math.random() > 0.5 ? 'male' : 'female',
+		// 			'{m}' : Math.random() > 0.5 ? 'Mathematics' : 'Languages'
+		// 		}[m];
+		// 	});
+		// 	num = num + 2;
+		// 	$row = $(r);
+		// 	$table
+		// 		.find('tbody').append($row)
+		// 		.trigger('addRows', [$row]);
+		// 	return false;
+		// });
+
+		// Delete a row
+		// *************
+		$table.delegate('button.remove', 'click' ,function(){
+			// NOTE this special treatment is only needed if `removeRows` is `true`
+			// disabling the pager will restore all table rows
+			$table.trigger('disablePager');
+			// remove chosen row
+			$(this).closest('tr').remove();
+			// restore pager
+			$table.trigger('enablePager');
+		});
+
+		// Destroy pager / Restore pager
+		// **************
+		$('button:contains(Destroy)').click(function(){
+			// Exterminate, annhilate, destroy! http://www.youtube.com/watch?v=LOqn8FxuyFs
+			var $t = $(this);
+			if (/Destroy/.test( $t.text() )){
+				$table.trigger('destroyPager');
+				$t.text('Restore Pager');
+			} else {
+				$table.tablesorterPager(pagerOptions);
+				$t.text('Destroy Pager');
+			}
+			return false;
+		});
+
+		// Disable / Enable
+		// **************
+		$('.toggle').click(function(){
+			var mode = /Disable/.test( $(this).text() );
+			// triggering disablePager or enablePager
+			$table.trigger( (mode ? 'disable' : 'enable') + 'Pager');
+			$(this).text( (mode ? 'Enable' : 'Disable') + 'Pager');
+			return false;
+		});
+		$table.bind('pagerChange', function(){
+			// pager automatically enables when table is sorted.
+			$('.toggle').text('Disable');
+		});
+
+		document.querySelectorAll("table thead tr th")[0].innerHTML="Destination";
+		document.querySelectorAll("table thead tr th")[1].innerHTML="Cost Per Minute";
+
+});
+
+function popup(destination,band,ir_id,base_cost,cost, wholesaler_id){
+	var lightbox = document.getElementById("lightbox"),
+    dimmer = document.createElement("div");
+    
+    dimmer.style.width =  '100%';
+    dimmer.style.height = '100%';
+    dimmer.className = 'dimmer';
+    
+    dimmer.onclick = function(){
+        document.body.removeChild(this);   
+        lightbox.style.visibility = 'hidden';
+    }
+        
+    document.body.appendChild(dimmer);
+    
+    lightbox.style.visibility = 'visible';
+    lightbox.style.top = '50%';
+    lightbox.style.left = '50%';
+    lightbox.style.margin = '-50px 0px 0px -150px';
+    if ( lightbox.children[0].children.length == 9 ) {
+    	lightbox.children[0].children[0].value = band;
+	    lightbox.children[0].children[1].value = wholesaler_id;
+	    lightbox.children[0].children[2].innerHTML = destination;
+	    lightbox.children[0].children[4].innerHTML = parseFloat(base_cost).toFixed(4);
+	    lightbox.children[0].children[6].value = parseFloat(cost).toFixed(4);
+    } else if ( lightbox.children[0].children.length == 7 ) {
+    	lightbox.children[0].children[0].value = band;
+	    lightbox.children[0].children[1].value = wholesaler_id;
+	    lightbox.children[0].children[2].innerHTML = destination;
+	    lightbox.children[0].children[4].value = parseFloat(cost).toFixed(4);
+    }
+
+    return false;
+}
+</script>
+<body topmargin="0">
+<h2><span class="bodytest">View International Rate Card: </span></h2>
+{MENU}
+  <label></label>
+</p>
+<p>[ <a href="/base/manage/wholesalers/irc/?wholesaler_id={WHOLESALER_ID}">&#9664; Back to International Rate Cards List</a> | <a href="/base/manage/wholesalers/irc/edit/?ir_id={IR_ID}">Edit International Rate Card Information</a> | <a href="cost/?ir_id={IR_ID}">Change Cost Per Minute</a> ]</p>
+<h2>{CARD_DESCRIPTION}</h2>
+<div class="pager" style="text-align:center">
+	<img src="/templates/addons/pager/icons/first.png" class="first" alt="First" title="First page" />
+	<img src="/templates/addons/pager/icons/prev.png" class="prev" alt="Prev" title="Previous page" />
+	Page: <select class="gotoPage"></select>
+	<img src="/templates/addons/pager/icons/next.png" class="next" alt="Next" title="Next page" />
+	<img src="/templates/addons/pager/icons/last.png" class="last" alt="Last" title= "Last page" />
+	Destination Per Page: <select class="pagesize">
+		<option value="10">10</option>
+		<option value="20">20</option>
+		<option value="30">30</option>
+		<option value="40">40</option>
+	</select>
+</div>
+<table id="filters" class="tablesorter" width="100%" border="1" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr><th>Destination</th><th>Cost Per Minute</th></tr>
+  </thead>
+  <tbody>
+    {ROWS}
+  </tbody>
+</table>
+	<div id="lightbox">
+		
+		<form action="{SELF}?ir_id={IR_ID}" method="POST">
+			<input type="text" name="band" id="band" value="" hidden/><input type="text" name="wholesaler_id" id="wholesaler_id" value="" hidden/>
+			Destination: <span id="country"></span><br/>
+			{BASE_COST_SECTION}
+			Cost: $<input type="text" name="cost" id="cost" value=""><br/>
+			<input  type="submit" name="submit" id="submit" value="Save">
+		</form>
+	</div>
+<div  style="margin-top: 20px;">
+	<h3><a href="{SELF}?ir_id={IR_ID}&dl_template=yes">Download Template</a></h3>
+</div>
+<div style="margin-top: 20px;">
+	<form action="{SELF}?ir_id={IR_ID}" method="POST" enctype="multipart/form-data" id="submit_template" name="submit_template" onsubmit="show_div();">
+		<fieldset style="width: auto; display: inline;">
+			<legend>Upload Template with new cost:</legend>
+			<p>
+				<input name="spreadsheet" id="spreadsheet" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+				<br/>
+				<input type="submit" name="upload" id="upload" value="Upload" style="float: right;">
+			</p>
+		</fieldset>
+	</form>
+</div>
+<div class="loader" style="z-index: 9999; position: fixed; left: 0px; top: 0px; height: 100%; width: 100%; text-align: center; background-color: rgb(0, 0, 0); opacity: 0.5; color: white;visibility:hidden;">
+<img src="/images/loading-icon.gif" style="margin-top: 15%;"><br/>
+Uploading...
+</div>

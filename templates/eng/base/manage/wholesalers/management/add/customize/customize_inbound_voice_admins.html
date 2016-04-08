@@ -1,0 +1,92 @@
+<p><!-- customize_inbound_voice_admins -->
+        <div>
+  <div>
+    <div style="display:inline-block; width:300px;vertical-align: top;">
+      
+    </div>
+    <div style="display:inline-block;vertical-align: bottom;">
+      <small><strong>New Plan</strong></small>
+    </div>
+  </div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+    <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Description:</font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;">
+    <input name="description" type="text" id="description" value="{DESCRIPTION}" class="input_custom">
+  </div>
+</div>
+<div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+    <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Active:</font></b></font>
+  </div>
+  <div style="display:inline-block;">
+    <div style="display:inline-block;vertical-align: bottom;">
+    <input name="active" type="radio" value="no"{ACTIVE_NO_SELECT} style="display:inline-block;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> No</font> 
+    </div>
+    <div style="display:inline-block;vertical-align: bottom;">
+    <input name="active" type="radio" value="yes"{ACTIVE_YES_SELECT} style="display:inline-block;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Yes</font>
+    </div>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Contract Length:</font></b></font>
+  </div>
+  <div style="display:inline-block;">
+  <select name="contract_length" id="contract_length">
+    <option value="0" {CL_SELECT_0}>0 Months</option>
+    <option value="12" {CL_SELECT_12}>12 Months</option>
+    <option value="24" {CL_SELECT_24}>24 Months</option>
+  </select>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Setup Fee: </font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;">
+    <input name="setup_fee" id="setup_fee" value="{SETUP_FEE}"/>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Monthly Fee: </font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;">
+    <input name="monthly_fee" id="monthly_fee" value="{MONTHLY_FEE}"/>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Standard Change Answering Point Fee: </font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;">
+    <input name="standard_capf" id="standard_capf" value="{STANDARD_CAPF}"/>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Priority Change Answering Point Fee: </font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;">
+    <input name="priority_capf" id="priority_capf" value="{PRIORITY_CAPF}"/>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Usage Types: </font></b></font>
+  </div>
+  <div style="margin-left: 110px;">
+    <!-- <select name="usage_types" id="usage_types">
+          <option value="Local to Fixed Line" {USAGE_TYPES_LOCAL_TO_FIXED_LINE}>Local to Fixed Line</option>
+          <option value="National to Fixed Line" {USAGE_TYPES_NATIONAL_TO_FIXED_LINE}>National to Fixed Line</option>
+          <option value="Mobile to Fixed Line" {USAGE_TYPES_MOBILE_TO_FIXED_LINE}>Mobile to Fixed Line</option>
+          <option value="Local to Mobile" {USAGE_TYPES_LOCAL_TO_MOBILE}>Local to Mobile</option>
+          <option value="National to Mobile" {USAGE_TYPES_NATIONAL_TO_MOBILE}>National to Mobile</option>
+          <option value="Mobile to Mobile" {USAGE_TYPES_MOBILE_TO_MOBILE}>Mobile to Mobile</option>
+  </select> -->
+  {INBOUND_USAGE_TYPES}
+  </div>
+</div>
+      </p>

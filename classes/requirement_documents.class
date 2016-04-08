@@ -1,0 +1,392 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// requirement_documents.class - Class for requirement documents
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+
+class requirement_documents {
+
+  var $doc_id;
+  var $customer_id;
+  var $authorised_rep;
+  var $requirement_id;
+  var $requirement_number;
+  var $file_name;
+  var $file_type;
+  var $ts;
+  var $file;
+  var $category;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function document() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function requirement_documents() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->doc_id = strtoupper($this->doc_id);
+  
+    if ($this->doc_id) {
+      
+      $query = "SELECT * FROM requirement_documents WHERE doc_id = " . $this->db->quote($this->doc_id);
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        while ($cel = each($row)) {
+
+          $key = $cel['key'];
+          
+          $this->{$key} = $cel['value'];
+          
+        }      
+
+      	if ($this->file == '') {
+      		// On file system
+      		
+      		$config = new config();
+    			$fp      = fopen($config->docs_dir . '/' . $this->category . '_ids/' . $this->doc_id, 'r');
+    			$this->file = fread($fp, filesize($config->docs_dir . '/' . $this->category . '_ids/' . $this->doc_id));  		
+    			fclose($fp);
+    		}
+
+      }    
+    }
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->doc_id = strtoupper($this->doc_id);
+  
+    // Check we have an doc_id
+    if (!$this->doc_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT doc_id FROM requirement_documents WHERE doc_id = " . $this->db->quote($this->doc_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+	
+    // Validate
+    if (requirement_documents::validate()) {
+    
+      return 0;
+      
+    }
+    
+    // Create the document
+    $query = "INSERT INTO requirement_documents (customer_id,authorised_rep, category, requirement_id, requirement_number, file_name, file_type, ts)";
+    $query .= " VALUES (" . $this->db->quote($this->customer_id) . "," . $this->db->quote($this->authorised_rep) . "," . $this->db->quote($this->category) . "," . $this->db->quote($this->requirement_id) . "," . $this->db->quote($this->requirement_number) . "," . $this->db->quote($this->file_name) . "," . $this->db->quote($this->file_type) . ",NOW())";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+    
+	    $this->doc_id = $this->db->fetch_insert_id();
+
+			// Write file out
+			$config = new config();
+			file_put_contents ( $config->docs_dir . '/' . $this->category . '_ids/' . $this->doc_id, $this->file );
+			
+			$this->load();
+			
+
+      return 1;
+					
+    }
+  }
+  
+  function create() {
+  
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (requirement_documents::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!requirement_documents::exist()) {
+      return 0;
+      
+    }
+    
+    $query = "UPDATE requirement_documents SET customer_id = " . $this->db->quote($this->customer_id) . ", authorised_rep = " . $this->db->quote($this->authorised_rep) . ", category = " . $this->db->quote($this->category) . ", requirement_id = " . $this->db->quote($this->requirement_id) . ", requirement_number = " . $this->db->quote($this->requirement_number) . ", file_name = " . $this->db->quote($this->file_name) . ", file_type = " . $this->db->quote($this->file_type) . ", ts = NOW()";
+    $query .= " WHERE doc_id = " . $this->db->quote($this->doc_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      if ($this->file) {
+        $this->file_upload();
+      }
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+		$this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+
+    
+    // Prepare the query
+    $query = "DELETE FROM requirement_documents WHERE doc_id = " . $this->db->quote($this->doc_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+    	
+    	if ($this->file == '') {
+    		
+    		// File system
+    		$config = new config();
+    		
+    		unlink($config->docs_dir . '/' . $this->category . '_ids/' . $this->doc_id);
+			}
+	  	return 1;
+	  	
+	  	
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+		if ($this->file_name == '') {
+			return 61;
+		}
+	
+		if (!$this->file_type) {
+			return 62;
+		}
+		
+    // ALL OK
+    return 0;
+    
+  }
+  
+
+
+  function get_all() {
+  
+    $query = "SELECT * FROM requirement_documents WHERE authorised_rep = " . $this->db->quote($this->authorised_rep);
+      $result = $this->db->execute_query($query);
+      
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+    
+  }
+
+    function file_upload() {
+  
+      if ( !$this->doc_id ) {
+        return 0;
+      }
+
+      if ( !$this->category ) {
+        return 0;
+      }
+
+      if ( !$this->file ) {
+        return 0;
+      }
+
+    // Write file out
+      $config = new config();
+      file_put_contents ( $config->docs_dir . '/' . $this->category . '_ids/' . $this->doc_id, $this->file );
+    return 1;
+    
+  }
+ 
+  	
+}

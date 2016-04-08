@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="{{ STATIC_URL }}Styles/Site.css" rel="stylesheet" type="text/css" />
+    <!-- Include for Ajax Calls -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <!-- This is the JSONP script include on the eWAY Rapid API Server - this must be included to use the Rapid API via JSONP -->
+    {# // <script type="text/javascript" src="<?php echo $service->APIConfig["PaymentService.JSONPScript"]  }}"></script> #}
+</head>
+<body>
+    <form id="form1" action="{{ FormActionURL }}" method='post'>
+    {% csrf_token %}
+    <center>
+        <div id="outer">
+            <div id="toplinks">
+                <img alt="eWAY Logo" class="logo" src="{{ STATIC_URL }}Images/merchantlogo.gif" width="926px" height="65px" />
+            </div>
+            <div id="main">
+                <div id="titlearea">
+                    <h2>Sample Merchant Checkout</h2>
+                </div>
+                {% if not form.non_field.errors %}
+                    <div id="error">
+                        <label style="color:red">{{ form.errors }}</label>
+                    </div>
+                {% endif %}
+                <div id="maincontent">
+                    <div class="transactioncustomer">
+                        <div class="header first">
+                            Customer Address
+                        </div>
+                        <div class="fields">
+                            <label for="lblStreet">Street</label>
+                            <label id="lblStreet">{{ Street }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblCity">
+                                City</label>
+                            <label id="lblStreet">{{ City }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblState">
+                                State</label>
+                            <label id="lblState">{{ State }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblPostcode">
+                                Post Code</label>
+                            <label id="lblPostcode">{{ PostalCode }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblCountry">
+                                Country</label>
+                            <label id="lblCountry">{{ Country }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblEmail">
+                                Email</label>
+                            <label id="lblEmail">{{ Email }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblPhone">
+                                Phone</label>
+                            <label id="lblPhone">{{ Phone }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblMobile">
+                                Mobile</label>
+                            <label id="lblMobile">{{ Mobile }}</label>
+                        </div>
+                        <div class="header">
+                            Payment Details
+                        </div>
+                        <div class="fields">
+                            <label for="lblAmount">
+                                Total Amount</label>
+                            <label id="lblAmount">{{ TotalAmount }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblInvoiceReference">
+                                Invoice Reference</label>
+                            <label id="lblInvoiceReference">{{ InvoiceReference }}</label>
+                        </div>
+                    </div>
+                    <div class="transactioncard">
+                        <div class="header first">
+                            Customer Details</div>
+                        <div class="fields">
+                            <label for="lblTitle">
+                                Title</label>
+                            <label id="lblTitle"> {{ Title }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblFirstName">
+                                First Name</label>
+                            <label id="lblFirstName">{{ FirstName }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblLastName">
+                                Last Name</label>
+                            <label id="lblLastName">{{ LastName }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblCompanyName">
+                                Company Name</label>
+                            <label id="lblCompanyName">{{ CompanyName  }}</label>
+                        </div>
+                        <div class="fields">
+                            <label for="lblJobDescription">
+                                Job Description</label>
+                            <label id="lblJobDescription">{{ JobDescription  }}</label>
+                        </div>
+                        <div class="header">
+                            Card Details
+                        </div>
+                        <!-- The following fields are the ones that eWAY looks for in the POSTed data when the form is submitted. -->
+
+                        <!-- This field should contain the access code received from eWAY -->
+                        <input type='hidden' name='EWAY_ACCESSCODE' value="{{ AccessCode }}" />
+                        <div class="fields">
+                            <label for="EWAY_CARDNAME">
+                                Card Holder</label>
+                            <input type='text' name='EWAY_CARDNAME' id='EWAY_CARDNAME' value="{{ EWAY_CARDNAME }}" />
+                        </div>
+                        <div class="fields">
+                            <label for="EWAY_CARDNUMBER">
+                                Card Number</label>
+                            <input type='text' name='EWAY_CARDNUMBER' id='EWAY_CARDNUMBER' value="{{ EWAY_CARDNUMBER }}" />
+                        </div>
+                        <div class="fields">
+                            <label for="EWAY_CARDEXPIRYMONTH">
+                                Expiry Date</label>
+                            <select name="EWAY_CARDEXPIRYMONTH" id="EWAY_CARDEXPIRYMONTH">
+                                {% for month in months %}
+                                    {{ month }} == {{ EWAY_CARDEXPIRYMONTH }}
+                                    {% if month == EWAY_CARDEXPIRYMONTH %}
+                                        <option value='{{ EWAY_CARDEXPIRYMONTH }}' selected="selected"> {{ EWAY_CARDEXPIRYMONTH }}</option>
+                                    {% else %}
+                                        <option value='{{ month }}'>{{ month }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <select ID="EWAY_CARDEXPIRYYEAR" name="EWAY_CARDEXPIRYYEAR">
+                                {% for year in years %}
+                                    {% if year == EWAY_CARDEXPIRYYEAR %}
+                                        <option value="{{ EWAY_CARDEXPIRYYEAR }}" selected="selected"> 20{{ EWAY_CARDEXPIRYYEAR }}</option>
+                                    {% else %}
+                                        <option value="{{ year }}"> 20{{ year }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="fields">
+                            <label for="EWAY_CARDSTARTMONTH">
+                                Valid From Date</label>
+
+                            <select name='EWAY_CARDSTARTMONTH' id='EWAY_CARDSTARTMONTH'>
+                                {% for month in months %}
+                                    {{ month }} == {{ EWAY_CARDSTARTMONTH }}
+                                    {% if month == EWAY_CARDSTARTMONTH %}
+                                        <option value='{{ EWAY_CARDSTARTMONTH }}' selected="selected"> {{ EWAY_CARDSTARTMONTH }}</option>
+                                    {% else %}
+                                        <option value='{{ month }}'>{{ month }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <select ID="EWAY_CARDSTARTYEAR" name="EWAY_CARDSTARTYEAR">
+                                {% for year in years %}
+                                    {% if year == EWAY_CARDSTARTYEAR %}
+                                        <option value="{{ EWAY_CARDSTARTYEAR }}" selected="selected"> 20{{ EWAY_CARDSTARTYEAR }}</option>
+                                    {% else %}
+                                        <option value="{{ year }}"> 20{{ year }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="fields">
+                            <label for="EWAY_CARDISSUENUMBER">
+                                Issue Number</label>
+                            <input type='text' name='EWAY_CARDISSUENUMBER' id='EWAY_CARDISSUENUMBER' value="{{ EWAY_CARDISSUENUMBER }}">
+                        </div>
+                        <div class="fields">
+                            <label for="EWAY_CARDCVN">
+                                CVN</label>
+                            <input type='text' name='EWAY_CARDCVN' id='EWAY_CARDCVN' value="123" maxlength="4" style="width:40px;"/> <!-- This field is optional but highly recommended -->
+                        </div>
+                    </div>
+                    <div class="paymentbutton">
+                        <br />
+                        <br />
+                        <input type='submit' ID="btnSubmit" name='Process' value="Process" />
+                    </div>
+                </div>
+                <div id="maincontentbottom">
+                </div>
+            </div>
+        </div>
+    </center>
+    </form>
+</body>
+</html>

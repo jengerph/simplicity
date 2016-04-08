@@ -1,0 +1,86 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Edit Service: </span></h2>
+<!-- <p>{BACK_LINK}</p> -->
+<p>[ <a href="/base/manage/services/?service_id={SERVICE_ID}">&#9664;Back to Service</a>{SERVICE_LINKS}{MOVE_SERVICE_LINK} ]</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="##0285AE">{ERROR_INPROGRESS}</font></p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="green">{SUCCESS_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&service_id={SERVICE_ID}" method="post" name="create_order">
+  <input name="customer_id" type="text" id="customer_id" value="{CUSTOMER_ID}" hidden>
+  <div style="display: inline-block; background-color: rgb(227, 241, 254); height: 20px; width: 65px; text-align: center; line-height: 21px;"><a href="javascript:void(0)" onclick="steps('general')">General</a></div>
+  {EXTRA_DIV_HEADER}
+<table id="general" border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66" style="margin: 0px;">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Service Type:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">{SERVICE_TYPE}</font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Start Date:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="start_date" type="text" id="start_date" value="{START_DATE}" readonly> -->
+      {START_DATE}
+    </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Contract End:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="contract_end" type="text" id="contract_end" value="{CONTRACT_END}" readonly> -->
+      {CONTRACT_END}
+      </font></td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Retail Plan:</font></b></font></div></td>
+    <td>{RETAIL_PLAN_LIST}</td>
+  </tr>
+   <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> State:</font></b></font></div></td>
+    <td>
+      <font color="#000000"><font face="Verdana, Arial, Helvetica, sans-serif" size="2">{STATE}</font>
+      <!-- <select name="state" id="state">
+        <option value="creation"{STATE_CREATION_SELECT}>Creation</option>
+        <option value="active"{STATE_ACTIVE_SELECT}>Active</option>
+        <option value="inactive"{STATE_INACTIVE_SELECT}>Inactive</option>
+      </select> -->
+    </td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Identifier:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {IDENTIFIER}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Tag:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="tag" type="text" id="tag" value="{TAG}"><input type="submit" name="save_tag" id="save_tag" value="Save">
+      </font></td>
+  </tr>
+</table>
+<p id="main_buttons">
+  <input name="submit2" type="submit" id="submit2" value="Create an Order"> | <input name="cancel" type="submit" id="cancel" value="Cancel Service"><!--  | <a href="">Disconnect/Terminate</a> -->
+  <!-- <input type="submit" name="activate" id="activate" value="activate" hidden /> -->
+  <input name="submit" type="submit" id="submit" value="Hidden Button" hidden>
+</p>
+</form>
+{EXTRA_TABLE}
+{USER_RADIUS}
+
+<script type="text/javascript">
+  function steps(tab){
+    if ( tab == "general" ) {
+      document.querySelector("#general").hidden = false;
+      document.querySelector("#main_buttons").hidden = false;
+      document.querySelector("#extra").hidden = true;
+      document.querySelector("#extra_button").hidden = true;
+    } else if ( tab == "extra" ) {
+      document.querySelector("#general").hidden = true;
+      document.querySelector("#main_buttons").hidden = true;
+      document.querySelector("#extra").hidden = false;
+      document.querySelector("#extra_button").hidden = false;
+    }
+  }
+</script>

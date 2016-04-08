@@ -1,0 +1,38 @@
+<script src="https://code.jquery.com/jquery-1.7.1.js" type="text/javascript"></script>
+ <link href="/select2/select2.css" rel="stylesheet"/>
+<script src="/select2/select2.js"></script>
+<script>
+$(document).ready(function() { $("#select_username").select2();});
+</script>
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">View  Sessions: </span></h2>
+<p><a href="/base/manage/adsl_service/usage">Service Usage</a> | <a href="/base/manage/adsl_service/sessions">Sessions</a></p>
+</p>
+	<form action="{SELF}" method="POST" id="audit_form">
+		<select name="select_username" id="select_username" onchange='this.form.submit()'>
+	        <option value="view_all">View All</option>
+	        {OPTION}
+		</select>
+	<!-- </form> -->
+<div>
+  Page:
+    <select name="page" id="page" onchange="this.form.submit()">
+      {OPTION_PAGE_NUM}
+    </select>
+  </form>
+</div>
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+	<tr>
+	    <th><strong>Session Start</strong></th>
+	    <th><strong>Session Stop</strong></th>
+	    <th><strong>Download</strong></th>
+	    <th><strong>Upload</strong></th>
+	    <th><strong>IP Address</strong></th>
+  	</tr>
+{ROWS}
+</table>

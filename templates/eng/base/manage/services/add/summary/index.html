@@ -1,0 +1,96 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<div>&#8226;&#8226;&#8226;<font color="green">&#9989;</font> Create Service &#xbb; Order Summary</div>
+<h2><span class="bodytext">Order Summary: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&sp={SP}" method="post" name="form">
+  <input name="customer_id" type="text" id="customer_id" value="{CUSTOMER_ID}" hidden>
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td colspan="2"><div align="left"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Basic Information</font></b></font></div></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Company Name:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {COMPANY_NAME}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Identifier:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {IDENTIFIER}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Address:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {ADDRESS}
+      </font></td>
+  </tr>
+{RADIUS_ROW}
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Tag:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {TAG}
+      </font></td>
+  </tr>
+{LOSING_PROVIDER}
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Order Contact:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {CONTACT}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Order Contact Number:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {CONTACT_NUMBER}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td colspan="2"><div align="left"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Plan Details</font></b></font></div></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Contract Start:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {CONTRACT_START}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Contract End:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {CONTRACT_END}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Contract Length:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {CONTRACT_LENGTH} months
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Service Type:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {SERVICE_TYPE}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Plan:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {PLAN}
+      </font></td>
+  </tr>
+  {ADSL_NBN_ROW}
+  {INBOUND_VOICE_ROW}
+  {OUTBOUND_VOICE_ROW}
+  {IRC_ROW}
+  {EXTRAS_ROW}
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Create"> | <a href="/base/manage/services/add/summary/?customer_id={CUSTOMER_ID}&sp={SP}&cancel=yes">Cancel Order</a>
+</p>
+</form>

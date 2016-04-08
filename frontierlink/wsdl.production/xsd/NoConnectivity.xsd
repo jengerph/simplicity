@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:element name="NoConnectivity" type="wsg:NoConnectivity" />
+
+    <xsd:complexType name="NoConnectivity">
+        <xsd:sequence>
+            <xsd:element name="haveDialTone" type="xsd:boolean" />
+            <xsd:element name="synchCarrierDetect" type="xsd:boolean" />
+            <xsd:element name="wanIPAddress" type="xsd:string" />
+            <xsd:element name="chapUsername" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

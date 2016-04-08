@@ -1,0 +1,90 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Edit Realm: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?wholesaler_id={WS_ID}" method="post">
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Company Name:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="company_name" type="text" id="company_name" value="{COMPANY_NAME}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Email Address:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="email" type="text" id="email" value="{EMAIL}">
+    </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Phone:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="phone" type="text" id="phone" value="{PHONE}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Active</font></b></font></div></td>
+    <td>
+      <input name="active" type="radio" value="no"{ACTIVE_NO_SELECT}>
+      No 
+      <input name="active" type="radio" value="yes"{ACTIVE_YES_SELECT}>
+      Yes</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Address 1:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="address1" type="text" id="address1" value="{ADDRESS1}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Address 2:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="address2" type="text" id="address2" value="{ADDRESS2}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> City:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="city" type="text" id="city" value="{CITY}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">State:</font></b></font></div></td>
+    <td><select name="state" id="state">
+      <option value="ACT" {STATE_ACT_SELECT}>ACT</option>
+      <option value="NSW" {STATE_NSW_SELECT}>NSW</option>
+      <option value="NT" {STATE_NT_SELECT}>NT</option>
+      <option value="QLD" {STATE_QLD_SELECT}>QLD</option>
+      <option value="SA" {STATE_SA_SELECT}>SA</option>
+      <option value="TAS" {STATE_TAS_SELECT}>TAS</option>
+      <option value="VIC" {STATE_VIC_SELECT}>VIC</option>
+      <option value="WA" {STATE_WA_SELECT}>WA</option>
+    </select></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Suburb:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="suburb" type="text" id="suburb" value="{SUBURB}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Australian Business Number:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="abn" type="text" id="abn" value="{ABN}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Services: </font></b></font></div></td>
+    <td>
+    {SERVICE_OPTION}
+    </td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Save">
+</p>
+</form>

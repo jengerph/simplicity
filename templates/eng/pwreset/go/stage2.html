@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" >
+<head>
+<title>Please Log In - Simplicity</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel='stylesheet'  href='/templates/style.css' type='text/css' media='all' />
+</head>
+
+<body>
+
+<div id="wrap">
+
+<div id="header"> 
+	<h1 id="logo"><a href="https://simplicity.xi.com.au/">Simplicity</a></h1>
+</div> <!-- #header -->
+
+<div id="content">
+
+	<h1 id="please">Recover Simplicity password</h1>
+
+	<p id="logmessage">&nbsp;{ERROR_MSG}</p>
+	<form method="POST" action="{SELF}" name="f" id="f">
+	  
+	  <div align="center">
+		<table width="600px" id="logform">
+		  <tr>
+			<td width="200" class="labels">
+				Username:
+			</td>
+			<td width="400" class="inputs">
+				{USERNAME}
+			</td>
+		  </tr>
+	  <tr>
+			<td width="200" class="labels">
+				First Name:
+			</td>
+			<td width="400" class="inputs"><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif">{FIRST_NAME}</font></td>
+		  </tr>
+          	  <tr>
+			<td width="200" class="labels">
+				Last Name:
+			</td>
+			<td width="400" class="inputs"><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif">{LAST_NAME}</font></td>
+		  </tr>
+          	  <tr>
+			<td width="200" class="labels">
+				New Password:
+			</td>
+			<td width="400" class="inputs"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+			  <input name="newpassword1" type="password" id="newpassword1" value="" />
+			</font></td>
+		  </tr>
+          	  <tr>
+          	    <td class="labels"> Repeat Password: </td>
+          	    <td class="inputs"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+          	      <input name="newpassword2" type="password" id="newpassword2" value="" />
+          	    </font></td>
+   	      </tr>
+		</table>
+	  </div>
+	  <p align="center">
+		    <input name="submit" type="submit" id="submit" value="Next">
+  <input name="reset_id" type="hidden" id="reset_id" value="{RESET_ID}">
+  <input name="token" type="hidden" id="token" value="{TOKEN}">
+  <input name="username" type="hidden" id="username" value="{USERNAME}">
+	  </p>
+	</form>
+</div>
+
+
+
+
+</div> <!-- #wrap -->
+
+<div id="footer">
+<p>&copy; 2015 X Integration. All rights reserved</p>
+</div>
+</body>
+</html>

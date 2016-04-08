@@ -1,0 +1,100 @@
+  
+<script src="https://code.jquery.com/jquery-1.7.1.js" type="text/javascript"></script>
+ <link href="/select2/select2.css" rel="stylesheet"/>
+<script src="/select2/select2.js"></script>
+<script>
+$(document).ready(function() { $("#wholesalers_list").select2();});
+</script>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Edit  User: </span></h2>
+<p>[ <a href="/base/manage/users/edit/?&username={USERNAME}">Edit</a> | <a href="/base/manage/users/resetpw/?username={USERNAME}">Reset password</a> | <a href="/base/manage/users/history/?username={USERNAME}">View Login History</a> ]
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?username={USERNAME}" method="post">
+  <table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Username:</font></b></font></div></td>
+      <td><font color="#000000" size="2">{USERNAME}</font>
+        
+      </td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">First Name:</font></b></font></div></td>
+      <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+        <input name="first_name" type="text" id="first_name" value="{FIRST_NAME}">
+      </font></td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Last Name:</font></b></font></div></td>
+      <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+        <input name="last_name" type="text" id="last_name" value="{LAST_NAME}">
+      </font></td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Email Address:</font></b></font></div></td>
+      <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+        <input name="email" type="text" id="email" value="{EMAIL}">
+      </font></td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Email Address2:</font></b></font></div></td>
+      <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+        <input name="email2" type="text" id="email2" value="{EMAIL2}">
+      </font></td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Home Phone:</font></b></font></div></td>
+      <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+        <input name="home_phone" type="text" id="home_phone" value="{HOME_PHONE}">
+      </font></td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Work Phone:</font></b></font></div></td>
+      <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+        <input name="work_phone" type="text" id="email3" value="{WORK_PHONE}">
+      </font></td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Mobile:</font></b></font></div></td>
+      <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+        <input name="mobile" type="text" id="email4" value="{MOBILE}">
+      </font></td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Password:</font></b></font></div></td>
+      <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+        <input name="password" type="text" id="password" value="">
+      </font></td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">State:</font></b></font></div></td>
+      <td><select name="state" id="state">
+        <option value="ACT" {STATE_ACT_SELECT}>ACT</option>
+        <option value="NSW" {STATE_NSW_SELECT}>NSW</option>
+        <option value="NT" {STATE_NT_SELECT}>NT</option>
+        <option value="QLD" {STATE_QLD_SELECT}>QLD</option>
+        <option value="SA" {STATE_SA_SELECT}>SA</option>
+        <option value="TAS" {STATE_TAS_SELECT}>TAS</option>
+        <option value="VIC" {STATE_VIC_SELECT}>VIC</option>
+        <option value="WA" {STATE_WA_SELECT}>WA</option>
+      </select></td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Active:</font></b></font></div></td>
+      <td><input name="active" type="radio" value="no"{ACTIVE_NO_SELECT}>
+        No
+        <input name="active" type="radio" value="yes"{ACTIVE_YES_SELECT}>
+        Yes</td>
+    </tr>
+  </table>
+  <p>
+  <input name="submit" type="submit" id="submit" value="Save">
+  <input name="submit2" type="submit" id="submit2" value="refresh" hidden>
+  <input name="username" type="hidden" id="username" value="{USERNAME}">
+</p>
+</form>
+
+<p>&nbsp;</p>

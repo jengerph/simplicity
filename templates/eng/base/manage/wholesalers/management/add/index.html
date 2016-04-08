@@ -1,0 +1,245 @@
+<script src="/templates/jquery.validate.js"></script>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Add a Plan: </span></h2>
+<div style="text-align:center"><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red"><span id="error_message">{ERROR_MSG}</span></font></div>
+<form action="{SELF}?wholesaler_id={WHOLESALER_ID}" method="post" id="addplan">
+<div id="example-vertical">
+    {WHOLESALER_SECTION}
+    <h3>Service Type</h3>
+    <section>
+      <p>Service Type: {SERVICE_TYPE_LIST}</p>
+      {SERVICE_SUB_TYPE}
+    </section>
+    {PARENT_PLAN_SECTION}
+    {PLAN_GROUP}
+    <h3>Customize</h3>
+    <section>
+      {CUSTOMIZE}
+    </section>
+    {EXTRAS_SECTION}
+</div>
+<input name="submit" type="submit" id="submit" value="refresh" hidden>
+<input name="submit2" type="submit" id="submit2" value="Create" hidden>
+</form>
+
+
+
+<script type="text/javascript">
+function select_service(index){
+  var checkbox = document.querySelectorAll('input[type="checkbox"][name="extra_type"]');
+  for ( x = 0; x < checkbox.length; x++ ) {
+    if ( checkbox[x].value != index ) {
+      checkbox[x].checked = false;
+    }
+  }
+}
+</script>
+
+<!-- <script type="text/javascript" src="/templates/management_form{MANAGEMENT_FORM}.js"></script> -->
+<script type="text/javascript">
+{FOR_CURRENT_JQUERY_STEP}
+next_tab();
+
+var type_id = "{TYPE_ID}";
+
+function next_tab(){
+
+  var wholesaler_id = "{WHOLESALER_ID}";
+
+  var form = $("#addplan");
+  $("#example-vertical").steps({
+      headerTag: "h3",
+      bodyTag: "section",
+      transitionEffect: "slideLeft",
+      stepsOrientation: "vertical",
+      saveState: true,
+      startIndex: 0,
+    onStepChanging: function (event, currentIndex, newIndex)
+    {
+        if ( newIndex > currentIndex ) {
+            var current_step = document.querySelector(".current a").text;
+            current_step = current_step.split(".").pop();
+            console.log(current_step);
+            switch( current_step.trim() ) {
+              case 'Wholesaler':
+                      if ( $('#wholesaler_id').val() == 0 ) {
+                        $('#error_message').html("Error: Wholesaler invalid.");
+                        return false;
+                      } else {
+                        return true;
+                      }
+                      break;
+              case 'Service Type':
+                      if ( $('#service_type').val() == 0 ) {
+                        $('#error_message').html("Error: Service Type invalid.");
+                        return false;
+                      } else if ( $('#access_method').val() == "" ) {
+                        $('#error_message').html("Error: Access Method invalid.");
+                        return false;
+                      } else if ( $('#speed').val() == "" ) {
+                        $('#error_message').html("Error: Speed invalid.");
+                        return false;
+                      } else if ( $('#sub_type').val() == "" ) {
+                        $('#error_message').html("Error: Sub Type invalid.");
+                        return false;
+                      } else {
+                        return true;
+                      }
+                      break;
+              case 'Parent Plan':
+                      if ( $('#parent_plan_id').val() == "0" ) {
+                        $('#error_message').html("Error: Parent Plan invalid.");
+                        return false;
+                      } else {
+                        return true;
+                      }
+                      break;
+              case 'Plan Group':
+                      if ( $('#group_id').val() == "0" ) {
+                        $('#error_message').html("Error: Plan Group invalid.");
+                        return false;
+                      } else {
+                        return true;
+                      }
+                      break;
+              case 'Customize':
+                      if ( $('#description').val() == "" ) {
+                        $('#error_message').html("Error: Description should not be empty.");
+                        return false;
+                      } else if ( $('#monthly_cost').val() == "" ) {
+                        $('#error_message').html("Error: Monthly Cost should not be empty.");
+                        return false;
+                      } else if ( $('#monthly_data_allowance').val() == "" ) {
+                        $('#error_message').html("Error: Monthly Data Allowance should not be empty.");
+                        return false;
+                      } else if ( $('#early_termination_cost').val() == "" ) {
+                        $('#error_message').html("Error: Early Termination Cost should not be empty.");
+                        return false;
+                      } else if ( $('#extra_data_cost').val() == "" ) {
+                        $('#error_message').html("Error: Extra Data Cost should not be empty.");
+                        return false;
+                      } else {
+                        return true;
+                      }
+                      break;
+              default:
+                      return false;
+                      break;
+            }
+          } else {
+            return true;
+          }
+    },
+      onFinishing: function (event, currentIndex)
+      {
+          var current_step = document.querySelector(".current a").text;
+            current_step = current_step.split(".").pop();
+            switch( current_step.trim() ) {
+              case 'Customize':
+                      if ( $('#description').val() == "" ) {
+                        $('#error_message').html("Error: Description should not be empty.");
+                      return false;
+                      } else if ( $('#setup_fee').val() == "" ) {
+                        $('#error_message').html("Error: Setup Fee should not be empty.");
+                      return false;
+                      } else if ( $('#monthly_fee').val() == "" ) {
+                        $('#error_message').html("Error: Monthly Fee should not be empty.");
+                      return false;
+                      } else if ( $('#standard_capf').val() == "" ) {
+                        $('#error_message').html("Error: Standard Change Answering Point Fee should not be empty.");
+                      return false;
+                      } else if ( $('#priority_capf').val() == "" ) {
+                        $('#error_message').html("Error: Priority Change Answering Point Fee should not be empty.");
+                      return false;
+                      } else if ( $('#local_to_fixed_line').val() == "" ) {
+                        $('#error_message').html("Error: Local to Fixed Line should not be empty.");
+                      return false;
+                      } else if ( $('#national_to_fixed_line').val() == "" ) {
+                        $('#error_message').html("Error: National to Fixed Line should not be empty.");
+                      return false;
+                      } else if ( $('#mobile_to_fixed_line').val() == "" ) {
+                        $('#error_message').html("Error: Mobile to Fixed Line should not be empty.");
+                      return false;
+                      } else if ( $('#local_to_mobile').val() == "" ) {
+                        $('#error_message').html("Error: Local to Mobile should not be empty.");
+                      return false;
+                      } else if ( $('#national_to_mobile').val() == "" ) {
+                        $('#error_message').html("Error: National to Mobile should not be empty.");
+                      return false;
+                      } else if ( $('#mobile_to_mobile').val() == "" ) {
+                        $('#error_message').html("Error: Mobile to Mobile should not be empty.");
+                      return false;
+                      } else if ( $('#government_tax').val() == "" ) {
+                        $('#error_message').html("Error: Government Tax should not be empty.");
+                      return false;
+                      } else if ( $('#ir_id').val() == "0" ) {
+                        $('#error_message').html("Error: International Rate Cards is invalid.");
+                      return false;
+                      } else if ( $('#local_calls').val() == "" ) {
+                        $('#error_message').html("Error: Local Calls should not be empty.");
+                      return false;
+                      } else if ( $('#national_calls').val() == "" ) {
+                        $('#error_message').html("Error: National Calls should not be empty.");
+                      return false;
+                      } else if ( $('#mobile_calls').val() == "" ) {
+                        $('#error_message').html("Error: Mobile Calls should not be empty.");
+                      return false;
+                      } else if ( $('#usage_type_13_1300').val() == "") {
+                        $('#error_message').html("Error: 13/1300 should not be empty.");
+                      return false;
+                      } else {
+                        return true;
+                      }
+                      break;
+              case 'Extras': 
+                      var error = 0;
+                      var check = 0;
+                      for (var i = 0; i < document.querySelectorAll("#extra_desc").length; i++) {
+                          if ( document.querySelectorAll("#extra_type")[i].checked == true ) {
+                            check = check + 1;
+                            if ( document.querySelectorAll("#extra_desc")[i].value == "" || document.querySelectorAll("#extra_month_cost")[i].value == "" || document.querySelectorAll("#extra_setup_cost")[i].value == "" ) {
+                              error = 1;
+                            }
+                          }
+                      }
+                      if ( error == 1 ) {
+                        $('#error_message').html("Error: Please provide the complete details for the Extra Type selected.");
+                        return false;
+                      } else {
+                        if ( check == 0 ) {
+                          $('#error_message').html("Error: Make sure to select at least one type of Extra Type.");
+                          return false;
+                        } else {
+                          return true;
+                        }
+                      }
+                      ;
+                      break;
+              default:
+                      return false;
+                      break;
+            }
+      },
+      onFinished: function (event, currentIndex)
+      {
+                  $.removeCookie('jQu3ry_5teps_St@te_example-vertical');
+                  document.getElementById("addplan").submit2.click();
+                  return true;
+      },
+      labels: {
+        cancel: "Cancel",
+        current: "current step:",
+        pagination: "Pagination",
+        finish: "Create Plan",
+        next: "Next",
+        previous: "Previous",
+        loading: "Loading ..."
+    }
+  });
+  
+}
+</script>

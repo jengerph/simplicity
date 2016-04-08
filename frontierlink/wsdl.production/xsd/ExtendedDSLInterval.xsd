@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/PerformanceInterval.xsd" />
+    <xsd:include schemaLocation="IntervalQuantity.xsd" />
+    <xsd:include schemaLocation="ExtendedChannelInterval.xsd" />
+    <xsd:include schemaLocation="ExtendedLineInterval.xsd" />
+
+    <xsd:complexType name="ExtendedDSLInterval">
+        <xsd:sequence>
+            <xsd:element name="performanceInterval" type="wsg:PerformanceInterval" />
+            <xsd:element name="initialisationAttempts" type="xsd:int" minOccurs="0" />
+            <xsd:element name="extendedChannelInterval" type="wsg:ExtendedChannelInterval" minOccurs="0" />
+            <xsd:element name="extendedLineInterval" type="wsg:ExtendedLineInterval" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

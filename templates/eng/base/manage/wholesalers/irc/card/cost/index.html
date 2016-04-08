@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="/templates/jquery-ui.css">
+  <script src="/templates/jquery-1.10.2.js"></script>
+  <script src="/templates/jquery-ui.js"></script>
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+.wizard > .content {
+min-height: 0;
+}
+.wizard > .content > .body {
+/*height: auto;
+width: auto;*/
+
+}
+p{
+  margin: 0;
+}
+</style>
+<body topmargin="0">
+<h2><span class="bodytest">Change Cost Per Minute: </span></h2>
+{MENU}
+  <label></label>
+</p>
+<p>[ <a href="/base/manage/wholesalers/irc/card/?ir_id={IR_ID}">&#9664; Back to International Rate Card</a> ]</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red">{ERROR_MSG}</font></p>
+<div id="example-vertical">
+    <h3>International Rate Card</h3>
+    <section>
+        <div>
+          <div style="display: inline-block; width: 189px;">Description:</div>
+          <div style="display: inline-block; vertical-align:bottom">{CARD_DESCRIPTION}</div>
+        </div>
+        <div>
+          <div style="display: inline-block; width: 189px;">Service Type:</div>
+          <div style="display: inline-block; vertical-align:bottom">{SERVICE_TYPE}</div>
+        </div>
+        <div>
+          <div style="display: inline-block; width: 189px;">Sub Type:</div>
+          <div style="display: inline-block; vertical-align:bottom">{SUB_TYPE}</div>
+        </div>
+        {BASE_ROW}
+    </section>
+    <h3>Cost</h3>
+    <section>
+        <form action="{SELF}?ir_id={IR_ID}" method="POST">
+          <p>
+            <table>
+              {TABLE_HEAD}
+              <tbody>
+                {ROWS}
+              </tbody>
+            </table>
+          </p>
+          <input type="submit" name="submit" id="submit" value="Submit" style="visibility:hidden;">
+        </form>
+    </section>
+</div>
+<script src="/templates/jquery.steps.js"></script> 
+<script type="text/javascript">
+
+$("#example-vertical").steps({
+    headerTag: "h3",
+    bodyTag: "section",
+    transitionEffect: "slideLeft",
+    stepsOrientation: "vertical",
+    saveState: true,
+    onFinished: function (event, currentIndex)
+      {
+                  document.querySelector("form").submit.click();
+                  return true;
+      },
+    labels: {
+        cancel: "Cancel",
+        current: "current step:",
+        pagination: "Pagination",
+        finish: "Save Cost",
+        next: "Next",
+        previous: "Previous",
+        loading: "Loading ..."
+    }
+});
+</script>

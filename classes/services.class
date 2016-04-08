@@ -1,0 +1,566 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// services.class - Class for accessing services details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "audit.class";
+include_once "service_temp.class";
+
+class services {
+  
+  var $service_id;
+  var $type_id;
+  var $customer_id;
+  var $start_date;
+  var $finish_date;
+  var $contract_end;
+  var $wholesale_plan_id;
+  var $retail_plan_id;
+  var $state;
+  var $identifier;
+  var $tag;
+
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function services() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function services() { 
+    
+  
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+    $this->finish_date = '0000-00-00 00:00:00';
+
+    $service_temp = new service_temp();
+    $service_temp->delete_expired();
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->service_id = strtoupper($this->service_id);
+    if (!$this->service_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->service_id) {
+      
+      $query = "SELECT * FROM services WHERE service_id = " . $this->db->quote($this->service_id);
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+         if ( $row ) { 
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+          }
+        }
+      }    
+    }
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->service_id = strtolower($this->service_id);
+  
+    // Check we have an user
+    if (!$this->service_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT service_id FROM services WHERE service_id = " . $this->db->quote($this->service_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (services::validate()) {
+    
+      return 0;
+      
+    }
+
+    $service = new services();
+
+    // Create the property search
+    $query = "INSERT INTO services (customer_id, type_id, start_date, contract_end, wholesale_plan_id, retail_plan_id, parent_service_id, state, identifier, tag, finish_date)";
+    $query .= " VALUES (" . $this->db->quote($this->customer_id) . "," . $this->db->quote($this->type_id) . "," . $this->db->quote($this->start_date) . "," . $this->db->quote($this->contract_end) . "," . $this->db->quote($this->wholesale_plan_id) . "," . $this->db->quote($this->retail_plan_id) . "," . $this->db->quote($this->parent_service_id) . "," . $this->db->quote($this->state) . "," . $this->db->quote($this->identifier) . "," . $this->db->quote($this->tag) . "," . $this->db->quote($this->finish_date) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      $this->service_id = $this->db->fetch_insert_id();
+
+      $this->load();
+      
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"services",$this->service_id);
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (services::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!services::exist()) {
+      return 0;
+      
+    }
+    $service = new services();
+    $service->service_id = $this->service_id;
+    $service->load();
+
+    $query = "UPDATE services SET customer_id = " . $this->db->quote($this->customer_id) . ", type_id = " . $this->db->quote($this->type_id) . ", start_date = " . $this->db->quote($this->start_date) . ", contract_end = " . $this->db->quote($this->contract_end) . ", wholesale_plan_id = " . $this->db->quote($this->wholesale_plan_id) . ", retail_plan_id = " . $this->db->quote($this->retail_plan_id) . ", state = " . $this->db->quote($this->state) . ", tag = " . $this->db->quote($this->tag) . ", finish_date = " . $this->db->quote($this->finish_date);
+    $query .= " WHERE service_id = " . $this->db->quote($this->service_id);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_changes($keys,$service,$this,"services",$this->service_id);
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    $validate = new validate();
+
+    if ( !$this->type_id ) {
+
+      return 130;
+
+    } else {
+
+      $service_type = new service_types();
+      $service_type->type_id = $this->type_id;
+      $service_type->exist();
+
+      if ( !$service_type ) {
+
+        return 130;
+
+      }
+
+    }
+
+    if ( $this->state != 'creation' && $this->state != 'active' && $this->state != 'inactive') {
+      
+      return 150;
+      
+    }
+
+    if ( $this->start_date ) {
+      if ( !$validate->datetime($this->start_date) ) {
+        return 151;
+      }
+    } else {
+        return 151;
+    }
+
+    if ( !$this->contract_end ) {
+
+      return 154;
+
+    }
+
+    // if ( !$this->wholesale_plan_id ) {
+
+    //   return 152;
+
+    // }
+
+    if ( !$this->retail_plan_id ) {
+
+      return 153;
+
+    }
+
+    if ( $this->finish_date ) {
+      if ( !$validate->datetime($this->finish_date) ) {
+        return 155;
+      }
+    } else {
+        return 155;
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_all()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of services with correpsonding details
+  ** 
+  */
+
+  function get_all(){
+      $a = array();
+      if ( !$this->customer_id ) {
+        return 0;
+      }
+
+      $query = "SELECT * FROM services WHERE customer_id=" . $this->customer_id;
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+    $this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+    
+    // Prepare the query
+    $query = "DELETE FROM services WHERE service_id = " . $this->db->quote($this->service_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+  }
+
+  /* function child_service()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function child_service() {
+
+    if (!$this->parent_service_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->parent_service_id) {
+      
+      $query = "SELECT * FROM services WHERE parent_service_id = " . $this->db->quote($this->parent_service_id) . " AND type_id = '7' ORDER BY start_date DESC LIMIT 1";
+      $result = $this->db->execute_query($query);
+  
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+  }
+
+  /* function get_child_service()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function get_child_service() {
+  
+    if ($this->parent_service_id) {
+      
+      $query = "SELECT * FROM services WHERE parent_service_id = " . $this->db->quote($this->parent_service_id) . " LIMIT 1";
+      $result = $this->db->execute_query($query);
+  
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+  }
+
+   /* function get_all_adsl()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of services with correpsonding details
+  ** 
+  */
+
+  function get_service_count(){
+      $a = array();
+      if ( !$this->customer_id ) {
+        return 0;
+      }
+
+      $query = "SELECT * FROM services WHERE customer_id=" . $this->customer_id . " AND type_id = " . $this->db->quote($this->type_id) . " AND state != 'inactive'";
+      
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+}
+

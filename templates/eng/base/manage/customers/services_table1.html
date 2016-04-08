@@ -1,0 +1,32 @@
+<p><small>Filter: <a href="?wholesaler_id={WHOLESALER_ID}&customer_id={CUSTOMER_ID}">All</a> | <a href="?wholesaler_id={WHOLESALER_ID}&customer_id={CUSTOMER_ID}&filter=no_wholesale_price">No Wholesale Price</a> | <a href="?wholesaler_id={WHOLESALER_ID}&customer_id={CUSTOMER_ID}&filter=with_wholesale_price">With Wholesale Price</a></small></p>
+<div class="pager" style="text-align:center">
+	<img src="/templates/addons/pager/icons/first.png" class="first" alt="First" title="First page" />
+	<img src="/templates/addons/pager/icons/prev.png" class="prev" alt="Prev" title="Previous page" />
+	Page: <select class="gotoPage"></select>
+	<img src="/templates/addons/pager/icons/next.png" class="next" alt="Next" title="Next page" />
+	<img src="/templates/addons/pager/icons/last.png" class="last" alt="Last" title= "Last page" />
+	Per Page: <select class="pagesize">
+		<option value="10">10</option>
+		<option value="20">20</option>
+		<option value="30">30</option>
+		<option value="40">40</option>
+	</select>
+</div>
+<table id="filters" class="tablesorter" width="100%" border="1" cellspacing="0" cellpadding="0">
+	<thead>
+		<tr>
+		    <th>Type</th>
+		    <th>Start Date</th>
+		    <th>Contract End</th>
+		    <th>Wholesale Plan</th>
+		    <th>Retail Plan</th>
+		    <th>State</th>
+		    <th>Identifier</th>
+		    <th>Tag</th>
+		    <th width="70px;">Status</th>
+	  	</tr>
+	</thead>
+	<tbody>
+		{ROW_SERVICES}
+	</tbody>
+</table>

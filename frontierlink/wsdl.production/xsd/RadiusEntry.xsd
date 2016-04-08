@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/Domain.xsd" />
+    <xsd:include schemaLocation="elements/Password.xsd" />
+    <xsd:include schemaLocation="elements/UserName.xsd" />
+
+    <xsd:element name="RadiusEntry" type="wsg:RadiusEntry" />
+
+    <xsd:complexType name="RadiusEntry">
+        <xsd:sequence>
+            <xsd:element name="radiusUserName" type="wsg:UserName" />
+            <xsd:element name="radiusDomain" type="wsg:Domain" />
+            <xsd:element name="password" type="wsg:Password" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

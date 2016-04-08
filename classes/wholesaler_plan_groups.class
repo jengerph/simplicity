@@ -1,0 +1,370 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// wholesaler_plan_groups.class - Class for accessing wholesaler_plan_groups details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "audit.class";
+
+class wholesaler_plan_groups {
+
+  var $wholesaler_id;
+  var $group_id;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function wholesaler_plan_groups() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function wholesaler_plan_groups() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->group_id = strtoupper($this->group_id);
+
+    if (!$this->group_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->group_id) {
+      
+      $query = "SELECT * FROM wholesaler_plan_groups WHERE group_id = " . $this->db->quote($this->group_id) . " AND wholeslaer_id = " . $this->db->quote($this->wholesaler_id);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ) {
+          while ($cel = each($row)) { 
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->group_id = strtoupper($this->group_id);
+  
+    // Check we have an group_id
+    if (!$this->group_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT group_id FROM wholesaler_plan_groups WHERE group_id = " . $this->db->quote($this->group_id) . " AND wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+	
+    // Validate
+    if (wholesaler_plan_groups::validate()) {
+    
+      return 0;
+      
+    }
+
+    $ws = new wholesaler_plan_groups();
+    $ws->load();
+    
+    // Create the property search
+    $query = "INSERT INTO wholesaler_plan_groups (wholesaler_id, group_id)";
+    $query .= " VALUES (" . $this->db->quote($this->wholesaler_id) . "," . $this->db->quote($this->group_id) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+    
+	    $this->group_id = $this->db->fetch_insert_id();
+
+			$this->load();
+
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"wholesaler_plan_groups",$this->group_id);
+
+			
+      return 1;
+					
+    }
+  }
+  
+  function create() {
+  
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+
+    
+    // Prepare the query
+    $query = "DELETE FROM wholesaler_plan_groups WHERE group_id = " . $this->db->quote($this->group_id);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+      return 1;
+      
+      
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    if (!$this->wholesaler_id) {
+      return 100;
+    }
+
+    if ( !$this->group_id ) {
+        return 280;
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+ /* function get_wholesaler_plan_groups()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of wholesaler_plan_groups with correpsonding details
+  ** 
+  */
+
+  function get_wholesaler_plan_groups(){
+      
+      $query = "SELECT * FROM wholesaler_plan_groups ";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+ /* function get_wholesalers_in_group()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of wholesalers with correpsonding details
+  ** 
+  */
+
+  function get_wholesalers_in_group(){
+      
+      $a = array();
+
+      $query = "SELECT * FROM wholesaler_plan_groups WHERE group_id = " . $this->db->quote($this->group_id);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_group_id()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of wholesalers with correpsonding details
+  ** 
+  */
+
+  function get_group_id(){
+      
+      $a = array();
+
+      $query = "SELECT * FROM wholesaler_plan_groups WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+}
+

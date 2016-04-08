@@ -1,0 +1,220 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// property.class - Class for accessing property information
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+
+class chat {
+
+
+  var $client;
+  var $dt;
+  var $who;
+  var $comment;
+  var $hidden;
+  var $module;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function chat() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function chat() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+    
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+    $this->hidden = 'no';
+    $this->module = 'search';
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create() {
+	
+    // Validate
+    if (chat::validate()) {
+    
+      return 0;
+      
+    }
+    
+    // Create the property property
+    $query = "INSERT INTO chat (client,dt,who,comment, hidden, module)";
+    $query .= " VALUES (" . $this->db->quote($this->client) . ",NOW()," . $this->db->quote($this->who) . "," . $this->db->quote($this->comment)  . "," . $this->db->quote($this->hidden)  . "," . $this->db->quote($this->module) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+    
+      return 1;
+					
+    }
+  }
+
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    $misc = new misc();
+    
+    $validate = new validate();
+
+		$user = new user();
+		$user->username = $this->client;
+		if (!$user->exist()) {
+			return 1;
+		}
+		
+		$this->who = strtolower($this->who);
+		if ($this->who != 'client' && $this->who != 'staff') {
+			return 61;
+		}
+
+		$this->hidden = strtolower($this->hidden);
+		if ($this->hidden != 'yes' && $this->hidden != 'no') {
+			return 62;
+		}
+
+		$this->module = strtolower($this->module);
+		if ($this->module != 'search' && $this->module != 'mgt') {
+			return 63;
+		}
+		
+    // ALL OK
+    return 0;
+    
+  }
+  
+
+
+
+  /* function get_client($client, $length)
+  **
+  ** DESCRIPTION: propertyes the database field $field_name for the value $value
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of arrays containing:
+  **   - account number
+  **   - business
+  **   - last name
+  **   - city
+  **   - state
+  ** 
+  */
+  function get_client($client, $length = 20, $module = 'search') {
+  
+    $query = "SELECT dt, who, comment FROM chat WHERE client = " . $this->db->quote($client) . " AND module = " . $this->db->quote($module);
+    $query .= " AND hidden = 'no' ORDER BY dt DESC";
+   
+    
+    $results = array();
+    $count = $length - 1;
+
+    $result = $this->db->execute_query($query);
+    
+    while ( $row = $this->db->fetch_row_array($result)) {
+    	
+    	if ($count != -1) {
+      
+      	$results[$count] = $row;
+      	$count--;
+
+    	}
+		}
+		
+    return $results;
+    
+  }  
+
+
+  /* function get_client($client, $length)
+  **
+  ** DESCRIPTION: propertyes the database field $field_name for the value $value
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of arrays containing:
+  **   - account number
+  **   - business
+  **   - last name
+  **   - city
+  **   - state
+  ** 
+  */
+  function clear_client($client, $module = 'search') {
+  
+    $query = "UPDATE chat SET hidden = 'yes' WHERE client = " . $this->db->quote($client) . " AND module = " . $this->db->quote($module);
+   
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+    
+      return 1;
+					
+    }
+
+  }    	
+}

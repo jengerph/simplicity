@@ -1,0 +1,413 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// billing_invoices_items.class - Class for accessing billing_invoices_items details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "user.class";
+
+class billing_invoices_items {
+  var $item_id;
+  var $invoice_id;
+  var $service_id;
+  var $description;
+  var $unit_amount;
+  var $gst;
+  var $qty;
+  var $line_type;
+  var $item_type;
+  var $ts;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function billing_invoices_items() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function billing_invoices_items() { 
+    
+  
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->item_id = strtoupper($this->item_id);
+
+    if (!$this->item_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->item_id) {
+      
+      $query = "SELECT * FROM billing_invoices_items WHERE item_id = " . $this->db->quote($this->item_id);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        while ($cel = each($row)) {
+
+          $key = $cel['key'];
+          
+          $this->{$key} = $cel['value'];
+          
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->item_id = $this->item_id;
+
+    $user = new user();
+    $user->item_id = $this->item_id;
+    $user->load();
+
+    if ( !$user->item_id ) {
+
+      return 1;
+
+    }
+    
+    
+    $query = "SELECT item_id FROM billing_invoices_items WHERE item_id = " . $this->db->quote($this->item_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+    
+    // Create the property search
+    $query = "INSERT INTO billing_invoices_items (invoice_id, service_id, description, unit_amount, gst, qty, line_type, item_type, ts)";
+    $query .= " VALUES (" . $this->db->quote($this->invoice_id) .", ". $this->db->quote($this->service_id) .", ". $this->db->quote($this->description) .", ". $this->db->quote($this->unit_amount) .", ". $this->db->quote($this->gst) .", ". $this->db->quote($this->qty) .", ". $this->db->quote($this->line_type) .", ". $this->db->quote($this->item_type) .", NOW())";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+      
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"billing_invoices_items",$this->item_id);
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+    
+    if ( !$this->description ) {
+      return 170;
+    }
+
+    if ( !$this->service_id ) {
+      return 160;
+    }
+
+    if ( !$this->invoice_id ) {
+      return 270;
+    }
+
+    if ( !is_numeric($this->unit_amount) ) {
+      return 271;
+    }
+
+    if ( !$this->qty ) {
+      return 262;
+    } else if ( !is_numeric($this->qty) ) {
+      return 262;
+    }
+
+    if ( !$this->line_type ) {
+      return 272;
+    }
+
+    if ( !$this->item_type ) {
+      return 263;
+    }
+
+    // ALL OK
+    return 0;
+    
+  }
+
+/* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+    // Validate
+    if (billing_invoices_items::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!billing_invoices_items::exist()) {
+      return 0;
+      
+    }
+
+    $previous = new billing_invoices_items();
+    $previous->item_id = $this->item_id;
+    $previous->fnn = $this->fnn;
+    $previous->load();
+
+    $query = "UPDATE billing_invoices_items SET invoice_id = " . $this->db->quote($this->invoice_id);
+    $query .= ", service_id = " . $this->db->quote($this->service_id);
+    $query .= ", description = " . $this->db->quote($this->description);
+    $query .= ", unit_amount = " . $this->db->quote($this->unit_amount);
+    $query .= ", gst = " . $this->db->quote($this->gst);
+    $query .= ", qty = " . $this->db->quote($this->qty);
+    $query .= ", line_type = " . $this->db->quote($this->line_type);
+    $query .= ", item_type = " . $this->db->quote($this->item_type);
+    $query .= " WHERE item_id = " . $this->db->quote($this->item_id);
+    
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+        //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_changes($keys,$user,$this,"billing_invoices_items",$this->item_id);
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+    
+    // Prepare the query
+    $query = "DELETE FROM billing_invoices_items WHERE item_id = " . $this->db->quote($this->item_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+  }
+
+  /* function get_all()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function get_all() {
+    
+    $a = array();
+      if ( !$this->service_id ) {
+        return 0;
+      }
+
+      $query = "SELECT * FROM billing_invoices_items WHERE service_id=" . $this->service_id;
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+  }
+
+}
+

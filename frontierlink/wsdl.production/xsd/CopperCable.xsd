@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/CopperCableType.xsd" />
+    <xsd:include schemaLocation="elements/Length.xsd" />
+    <xsd:include schemaLocation="elements/Gauge.xsd" />
+
+    <xsd:complexType name="CopperCable">
+        <xsd:sequence>
+            <xsd:element name="cableType" type="wsg:CopperCableType" />
+            <xsd:element name="length" type="wsg:Length" />
+            <xsd:element name="gauge" type="wsg:Gauge" />
+            <xsd:element name="bridgeTap" type="wsg:Length" minOccurs="0"/>
+            <xsd:element name="sequence" type="xsd:int" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

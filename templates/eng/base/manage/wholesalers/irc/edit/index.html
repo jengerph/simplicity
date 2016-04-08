@@ -1,0 +1,48 @@
+
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">Edit  International Rate Cards: </span></h2>
+{MENU}
+  <label></label>
+</p>
+<p>[ <a href="/base/manage/wholesalers/irc/card/?ir_id={IR_ID}">&#9664; Back to International Rate Cards List</a> ]</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red">{ERROR_MSG}</font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="green">{SUCCESS_MSG}</font></p>
+<form action="{SELF}?ir_id={IR_ID}" method="post">
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Description:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="description" type="text" id="description" value="{DESCRIPTION}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Service Type:</font></b></font></div></td>
+    <td>
+      <font color="#000000"><font face="Verdana, Arial, Helvetica, sans-serif" size="2">{SERVICE_TYPE}</font>
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Sub Type:</font></b></font></div></td>
+    <td>
+      <font color="#000000"><font face="Verdana, Arial, Helvetica, sans-serif" size="2">{SUB_TYPE}</font>
+    </td>
+  </tr>
+  {MASTER_ROW}
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Active</font></b></font></div></td>
+    <td>
+      <input name="active" type="radio" value="no"{ACTIVE_NO_SELECT}>
+      No 
+      <input name="active" type="radio" value="yes"{ACTIVE_YES_SELECT}>
+      Yes</td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Save">
+  <input name="submit2" type="submit" id="submit2" value="Create" hidden>
+</p>
+</form>

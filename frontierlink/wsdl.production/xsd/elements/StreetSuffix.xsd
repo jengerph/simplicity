@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="StreetSuffix">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="NORTH" />
+            <xsd:enumeration value="SOUTH" />
+            <xsd:enumeration value="EAST" />
+            <xsd:enumeration value="WEST" />
+            <xsd:enumeration value="LOWER" />
+            <xsd:enumeration value="UPPER" />
+            <xsd:enumeration value="NORTH EAST" />
+            <xsd:enumeration value="NORTH WEST" />
+            <xsd:enumeration value="SOUTH EAST" />
+            <xsd:enumeration value="SOUTH WEST" />
+            <xsd:enumeration value="CENTRAL" />
+            <xsd:enumeration value="EXTENSION" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

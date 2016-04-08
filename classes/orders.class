@@ -1,0 +1,646 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// orders.class - Class for accessing orders details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "audit.class";
+
+class orders {
+
+  var $order_id;
+  var $service_id;
+  var $start;
+  var $finish;
+  var $description;
+  var $request_type;
+  var $action;
+  var $status;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function orders() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function orders() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->order_id = strtoupper($this->order_id);
+
+    if (!$this->order_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->order_id) {
+      
+      $query = "SELECT * FROM orders WHERE order_id = " . $this->db->quote($this->order_id);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        while ($cel = each($row)) {
+
+          $key = $cel['key'];
+          
+          $this->{$key} = $cel['value'];
+          
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->order_id = strtolower($this->order_id);
+  
+    // Check we have an user
+    if (!$this->order_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT order_id FROM orders WHERE order_id = " . $this->db->quote($this->order_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (orders::validate()) {
+    
+      return 0;
+      
+    }
+    
+    $orders = new orders();
+
+    // Create the property search
+    $query = "INSERT INTO orders (service_id, start, finish, description,request_type,action,status)";
+    $query .= " VALUES (" . $this->db->quote($this->service_id) .  "," . $this->db->quote($this->start) . "," . $this->db->quote($this->finish) . "," . $this->db->quote($this->description) . "," . $this->db->quote($this->request_type) . "," . $this->db->quote($this->action) . "," . $this->db->quote($this->status) . ")";
+    
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      $this->order_id = $this->db->fetch_insert_id();
+
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"orders",$this->order_id);
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (orders::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!orders::exist()) {
+      return 0;
+      
+    }
+
+    if ( empty($this->finish) ) {
+      $this->finish = "0000-00-00 00:00:00";
+    }
+
+    $query = "UPDATE orders SET action = " . $this->db->quote($this->action) . ", status = " . $this->db->quote($this->status) . ", finish = " . $this->db->quote($this->finish);
+    $query .= " WHERE order_id = " . $this->db->quote($this->order_id);
+    
+    $result = $this->db->execute_query($query);
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+    $this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+    
+    // Prepare the query
+    $query = "DELETE FROM orders WHERE order_id = " . $this->db->quote($this->order_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    if ( !$this->service_id ) {
+
+      return 160;
+
+    }
+    
+    if ( !$this->start ) {
+
+      return 180;
+
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_latest_orders()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of orders with correpsonding details
+  ** 
+  */
+
+  function get_latest_orders(){
+      
+      $query = "SELECT * FROM orders WHERE service_id = " . $this->service_id . " AND action != 'withdraw' ORDER BY start DESC LIMIT 1";
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }
+
+    return 0;
+
+  }
+
+   /* function get_latest_main_orders()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of orders with correpsonding details
+  ** 
+  */
+
+  function get_latest_main_orders(){
+      
+      $query = "SELECT * FROM orders WHERE service_id = " . $this->service_id . " AND action != 'addon create' ORDER BY start DESC LIMIT 1";
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }
+
+    return 0;
+
+  }
+
+   /* function get_all_orders()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of orders with correpsonding details
+  ** 
+  */
+
+  function get_all_orders(){
+      
+      $query = "SELECT * FROM orders WHERE service_id = " . $this->service_id;
+      $result = $this->db->execute_query($query);
+      
+      $a = array();
+            
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+
+    return $a;
+
+  }
+
+   /* function all_orders()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of orders with correpsonding details
+  ** 
+  */
+
+  function all(){
+      
+      $query = "SELECT * FROM orders";
+      $result = $this->db->execute_query($query);
+      
+      $a = array();
+            
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+
+    return $a;
+
+  }
+
+  /* function open_load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function open_load() {
+
+    $this->service_id = strtoupper($this->service_id);
+
+    if (!$this->service_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->service_id) {
+      
+      $query = "SELECT * FROM orders WHERE service_id = " . $this->db->quote($this->service_id) . " AND NOT (status = 'closed' OR status = 'withdrawn')";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ){
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function get_closed()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function get_closed() {
+
+    $this->service_id = strtoupper($this->service_id);
+
+    if (!$this->service_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->service_id) {
+      
+      $query = "SELECT * FROM orders WHERE service_id = " . $this->db->quote($this->service_id) . " AND (status = 'closed' OR status = 'withdrawn') LIMIT 1";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ){
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function get_all_closed()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function get_all_closed() {
+
+    $a = array();
+
+    if (!$this->service_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->service_id) {
+      
+      $query = "SELECT * FROM orders WHERE service_id = " . $this->db->quote($this->service_id) . " AND (status = 'closed' OR status = 'withdrawn') ORDER BY start DESC";
+      
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }  
+    }
+
+
+    return $a;
+    
+  }
+
+   /* function all_open()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of orders with correpsonding details
+  ** 
+  */
+
+  function all_open(){
+      
+      $query = "SELECT * FROM orders WHERE NOT (status = 'closed' OR status = 'withdrawn')";
+      $result = $this->db->execute_query($query);
+      
+      $a = array();
+            
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+
+    return $a;
+
+  }
+
+}
+

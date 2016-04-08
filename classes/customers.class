@@ -1,0 +1,695 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// customers.class - Class for accessing customers details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "audit.class";
+
+class customers {
+
+  var $customer_id;
+  var $wholesaler_id;
+  var $type;
+  var $company_name;
+  var $first_name;
+  var $last_name;
+  var $email;
+  var $mobile;
+  var $phone;
+  var $fax;
+  var $address1;
+  var $address2;
+  var $city;
+  var $state;
+  var $postcode;
+  var $postal_same;
+  var $postal_address1;
+  var $postal_address2;
+  var $postal_city;
+  var $postal_state;
+  var $postal_postcode;
+  var $active;
+  var $datetime;
+  var $abn;
+  var $birthdate;
+  var $kind;
+  var $agent;
+  var $creator;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function customers() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function customers() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->customer_id = strtoupper($this->customer_id);
+
+    if (!$this->customer_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->customer_id) {
+      
+      $query = "SELECT * FROM customers WHERE customer_id = " . $this->db->quote($this->customer_id);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->customer_id = strtoupper($this->customer_id);
+  
+    // Check we have an customer_id
+    if (!$this->customer_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT customer_id FROM customers WHERE customer_id = " . $this->db->quote($this->customer_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+
+    // Create the account
+    $query = "INSERT INTO customers (creator, wholesaler_id, type, company_name, first_name, last_name, email, mobile, phone, fax, address1, address2, city, state, postcode, postal_same, postal_address1, postal_address2, postal_city, postal_state, postal_postcode, active, datetime, abn, birthdate, kind,agent)";
+    $query .= " VALUES (" . $this->db->quote($this->creator) . ", " . $this->db->quote($this->wholesaler_id) . ", " . $this->db->quote($this->type) . ", ". $this->db->quote($this->company_name) . ", " . $this->db->quote($this->first_name) . ", " . $this->db->quote($this->last_name) . ", " . $this->db->quote($this->email) . ", " . $this->db->quote($this->mobile) . ", " . $this->db->quote($this->phone) . ", " . $this->db->quote($this->fax) . ", " . $this->db->quote($this->address1) . ", " . $this->db->quote($this->address2) . ", " . $this->db->quote($this->city) . ", " . $this->db->quote($this->state) . ", " . $this->db->quote($this->postcode) . ", " . $this->db->quote($this->postal_same) . ", " . $this->db->quote($this->postal_address1) . ", " . $this->db->quote($this->postal_address2) . ", " . $this->db->quote($this->postal_city) . ", " . $this->db->quote($this->postal_state) . ", " . $this->db->quote($this->postal_postcode) . ", " . $this->db->quote($this->active) . ", NOW(), " . $this->db->quote($this->abn) . ", " . $this->db->quote($this->birthdate) . ", " . $this->db->quote($this->kind) . ", " . $this->db->quote($this->agent) . ")";
+  
+    $result = $this->db->execute_query($query);
+  
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+    
+        $this->customer_id = $this->db->fetch_insert_id();
+
+        $this->load();
+
+        //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"customers",$this->customer_id);
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+  
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+		$this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+
+    
+    // Prepare the query
+    $query = "DELETE FROM customers WHERE customer_id = " . $this->db->quote($this->customer_id);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+      return 1;
+      
+      
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    $validate = new validate();
+
+    $this->type = strtolower($this->type);
+    if ($this->type != 'person' && $this->type != 'company') {
+      
+      return 120;
+      
+    }
+
+    if ( $this->type == 'person' ) {
+
+      if ( !$this->first_name ) {
+
+          return 3;
+
+      }
+
+      if ( !$this->last_name ) {
+
+          return 2;
+
+      }
+    } else if ( $this->type == 'company' ) {
+
+      if ( !$this->company_name ) {
+      
+        return 101;
+        
+      }
+
+    }
+
+    $this->postal_same = strtolower($this->postal_same);
+    if ($this->postal_same != 'yes' && $this->postal_same != 'no') {
+      
+      return 121;
+      
+    }
+
+    $this->postcode = strtolower($this->postcode);
+    if ($this->postcode) {
+      if ( strlen($this->postcode) == 4 && ctype_digit($this->postcode)) {
+        //valid
+      } else {
+        return 122;
+      }
+    }
+
+    $this->postal_postcode = strtolower($this->postal_postcode);
+    if ($this->postal_postcode) {
+      if ( strlen($this->postal_postcode) == 4 && ctype_digit($this->postal_postcode)) {
+        //valid
+      } else {
+        return 122;
+      }
+    }
+
+    $this->mobile = strtolower($this->mobile);
+    $this->mobile = preg_replace('/[^\d]/', '', $this->mobile);
+    if ( $this->mobile ) {
+      if ( !is_numeric($this->mobile) || strlen($this->mobile) != 10 || substr($this->mobile, 0, 2) != '04') {
+
+        return 123;
+
+      }
+    }
+
+    $this->phone = strtolower($this->phone);
+    $this->phone = preg_replace('/[^\d]/', '', $this->phone);
+    if ( $this->phone ) {
+      if ( !is_numeric($this->phone) || strlen($this->phone) != 10 || substr($this->phone, 0, 1) != '0') {
+
+        return 124;
+
+      }
+    }
+
+    $this->fax = strtolower($this->fax);
+    $this->fax = preg_replace('/[^\d]/', '', $this->fax);
+    if ( $this->fax ) {
+      if ( !is_numeric($this->fax) || strlen($this->fax) != 10 || substr($this->fax, 0, 1) != '0') {
+
+        return 125;
+
+      }
+    }
+
+    $this->active = strtolower($this->active);
+    if ($this->active != 'yes' && $this->active != 'no') {
+      
+      return 123;
+      
+    }
+    
+    if (!$validate->email($this->email)) {
+      
+      return 5;
+      
+    }
+    
+    if ($this->phone == '') {
+      return 124;
+    }
+
+    $this->state = strtoupper($this->state);
+    if ($this->state != 'VIC' && $this->state != 'ACT' && $this->state != 'NSW' && $this->state != 'QLD' && $this->state != 'SA' && $this->state != 'NT' && $this->state != 'WA' && $this->state != 'TAS') {
+
+      return 9;
+    }
+
+    if ( $this->type == "company" ) {
+      if ( empty($this->abn) ) {
+        return 126;
+      }
+    }
+
+    if ( $this->type == "person" ) {
+      if ( empty($this->birthdate) ) {
+        return 127;
+      } else {
+        $date = explode("-", $this->birthdate);
+
+        if ( count($date) != 3 ) {
+          return 127;
+        } else {
+
+          $year = $date[0];
+          $month = $date[1];
+          $day = $date[2];
+          
+          if ( !ctype_digit($day) || !ctype_digit($month) || !ctype_digit($year) ) {
+            return 127;
+          } else if ( checkdate($month, $day, $year) == false ) {
+            return 127;
+          }
+          
+        }
+      }
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (customers::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!customers::exist()) {
+      return 0;
+      
+    }
+      $customer = new customers();
+      $customer->customer_id = $this->customer_id;
+      $customer->load();
+    
+    $query = "UPDATE customers SET wholesaler_id = " . $this->db->quote($this->wholesaler_id) . ", type = " . $this->db->quote($this->type) . ", company_name = " . $this->db->quote($this->company_name) . ", first_name = " . $this->db->quote($this->first_name) . ", last_name = " . $this->db->quote($this->last_name) . ", email = " . $this->db->quote($this->email) . ", mobile = " . $this->db->quote($this->mobile) . ", phone = " . $this->db->quote($this->phone) . ", fax = " . $this->db->quote($this->fax) . ", address1 = " . $this->db->quote($this->address1) . ", address2 = " . $this->db->quote($this->address2) . ", city = " . $this->db->quote($this->city) . ", state = " . $this->db->quote($this->state) . ", postcode = " . $this->db->quote($this->postcode) . ", postal_same = " . $this->db->quote($this->postal_same) . ", postal_address1 = " . $this->db->quote($this->postal_address1) . ", postal_address2 = " . $this->db->quote($this->postal_address2) . ", postal_city = " . $this->db->quote($this->postal_city) . ", postal_state = " . $this->db->quote($this->postal_state) . ", postal_postcode = " . $this->db->quote($this->postal_postcode) . ", active = " . $this->db->quote($this->active) . ", abn = " . $this->db->quote($this->abn) . ", birthdate = " . $this->db->quote($this->birthdate) . ", kind = " . $this->db->quote($this->kind) . ", agent = " . $this->db->quote($this->agent);
+    $query .= " WHERE customer_id = " . $this->db->quote($this->customer_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+        //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_changes($keys,$customer,$this,"customers",$this->customer_id);
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+		
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function get_customers()
+  **
+  ** DESCRIPTION: retrieves all customer details from the table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - an array containing all the list of customer details
+  ** 
+  */
+  function get_customers($wholesaler_id = 0) {
+    $query = "SELECT * FROM customers ";
+
+	if ($wholesaler_id != 0) {
+		$query .= " WHERE wholesaler_id = " . $this->db->quote($wholesaler_id);
+	}
+
+	$query .= " ORDER BY company_name, first_name, last_name";
+
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $a = array();
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+  }
+
+ /* function customers_list()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - array
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function customers_list( $name, $array ){
+      
+    $list = '<select name="' . $name . '" id="' . $name . '">'; 
+    $list .= '<option value="0">Select Customer</option>';
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+        $customer = new customers();
+        $customer->customer_id = $array[$x];
+        $customer->load();
+        $customer_name = $customer->company_name;
+          $list .= "<option value='" . $array[$x] . "' {CS_". $array[$x] ."_SELECT}>" . $customer_name . "</option>";
+      }
+
+      $list .= '</select>';
+
+    }
+
+      return $list; 
+
+  }
+
+ /* function customers_list2()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - array
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function customers_list2( $name, $array ){
+      
+    $list = '<select name="' . $name . '" id="' . $name . '">'; 
+    $list .= '<option value="0">Select Customer</option>';
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+          $list .= "<option value='" . $array[$x]["customer_id"] . "' {CS_". $array[$x]["customer_id"] ."_SELECT}>" . ucwords($array[$x]["company_name"]). " - " . ucwords($array[$x]["first_name"]) . " " . ucwords($array[$x]["last_name"]) . "</option>";
+      }
+
+      $list .= '</select>';
+
+    }
+
+      return $list; 
+
+  }
+
+  /* function get_by_agent()
+  **
+  ** DESCRIPTION: retrieves all customer details from the table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - an array containing all the list of customer details
+  ** 
+  */
+  function get_by_agent() {
+    $query = "SELECT * FROM customers ";
+    $query .= " WHERE agent = " . $this->db->quote($this->agent);
+    $query .= " ORDER BY company_name, first_name, last_name";
+
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $a = array();
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+  }
+
+  /* function get_agents_by_wholesalers()
+  **
+  ** DESCRIPTION: retrieves all customer details from the table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - an array containing all the list of customer details
+  ** 
+  */
+  function get_agents_by_wholesalers() {
+    $query = "SELECT * FROM customers ";
+    $query .= " WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    $query .= " AND kind = 'agent'";
+
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $a = array();
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+  }
+
+ /* function agent_list()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - array
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function agent_list( $name, $array ){
+      
+    $list = '<select name="' . $name . '" id="' . $name . '">'; 
+    $list .= '<option value="0">Select Agent</option>';
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+          $list .= "<option value='" . $array[$x]["customer_id"] . "' {AGENT_". $array[$x]["customer_id"] ."_SELECT}>" . ucwords($array[$x]["company_name"]). " - " . ucwords($array[$x]["first_name"]) . " " . ucwords($array[$x]["last_name"]) . "</option>";
+      }
+
+      $list .= '</select>';
+
+    }
+
+      return $list; 
+
+  }
+
+}
+

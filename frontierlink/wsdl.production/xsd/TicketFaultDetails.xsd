@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+	<xsd:include schemaLocation="elements/TicketClearanceCode.xsd" />
+
+    <xsd:complexType name="TicketFaultDetails">
+        <xsd:sequence>
+            <xsd:element name="faultSymptom" type="wsg:TicketClearanceCode" minOccurs="0" />
+            <xsd:element name="faultImpact" type="wsg:TicketClearanceCode" minOccurs="0" />
+            <xsd:element name="faultLocation" type="wsg:TicketClearanceCode" minOccurs="0" />
+            <xsd:element name="faultElementType" type="wsg:TicketClearanceCode" minOccurs="0" />
+            <xsd:element name="faultCause" type="wsg:TicketClearanceCode" minOccurs="0" />
+            <xsd:element name="actionTaken" type="wsg:TicketClearanceCode" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

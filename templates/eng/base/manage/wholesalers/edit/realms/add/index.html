@@ -1,0 +1,32 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Add Realm: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?wholesaler_id={WHOLESALER_ID}" method="post">
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Realm:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="realm" type="text" id="realm" value="{REALM}">
+      </font></td>
+  </tr>
+<tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Service Type:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- {SERVICE_TYPE_LIST} -->
+      <select name="service_type" id="service_type">
+          <option value="0">Add a Service</option>
+          <option value="1">ADSL/NBN</option>
+          <option value="4">EFM</option>
+        </select>
+      </font></td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Create">
+</p>
+</form>

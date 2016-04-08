@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="CablePair.xsd" />
+    <xsd:include schemaLocation="elements/TransmissionPathStatus.xsd" />
+
+    <xsd:element name="CableDetails" type="wsg:CableDetails" />
+
+    <xsd:complexType name="CableDetails">
+        <xsd:sequence>
+            <xsd:element name="transmissionPathStatus" type="wsg:TransmissionPathStatus" minOccurs="0" />
+            <xsd:element name="cablePair" type="wsg:CablePair" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,44 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<!-- <div><font color="green">&#9989;</font> Edit &#xbb; <font color="green">&#9989;</font> Distribution &#xbb; Create Service</div> -->
+<h2><span class="bodytext">Edit a Service: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?service_id={SERVICE_ID}" method="post" name="form">
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Delivery Address:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {DELIVERY_ADDRESS}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Current Retail Plan:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="retail_plan" type="text" id="retail_plan" value="{RETAIL_PLAN}"> -->
+      {CURRENT_RETAIL_PLAN_LIST}
+      </font></td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Tag:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {TAG}
+      </font></td>
+  </tr>
+  {EXTRA_ROW}
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Order Contact:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="order_churn_contact_0" type="text" id="order_churn_contact_0" value="{ORDER_CHURN_CONTACT_0}"> -->
+      {ORDER_CONTACT_LIST}
+    </font></td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Create">
+  <!-- <input name="submit2" type="submit" id="submit2" value="submit" hidden> -->
+</p>
+</form>

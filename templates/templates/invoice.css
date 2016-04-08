@@ -1,0 +1,53 @@
+body {
+	font-family: Arial;
+}
+.header {
+	padding-bottom: 5px;
+}
+.container {
+	width:	800px;
+	margin:	auto;
+}
+.logo {
+    display: inline-block;
+    width: 50%;
+}
+.abn {
+    display: inline-block;
+    width: 50%;
+    text-align: right;
+    vertical-align: bottom;
+}
+.left {
+	vertical-align: top;
+	display: inline-block;
+	width: 50%;
+}
+.right {
+	display: inline-block;
+	width: 50%;
+}
+p {
+	padding: 0;
+	margin: 0;
+}
+p span {
+	float: right;
+}
+table {
+	width: 100%;
+	max-width: 100%;
+}
+.bill_summary_table {
+	height: 200px;
+}
+.bill_summary_charges {
+    border-bottom: solid;
+    margin-top: 5px;
+    height: 20px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 800px;
+}

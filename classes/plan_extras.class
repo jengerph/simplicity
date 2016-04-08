@@ -1,0 +1,508 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// plan_extras.class - Class for accessing plan_extras details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "audit.class";
+
+class plan_extras {
+
+  var $plan_id;
+  var $extra_id;
+  var $type;
+  var $description;
+  var $month_cost;
+  var $setup_cost;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function plan_extras() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function plan_extras() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->plan_id = strtoupper($this->plan_id);
+
+    if (!$this->plan_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->plan_id) {
+      
+      $query = "SELECT * FROM plan_extras WHERE plan_id = " . $this->db->quote($this->plan_id);
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - exists
+  ** 0 - does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->extra_id = strtolower($this->extra_id);
+  
+    // Check we have an user
+    if (!$this->extra_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT extra_id FROM plan_extras WHERE extra_id = " . $this->db->quote($this->extra_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (plan_extras::validate()) {
+    
+      return 0;
+      
+    }
+
+    $plan_extras = new plan_extras();
+
+    // Create the property search
+    $query = "INSERT INTO plan_extras (plan_id, type, description, month_cost, setup_cost)";
+    $query .= " VALUES (" . $this->db->quote($this->plan_id) . "," . $this->db->quote($this->type) . "," . $this->db->quote($this->description) . "," . $this->db->quote($this->month_cost) . "," . $this->db->quote($this->setup_cost) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      $this->plan_id = $this->db->fetch_insert_id();
+
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"plan_extras",$this->plan_id);
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (plan_extras::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!plan_extras::exist()) {
+      return 0;
+      
+    }
+
+    $plan_extras = new plan_extras();
+    $plan_extras->extra_id = $this->extra_id;
+    $plan_extras->get_extra();
+
+    $query = "UPDATE plan_extras SET type = " . $this->db->quote($this->type) . ", description = " . $this->db->quote($this->description) . ", month_cost = " . $this->db->quote($this->month_cost) . ", setup_cost = " . $this->db->quote($this->setup_cost);
+    $query .= " WHERE extra_id = " . $this->db->quote($this->extra_id);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_changes($keys,$plan_extras,$this,"plan_extras",$this->extra_id);
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+    $this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+    
+    // Prepare the query
+    $query = "DELETE FROM plan_extras WHERE extra_id = " . $this->db->quote($this->extra_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    $this->type = strtolower($this->type);
+    if (!isset($this->type) || empty($this->type)) {
+      
+      return 192;
+      
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_plan_extras()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of plan extras with correpsonding details
+  ** 
+  */
+
+  function get_plan_extras(){
+      
+      $query = "SELECT * FROM plan_extras ";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+     /* function get_extra()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - the data of a specific plan extra detail
+  ** 
+  */
+
+  function get_extra(){
+      
+      $this->extra_id = strtoupper($this->extra_id);
+
+    if (!$this->extra_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->extra_id) {
+      
+      $query = "SELECT * FROM plan_extras WHERE extra_id = " . $this->db->quote($this->extra_id);
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+  }
+
+     /* function get_extra_types()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - the data of a specific plan extra detail
+  ** 
+  */
+
+  function get_extra_types(){
+
+      $a = array();
+      
+      $this->plan_id = strtoupper($this->plan_id);
+
+    if (!$this->plan_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->plan_id) {
+      
+      $query = "SELECT * FROM plan_extras WHERE plan_id = " . $this->db->quote($this->plan_id);
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }  
+    }
+
+
+    return $a;
+  }
+
+     /* function get_extra_types_id_type()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - the data of a specific plan extra detail
+  ** 
+  */
+
+  function get_extra_types_id_type(){
+  
+    if ($this->plan_id) {
+      
+      $query = "SELECT * FROM plan_extras WHERE plan_id = " . $this->db->quote($this->plan_id) . " AND type=" . $this->db->quote($this->type);
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }   
+    }
+
+
+    return 0;
+  }
+
+}
+

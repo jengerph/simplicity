@@ -1,0 +1,23 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Edit Once-Off Billing: </span></h2>
+<p>{BACK_LINK}</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red">{ERROR_MSG}</font></p>
+<form action="{SELF}?item_id={ITEM_ID}" method="post" name="form">
+<p>Description:<input type="text" name="description" id="description" value="{DESCRIPTION}" /></p>
+{UNIT_AMOUNT}
+<p>GST: <input type="radio" name="gst" id="gst" value="yes" {GST_YES}/> Yes <input type="radio" name="gst" id="gst" value="no" {GST_NO}/> No</p>
+<p>Quantity:<input type="text" name="qty" id="qty" value="{QTY}" /></p>
+<p>Item Type:
+	{ITEM_TYPE}
+</p>
+<!-- <p>Main Invoice ID:<input type="text" name="main_invoice_id" id="main_invoice_id" value="{MAIN_INVOICE_ID}" /></p>
+<p>Main Item ID:<input type="text" name="main_item_id" id="main_item_id" value="{MAIN_ITEM_ID}" /></p>
+<p>Wholesale Invoice ID:<input type="text" name="wholesale_invoice_id" id="wholesale_invoice_id" value="{WHOLESALE_INVOICE_ID}" /></p>
+<p>Wholesale Item ID:<input type="text" name="wholesale_item_id" id="wholesale_item_id" value="{WHOLESALE_ITEM_ID}" /></p> -->
+<p><input name="submit" type="submit" id="submit" value="Submit"></p>
+</form>

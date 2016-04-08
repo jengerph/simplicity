@@ -1,0 +1,16 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Porting Option: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&outbound_kind={OUTBOUND_KIND}&sp={SP}" method="post" name="form" enctype="multipart/form-data">
+	<p>Service No: <input type="text" name="outbound_service_number" id="outbound_service_number" value="{OUTBOUND_SERVICE_NUMBER}"/></p>
+	<p>Account Name: <input type="text" name="outbound_account_name" id="outbound_account_name" value="{OUTBOUND_ACCOUNT_NAME}"/></p>
+	<p>Account Number: <input type="text" name="outbound_account_number" id="outbound_account_number" value="{OUTBOUND_ACCOUNT_NUMBER}"/></p>
+	<p>Carrier: <input type="text" name="outbound_carrier" id="outbound_carrier" value="{OUTBOUND_CARRIER}"/></p>
+	<p>Upload Bill: <!-- <input type="text" name="outbound_upload_bill" id="outbound_upload_bill" value="{OUTBOUND_UPLOAD_BILL}"/> --><input name="outbound_upload_bill" type="file" id="outbound_upload_bill"></p>
+	<p><input name="submit" type="submit" id="submit" value="Next"></p>
+</form>

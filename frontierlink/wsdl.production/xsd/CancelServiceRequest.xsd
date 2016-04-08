@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+	        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+	        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="SiteContactDetails.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+
+    <xsd:element name="CancelServiceRequest" type="wsg:CancelServiceRequest" />
+
+    <xsd:complexType name="CancelServiceRequest">
+        <xsd:sequence>
+            <xsd:element name="serviceOrders" type="wsg:ServiceID" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A list of to the Service Orders Ids making up the customer service to be cancelled</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="siteContactDetails" type="wsg:SiteContactDetails">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details pertaining to site contacts</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

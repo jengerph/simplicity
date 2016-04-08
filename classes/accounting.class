@@ -1,0 +1,496 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// accounting.class - Class for accessing accounting details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "user.class";
+
+class accounting {
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+  var $start_date;
+  var $end_date;
+
+
+  /* function accounting() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function accounting() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->username = strtoupper($this->username);
+
+    if (!$this->username) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->username) {
+      
+      $query = "SELECT username,CAST(dt AS DATE) as 'date', SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown ";
+      $query .= "WHERE username=" . $this->db->quote($this->username) . " GROUP BY YEAR(dt), MONTH(dt), DAY(dt) ORDER BY dt DESC LIMIT 1";
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        while ($cel = each($row)) {
+
+          $key = $cel['key'];
+          
+          $this->{$key} = $cel['value'];
+          
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->username = $this->username;
+
+    $user = new user();
+    $user->username = $this->username;
+    $user->load();
+
+    if ( !$user->username ) {
+
+      return 1;
+
+    }
+    
+    
+    $query = "SELECT username FROM accounting.radacct_breakdown WHERE username = " . $this->db->quote($this->username);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count >= 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+    
+    if ( !$this->username ) {
+
+      return 1;
+
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_all()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table
+  ** 
+  */
+
+  function get_all(){
+      
+      // $query = "SELECT * FROM accounting.radacct_breakdown LIMIT 10";
+      $query = "SELECT username,CAST(dt AS DATE) as 'date', SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown GROUP BY YEAR(dt), MONTH(dt), DAY(dt) ORDER BY dt DESC";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user(){
+      
+      $a = array();
+
+      $query = "SELECT username,CAST(dt AS DATE) as 'date', SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown ";
+      $query .= "WHERE username=" . $this->db->quote($this->username) . " GROUP BY YEAR(dt), MONTH(dt), DAY(dt) ORDER BY dt DESC LIMIT 1";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user_month()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_month(){
+     
+      // Check if we have date/time format or just date
+      if (strpos($this->start_date, ' ') === FALSE) { 
+      	$start_date = $this->start_date . " 00:00:00";
+      } else {
+	$start_date = $this->start_date;
+      }
+      if (strpos($this->end_date, ' ') === FALSE) { 
+      	$end_date = $this->end_date . " 23:59:59";
+      } else {
+	$end_date = $this->end_date;
+      }
+
+      $query = "SELECT username,CAST(dt AS DATE) as 'date', SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown WHERE username=" . $this->db->quote($this->username) . " AND dt >=CAST(" . $this->db->quote($start_date) . " as datetime) AND dt<=" . $this->db->quote($end_date) . " GROUP BY YEAR(dt), MONTH(dt), DAY(dt) ORDER BY dt DESC";
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+     /* function get_user_month_asc()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_month_asc(){
+     
+      // Check if we have date/time format or just date
+      if (strpos($this->start_date, ' ') === FALSE) { 
+        $start_date = $this->start_date . " 00:00:00";
+      } else {
+  $start_date = $this->start_date;
+      }
+      if (strpos($this->end_date, ' ') === FALSE) { 
+        $end_date = $this->end_date . " 23:59:59";
+      } else {
+  $end_date = $this->end_date;
+      }
+
+      $query = "SELECT username,CAST(dt AS DATE) as 'date', SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown WHERE username=" . $this->db->quote($this->username) . " AND dt >=CAST(" . $this->db->quote($start_date) . " as datetime) AND dt<=" . $this->db->quote($end_date) . " GROUP BY YEAR(dt), MONTH(dt), DAY(dt) ORDER BY dt ASC";
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user_week()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_week(){
+
+      $start_date = $this->start_date . " 00:00:00";
+      $end_date = $this->end_date . " 23:59:59";
+      
+      $query = "SELECT username,CAST(dt AS DATE) as 'date', SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown WHERE username=" . $this->db->quote($this->username) . " AND dt >=CAST(" . $this->db->quote($start_date) . " as datetime) AND dt<=" . $this->db->quote($end_date) . " GROUP BY YEAR(dt), MONTH(dt), DAY(dt)";
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+     /* function usage_month_per_week()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function usage_month_per_week(){
+      
+      // $query = "SELECT username,CAST(dt AS DATE) as 'date', SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown WHERE username=" . $this->db->quote($this->username) . " AND dt >=CAST(" . $this->db->quote($start_date) . " as datetime) AND dt<=CAST(" . $this->db->quote($end_date) . " as datetime) GROUP BY YEAR(dt), MONTH(dt), DAY(dt)";
+    $query = "SELECT username, DATE_FORMAT(dt, '%m/%d') AS date, SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown WHERE username=" . $this->db->quote($this->username) . " AND dt >= CAST(" . $this->db->quote($this->start_date) . " as datetime) AND dt<=CAST(" . $this->db->quote($this->end_date) . " as datetime) GROUP BY WEEK(dt)";
+    
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user_today()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_today(){
+      
+    $query = "SELECT username,CAST(dt AS DATE) as 'date', SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown WHERE username=" . $this->db->quote($this->username) . " AND dt LIKE " . $this->db->quote("%" . $this->start_date . "%" ) . " GROUP BY YEAR(dt), MONTH(dt), DAY(dt) ORDER BY dt DESC LIMIT 1";
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+ /* function date_range()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - string start_contract and end_contract
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function date_range( $start_contract, $end_contract ){
+
+    $start_date = date("Y-m-d", strtotime($start_contract) );
+    $start_date2 = date("Y_m_d", strtotime($start_contract) );
+    $end_contract = date("Y-m-d", strtotime($end_contract) );
+
+    $today = date("Y-m-d");
+
+    $time_end = strtotime($start_date);
+    $time_end = date("Y-m-d", strtotime("+1 month -1 day", $time_end));
+        
+      $list = '<select name="date_range" id="date_range" onchange="this.form.submit()">'; 
+      $list .= '<option value="0">Select Date</option>';
+      while ( $time_end <= $today ) {
+        $list .= "<option value='" . $start_date2 . "' {DR_". $start_date2 ."_SELECT}>" . $start_date . " to " . $time_end . "</option>";
+      $start_date = $time_end;
+      $start_date = strtotime($start_date);
+      $start_date2 = date("Y_m_d", strtotime("+1 day", $start_date));
+      $start_date = date("Y-m-d", strtotime("+1 day", $start_date));
+      $time_end = strtotime($start_date);
+      $time_end = date("Y-m-d", strtotime("+1 month -1 day", $time_end));
+      }
+
+      $list .= "<option value='" . $start_date2 . "' {DR_". $start_date2 ."_SELECT}>" . $start_date . " to " . $time_end . "</option>";
+
+      $list .= '</select>';
+      return $list; 
+
+  }
+
+ /* function date_range2()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - string start_contract and end_contract
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function date_range2( $start_contract, $end_contract ){
+
+    $list_months = array();
+
+    $start_date = date("Y-m-d", strtotime($start_contract) );
+    $start_date2 = date("Y_m_d", strtotime($start_contract) );
+    $end_contract = date("Y-m-d", strtotime($end_contract) );
+
+    $today = date("Y-m-d");
+
+    $time_end = strtotime($start_date);
+    $time_end = date("Y-m-d", strtotime("+1 month -1 day", $time_end));
+        
+      // $list = '<select name="date_range" id="date_range" onchange="this.form.submit()">'; 
+      // $list .= '<option value="0">Select Date</option>';
+      while ( $time_end <= $today ) {
+        // $list .= "<option value='" . $start_date2 . "' {DR_". $start_date2 ."_SELECT}>" . $start_date . " to " . $time_end . "</option>";
+        $list_months[] = $start_date . " to " . $time_end;
+      $start_date = $time_end;
+      $start_date = strtotime($start_date);
+      $start_date2 = date("Y_m_d", strtotime("+1 day", $start_date));
+      $start_date = date("Y-m-d", strtotime("+1 day", $start_date));
+      $time_end = strtotime($start_date);
+      $time_end = date("Y-m-d", strtotime("+1 month -1 day", $time_end));
+      }
+
+      // $list .= "<option value='" . $start_date2 . "' {DR_". $start_date2 ."_SELECT}>" . $start_date . " to " . $time_end . "</option>";
+      $list_months[] = $start_date . " to " . $time_end;
+
+      // $list .= '</select>';
+      return $list_months; 
+
+  }
+
+}
+

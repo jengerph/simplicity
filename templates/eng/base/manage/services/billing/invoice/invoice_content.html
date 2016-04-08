@@ -1,0 +1,84 @@
+<style type="text/css">
+body {
+    font-family: Arial;
+}
+p {
+    padding: 0;
+    margin: 0;
+}
+p span {
+    float: right;
+}
+table {
+    width: 100%;
+    max-width: 100%;
+}
+</style>
+<div class="container" style="width:800px;margin: auto;">
+    <div style="padding-bottom: 5px;">
+        <div style="display: inline-block;width: 50%;">
+            <img src="http://simplicity.xi.com.au/templates/images/header.png">
+        </div><div class="abn" style="display: inline-block;width: 50%;text-align: right;vertical-align: bottom;">
+            X Iintegration Pty Ltd ABN 83 112 450 343 
+        </div>
+    </div>
+    <div class="container" style="width:800px;margin: auto;">
+        <div class="left" style="vertical-align: top;display: inline-block;width: 50%;">
+            <p>Tax Invoice for...</p>
+            <br/>
+            <br/>
+            <p>{INVOICE_OWNER_NAME}</p>
+            <p>{INVOICE_ADDRESS}</p>
+        </div><div class="right" style="display: inline-block;width: 50%;">
+            <p>
+                Service number
+                <span>{SERVICE_ID}</span>
+            </p>
+            <p>
+                Invoice number
+                <span>{INVOICE_NUMBER}</span>
+            </p>
+            <p>
+                Billing Period
+                <span>{BILLING_PERIOD}</span>
+            </p>
+            <p>
+                Date of issue
+                <span>{DATE_OF_ISSUE}</span>
+            </p>
+            <br/>
+            <div style="background-color:#efefef;">
+                <div class="bill_summary_table" style="height: 200px;">
+                    <table>
+                    <tr>
+                        <th colspan="3" style="background-color:#474747;color:white;">Bill Summary</th>
+                    </tr>
+                    <tr>
+                        <td>{ITEM_TYPE}</td>
+                        <td>{IT_NUMBER}</td>
+                        <td>${IT_AMOUNT}</td>
+                    </tr>
+                </table>
+                </div>
+                <div class="bill_summary_charges" style="border-bottom: solid;margin-top: 5px;height: 20px;">
+                    <p>
+                        Account Charges and credits
+                        <span>${ACOUNT_CHARGES}</span>
+                    </p>
+                </div>
+                <div class="bill_summary_charges" style="border-bottom: solid;margin-top: 5px;height: 20px;">
+                    <p>
+                        Previous Balance
+                        <span>${PREVIOUS_BALANCE}</span>
+                    </p>
+                </div>
+                <div class="total">
+                    <p>
+                        <font style="font-size: 25px;">Total</font>
+                        <span><font style="font-size: 25px;font-weight: bold;">${TOTAL_BALANCE}</font></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

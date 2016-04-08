@@ -1,0 +1,228 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// aatp_ctop.class- Class for accessing aatp_ctop details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "user.class";
+include_once "audit.class";
+
+class aatp_ctop {
+  var $id_value;
+  var $trans_date_time;
+  var $target;
+  var $usage_type;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function aatp_ctop() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function aatp_ctop() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->id_value = strtoupper($this->id_value);
+
+    if (!$this->id_value) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->id_value) {
+      
+      $query = "SELECT * FROM aatp_ctop WHERE IDValue = " . $this->db->quote($this->id_value);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->id_value = $this->id_value;
+
+    if ( !$user->id_value ) {
+
+      return 1;
+
+    }
+    
+    
+    $query = "SELECT * FROM aatp_ctop WHERE IDValue = " . $this->db->quote($this->id_value);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+   /* function get_history()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all aatp_ctop details in the table
+  ** 
+  */
+
+  function get_history($date_start,$date_end){
+    
+    $date_start = explode("/", $date_start);
+    $fmt_start = $date_start[2] .'-'. $date_start[1] .'-'. $date_start[0];
+
+    $date_end = explode("/", $date_end);
+    $fmt_end = $date_end[2] .'-'. $date_end[1] .'-'. $date_end[0];
+
+    if ( !$this->id_value ) {
+      return 0;
+    }
+      $a = array();
+      $query = "SELECT * FROM aatp_ctop WHERE IDValue = " . $this->db->quote($this->id_value) . " AND TransDateTime BETWEEN " . $this->db->quote($fmt_start) . " AND " . $this->db->quote($fmt_end);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_usage_type()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all aatp_ctop details in the table
+  ** 
+  */
+
+  function get_usage_type(){
+
+    if ( !$this->usage_type ) {
+      return 0;
+    }
+      
+      $query = "SELECT * FROM call_usage WHERE usage_type = " . $this->db->quote($this->usage_type);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      } 
+
+    return 0;
+
+  }
+
+}
+

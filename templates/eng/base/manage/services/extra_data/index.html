@@ -1,0 +1,25 @@
+
+<script type="text/javascript">
+  function outputUpdate(value) {
+  document.querySelector('#value').innerHTML = value + " GB";
+}
+</script>
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">Purchase Extra Data: </span></h2>
+
+<p>{BACK_LINK}</p>
+<p>{ERROR_MSG}</p>
+<form action="{SELF}?service_id={SERVICE_ID}" method="POST">
+  <table>
+    <tr>
+      <td>How much GB of data do you wish to buy?</td>
+      <td><input type="range" name="extra_data" id="extra_data" min="1" max="50" step="1" value="{VALUE}" onchange="outputUpdate(value)" onkeypress="outputUpdate(value)" style="width:250px;"><span id="value" style="font-size:14px;vertical-align: top;">{VALUE} GB</span></td>
+    </tr>
+  </table>
+  <p><input type="submit" name="submit" id="submit" value="Purchase"></p>
+</form>

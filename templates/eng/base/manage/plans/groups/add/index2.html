@@ -1,0 +1,37 @@
+
+ <link href="/select2/select2.css" rel="stylesheet"/>
+<script src="/select2/select2.js"></script>
+<script>
+$(document).ready(function() { $("#wholesaler_id").select2();});
+$(document).ready(function() { $("#type_id").select2();});
+</script>
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">Add  Plan Groups: </span></h2>
+
+{BACK_LINK}
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red">{ERROR_MSG}</font></p>
+<form action="{SELF}?wholesaler_id={WHOLESALER_ID}" method="POST">
+<p>Wholesaler: {WHOLESALER_LIST}</p>
+<p>Service Type: 
+<select name="type_id" id="type_id">
+    <option value="">--Select Type--</option>
+    <option value="1" {ST_1_SELECT}>ADSL/NBN</option>
+    <option value="3" {ST_3_SELECT}>Web hosting</option>
+    <option value="4" {ST_4_SELECT}>EFM</option>
+    <option value="5" {ST_5_SELECT}>Inbound Voice</option>
+    <option value="6" {ST_6_SELECT}>Outbound Voice</option>
+</select>
+</p>
+<p>Description: <input type="text" name="description" id="description" value="{DESCRIPTION}"></p>
+<p>Active: <input name="active" id="active" type="radio" value="no"{ACTIVE_NO_SELECT}>
+  No 
+  <input name="active" id="active" type="radio" value="yes"{ACTIVE_YES_SELECT}>
+  Yes</p>
+<input type="submit" name="submit" id="submit" value="Submit" hidden/>
+<p><input  type="submit" name="real_submit" id="real_submit" value="Create Plan Group"></p>
+</form>

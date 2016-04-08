@@ -1,0 +1,29 @@
+{BACK_LINK}
+<div style="padding-top: 10px;padding-bottom: 10px;">
+	<div>
+		<strong>{CUSTOMER_NAME}</strong>
+		<small><a href="/base/manage/customers/edit/?customer_id={CUSTOMER_ID}">Edit</a></small>
+		<p><a href="/base/manage/orders/?customer_id={CUSTOMER_ID}">Orders</a>{AGENT_LINKS}{CREDIT_CARD_LINK}</p>
+		<table>
+			<tr>
+				<td><strong>Wholesaler</strong></td>
+				<td>{CS_WHOLESALER}</td>
+				<td><strong>Type</strong></td>
+				<td>{CS_TYPE}</td>
+				<td><strong>Kind</strong></td>
+				<td>{CUSTOMER_KIND}</td>
+			</tr>
+			<tr>
+				<td><strong>Phone</strong></td>
+				<td>{CS_PHONE}</td>
+				<td><strong>ACTIVE</strong></td>
+				<td>{CS_ACTIVE}</td>
+				{AGENT_COLUMN}
+			</tr>
+		</table>
+	</div>
+	<div>Services: <small><a href="/base/manage/services/add/?customer_id={CUSTOMER_ID}">Add a service</a></small>
+		<!-- <ul style="margin-left: 10px;">{SERVICES_LI}</ul> -->
+		{SERVICES_TABLE}
+	</div>
+</div>

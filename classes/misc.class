@@ -1,0 +1,431 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// misc.class - Provides misc functions that are used around the place
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log: misc.class,v $
+// Revision 1.12  2004/08/25 06:04:46  menger
+// add function date_nice24 to display date nicely with 24 hour time
+//
+// Revision 1.11  2004/06/23 01:43:16  menger
+// allow dates < 1970 to skip stage 2 validation
+//
+// Revision 1.10  2004/04/06 13:38:22  menger
+// add in step for minute box generator
+//
+// Revision 1.9  2004/03/30 00:29:33  menger
+// Fix dates to display nicley
+//
+// Revision 1.8  2004/03/25 02:07:49  menger
+// Add in function to turn mysql dt into unix timestamp
+//
+// Revision 1.7  2004/03/02 03:57:16  menger
+// Change year list function to always list 100 years starting from $i
+//
+// Revision 1.6  2004/02/01 03:52:14  menger
+// Add in function date_nice to print out a date/time in a nice fashion
+//
+// Revision 1.5  2004/01/08 06:20:30  menger
+// add in make hour and make minute drop down list funcitons
+//
+// Revision 1.4  2003/12/11 22:20:35  menger
+// Added support for recurring availability data set
+//
+// Revision 1.3  2003/12/11 02:26:54  menger
+// Added support for year to have a starting year value
+//
+// Revision 1.2  2003/12/11 00:18:10  menger
+// Fixed prefix to take prefix as paramater
+//
+// Revision 1.1  2003/12/11 00:06:11  menger
+// initial commit
+//
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+
+class misc {
+
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+  
+
+  /* function misc() 
+  **
+  ** DESCRIPTION: class constructor, initalizes and sets up DB connection
+  **
+  ** PARAMETERS:
+	**
+  ** RETURNS:
+  ** 
+  */
+  function misc() { 
+
+    $config = new config();
+
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+        
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  function make_date_day_list($day, $name) {
+  
+    $i = 0;
+    
+    $out = "<select size='1' name='$name'>";
+
+    while ($i <= 31) {
+    
+      $out .= '<option';
+      
+      if ($i == $day) {
+      
+        $out .= ' selected';
+        
+      }
+      
+      if ($i < 10 ) {
+      
+        $i = "0" . $i;
+        
+      }
+
+      $out .= '>' . $i;
+      
+      $i++;
+      
+    }
+    
+    $out .= '</select>';
+    
+    return $out;
+  }
+  
+  function make_date_month_list($month_in, $name) {
+  
+    $months = array(0 => '--', 1 => 'January', 2 => 'Feburary', 3 => 'March', 4 => 'April', 5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December');
+
+    $out = "<select size='1' name='$name'>";
+    
+    while ($cel = each($months)) {
+
+      $month = $cel['key'];
+      $value = $cel['value'];
+      
+      if ($month < 10) {
+      
+        $month = "0" . $month;
+      }
+          
+      $out .= "<option value = '$month'";
+      
+      if ($month == $month_in) {
+      
+        $out .= ' selected';
+        
+      }
+      
+      $out .= '>' . $value;
+      
+    }
+    
+    $out .= '</select>';
+    
+    return $out;
+  
+  }    
+
+  function make_date_year_list($year, $name, $i = 1900) {
+  
+    if ($year == '') {
+    
+      // default
+      $year = 1970;
+      
+    }
+    
+    $out = "<select size='1' name='$name'>";
+
+    $out .= '<option';
+      
+    if ('0000' == $year) {
+      
+      $out .= ' selected';
+        
+    }
+
+    $out .= '>0000';
+
+
+    $stop = $i + 100;    
+      
+    while ($i <= $stop) {
+    
+      $out .= '<option';
+      
+      if ($i == $year) {
+      
+        $out .= ' selected';
+        
+      }
+
+      $out .= '>' . $i;
+      
+      $i++;
+      
+    }
+    
+    $out .= '</select>';
+    
+    return $out;
+  }
+
+  function make_time_hour_list($hour, $name) {
+  
+    if ($hour == '') {
+    
+      // default
+      $hour = 0;
+      
+    }
+    
+    $out = "<select size='1' name='$name'>";
+
+    $i = 0;
+    
+    while ($i <= 24) {
+    
+      $out .= '<option';
+      
+      $iout = $i;
+      
+      if ($i < 10) {
+      
+        $iout = '0' . $i;
+        
+      }
+      
+      if ($iout == $hour) {
+      
+        $out .= ' selected';
+        
+      }
+
+      $out .= '>' . $iout;
+      
+      $i++;
+      
+    }
+    
+    $out .= '</select>';
+    
+    return $out;
+  }
+
+  function make_time_minute_list($minute, $name, $step = 1) {
+  
+    if ($minute == '') {
+    
+      // default
+      $minute = 0;
+      
+    }
+    
+    $out = "<select size='1' name='$name'>";
+
+    $i = 0;
+      
+    while ($i < 60) {
+    
+      $out .= '<option';
+      
+      $iout = $i;
+      
+      if ($i < 10) {
+      
+        $iout = '0' . $i;
+        
+      }
+      
+      if ($iout == $minute) {
+      
+        $out .= ' selected';
+        
+      }
+
+      $out .= '>' . $iout;
+      
+      $i = $i + $step;
+      
+    }
+    
+    $out .= '</select>';
+    
+    return $out;
+  }
+  
+  function make_prefix_list($prefix) {
+  
+    $prefixes = array('Mr','Mrs','Miss','Ms','Dr');
+    
+    $out = '<select size="1" name="prefix">';
+    
+    while ($cel = each($prefixes)) {
+
+      $value = $cel['value'];
+          
+      $out .= '<option';
+      
+      if (strtolower($prefix) == strtolower($value)) {
+      
+        $out .= ' selected';
+        
+      }
+      
+      $out .= '>' . $value;
+      
+    }
+    
+    $out .= '</select>';
+    
+    return $out;
+    
+  }
+
+  function make_country_list($country, $name) {
+  
+    if ($country == '') {
+    
+      $country = "au";
+      
+    }
+
+    $query = "SELECT country_code, country_text FROM countries ORDER BY country_text";
+    
+    $result = $this->db->execute_query($query);
+
+    $out = "<select size='1' name='$name'>";
+    
+    while ( $row = $this->db->fetch_row_array($result)) {
+      
+      $out .= "<option value = '" . $row['country_code'] . "'";
+      
+      if (strtolower($row['country_code']) == strtolower($country)) {
+      
+        $out .= ' selected';
+        
+      }
+      
+      $out .= '>' . $row['country_text'];
+      
+    }
+    
+    $out .= '</select>';
+    
+    return $out;
+  
+  }    
+
+  function date_reverse($date) {
+  
+    $datebits = explode('-', $date);
+		
+    return $datebits[2] . '-' . $datebits[1] . '-' . $datebits[0];
+  
+  }
+  
+  function date_bits($date) {
+  
+    $bits = explode(' ', $date);
+    
+    $datebits = explode('-', $bits[0]);
+    $hourbits = explode(':', $bits[1]);
+    
+    $bits2 = array();
+    
+    $datebits[3] = $hourbits[0];
+    $datebits[4] = $hourbits[1];
+    $datebits[5] = $hourbits[2];
+
+    return $datebits;
+  }
+
+  function date_ts($date) {
+  
+    $datebits = $this->date_bits($date);
+    $ts = mktime($datebits[3], $datebits[4], $datebits[5], $datebits[1], $datebits[2], $datebits[0], -1);
+    
+    return $ts;
+    
+  }
+  
+  function date_nice($date) {
+  
+    $ts = $this->date_ts($date);
+        
+    return date("D jS M Y, g:i a", $ts);
+    
+  }
+
+  function date_nice24($date) {
+  
+    $ts = $this->date_ts($date);
+        
+    return date("D jS M Y, H:i", $ts);
+    
+  }
+
+  function date_MDY($date) {
+  
+    $ts = $this->date_ts($date);
+        
+    return date("d/m/Y", $ts);
+    
+  }
+   /* function make_dropdown()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - name/id
+  ** - array
+  ** - select_key
+  ** - field
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function make_dropdown( $name, $array, $select_key, $field ){
+
+    $list = '<select name="' . $name . '" id="' . $name . '">'; 
+    $list .= '<option value="0">Select '.$field.'</option>';
+
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+          $temp = str_replace(" ", "_", $array[$x]);
+          $list .= "<option value='" . $array[$x] . "' {". strtoupper($temp) . $select_key . "_SELECT}>" . $array[$x] . "</option>";
+      }
+
+      $list .= '</select>';
+
+    }
+
+      return $list; 
+
+  }
+}
+
+?>

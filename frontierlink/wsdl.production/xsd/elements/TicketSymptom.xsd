@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="TicketSymptom">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Browsing Issue" />
+            <xsd:enumeration value="Configuration" />
+            <xsd:enumeration value="DNS (General)" />
+            <xsd:enumeration value="Download Issue" />
+            <xsd:enumeration value="Error Message" />
+            <xsd:enumeration value="Performance Issue" />
+            <xsd:enumeration value="Sync - No Comms" />
+            <xsd:enumeration value="No Sync/CD" />
+            <xsd:enumeration value="High Packet Loss" />
+            <xsd:enumeration value="High Latency" />
+            <xsd:enumeration value="No Service" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

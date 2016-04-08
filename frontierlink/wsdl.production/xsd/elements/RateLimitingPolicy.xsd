@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="RateLimitingPolicy">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="no-throttle" />
+            <xsd:enumeration value="throttle-user-64k" />
+            <xsd:enumeration value="throttle-user-128k" />
+            <xsd:enumeration value="throttle-user-256k" />
+            <xsd:enumeration value="throttle-user-512k" />
+            <xsd:enumeration value="throttle-user-1024k" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

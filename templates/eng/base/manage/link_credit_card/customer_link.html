@@ -1,0 +1,30 @@
+<form action="{SELF}?customer_id={CUSTOMER_ID}&request=customer" method="POST">
+	<p><font color="black"><strong>Token ID:</strong></font> {TOKEN_ID}</p>
+	<table width="50%">
+		<tr>
+			<td colspan="2"><font color="black"><strong>Card Details</strong></font></td>
+		</tr>
+		<tr>
+			<td>Title:</td>
+			<td>
+				<select name="title" id="title" style="width:100%" />
+					<option value="Mr." {TITLE_MR}>Mr.</option>
+					<option value="Ms." {TITLE_MS}>Ms.</option>
+					<option value="Mrs." {TITLE_MRS}>Mrs.</option>
+					<option value="Dr." {TITLE_DR}>Dr.</option>
+					<option value="Sir." {TITLE_SIR}>Sir.</option>
+					<option value="Prof." {TITLE_PROF}>Prof.</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>First Name:</td>
+			<td><input type="text" name="first_name" id="first_name" value="{FIRST_NAME}" style="width:100%" /></td>
+		</tr>
+		<tr>
+			<td>Last Name:</td>
+			<td><input type="text" name="last_name" id="last_name" value="{LAST_NAME}" style="width:100%" /></td>
+		</tr>
+	</table>
+		<p><input type="submit" name="create_token" id="create_token" value="Create Token"> | <input type="submit" name="update_token" id="update_token" value="Update Token"></p>
+</form>

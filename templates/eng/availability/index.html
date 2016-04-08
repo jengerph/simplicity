@@ -1,0 +1,622 @@
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        text-align:center;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style>
+      #locationField, #controls {
+        position: relative;
+        width: 550px;
+      }
+      #autocomplete {
+        /*position: absolute;*/
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 18px;
+      }
+      .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+      }
+      #address {
+        border: 1px solid #000090;
+        background-color: #f0f0ff;
+        width: 550px;
+        padding-right: 2px;
+        margin: auto;
+      }
+      #address td {
+        font-size: 10pt;
+      }
+      .field {
+        width: 99%;
+      }
+      .slimField {
+        width: 80px;
+      }
+      .wideField {
+        width: 200px;
+      }
+      #locationField {
+        height: auto;
+        margin-bottom: 2px;
+        margin:auto;
+      }
+      #status {
+        margin:auto;
+      }
+      #result{
+        width: 100%;
+        text-align: justify;
+      }
+    </style>
+<style type="text/css">
+<!--
+.style1 {font-family: Arial, Helvetica, sans-serif}
+-->
+</style>
+<body topmargin="0">
+<h2>Service Availability:</h2>
+<br/>
+	<form action="{SELF}" method="post" name="form">
+	    <div id="locationField"><small>Street Address Search:</small>
+	      <input id="autocomplete" name="autocomplete" placeholder="Enter street address" onFocus="geolocate()" type="text" value="{AUTOCOMPLETE}"></input>
+		  <!-- <input name="submit" type="submit" id="submit" value="Go &#9654;" style="float:right;"> -->
+	    </div>
+	<div id="status">
+		<div id="status_word"></div>
+		<img src="/images/loading-icon.gif" style="visibility:hidden" id="status_img">
+	</div><small>Enter Street Address Manually:</small><small><font color="red"> {ERROR_MSG}</font></small>
+	    <div style="width: 659px; text-align: justify;margin:auto;">
+        <div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 125px;text-align: right;">Address Information:</div>
+            <div style="display:inline-block"><input name="address_information" id="address_information" value="{ADDRESS_INFORMATION}"></div>
+          </div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 55px;text-align: right;">Level:</div>
+            <div style="display:inline-block"><input name="level" id="level" value="{LEVEL}"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 125px;text-align: right;">Sub Address Type:</div>
+            <div style="display:inline-block"><input name="sub_address_type" id="sub_address_type" value="{SUB_ADDRESS_TYPE}"></div>
+          </div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 55px;text-align: right;">Number:</div>
+            <div style="display:inline-block"><input name="number" id="number" value="{NUMBER}"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 125px;text-align: right;">Street Number:</div>
+            <div style="display:inline-block"><input name="street_number" id="street_number" value="{STREET_NUMBER}"></div>
+          </div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 55px;text-align: right;">Suffix:</div>
+            <div style="display:inline-block"><input name="suffix" id="suffix" value="{SUFFIX}"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 125px;text-align: right;"><font color="red">*</font>Street Name:</div>
+            <div style="display:inline-block">
+              <input name="route" id="route" value="{STREET_NAME}">
+            </div>
+          </div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 55px;text-align: right;">Type:</div>
+            <div style="display:inline-block">
+              <!-- <input name="add_type" id="add_type" value="{ADD_TYPE}"> -->
+              <select id="street_type" name="street_type">
+                 <option value="">Please Select</option>
+                 <option value="STREET" {TYPE_STREET}>STREET</option>
+                 <option value="ROAD" {TYPE_ROAD}>ROAD</option>
+                 <option value="ROUTE" {TYPE_ROUTE}>ROUTE</option>
+                 <option value="PARADE" {TYPE_PARADE}>PARADE</option>
+                 <option value="PLACE" {TYPE_PLACE}>PLACE</option>
+                 <option value="LANE" {TYPE_LANE}>LANE</option>
+                 <option value="HIGHWAY" {TYPE_HIGHWAY}>HIGHWAY</option>
+                 <option value="DRIVE" {TYPE_DRIVE}>DRIVE</option>
+                 <option value="AVENUE" {TYPE_AVENUE}>AVENUE</option>
+                 <option value="ACCESS" {TYPE_ACCESS}>ACCESS</option>
+                 <option value="ACRE" {TYPE_ACRE}>ACRE</option>
+                 <option value="ALLEY" {TYPE_ALLEY}>ALLEY</option>
+                 <option value="ALLEYWAY" {TYPE_ALLEYWAY}>ALLEYWAY</option>
+                 <option value="AMBLE" {TYPE_AMBLE}>AMBLE</option>
+                 <option value="ANCHORAGE" {TYPE_ANCHORAGE}>ANCHORAGE</option>
+                 <option value="APPROACH" {TYPE_APPROACH}>APPROACH</option>
+                 <option value="ARCADE" {TYPE_ARCADE}>ARCADE</option>
+                 <option value="ARTERIAL" {TYPE_ARTERIAL}>ARTERIAL</option>
+                 <option value="ARTERY" {TYPE_ARTERY}>ARTERY</option>
+                 <option value="BANAN" {TYPE_BANAN}>BANAN</option>
+                 <option value="BANK" {TYPE_BANK}>BANK</option>
+                 <option value="BASIN" {TYPE_BASIN}>BASIN</option>
+                 <option value="BAY" {TYPE_BAY}>BAY</option>
+                 <option value="BEACH" {TYPE_BEACH}>BEACH</option>
+                 <option value="BEND" {TYPE_BEND}>BEND</option>
+                 <option value="BLOCK" {TYPE_BLOCK}>BLOCK</option>
+                 <option value="BOARDWALK" {TYPE_BOARDWALK}>BOARDWALK</option>
+                 <option value="BOULEVARD" {TYPE_BOULEVARD}>BOULEVARD</option>
+                 <option value="BOUNDRY" {TYPE_BOUNDRY}>BOUNDRY</option>
+                 <option value="BOWL" {TYPE_BOWL}>BOWL</option>
+                 <option value="BRACE" {TYPE_BRACE}>BRACE</option>
+                 <option value="BRAE" {TYPE_BRAE}>BRAE</option>
+                 <option value="BRANCH" {TYPE_BRANCH}>BRANCH</option>
+                 <option value="BREAK" {TYPE_BREAK}>BREAK</option>
+                 <option value="BRETT" {TYPE_BRETT}>BRETT</option>
+                 <option value="BRIDGE" {TYPE_BRIDGE}>BRIDGE</option>
+                 <option value="BROADWAY" {TYPE_BROADWAY}>BROADWAY</option>
+                 <option value="BROW" {TYPE_BROW}>BROW</option>
+                 <option value="BULL" {TYPE_BULL}>BULL</option>
+                 <option value="BUSWAY" {TYPE_BUSWAY}>BUSWAY</option>
+                 <option value="BYPASS" {TYPE_BYPASS}>BYPASS</option>
+                 <option value="BYWAY" {TYPE_BYWAY}>BYWAY</option>
+                 <option value="CAUSEWAY" {TYPE_CAUSEWAY}>CAUSEWAY</option>
+                 <option value="CENTRE" {TYPE_CENTRE}>CENTRE</option>
+                 <option value="CENTREWAY" {TYPE_CENTREWAY}>CENTREWAY</option>
+                 <option value="CHASE" {TYPE_CHASE}>CHASE</option>
+                 <option value="CIRCLE" {TYPE_CIRCLE}>CIRCLE</option>
+                 <option value="CIRCLET" {TYPE_CIRCLET}>CIRCLET</option>
+                 <option value="CIRCUIT" {TYPE_CIRCUIT}>CIRCUIT</option>
+                 <option value="CIRCUS" {TYPE_CIRCUS}>CIRCUS</option>
+                 <option value="CLAIM" {TYPE_CLAIM}>CLAIM</option>
+                 <option value="CLOSE" {TYPE_CLOSE}>CLOSE</option>
+                 <option value="CLUSTER" {TYPE_CLUSTER}>CLUSTER</option>
+                 <option value="COLONNADE" {TYPE_COLONNADE}>COLONNADE</option>
+                 <option value="COMMON" {TYPE_COMMON}>COMMON</option>
+                 <option value="CONCOURSE" {TYPE_CONCOURSE}>CONCOURSE</option>
+                 <option value="CONNECTION" {TYPE_CONNECTION}>CONNECTION</option>
+                 <option value="COPSE" {TYPE_COPSE}>COPSE</option>
+                 <option value="CORNER" {TYPE_CORNER}>CORNER</option>
+                 <option value="CORSO" {TYPE_CORSO}>CORSO</option>
+                 <option value="COURSE" {TYPE_COURSE}>COURSE</option>
+                 <option value="COURT" {TYPE_COURT}>COURT</option>
+                 <option value="COURTYARD" {TYPE_COURTYARD}>COURTYARD</option>
+                 <option value="COVE" {TYPE_COVE}>COVE</option>
+                 <option value="CREEK" {TYPE_CREEK}>CREEK</option>
+                 <option value="CRESCENT" {TYPE_CRESCENT}>CRESCENT</option>
+                 <option value="CREST" {TYPE_CREST}>CREST</option>
+                 <option value="CRIEF" {TYPE_CRIEF}>CRIEF</option>
+                 <option value="CROSS" {TYPE_CROSS}>CROSS</option>
+                 <option value="CROSSING" {TYPE_CROSSING}>CROSSING</option>
+                 <option value="CROSSROAD" {TYPE_CROSSROAD}>CROSSROAD</option>
+                 <option value="CROSSWAY" {TYPE_CROSSWAY}>CROSSWAY</option>
+                 <option value="CRUISEWAY" {TYPE_CRUISEWAY}>CRUISEWAY</option>
+                 <option value="CUL_DE_SAC" {TYPE_CUL_DE_SAC}>CUL-DE-SAC</option>
+                 <option value="CUT" {TYPE_CUT}>CUT</option>
+                 <option value="CUTTING" {TYPE_CUTTING}>CUTTING</option>
+                 <option value="DALE" {TYPE_DALE}>DALE</option>
+                 <option value="DELL" {TYPE_DELL}>DELL</option>
+                 <option value="DENE" {TYPE_DENE}>DENE</option>
+                 <option value="DEVIATION" {TYPE_DEVIATION}>DEVIATION</option>
+                 <option value="DIP" {TYPE_DIP}>DIP</option>
+                 <option value="DISTRIBUTOR" {TYPE_DISTRIBUTOR}>DISTRIBUTOR</option>
+                 <option value="DIVIDE" {TYPE_DIVIDE}>DIVIDE</option>
+                 <option value="DOCK" {TYPE_DOCK}>DOCK</option>
+                 <option value="DOMAIN" {TYPE_DOMAIN}>DOMAIN</option>
+                 <option value="DOWN" {TYPE_DOWN}>DOWN</option>
+                 <option value="DOWNS" {TYPE_DOWNS}>DOWNS</option>
+                 <option value="DRIVEWAY" {TYPE_DRIVEWAY}>DRIVEWAY</option>
+                 <option value="EASEMENT" {TYPE_EASEMENT}>EASEMENT</option>
+                 <option value="EDGE" {TYPE_EDGE}>EDGE</option>
+                 <option value="ELBOW" {TYPE_ELBOW}>ELBOW</option>
+                 <option value="END" {TYPE_END}>END</option>
+                 <option value="ENTRANCE" {TYPE_ENTRANCE}>ENTRANCE</option>
+                 <option value="ESPLANADE" {TYPE_ESPLANADE}>ESPLANADE</option>
+                 <option value="ESTATE" {TYPE_ESTATE}>ESTATE</option>
+                 <option value="EXPRESSWAY" {TYPE_EXPRESSWAY}>EXPRESSWAY</option>
+                 <option value="EXTENSION" {TYPE_EXTENSION}>EXTENSION</option>
+                 <option value="FAIRWAY" {TYPE_FAIRWAY}>FAIRWAY</option>
+                 <option value="FARE" {TYPE_FARE}>FARE</option>
+                 <option value="FARMS" {TYPE_FARMS}>FARMS</option>
+                 <option value="FERN" {TYPE_FERN}>FERN</option>
+                 <option value="FIRELINE" {TYPE_FIRELINE}>FIRELINE</option>
+                 <option value="FIRETRACK" {TYPE_FIRETRACK}>FIRETRACK</option>
+                 <option value="FIRETRAIL" {TYPE_FIRETRAIL}>FIRETRAIL</option>
+                 <option value="FLAT" {TYPE_FLAT}>FLAT</option>
+                 <option value="FOLLOW" {TYPE_FOLLOW}>FOLLOW</option>
+                 <option value="FOOTWAY" {TYPE_FOOTWAY}>FOOTWAY</option>
+                 <option value="FORD" {TYPE_FORD}>FORD</option>
+                 <option value="FORESHORE" {TYPE_FORESHORE}>FORESHORE</option>
+                 <option value="FORK" {TYPE_FORK}>FORK</option>
+                 <option value="FORMATION" {TYPE_FORMATION}>FORMATION</option>
+                 <option value="FREEWAY" {TYPE_FREEWAY}>FREEWAY</option>
+                 <option value="FRONT" {TYPE_FRONT}>FRONT</option>
+                 <option value="FRONTAGE" {TYPE_FRONTAGE}>FRONTAGE</option>
+                 <option value="GAP" {TYPE_GAP}>GAP</option>
+                 <option value="GARDEN" {TYPE_GARDEN}>GARDEN</option>
+                 <option value="GARDENS" {TYPE_GARDENS}>GARDENS</option>
+                 <option value="GATE" {TYPE_GATE}>GATE</option>
+                 <option value="GATES" {TYPE_GATES}>GATES</option>
+                 <option value="GATEWAY" {TYPE_GATEWAY}>GATEWAY</option>
+                 <option value="GLADE" {TYPE_GLADE}>GLADE</option>
+                 <option value="GLEN" {TYPE_GLEN}>GLEN</option>
+                 <option value="GRANGE" {TYPE_GRANGE}>GRANGE</option>
+                 <option value="GREEN" {TYPE_GREEN}>GREEN</option>
+                 <option value="GROUND" {TYPE_GROUND}>GROUND</option>
+                 <option value="GROVE" {TYPE_GROVE}>GROVE</option>
+                 <option value="GULLY" {TYPE_GULLY}>GULLY</option>
+                 <option value="HAVEN" {TYPE_HAVEN}>HAVEN</option>
+                 <option value="HEATH" {TYPE_HEATH}>HEATH</option>
+                 <option value="HEIGHTS" {TYPE_HEIGHTS}>HEIGHTS</option>
+                 <option value="HIGHROAD" {TYPE_HIGHROAD}>HIGHROAD</option>
+                 <option value="HILL" {TYPE_HILL}>HILL</option>
+                 <option value="HOLLOW" {TYPE_HOLLOW}>HOLLOW</option>
+                 <option value="HUB" {TYPE_HUB}>HUB</option>
+                 <option value="INLET" {TYPE_INLET}>INLET</option>
+                 <option value="INTERCHANGE" {TYPE_INTERCHANGE}>INTERCHANGE</option>
+                 <option value="INTERSECTION" {TYPE_INTERSECTION}>INTERSECTION</option>
+                 <option value="ISLAND" {TYPE_ISLAND}>ISLAND</option>
+                 <option value="JUNCTION" {TYPE_JUNCTION}>JUNCTION</option>
+                 <option value="KEY" {TYPE_KEY}>KEY</option>
+                 <option value="KEYS" {TYPE_KEYS}>KEYS</option>
+                 <option value="KNOB" {TYPE_KNOB}>KNOB</option>
+                 <option value="KNOLL" {TYPE_KNOLL}>KNOLL</option>
+                 <option value="LAGOON" {TYPE_LAGOON}>LAGOON</option>
+                 <option value="LANDING" {TYPE_LANDING}>LANDING</option>
+                 <option value="LANEWAY" {TYPE_LANEWAY}>LANEWAY</option>
+                 <option value="LEES" {TYPE_LEES}>LEES</option>
+                 <option value="LEIGH" {TYPE_LEIGH}>LEIGH</option>
+                 <option value="LINE" {TYPE_LINE}>LINE</option>
+                 <option value="LINK" {TYPE_LINK}>LINK</option>
+                 <option value="LITTLE" {TYPE_LITTLE}>LITTLE</option>
+                 <option value="LOOKOUT" {TYPE_LOOKOUT}>LOOKOUT</option>
+                 <option value="LOOP" {TYPE_LOOP}>LOOP</option>
+                 <option value="LOWER" {TYPE_LOWER}>LOWER</option>
+                 <option value="LYNNE" {TYPE_LYNNE}>LYNNE</option>
+                 <option value="MALL" {TYPE_MALL}>MALL</option>
+                 <option value="MANOR" {TYPE_MANOR}>MANOR</option>
+                 <option value="MART" {TYPE_MART}>MART</option>
+                 <option value="MEAD" {TYPE_MEAD}>MEAD</option>
+                 <option value="MEANDER" {TYPE_MEANDER}>MEANDER</option>
+                 <option value="MEW" {TYPE_MEW}>MEW</option>
+                 <option value="MEWS" {TYPE_MEWS}>MEWS</option>
+                 <option value="MOTORWAY" {TYPE_MOTORWAY}>MOTORWAY</option>
+                 <option value="MOUNT" {TYPE_MOUNT}>MOUNT</option>
+                 <option value="NOOK" {TYPE_NOOK}>NOOK</option>
+                 <option value="NORTH" {TYPE_NORTH}>NORTH</option>
+                 <option value="NULL" {TYPE_NULL}>NULL</option>
+                 <option value="OAKS" {TYPE_OAKS}>OAKS</option>
+                 <option value="OUTLET" {TYPE_OUTLET}>OUTLET</option>
+                 <option value="OUTLOOK" {TYPE_OUTLOOK}>OUTLOOK</option>
+                 <option value="OVAL" {TYPE_OVAL}>OVAL</option>
+                 <option value="OVERBRIDGE" {TYPE_OVERBRIDGE}>OVERBRIDGE</option>
+                 <option value="PARADE" {TYPE_PARADE}>PARADE</option>
+                 <option value="PARADISE" {TYPE_PARADISE}>PARADISE</option>
+                 <option value="PARK" {TYPE_PARK}>PARK</option>
+                 <option value="PARKLANDS" {TYPE_PARKLANDS}>PARKLANDS</option>
+                 <option value="PARKWAY" {TYPE_PARKWAY}>PARKWAY</option>
+                 <option value="PART" {TYPE_PART}>PART</option>
+                 <option value="PASS" {TYPE_PASS}>PASS</option>
+                 <option value="PASSAGE" {TYPE_PASSAGE}>PASSAGE</option>
+                 <option value="PATH" {TYPE_PATH}>PATH</option>
+                 <option value="PATHWAY" {TYPE_PATHWAY}>PATHWAY</option>
+                 <option value="PENINSULA" {TYPE_PENINSULA}>PENINSULA</option>
+                 <option value="PIAZZA" {TYPE_PIAZZA}>PIAZZA</option>
+                 <option value="PIER" {TYPE_PIER}>PIER</option>
+                 <option value="PLACE" {TYPE_PLACE}>PLACE</option>
+                 <option value="PLAZA" {TYPE_PLAZA}>PLAZA</option>
+                 <option value="POCKET" {TYPE_POCKET}>POCKET</option>
+                 <option value="POINT" {TYPE_POINT}>POINT</option>
+                 <option value="PORT" {TYPE_PORT}>PORT</option>
+                 <option value="PRECINCT" {TYPE_PRECINCT}>PRECINCT</option>
+                 <option value="PROMENADE" {TYPE_PROMENADE}>PROMENADE</option>
+                 <option value="PURSUIT" {TYPE_PURSUIT}>PURSUIT</option>
+                 <option value="QUAD" {TYPE_QUAD}>QUAD</option>
+                 <option value="QUADRANGLE" {TYPE_QUADRANGLE}>QUADRANGLE</option>
+                 <option value="QUADRANT" {TYPE_QUADRANT}>QUADRANT</option>
+                 <option value="QUAY" {TYPE_QUAY}>QUAY</option>
+                 <option value="QUAYS" {TYPE_QUAYS}>QUAYS</option>
+                 <option value="RAMBLE" {TYPE_RAMBLE}>RAMBLE</option>
+                 <option value="RAMP" {TYPE_RAMP}>RAMP</option>
+                 <option value="RANGE" {TYPE_RANGE}>RANGE</option>
+                 <option value="REACH" {TYPE_REACH}>REACH</option>
+                 <option value="REEF" {TYPE_REEF}>REEF</option>
+                 <option value="RESERVE" {TYPE_RESERVE}>RESERVE</option>
+                 <option value="REST" {TYPE_REST}>REST</option>
+                 <option value="RETREAT" {TYPE_RETREAT}>RETREAT</option>
+                 <option value="RETURN" {TYPE_RETURN}>RETURN</option>
+                 <option value="RIDE" {TYPE_RIDE}>RIDE</option>
+                 <option value="RIDGE" {TYPE_RIDGE}>RIDGE</option>
+                 <option value="RIDGEWAY" {TYPE_RIDGEWAY}>RIDGEWAY</option>
+                 <option value="RIGHT OF WAY" {TYPE_RIGHT_OF_WAY}>RIGHT OF WAY</option>
+                 <option value="RIGHT" {TYPE_RIGHT}>RIGHT</option>
+                 <option value="RING" {TYPE_RING}>RING</option>
+                 <option value="RISE" {TYPE_RISE}>RISE</option>
+                 <option value="RISING" {TYPE_RISING}>RISING</option>
+                 <option value="RIVER" {TYPE_RIVER}>RIVER</option>
+                 <option value="RIVERWAY" {TYPE_RIVERWAY}>RIVERWAY</option>
+                 <option value="RIVIERA" {TYPE_RIVIERA}>RIVIERA</option>
+                 <option value="ROADS" {TYPE_ROADS}>ROADS</option>
+                 <option value="ROADSIDE" {TYPE_ROADSIDE}>ROADSIDE</option>
+                 <option value="ROADWAY" {TYPE_ROADWAY}>ROADWAY</option>
+                 <option value="RONDE" {TYPE_RONDE}>RONDE</option>
+                 <option value="ROSEBOWL" {TYPE_ROSEBOWL}>ROSEBOWL</option>
+                 <option value="ROTARY" {TYPE_ROTARY}>ROTARY</option>
+                 <option value="ROUND" {TYPE_ROUND}>ROUND</option>
+                 <option value="ROUTE" {TYPE_ROUTE}>ROUTE</option>
+                 <option value="ROW" {TYPE_ROW}>ROW</option>
+                 <option value="ROWE" {TYPE_ROWE}>ROWE</option>
+                 <option value="RUA" {TYPE_RUA}>RUA</option>
+                 <option value="RUE" {TYPE_RUE}>RUE</option>
+                 <option value="RUN" {TYPE_RUN}>RUN</option>
+                 <option value="SERVICEWAY" {TYPE_SERVICEWAY}>SERVICEWAY</option>
+                 <option value="SHUN" {TYPE_SHUN}>SHUN</option>
+                 <option value="SIDING" {TYPE_SIDING}>SIDING</option>
+                 <option value="SKYLINE" {TYPE_SKYLINE}>SKYLINE</option>
+                 <option value="SLOPE" {TYPE_SLOPE}>SLOPE</option>
+                 <option value="SPUR" {TYPE_SPUR}>SPUR</option>
+                 <option value="SQUARE" {TYPE_SQUARE}>SQUARE</option>
+                 <option value="STAIRS" {TYPE_STAIRS}>STAIRS</option>
+                 <option value="STATE HIGHWAY" {TYPE_STATE_HIGHWAY}>STATE HIGHWAY</option>
+                 <option value="STEPS" {TYPE_STEPS}>STEPS</option>
+                 <option value="STRAIGHT" {TYPE_STRAIGHT}>STRAIGHT</option>
+                 <option value="STRAIT" {TYPE_STRAIT}>STRAIT</option>
+                 <option value="STRAND" {TYPE_STRAND}>STRAND</option>
+                 <option value="STRIP" {TYPE_STRIP}>STRIP</option>
+                 <option value="SUBWAY" {TYPE_SUBWAY}>SUBWAY</option>
+                 <option value="TARN" {TYPE_TARN}>TARN</option>
+                 <option value="TERRACE" {TYPE_TERRACE}>TERRACE</option>
+                 <option value="THOROUGHFARE" {TYPE_THOROUGHFARE}>THOROUGHFARE</option>
+                 <option value="THOROUGHWAY" {TYPE_THOROUGHWAY}>THOROUGHWAY</option>
+                 <option value="TOLLWAY" {TYPE_TOLLWAY}>TOLLWAY</option>
+                 <option value="TOP" {TYPE_TOP}>TOP</option>
+                 <option value="TOR" {TYPE_TOR}>TOR</option>
+                 <option value="TOWERS" {TYPE_TOWERS}>TOWERS</option>
+                 <option value="TRACK" {TYPE_TRACK}>TRACK</option>
+                 <option value="TRAIL" {TYPE_TRAIL}>TRAIL</option>
+                 <option value="TREES" {TYPE_TREES}>TREES</option>
+                 <option value="TRIANGLE" {TYPE_TRIANGLE}>TRIANGLE</option>
+                 <option value="TRUNKWAY" {TYPE_TRUNKWAY}>TRUNKWAY</option>
+                 <option value="TURN" {TYPE_TURN}>TURN</option>
+                 <option value="UNDERPASS" {TYPE_UNDERPASS}>UNDERPASS</option>
+                 <option value="UPPER" {TYPE_UPPER}>UPPER</option>
+                 <option value="VALE" {TYPE_VALE}>VALE</option>
+                 <option value="VALLEY" {TYPE_VALLEY}>VALLEY</option>
+                 <option value="VIADUCT" {TYPE_VIADUCT}>VIADUCT</option>
+                 <option value="VIEW" {TYPE_VIEW}>VIEW</option>
+                 <option value="VIEWS" {TYPE_VIEWS}>VIEWS</option>
+                 <option value="VILLA" {TYPE_VILLA}>VILLA</option>
+                 <option value="VILLAS" {TYPE_VILLAS}>VILLAS</option>
+                 <option value="VISTA" {TYPE_VISTA}>VISTA</option>
+                 <option value="WADE" {TYPE_WADE}>WADE</option>
+                 <option value="WALK" {TYPE_WALK}>WALK</option>
+                 <option value="WALKWAY" {TYPE_WALKWAY}>WALKWAY</option>
+                 <option value="WATERS" {TYPE_WATERS}>WATERS</option>
+                 <option value="WAY" {TYPE_WAY}>WAY</option>
+                 <option value="WAYS" {TYPE_WAYS}>WAYS</option>
+                 <option value="WHARF" {TYPE_WHARF}>WHARF</option>
+                 <option value="WOOD" {TYPE_WOOD}>WOOD</option>
+                 <option value="WOODS" {TYPE_WOODS}>WOODS</option>
+                 <option value="WYND" {TYPE_WYND}>WYND</option>
+                 <option value="YARD" {TYPE_YARD}>YARD</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 70px;text-align: right;">Suffix:</div>
+            <div style="display:inline-block">
+              <!-- <input name="suffix_type" id="suffix_type" value="{SUFFIX_TYPE}"> -->
+              <select id="suffix_type" name="suffix_type">
+                <option value="">Please Select</option>
+                <option value="NORTH" {SUFFIX_TYPE_NORTH}>NORTH</option>
+                <option value="SOUTH" {SUFFIX_TYPE_SOUTH}>SOUTH</option>
+                <option value="EAST" {SUFFIX_TYPE_EAST}>EAST</option>
+                <option value="WEST" {SUFFIX_TYPE_WEST}>WEST</option>
+                <option value="LOWER" {SUFFIX_TYPE_LOWER}>LOWER</option>
+                <option value="UPPER" {SUFFIX_TYPE_UPPER}>UPPER</option>
+                <option value="NORTH EAST" {SUFFIX_TYPE_NORTH_EAST}>NORTH EAST</option>
+                <option value="NORTH WEST" {SUFFIX_TYPE_NORTH_WEST}>NORTH WEST</option>
+                <option value="SOUTH EAST" {SUFFIX_TYPE_SOUTH_EAST}>SOUTH EAST</option>
+                <option value="SOUH WEST" {SUFFIX_TYPE_SOUH_WEST}>SOUH WEST</option>
+                <option value="CENTRAL" {SUFFIX_TYPE_CENTRAL}>CENTRAL</option>
+                <option value="EXTENSION" {SUFFIX_TYPE_EXTENSION}>EXTENSION</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 125px;text-align: right;"><font color="red">*</font>Suburb:</div>
+            <div style="display:inline-block"><input name="locality" id="locality" value="{SUBURB}" onchange="postcode()"></div>
+          </div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 55px;text-align: right;"><font color="red">*</font>State:</div>
+            <div style="display:inline-block">
+              <!-- <input name="administrative_area_level_1" id="administrative_area_level_1" value="{ADDRESS_STATE}"> -->
+              <select id="administrative_area_level_1" name="administrative_area_level_1" onchange="postcode()">
+                <option value="">Please Select</option>
+                <option value="ACT" {ADDRESS_STATE_ACT}>ACT</option>
+                <option value="NSW" {ADDRESS_STATE_NSW}>NSW</option>
+                <option value="NT" {ADDRESS_STATE_NT}>NT</option>
+                <option value="QLD" {ADDRESS_STATE_QLD}>QLD</option>
+                <option value="SA" {ADDRESS_STATE_SA}>SA</option>
+                <option value="TAS" {ADDRESS_STATE_TAS}>TAS</option>
+                <option value="VIC" {ADDRESS_STATE_VIC}>VIC</option>
+                <option value="WA" {ADDRESS_STATE_WA}>WA</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:inline-block">
+            <div style="display:inline-block;width: 70px;text-align: right;"><font color="red">*</font>Postcode:</div>
+            <!-- <div style="display:inline-block"><input name="postal_code" id="postal_code" value="{POSTCODE}" style="width: 70px;"></div> -->
+            <div style="display:inline-block" id="postal_input"><input name="postal_code" id="postal_code" value="{POSTCODE}" style="width: 70px;"></div>
+          </div>
+        </div>
+      </div>
+      <p style="margin:0px"><input type="submit" name="submit" id="submit" value="Search"></p>
+	</form>
+	<div id="result">
+  {SPECIFIC_ADDRESS_TABLE}
+  </div>
+<script>
+// displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+
+var available_services = "";
+var to_json;
+var postalcode_temp = "";
+
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  postal_code: 'short_name'
+};street_type
+
+//call post code function
+postcode();
+
+function initAutocomplete() {
+
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      {types: ['geocode'],componentRestrictions: {country: ["AU"]}});
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+var here = "";
+// [START region_fillform]
+function fillInAddress() {
+
+  //set suffix as blank
+  document.getElementById('suffix').value="";
+
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+here=place;
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    // document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      
+      if ( addressType == "route" ) {
+        var street_type="";
+        var street_name="";
+        var route_arr = val.split(" ");
+
+          street_type = route_arr[route_arr.length-1];
+
+          for (var i = 0; i < route_arr.length-1; i++) {
+            street_name += route_arr[i] + " ";
+          };
+
+          street_name = street_name.trim();
+          document.getElementById('route').value = street_name;
+          document.getElementById('street_type').value = street_type.toUpperCase();
+      } else {
+        if ( addressType == "street_number" && !check_sn(val) ) { 
+          start = val;
+          document.getElementById(addressType).value = val;
+        } else if ( addressType == "street_number" && check_sn(val) ) {
+          var text = val;
+          var suffix = text.replace(/[0-9]/g, '');
+          var s_number = text.replace(/\D/g,'');
+          document.getElementById('street_number').value = s_number;
+          if ( suffix ) {
+            document.getElementById('suffix').value = suffix.toUpperCase();
+          }
+        } else {
+          document.getElementById(addressType).value = val;
+        }
+
+        var post_tagname = document.getElementById("postal_code");
+        if ( addressType == "postal_code" && post_tagname.tagName == "SELECT" ) {
+            postalcode_temp = val;
+            select_postcode(val);
+        }
+      }
+    }
+  }
+  postcode();
+}
+// [END region_fillform]
+
+// [START region_geolocation]
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+// [END region_geolocation]
+
+
+// $('#locality').on("change",postcode());
+
+function postcode(){
+  var postcode_val = document.getElementById("postal_code").value;
+  var suburb = document.getElementById("locality").value;
+  var state = document.getElementById("administrative_area_level_1").value;
+  
+    if ( suburb != "" && state != "") {
+          postData = {
+            suburb,
+            state
+          }
+
+        $.post("postalcode.php",postData,function(data){
+            document.querySelector("#postal_input").innerHTML=data;
+        }).done(function() {
+            if ( postalcode_temp == "" ) {
+                select_postcode(postcode_val);
+            } else {
+                select_postcode(postalcode_temp);
+            }
+        });
+    }
+}
+
+function select_postcode(postcode_val) {
+    var sel = document.getElementById('postal_code');
+    var opts = sel.options;
+    for(var opt, j = 0; opt = opts[j]; j++) {
+        if(opt.value == postcode_val) {
+            sel.selectedIndex = j;
+            break;
+        }
+    }
+}
+
+function check_sn( val ) {
+  return /[a-z]/i.test(val.toLowerCase());
+}
+    </script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>

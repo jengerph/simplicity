@@ -1,0 +1,685 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// authorised_rep.class - Class for accessing authorised_rep details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "audit.class";
+
+class authorised_rep {
+  var $id;
+  var $customer_id;
+  var $title;
+  var $first_name;
+  var $middle_name;
+  var $surname;
+  var $birthdate;
+  var $position;
+  var $primary_id;
+  var $primary_id_number;
+  var $file;
+  var $email;
+  var $contact_number;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function authorised_rep() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function authorised_rep() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->id = strtoupper($this->id);
+
+    if (!$this->id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->id) {
+      
+      $query = "SELECT * FROM authorised_rep WHERE id = " . $this->db->quote($this->id);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+        // if ($this->file == '') {
+        //   // On file system
+          
+        //   $config = new config();
+        //   $fp      = fopen($config->docs_dir . '/primary_ids/' . $this->customer_id, 'r');
+        //   $this->file = fread($fp, filesize($config->mgt_docs_dir . '/' . $this->customer_id));
+        //   fclose($fp);
+        // }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->id = strtoupper($this->id);
+  
+    // Check we have an customer_id
+    if (!$this->id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT id FROM authorised_rep WHERE id = " . $this->db->quote($this->id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (authorised_rep::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Create the account
+    $query = "INSERT INTO authorised_rep (customer_id, title, first_name, middle_name, surname, birthdate, position, primary_id, primary_id_number, email, contact_number)";
+    $query .= " VALUES (" . $this->db->quote($this->customer_id) . ", " . $this->db->quote($this->title) . ", ". $this->db->quote($this->first_name) . ", " . $this->db->quote($this->middle_name) . ", " . $this->db->quote($this->surname) . ", " . $this->db->quote($this->birthdate) . ", " . $this->db->quote($this->position) . ", " . $this->db->quote($this->primary_id) . ", " . $this->db->quote($this->primary_id_number) . ", " . $this->db->quote($this->email) . ", " . $this->db->quote($this->contact_number) . ")";
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+        $this->id = $this->db->fetch_insert_id();
+
+        $this->load();
+
+        //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"authorised_rep",$this->customer_id);
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+  
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+		$this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+
+    
+    // Prepare the query
+    $query = "DELETE FROM authorised_rep WHERE id = " . $this->db->quote($this->id);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+      return 1;
+      
+      
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    $validate = new validate();
+
+    if ( !$this->first_name ) {
+      return 200;
+    }
+
+    if ( !$this->surname ) {
+      return 201;
+    }
+
+    if ( !$this->birthdate ) {
+      return 202;
+    }
+
+    if ( !$this->position ) {
+      return 203;
+    }
+
+    // if ( !$this->primary_id ) {
+    //   return 204;
+    // }
+
+    // if ( !$this->primary_id_number ) {
+    //   return 205;
+    // }
+
+    if ( !$this->email ) {
+      return 5;
+    }
+
+    if ( !$this->contact_number ) {
+      return 207;
+    }
+
+
+    // ALL OK
+    return 0;
+    
+  }
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (authorised_rep::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!authorised_rep::exist()) {
+      return 0;
+      
+    }
+
+      $previous = new authorised_rep();
+      $previous->customer_id = $this->customer_id;
+      $previous->load();
+    
+    $query = "UPDATE authorised_rep SET customer_id = " . $this->db->quote($this->customer_id) . ", title = " . $this->db->quote($this->title) . ", first_name = " . $this->db->quote($this->first_name) . ", middle_name = " . $this->db->quote($this->middle_name) . ", surname = " . $this->db->quote($this->surname) . ", birthdate = " . $this->db->quote($this->birthdate) . ", position = " . $this->db->quote($this->position) . ", primary_id = " . $this->db->quote($this->primary_id) . ", primary_id_number = " . $this->db->quote($this->primary_id_number) . ", email = " . $this->db->quote($this->email) . ", contact_number = " . $this->db->quote($this->contact_number);
+    $query .= " WHERE id = " . $this->db->quote($this->id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+        //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_changes($keys,$previous,$this,"authorised_rep",$this->customer_id);
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+		
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function get_authorised_rep()
+  **
+  ** DESCRIPTION: retrieves all customer details from the table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - an array containing all the list of customer details
+  ** 
+  */
+  function get_authorised_rep() {
+    $query = "SELECT * FROM idrequirements ";
+      $result = $this->db->execute_query($query);
+      
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+  }
+
+ /* function idrequirements_list()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - array
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function idrequirements_list( $name, $array, $type, $account ){
+      
+    $list = '<select name="' . $name . '" id="' . $name . '" onchange="evaluate_points()" required>'; 
+    $list .= '<option value="">Select ID</option>';
+
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+        if( $array[$x]["id_type"] == $type && $array[$x]["account"] == $account ){
+          $list .= "<option value='" . $array[$x]["id"] . "' {AR_ID_". $array[$x]["id"] ."_SELECT}>" . $array[$x]["description"] . "</option>";
+        }
+      }
+
+      $list .= '</select>';
+
+    }
+
+      return $list; 
+
+  }
+
+   /* function upload_file()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - object
+  **
+  ** RETURNS:
+  ** - 1 : success
+  ** 
+  */
+
+  function upload_file($attachment){
+    $config = new config();
+    $upload_exts = end(explode(".", $attachment["name"]));
+    move_uploaded_file($attachment["tmp_name"],
+    $config->docs_dir . '/primary_ids/' . $this->customer_id . "." . $upload_exts);
+    // $config->docs_dir . '/primary_ids/' . $this->customer_id);
+    return 1;
+  }
+
+  /* function get_requirement()
+  **
+  ** DESCRIPTION: retrieves all customer details from the table
+  **
+  ** PARAMETERS:
+  ** - id
+  **
+  ** RETURNS:
+  ** - id details
+  ** 
+  */
+  function get_requirements($id) {
+
+    if (!$id) {
+      return 0;
+    }
+
+    $query = "SELECT * FROM idrequirements WHERE id = " . $this->db->quote($id);
+      $result = $this->db->execute_query($query);
+      
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+  }
+
+     /* function get_points()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - object
+  **
+  ** RETURNS:
+  ** - int
+  ** 
+  */
+
+  function get_points(){
+
+    $points = 0;
+
+    if ( $this->id) {
+
+      $point = new stdClass();
+      $point->id = $this->id;
+      $a = $this->get_requirements($point->id);
+
+      $points = $a[0]["points"];
+      return $points;
+
+    } else {
+      return 0;
+    }
+
+  }
+
+     /* function secondary_list()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - array
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function secondary_list( $name, $array, $type, $account, $identifier ){
+      
+    $list = '<select name="' . $name . '" id="' . $name . '" onchange="evaluate_points()">'; 
+    $list .= '<option value="">Select ID</option>';
+
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+        if( $array[$x]["id_type"] == $type && $array[$x]["account"] == $account ){
+          $list .= "<option value='" . $array[$x]["id"] . "' {AR_ID_". $array[$x]["id"] ."_SELECT_". $identifier ."}>" . $array[$x]["description"] . "</option>";
+        }
+      }
+      $list .= '</select>';
+
+    }
+      return $list; 
+
+  }
+
+  /* function get_contacts()
+  **
+  ** DESCRIPTION: retrieves all customer details from the table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - an array containing all the list of contact details
+  ** 
+  */
+  function get_contacts() {
+    $query = "SELECT * FROM authorised_rep WHERE customer_id = " . $this->db->quote($this->customer_id);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $a = array();
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+  }
+
+     /* function contact_list()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - array
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function contact_list( $name, $array){
+      
+    $list = '<select name="' . $name . '" id="' . $name . '">'; 
+    $list .= '<option value="">Select Primary Contact</option>';
+
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+          $list .= "<option value='" . $array[$x]["id"] . "' {AR_CONTACT_". $array[$x]["id"] ."}>" . $array[$x]["first_name"]  ." " . $array[$x]["surname"] ." - " . $array[$x]["contact_number"]  . "</option>";
+      }
+
+      $list .= '</select>';
+
+    }
+      return $list; 
+
+  }
+
+  /* function get_rep_details()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function get_rep_details() {
+
+    $this->id = strtoupper($this->id);
+
+    if (!$this->id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->id) {
+      
+      $query = "SELECT * FROM authorised_rep WHERE id = " . $this->db->quote($this->id);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+        // if ($this->file == '') {
+        //   // On file system
+          
+        //   $config = new config();
+        //   $fp      = fopen($config->docs_dir . '/primary_ids/' . $this->customer_id, 'r');
+        //   $this->file = fread($fp, filesize($config->mgt_docs_dir . '/' . $this->customer_id));
+        //   fclose($fp);
+        // }
+      }    
+    }
+  }
+
+
+}
+

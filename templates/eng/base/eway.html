@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>eWAY Rapid Direct Connection</title>
+    <link href="/templates/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="/templates/Styles/jquery-ui-1.8.11.custom.css" rel="stylesheet" type="text/css" />
+    <script src="/templates/Scripts/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="/templates/Scripts/jquery-ui-1.8.11.custom.min.js" type="text/javascript"></script>
+    <script src="/templates/Scripts/jquery.ui.datepicker-en-GB.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/templates/Scripts/tooltip.js"></script>
+</head>
+<body>
+    <form method="POST">
+    <center>
+        <div id="outer">
+            <div id="toplinks">
+                <img alt="eWAY Logo" class="logo" src="/templates/images/companylogo.gif" width="960px" height="65px" />
+            </div>
+            <div id="main">
+
+
+    <div id="titlearea">
+        <h2>Merchant Page</h2>
+    </div>
+    <div id="maincontent">
+        <div class="transactioncustomer">
+            <div hidden>
+                <div class="header first">
+                    Request Options
+                </div>
+                <div class="fields">
+                    <label for="APIKey">API Key</label>
+                    <input id="APIKey" name="APIKey" type="text" value="{API_KEY}" />
+                </div>
+                <div class="fields">
+                    <label for="APIPassword">API Password</label>
+                    <input id="APIPassword" name="APIPassword" type="password" value="{API_PASSWORD}" />
+                </div>
+                <div class="fields">
+                    <label for="ddlSandbox">API Sandbox</label>
+                    <select id="ddlSandbox" name="ddlSandbox">
+                    <option value="1" selected="selected" {DDLSANDBOX_SELECT_YES}>Yes</option>
+                    <option value="" {DDLSANDBOX_SELECT_NO}>No</option>
+                    </select>
+                </div>
+                <div class="fields">
+                    <label for="ddlMethod">Payment Method</label>
+                    <select id="ddlMethod" name="ddlMethod" style="width: 140px" onchange="onMethodChange(this.options[this.options.selectedIndex].value)">
+                        <option value="ProcessPayment" {DDLMETHOD_SELECT_PROCESSPAYMENT}>ProcessPayment</option>
+                        <option value="TokenPayment" {DDLMETHOD_SELECT_TOKENPAYMENT}>TokenPayment</option>
+                        <option value="CreateTokenCustomer" {DDLMETHOD_SELECT_CREATETOKENCUSTOMER}>CreateTokenCustomer</option>
+                        <option value="UpdateTokenCustomer" {DDLMETHOD_SELECT_UPDATETOKENCUSTOMER}>UpdateTokenCustomer</option>
+                        <option value="Authorise" {DDLMETHOD_SELECT_AUTHORISE}>Authorise</option>
+                    </select>
+                </div>
+            </div>
+          {PAYMENT_DETAILS}
+        </div>
+        <div class="transactioncard">
+            <div class="header first">
+                Customer Details
+            </div>
+            <div class="fields">
+                <label for="txtTokenCustomerID">Token Customer ID &nbsp;<img src="/templates/Images/question.gif" alt="Find out more" id="tokenCustomerTipOpener" border="0" /></label>
+                <input id="txtTokenCustomerID" name="txtTokenCustomerID" type="text" value="{TXTTOKENCUSTOMERID}" />
+            </div>
+            <div class="fields">
+                <label for="ddlTitle">Title</label>
+                <select id="ddlTitle" name="ddlTitle">
+                <option></option>
+                <option value="Mr." {DDLTITLE_SELECT_MR}>Mr.</option>
+                <option value="Miss" {DDLTITLE_SELECT_MISS}>Miss</option>
+                <option value="Mrs." {DDLTITLE_SELECT_MRS}>Mrs.</option>
+                </select>
+            </div>
+            <div class="fields">
+                <label for="txtCustomerRef">Customer Reference</label>
+                <input id="txtCustomerRef" name="txtCustomerRef" type="text" value="{TXTCUSTOMERREF}" />
+            </div>
+            <div class="fields">
+                <label for="txtFirstName">First Name</label>
+                <input id="txtFirstName" name="txtFirstName" type="text" value="{TXTFIRSTNAME}" />
+            </div>
+            <div class="fields">
+                <label for="txtLastName">Last Name</label>
+                <input id="txtLastName" name="txtLastName" type="text" value="{TXTLASTNAME}" />
+            </div>
+            <div class="fields">
+                <label for="txtCompanyName">Company Name</label>
+                <input id="txtCompanyName" name="txtCompanyName" type="text" value="{TXTCOMPANYNAME}" />
+            </div>
+            <div class="fields">
+                <label for="txtJobDescription">Job Description</label>
+                <input id="txtJobDescription" name="txtJobDescription" type="text" value="{TXTJOBDESCRIPTION}" />
+            </div>
+            <div class="header">
+                Customer Address
+            </div>
+            <div class="fields">
+                <label for="txtStreet">Street</label>
+                <input id="txtStreet" name="txtStreet" type="text" value="{TXTSTREET}" />
+            </div>
+            <div class="fields">
+                <label for="txtCity">City</label>
+                <input id="txtCity" name="txtCity" type="text" value="{TXTCITY}" />
+            </div>
+            <div class="fields">
+                <label for="txtState">State</label>
+                <input id="txtState" name="txtState" type="text" value="{TXTSTATE}" />
+            </div>
+            <div class="fields">
+                <label for="txtPostalcode">Post Code</label>
+                <input id="txtPostalcode" name="txtPostalcode" type="text" value="{TXTPOSTALCODE}" />
+            </div>
+            <div class="fields">
+                <label for="txtCountry">Country</label>
+                <input id="txtCountry" name="txtCountry" type="text" value="{TXTCOUNTRY}" maxlength="2" />
+            </div>
+            <div class="fields">
+                <label for="txtEmail">Email</label>
+                <input id="txtEmail" name="txtEmail" type="text" value="{TXTEMAIL}" />
+            </div>
+            <div class="fields">
+                <label for="txtPhone">Phone</label>
+                <input id="txtPhone" name="txtPhone" type="text" value="{TXTPHONE}" />
+            </div>
+            <div class="fields">
+                <label for="txtMobile">Mobile</label>
+                <input id="txtMobile" name="txtMobile" type="text" value="{TXTMOBILE}" />
+            </div>
+            <div class="fields">
+                <label for="txtFax">Fax</label>
+                <input id="txtFax" name="txtFax" type="text" value="{TXTFAX}" />
+            </div>
+            <div class="fields">
+                <label for="txtUrl">Website</label>
+                <input id="txtUrl" name="txtUrl" type="text" value="{TXTURL}" />
+            </div>
+            <div class="fields">
+                <label for="txtComments">Comments</label>
+                <textarea id="txtComments" name="txtComments"/>{TXTCOMMENTS}</textarea>
+            </div>
+            <div class="header">
+                Customer Card Details
+            </div>
+            <div class="fields">
+                <label for="txtCardName">
+                    Card Holder</label>
+                <input type='text' name='txtCardName' id='txtCardName' value="" />
+            </div>
+            <div class="fields">
+                <label for="txtCardNumber">
+                    Card Number</label>
+                <input type='text' name='txtCardNumber' id='txtCardNumber' value="" />
+            </div>
+            <div class="fields">
+                <label for="ddlCardExpiryMonth">
+                    Expiry Date</label>
+                <select ID="ddlCardExpiryMonth" name="ddlCardExpiryMonth">
+                    <option value='01'>01</option>
+<option value='02'>02</option>
+<option value='03'>03</option>
+<option value='04'>04</option>
+<option value='05'>05</option>
+<option value='06'>06</option>
+<option value='07'>07</option>
+<option value='08'>08</option>
+<option value='09'>09</option>
+<option value='10'>10</option>
+<option value='11'>11</option>
+<option value='12' selected='selected'>12</option>
+                </select>
+                /
+                <select ID="ddlCardExpiryYear" name="ddlCardExpiryYear">
+                    <option value='15'>15</option>
+<option value='16'>16</option>
+<option value='17'>17</option>
+<option value='18'>18</option>
+<option value='19'>19</option>
+<option value='20'>20</option>
+<option value='21'>21</option>
+<option value='22'>22</option>
+<option value='23'>23</option>
+<option value='24'>24</option>
+<option value='25'>25</option>
+<option value='26'>26</option>
+                </select>
+            </div>
+            <div class="fields">
+                <label for="ddlStartMonth">
+                    Valid From Date</label>
+                <select ID="ddlStartMonth" name="ddlStartMonth">
+                    <option></option><option value='01'>01</option>
+<option value='02'>02</option>
+<option value='03'>03</option>
+<option value='04'>04</option>
+<option value='05'>05</option>
+<option value='06'>06</option>
+<option value='07'>07</option>
+<option value='08'>08</option>
+<option value='09'>09</option>
+<option value='10'>10</option>
+<option value='11'>11</option>
+<option value='12'>12</option>
+                </select>
+                /
+                <select ID="ddlStartYear" name="ddlStartYear">
+                    <option></option><option value='15'>15</option>
+<option value='14'>14</option>
+<option value='13'>13</option>
+<option value='12'>12</option>
+<option value='11'>11</option>
+<option value='10'>10</option>
+<option value='09'>09</option>
+<option value='08'>08</option>
+<option value='07'>07</option>
+<option value='06'>06</option>
+<option value='05'>05</option>
+<option value='04'>04</option>
+                </select>
+            </div>
+            <div class="fields">
+                <label for="txtIssueNumber">
+                    Issue Number</label>
+                <input type='text' name='txtIssueNumber' id='txtIssueNumber' value="22" maxlength="2" style="width:40px;"/> <!-- This field is optional but highly recommended -->
+            </div>
+            <div class="fields">
+                <label for="txtCVN">
+                    CVN</label>
+                <input type='text' name='txtCVN' id='txtCVN' value="123" maxlength="4" style="width:40px;"/> <!-- This field is optional but highly recommended -->
+            </div>
+            <div class="header">
+                Others
+            </div>
+            <div class="fields">
+                <label for="ddlTransactionType">Transaction Type</label>
+                <select id="ddlTransactionType" name="ddlTransactionType" style="width:140px;">
+                <option value="Purchase">Ecommerce</option>
+                <option value="MOTO">MOTO</option>
+                <option value="Recurring">Recurring</option>
+                </select>
+            </div>
+        </div>
+        <div class="button">
+            <br />
+            <br />
+            <input type="submit" id="btnSubmit" name="btnSubmit" value="Make Payment" />
+        </div>
+    </div>
+    <div id="maincontentbottom">
+    </div>
+    <div id="amountTip" style="font-size: 8pt !important">
+        The amount in cents. For example for an amount of $1.00, enter 100
+    </div>
+    <div id="tokenCustomerTip" style="font-size: 8pt !important">
+        If this field has a value, the details of an existing customer will be loaded when the request is sent.
+    </div>
+    <div id="saveTokenTip" style="font-size: 8pt !important">
+        If this field is checked, the details in the customer fields will be used to either create a new token customer, or (if Token Customer ID has a value) update an existing customer.
+    </div>
+
+            </div>
+            <div id="footer"></div>
+        </div>
+    </center>
+    </form>
+
+</body>
+</html>

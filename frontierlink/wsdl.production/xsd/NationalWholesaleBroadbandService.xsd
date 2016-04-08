@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccessType.xsd" />
+    <xsd:include schemaLocation="elements/AccessMethod.xsd" />
+    <xsd:include schemaLocation="elements/NationalWholesaleBroadbandSpeed.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/CustomerRequiredDate.xsd" />
+    <xsd:include schemaLocation="elements/ContractTermMonths.xsd" />
+    <xsd:include schemaLocation="elements/BatteryBackupService.xsd" />
+    <xsd:include schemaLocation="DSLTransfer.xsd" />
+    <xsd:include schemaLocation="RadiusEntry.xsd" />
+
+    <xsd:complexType name="NationalWholesaleBroadbandService">
+        <xsd:sequence>
+            <xsd:element name="accessMethod" type="wsg:AccessMethod">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The AAPT access method for the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accessType" type="wsg:AccessType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The AAPT access type relating to the access method</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceSpeed" type="wsg:NationalWholesaleBroadbandSpeed">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Speed of national wholesale broadband service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="networkConnectionServiceId" type="wsg:ServiceID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The network connection point the customer service will terminate to</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="contractTerm" type="wsg:ContractTermMonths">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The AAPT contract term for the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="radiusEntry" type="wsg:RadiusEntry" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The radius entry used by the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dslTransfer" type="wsg:DSLTransfer" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The DSL Transfer details for the service, if applicable</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="installationDate" type="wsg:CustomerRequiredDate" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The date of service activiation - populated in enquire service response</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="batteryBackupService" type="wsg:BatteryBackupService" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Battery Backup Service for NBN delivered services</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="existingServiceAtSite" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Do you currently have an existing active telephone service at this location?</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

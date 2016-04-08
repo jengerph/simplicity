@@ -1,0 +1,287 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// order_comments.class - Class for accessing order_comments details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "audit.class";
+
+class order_comments {
+
+  var $order_id;
+  var $td;
+  var $username;
+  var $comment_visibility;
+  var $comment;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function order_comments() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function order_comments() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->order_id = strtoupper($this->order_id);
+
+    if (!$this->order_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->order_id) {
+      
+      $query = "SELECT * FROM order_comments WHERE order_id = " . $this->db->quote($this->order_id);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+        $row = $this->db->fetch_row_array($result);
+        if (isset($row)) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->order_id = strtolower($this->order_id);
+  
+    // Check we have an user
+    if (!$this->order_id) {
+    
+      return 0;
+      
+    }
+
+    $query = "SELECT * FROM order_comments WHERE order_id = " . $this->db->quote($this->order_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+    // Validate
+    if (order_comments::validate()) {
+    
+      // return 0;
+      
+    }
+
+    // Create the property search
+    $query = "INSERT INTO order_comments (order_id, td, username, comment_visibility, comment)";
+    $query .= " VALUES (" . $this->db->quote($this->order_id) . ", NOW()," . $this->db->quote($this->username) . "," . $this->db->quote($this->comment_visibility) . "," . $this->db->quote($this->comment) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      //Audit section for storing first changes
+      $temp = get_object_vars($this);
+
+      unset($temp['db']);
+      unset($temp["server_name"]);
+      unset($temp["database_name"]);
+      unset($temp["user_name"]);
+      unset($temp["user_password"]);
+      $keys = array_keys($temp);
+      
+      $changes = new audit();
+      $changes->store_first_changes($keys,$this,"order_comments",$this->order_id);
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+    
+    if ( !$this->order_id ) {
+
+      return 240;
+
+    }
+
+    if ( !$this->username ) {
+
+      return 241;
+
+    }
+
+    if ( !$this->comment_visibility ) {
+
+      return 250;
+
+    }
+
+    if ( !$this->comment ) {
+
+      return 251;
+
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_comments()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of plan attributes with correpsonding details
+  ** 
+  */
+
+  function get_comments(){
+      
+      $a = array();
+      
+      $query = "SELECT * FROM order_comments WHERE order_id = " . $this->db->quote($this->order_id) . " ORDER BY td DESC";
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+}
+

@@ -1,0 +1,90 @@
+
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+
+.success, .error {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+}
+.success {
+color: #4F8A10;
+background-color: #DFF2BF;
+}
+.error {
+color: #D8000C;
+background-color: #FFBABA;
+}
+
+.black_overlay{
+  display: none;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index:1001;
+  -moz-opacity: 0.8;
+  opacity:.80;
+  filter: alpha(opacity=80);
+}
+
+.white_content {
+  display: none;
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: auto;
+  padding: 16px;
+  border: 16px solid rgb(244, 249, 254);
+  background-color: white;
+  z-index:1002;
+  overflow: auto;
+  text-align: center;
+  font-size: 16px;
+}
+
+</style><body topmargin="0">
+<h2><span class="bodytest">Rebuild Port: </span></h2>
+
+<p>[ <a href="/base/manage/services/?service_id={SERVICE_ID}">&#9664;Back to Service</a> | <a href="/base/manage/services/edit/?service_id={SERVICE_ID}">Edit Service</a> | <a href="/base/manage/services/usage/?service_id={SERVICE_ID}">Service Usage</a> | <a href="/base/manage/services/sessions/?service_id={SERVICE_ID}">Sessions</a>{SERVICE_STATS_LINK} ]</p>
+
+<p><span>[ <a href="/base/manage/services/service_stats/rebuild/?service_id={SERVICE_ID}">Rebuild Port</a> | <a href="/base/manage/services/service_stats/change_profile/?service_id={SERVICE_ID}">Change Line Profile</a> ]</span></p>
+
+{SUCCESS_NOTICE}
+
+{REBUILD_FORM}
+
+  <!-- PopUp here -->
+<div id="light" class="white_content">
+  <div>
+  <div>Rebuilding the port will cause the service to go offline temporarily, are you sure? </div>
+  <div style="display:inline;">
+    <a href = "javascript:void(0)" onclick = "proceed_rebuild();">Yes</a></div>
+  <div style="display:inline;margin-left:10px">
+    <a href = "javascript:void(0)" onclick = "stop_rebuild();">No</a>
+  </div>
+  </div>
+</div>
+<div id="fade" class="black_overlay"></div>
+
+<script type="text/javascript">
+
+function proceed_rebuild(){
+
+	document.getElementById("submit").click();
+
+}
+
+function stop_rebuild(){
+
+	window.location.href = "/base/manage/services/service_stats/?service_id={SERVICE_ID}";
+
+}
+
+</script>

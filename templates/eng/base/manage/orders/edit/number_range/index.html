@@ -1,0 +1,34 @@
+
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">Number Range: </span></h2>
+<p></p>
+{BACK_LINK}
+<h3>Order# {ORDER_ID}</h3>
+<div>
+	<div style="display:inline-block; width:55px;">
+		Address:
+	</div>
+	<div style="display:inline-block;">
+		{ORDER_ADDRESS}
+	</div>
+</div>
+<div>
+	<font color="red">{ERROR_MSG}</font>
+</div>
+{NUMBER_RANGE_FORM}
+<table class="service_stats">
+  <tr>
+    <th colspan="3" style="padding-left: 5px;">Number Range ({CURRENT_COUNT_RANGE}/{TOTAL_NUMBER_RANGE})</th>
+  </tr>
+  <tr>
+    <td><font color="black">FNN</font></td>
+    <td><font color="black">Start</font></td>
+    <td><font color="black">Stop</font></td>
+  </tr>
+  {NUMBER_RANGE_ROWS}
+</table>

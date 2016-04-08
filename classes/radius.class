@@ -1,0 +1,929 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// radius.class- Class for accessing radius details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "user.class";
+include_once "audit.class";
+
+class radius {
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function radius() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function radius() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->username = strtoupper($this->username);
+
+    if (!$this->username) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->username) {
+      
+      $query = "SELECT * FROM accounting.radacct WHERE username = " . $this->db->quote($this->username) . " ORDER BY acctupdatetime DESC LIMIT 1";
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->username = $this->username;
+
+    $user = new user();
+    $user->username = $this->username;
+    $user->load();
+
+    if ( !$user->username ) {
+
+      return 1;
+
+    }
+    
+    
+    $query = "SELECT username FROM accounting.radacct WHERE username = " . $this->db->quote($this->username);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+    
+    if ( !$this->username ) {
+
+      return 1;
+
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_all()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all radius details in the table
+  ** 
+  */
+
+  function get_all(){
+      $a = array();
+      $query = "SELECT * FROM accounting.radacct ";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_all_usernames()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all radius details in the table
+  ** 
+  */
+
+  function get_all_usernames(){
+      $a = array();
+      $query = "SELECT username FROM accounting.radacct ";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all radius details in the table for a user
+  ** 
+  */
+
+  function get_user(){
+      
+      $a = array();
+
+      $query = "SELECT * FROM accounting.radacct WHERE username = " . $this->db->quote($this->username);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user_per_page()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all radius details in the table for a user
+  ** 
+  */
+
+  function get_user_per_page(){
+      
+      $a = array();
+
+      $query = "SELECT * FROM accounting.radacct WHERE username = " . $this->db->quote($this->username) . " ORDER BY acctstarttime DESC LIMIT " . $this->start . "," . $this->per_page;
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user_record_count()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all radius details in the table for a user
+  ** 
+  */
+
+  function get_user_record_count(){
+      
+      $a = array();
+
+      $query = "SELECT * FROM accounting.radacct WHERE username = " . $this->db->quote($this->username);
+      $result = $this->db->execute_query($query);
+
+    return mysql_num_rows($result);
+
+  }
+
+   /* function user_exists()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all radius details in the table for a user
+  ** 
+  */
+
+  function user_exists(){
+      
+      if ($this->username) {
+      
+      $query = "SELECT * FROM radius.radcheck WHERE username = " . $this->db->quote($this->username);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+
+  }
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (radius::validate()) {
+    
+      return 0;
+      
+    }
+
+    if ( !isset($this->password) ) {
+      $this->password = "rg0943";
+    }
+
+    // Create the property search
+    $query = "INSERT INTO radius.radcheck (username, attribute, op, value)";
+    $query .= " VALUES (" . $this->db->quote($this->username) . ", 'Cleartext-Password',':='," . $this->db->quote($this->password) . ") ";
+
+    // $audit = new audit();
+    // $audit->param = 'username';
+    // $audit->value = $this->username;
+
+    $query2 = "INSERT INTO radius.radusergroup (username, groupname)";
+    $query2 .= " VALUES (" . $this->db->quote($this->username) . ", 'dynamic') ";
+
+    $result = $this->db->execute_query($query);
+
+    $result = $this->db->execute_query($query2);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      $audit = new audit();
+      $audit->order_id = $this->service_id;
+      $audit->param = "username";
+      $audit->value = $this->username;
+      $audit->store_first_changes_attributes("radius");
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+
+    // Validate
+    if (radius::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!radius::radcheck_exist()) {
+      return 0;
+      
+    }
+
+    $radius = new radius();
+    $radius->username = $this->username;
+    $radius->radcheck_load();
+
+    $query = "UPDATE radius.radcheck SET value = " . $this->db->quote($this->value) . " WHERE username = " . $this->db->quote($this->username) . " AND attribute = 'Cleartext-Password'";
+
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_changes($keys,$radius,$this,"radius",$radius->id);
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+   /* function delete()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - 1: Success
+  ** - 0: Fail
+  ** 
+  */
+
+  function delete(){
+
+    // Prepare the query
+    $query = "DELETE FROM radius.radcheck WHERE username = " . $this->db->quote($this->username);
+    $query2 = "DELETE FROM radius.radusergroup WHERE username = " . $this->db->quote($this->username);
+    $result = $this->db->execute_query($query);
+    $result2 = $this->db->execute_query($query2);
+    
+    if ($result == 0 && $result2 == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+
+  }
+
+ /* function date_range2()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - string start_contract and end_contract
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function date_range2( $start_contract, $end_contract ){
+
+    $list_months = array();
+
+    $start_date = date("Y-m-d", strtotime($start_contract) );
+    $start_date2 = date("Y_m_d", strtotime($start_contract) );
+    $end_contract = date("Y-m-d", strtotime($end_contract) );
+
+    $today = date("Y-m-d");
+
+    $time_end = strtotime($start_date);
+    $time_end = date("Y-m-d", strtotime("+1 month -1 day", $time_end));
+        
+      // $list = '<select name="date_range" id="date_range" onchange="this.form.submit()">'; 
+      // $list .= '<option value="0">Select Date</option>';
+      while ( $time_end <= $today ) {
+        // $list .= "<option value='" . $start_date2 . "' {DR_". $start_date2 ."_SELECT}>" . $start_date . " to " . $time_end . "</option>";
+        $list_months[] = $start_date . " to " . $time_end;
+      $start_date = $time_end;
+      $start_date = strtotime($start_date);
+      $start_date2 = date("Y_m_d", strtotime("+1 day", $start_date));
+      $start_date = date("Y-m-d", strtotime("+1 day", $start_date));
+      $time_end = strtotime($start_date);
+      $time_end = date("Y-m-d", strtotime("+1 month -1 day", $time_end));
+      }
+
+      // $list .= "<option value='" . $start_date2 . "' {DR_". $start_date2 ."_SELECT}>" . $start_date . " to " . $time_end . "</option>";
+      $list_months[] = $start_date . " to " . $time_end;
+
+      // $list .= '</select>';
+      return $list_months; 
+
+  }
+
+   /* function get_user_month()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_month(){
+      
+      // $query = "SELECT * FROM accounting.radacct WHERE username = " . $this->db->quote($this->username) . " AND acctstarttime >=" . $this->db->quote($this->start_date) . " AND acctstarttime <=" . $this->db->quote($this->end_date);
+      // Check if we have date/time format or just date
+      if (strpos($this->start_date, ' ') === FALSE) { 
+        $start_date = $this->start_date . " 00:00:00";
+      } else {
+  $start_date = $this->start_date;
+      }
+      if (strpos($this->end_date, ' ') === FALSE) { 
+        $end_date = $this->end_date . " 23:59:59";
+      } else {
+  $end_date = $this->end_date;
+      }
+
+      $query = "SELECT acctinputoctets,acctoutputoctets,acctstoptime,acctstarttime,framedipaddress,acctterminatecause FROM accounting.radacct WHERE username=" . $this->db->quote($this->username) . " AND acctstarttime >=" . $this->db->quote($start_date) . " AND acctstarttime<=" . $this->db->quote($end_date) . " ORDER BY acctstarttime DESC LIMIT ".$this->start.",".$this->per_page;
+// print_r($query);
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user_month_count()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_month_count(){
+      
+      if (strpos($this->start_date, ' ') === FALSE) { 
+        $start_date = $this->start_date . " 00:00:00";
+      } else {
+  $start_date = $this->start_date;
+      }
+      if (strpos($this->end_date, ' ') === FALSE) { 
+        $end_date = $this->end_date . " 23:59:59";
+      } else {
+  $end_date = $this->end_date;
+      }
+
+      $query = "SELECT * FROM accounting.radacct WHERE username=" . $this->db->quote($this->username) . " AND acctstarttime >=" . $this->db->quote($start_date) . " AND acctstarttime<=" . $this->db->quote($end_date);
+      $result = $this->db->execute_query($query);
+
+    return mysql_num_rows($result);
+
+  }
+
+     /* function get_user_month_asc()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_month_asc(){
+     
+      // Check if we have date/time format or just date
+      if (strpos($this->start_date, ' ') === FALSE) { 
+        $start_date = $this->start_date . " 00:00:00";
+      } else {
+  $start_date = $this->start_date;
+      }
+      if (strpos($this->end_date, ' ') === FALSE) { 
+        $end_date = $this->end_date . " 23:59:59";
+      } else {
+  $end_date = $this->end_date;
+      }
+
+      $query = "SELECT username,CAST(acctstarttime AS DATE) as 'acctstarttime', SUM(acctinputoctets) as acctinputoctets, SUM(acctoutputoctets) as acctoutputoctets FROM accounting.radacct WHERE username=" . $this->db->quote($this->username) . " AND acctstarttime >=CAST(" . $this->db->quote($start_date) . " as datetime) AND acctstarttime<=" . $this->db->quote($end_date) . " GROUP BY YEAR(acctstarttime), MONTH(acctstarttime), DAY(acctstarttime) ORDER BY acctstarttime ASC";
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user_week()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_week(){
+      
+      // $query = "SELECT * FROM accounting.radacct WHERE username = " . $this->db->quote($this->username) . " AND acctstarttime >=" . $this->db->quote($this->start_date) . " AND acctstarttime <=" . $this->db->quote($this->end_date);
+
+      $start_date = $this->start_date . " 00:00:00";
+      $end_date = $this->end_date . " 23:59:59";
+      
+      $query = "SELECT username,CAST(acctstarttime AS DATE) as 'acctstarttime', SUM(acctinputoctets) as acctinputoctets, SUM(acctoutputoctets) as acctoutputoctets FROM accounting.radacct WHERE username=" . $this->db->quote($this->username) . " AND acctstarttime >=CAST(" . $this->db->quote($start_date) . " as datetime) AND acctstarttime<=" . $this->db->quote($end_date) . " GROUP BY YEAR(acctstarttime), MONTH(acctstarttime), DAY(acctstarttime)";
+
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_user_today()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_today(){
+      
+      $query = "SELECT * FROM accounting.radacct WHERE username = " . $this->db->quote($this->username) . " AND acctstarttime LIKE " . $this->db->quote('%'.$this->start_date.'%');
+      $query = "SELECT username,CAST(acctstarttime AS DATE) as 'date', SUM(acctinputoctets) as acctinputoctets, SUM(acctoutputoctets) as acctoutputoctets FROM accounting.radacct WHERE username=" . $this->db->quote($this->username) . " AND acctstarttime LIKE " . $this->db->quote("%" . $this->start_date . "%" ) . " GROUP BY YEAR(acctstarttime), MONTH(acctstarttime), DAY(acctstarttime) ORDER BY acctstarttime DESC LIMIT 1";
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+  /* function radcheck_exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function radcheck_exist() {
+  
+    $this->username = $this->username;
+
+    $user = new user();
+    $user->username = $this->username;
+    $user->load();
+
+    if ( !$user->username ) {
+
+      return 1;
+
+    }
+    
+    
+    $query = "SELECT username FROM radius.radcheck WHERE username = " . $this->db->quote($this->username);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+  /* function radcheck_load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function radcheck_load() {
+
+    $this->username = strtoupper($this->username);
+
+    if (!$this->username) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->username) {
+      
+      $query = "SELECT * FROM radius.radcheck WHERE username = " . $this->db->quote($this->username) . " LIMIT 1";
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function radreply_load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function radreply_load() {
+
+    if (!$this->username) {
+    
+      return 0;
+      
+    }
+  
+    $a = array();
+
+    if ($this->username) {
+      
+      $query = "SELECT * FROM radius.radreply WHERE username = " . $this->db->quote($this->username);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }  
+    }
+
+
+    return $a;
+    
+  }
+  /* function check_online()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function check_online() {
+
+    if (!$this->username) {
+    
+      return 0;
+      
+    }
+  
+    $a = array();
+
+    if ($this->username) {
+      
+      // $query = "SELECT username, acctsessionid, acctstarttime, acctupdatetime, nasipaddress, framedipaddress FROM accounting.radacct WHERE username = " . $this->db->quote($this->username) . " AND connectinfo_stop = 0";
+      $query = "SELECT username, acctsessionid, acctstarttime, acctupdatetime, nasipaddress, framedipaddress, connectinfo_stop FROM accounting.radacct WHERE username = " . $this->db->quote($this->username) . " AND connectinfo_stop = 0 AND acctterminatecause = '' AND servicetype = 'Framed-User'";
+      // print_r($query);
+
+      $result = $this->db->execute_query($query);
+
+    return $this->db->fetch_row_count($result);
+    }
+    
+  }
+
+}
+

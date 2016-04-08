@@ -1,0 +1,410 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// login_history.class - Class for accessing user login history
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "user.class";
+
+class login_history {
+
+  var $username;
+  var $dt;
+  var $ip;
+  var $hostname;
+  var $comment;
+  var $last_activity;
+  var $logout;
+  var $sid;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function login_history() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function login_history() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+    
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->username = strtolower($this->username);
+    $this->dt = strtolower($this->dt);
+  
+    if ($this->username && $this->dt) {
+      
+      $query = "SELECT * FROM login_history WHERE username = " . $this->db->quote($this->username) . " AND dt = " . $this->db->quote($this->dt);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        
+        while ($cel = each($row)) {
+
+	        $key = $cel['key'];
+          
+          $this->{$key} = $cel['value'];
+          
+        }
+        
+      }    
+    }
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->username = strtolower($this->username);
+    $this->dt = strtolower($this->dt);
+  
+    // Check we have an user
+    if (!$this->username || !$this->dt) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT username FROM users WHERE username = " . $this->db->quote($this->username);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+	
+    // Validate
+    if (login_history::validate()) {
+    
+      return 0;
+      
+    }
+    
+    // Create the account
+    $query = "INSERT INTO login_history (username,dt,ip,hostname,comment, sid, last_activity)";
+    $query .= " VALUES (" . $this->db->quote($this->username) . ",NOW()," . $this->db->quote($this->ip) . "," . $this->db->quote($this->hostname) . "," . $this->db->quote($this->comment) . "," . $this->db->quote($this->sid) . ",NOW())";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+    
+      return 1;
+					
+    }
+  }
+  
+  function create() {
+  
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 1 - login id is bad
+  ** 2 - status code is bad
+  ** 3 - password is bad
+  ** 
+  */
+  function validate() {
+    
+    $validate = new validate();
+    
+    $this->username = strtolower($this->username);
+    $user = new user();
+    $user->username = $this->username;
+    if (!$user->exist()) {
+	return 1;
+    }
+    
+    if ($this->ip == '') {
+    	
+    	return 2;
+    	
+    } 
+    
+    if ($this->hostname == '') {
+    	
+    	return 3;
+    	
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+  
+
+
+  /* function getUser($username)
+  **
+  ** DESCRIPTION: Returns users login history
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of arrays containing:
+  **   - account number
+  **   - business
+  **   - last name
+  **   - city
+  **   - state
+  ** 
+  */
+  function getUser($username) {
+  
+    $query = "SELECT dt FROM login_history WHERE username = " . $this->db->quote($username) . " ORDER BY dt DESC";
+    
+    $results = array();
+    $count = 0;
+
+    $result = $this->db->execute_query($query);
+    
+    while ( $row = $this->db->fetch_row_array($result)) {
+      
+      $results[$count] = $row['dt'];
+      
+      $count++;
+
+    }
+
+    return $results;
+    
+  }
+
+  /* function poke()
+  **
+  ** DESCRIPTION: pokes a session
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  **
+  */
+  function poke() {
+
+    // Update
+    $query = "UPDATE login_history SET last_activity = NOW() WHERE username = " . $this->db->quote($this->username) . " AND sid = " . $this->db->quote($this->sid) . ' AND logout is null';
+		
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+      return 0;
+
+    } else {
+
+      return 1;
+
+    }
+  }
+
+  /* function poke()
+  **
+  ** DESCRIPTION: logout a session
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  **
+  */
+  function logout() {
+
+    // Update
+    $query = "UPDATE login_history SET logout = last_activity WHERE username = " . $this->db->quote($this->username) . " AND sid = " . $this->db->quote($this->sid);
+
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+      return 0;
+
+    } else {
+
+      return 1;
+
+    }
+  }
+
+  /* function cleanup()
+  **
+  ** DESCRIPTION: cleanup non logged out sessions
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  **
+  */
+  function cleanup() {
+
+    // Update
+    $query = "UPDATE login_history SET logout = last_activity WHERE last_activity < NOW() - interval 120 minute and logout is null";
+
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+      return 0;
+
+    } else {
+
+      return 1;
+
+    }
+  }
+
+  /* function getOnline()
+  **
+  ** DESCRIPTION: Returns users login history
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of arrays containing:
+  **   - account number
+  **   - business
+  **   - last name
+  **   - city
+  **   - state
+  **
+  */
+  function getOnline() {
+
+    $query = "SELECT * FROM login_history WHERE logout is null ORDER BY dt ASC";
+
+    $results = array();
+    $count = 0;
+
+    $result = $this->db->execute_query($query);
+
+    while ( $row = $this->db->fetch_row_array($result)) {
+
+      $results[$count] = $row;
+
+      $count++;
+
+    }
+
+    return $results;
+
+  }
+
+
+
+}
+
+?>

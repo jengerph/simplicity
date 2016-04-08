@@ -1,0 +1,115 @@
+<br/>
+    <div id="locationField">
+      <input id="autocomplete" name="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text" value="{AUTOCOMPLETE}"></input>
+    </div>
+
+    <table id="address">
+      <tr>
+        <td class="label" style="width:150px;">Street address</td>
+        <td class="slimField"><input class="field" id="street_number" name="street_number" value="{STREET_NUMBER}" readonly/></input></td>
+        <td class="wideField" colspan="2"><input class="field" id="route" name="route" value="{ROUTE}" readonly/></input></td>
+      </tr>
+      <tr>
+        <td class="label">City</td>
+        <td class="wideField" colspan="3"><input class="field" id="locality" name="locality" value="{LOCALITY}" readonly/></input></td>
+      </tr>
+      <tr>
+        <td class="label">State</td>
+        <td class="slimField"><input class="field" id="administrative_area_level_1" name="administrative_area_level_1" value="{ADMINISTRATIVE_AREA}" readonly/></input></td>
+        <td class="label">Zip code</td>
+        <td class="wideField"><input class="field" id="postal_code" name="postal_code" value="{POSTAL_CODE}" readonly/></input></td>
+      </tr>
+      <tr>
+        <td class="label">Country</td>
+        <td class="wideField" colspan="3"><input class="field" id="country" name="country" value="{COUNTRY}" readonly/></input></td>
+      </tr>
+    </table>
+<script>
+// displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      {types: ['geocode'],componentRestrictions: {country: ["AU"]}});
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+var here = "";
+// [START region_fillform]
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+here=place;
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    // document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+  check_address();
+}
+// [END region_fillform]
+
+// [START region_geolocation]
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+
+function check_address(){
+  var street_number = document.querySelector('#street_number').value;
+  var street_name = document.querySelector('#route').value;
+  var locality = document.querySelector('#locality').value;
+  var administrative_area_level_1 = document.querySelector('#administrative_area_level_1').value;
+  var postal_code = document.querySelector('#postal_code').value;
+  var country = document.querySelector('#country').value;
+  var autocomplete = document.querySelector('#autocomplete').value;
+
+  if ( street_number == "" ) {
+    if ( street_name ) {
+      street_number = autocomplete.substr(0, autocomplete.indexOf(street_name));
+      document.querySelector('#street_number').value = street_number.trim();
+    }
+  }
+}
+
+// [END region_geolocation]
+
+    </script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>

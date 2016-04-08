@@ -1,0 +1,394 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// staticip.class - Class for accessing static ip details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "audit.class";
+
+class staticip {
+  
+  var $ip;
+  var $service_id;
+  var $ts;
+
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function staticip() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function staticip() { 
+    
+  
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->ip = strtoupper($this->ip);
+    if (!$this->ip) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->ip) {
+      
+      $query = "SELECT * FROM staticips WHERE ip = " . $this->db->quote($this->ip);
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+         if ( $row ) { 
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+          }
+        }
+      }    
+    }
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->ip = strtolower($this->ip);
+  
+    // Check we have an static ip
+    if (!$this->ip) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT ip FROM staticips WHERE ip = " . $this->db->quote($this->ip);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (staticip::validate()) {
+    
+      return 0;
+      
+    }
+
+    $service = new services();
+
+    // Create the property search
+    $query = "INSERT INTO staticips (ip, service_id)";
+    $query .= " VALUES (" . $this->db->quote($this->ip) . "," . $this->db->quote($this->service_id) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      //$this->service_id = $this->db->fetch_insert_id();
+
+      $this->load();
+      
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"staticips",$this->ip);
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (staticip::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!staticip::exist()) {
+      return 0;
+      
+    }
+    $service = new services();
+    $service->service_id = $this->service_id;
+    $service->load();
+
+    $query = "UPDATE staticips SET service_id = " . $this->db->quote($this->service_id);
+    $query .= " WHERE ip = " . $this->db->quote($this->ip);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_changes($keys,$service,$this,"staticips",$this->ip);
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  **   */
+  function validate() {
+
+    $validate = new validate();
+    
+    if (!$validate->ip($this->ip)) {
+    	
+    	return 160;
+    	
+    }
+    
+    if ($this->service_id != 0) {
+    
+    	$service = new services();
+    	$service->service_id = $this->service_id;
+    	
+    	if (!$service->exist()) {
+    		
+    		return 300;
+    		
+    	}	
+    }
+
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_next_free_ip()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of services with correpsonding details
+  ** 
+  */
+
+  function get_next_free_ip(){
+
+      $query = "SELECT ip FROM staticips WHERE service_id =0";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        
+        return $row['ip'];
+      }
+
+    return;
+
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+    $this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+    
+    // Prepare the query
+    $query = "DELETE FROM staticips WHERE ip = " . $this->db->quote($this->ip);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+  }
+
+
+}
+

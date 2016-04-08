@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="VpiVci.xsd" />
+    <xsd:include schemaLocation="elements/PPPType.xsd" />
+    <xsd:include schemaLocation="elements/LoopbackType.xsd" />
+    <xsd:include schemaLocation="elements/EncapsulationType.xsd" />
+
+    <xsd:complexType name="PVCStatus">
+        <xsd:sequence>
+            <xsd:element name="VPIVCI" type="wsg:VpiVci" />
+            <xsd:element name="LoopbackStatus" type="wsg:LoopbackType" />
+            <xsd:element name="Encapsulation" type="wsg:EncapsulationType" />
+            <xsd:element name="PPPType" type="wsg:PPPType" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

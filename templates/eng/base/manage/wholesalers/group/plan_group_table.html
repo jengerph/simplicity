@@ -1,0 +1,34 @@
+<div width="100%" border="1" cellspacing="0" cellpadding="0" style="background-color: rgb(244, 249, 254);">
+	<div>
+		<p style="text-align:left;margin-left:5px;padding-left:10px;padding-right:10px;">{GROUP_DESCRIPTION}{WHOLESALER} <a href="javascript:void(0)" onclick="show_form({GROUP_ID})">&#x25BC;</a></p>
+	</div>
+	<div id="show_{GROUP_ID}" style="padding-left:10px;" hidden>
+		<form action="{SELF}?group_id={GROUP_ID}" method="POST" onsubmit="return confSubmit({GROUP_ID});">
+		<section class="container">
+				<div>
+				    <div style="display: inline-block;">
+				    	<fieldset>
+				    		<legend>Wholesalers who cannot see this group:</legend>
+				        	{WHOLESALER_NOT_IN_GROUP}
+				        	</fieldset>
+				        <div>
+				            <input type="text" name="txtRight_{GROUP_ID}" id="txtRight_{GROUP_ID}" hidden/>
+				        </div>
+				    </div>
+				    <div style="display: inline-block; vertical-align: top; line-height: 15;">
+				        <input type="button" id="btnLeft_{GROUP_ID}" onclick="move_value_left({GROUP_ID})" value="&lt;&lt;" />
+				        <input type="button" id="btnRight_{GROUP_ID}" onclick="move_value_right({GROUP_ID})" value="&gt;&gt;" />
+				    </div>
+				    <div style="display: inline-block;">
+				    	<fieldset>
+				    		<legend>Wholesalers who can see this group:</legend>
+				        	{WHOLESALER_IN_GROUP}
+				    	</fieldset>
+				    </div>
+				</div>
+			<input type="submit" name="submit" id="submit" value="Save">
+			</section>
+		</form>
+	</div>
+
+</div>

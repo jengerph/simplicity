@@ -1,0 +1,35 @@
+
+<script type="text/javascript">
+rep_type();
+function rep_type(){
+  var type = document.getElementById('type').value;
+  var table = document.getElementById('ar_table').style.visibility;
+  if ( table != "hidden" ) {
+    if ( type == "person" ) {
+      document.getElementById('ar_primary_id_c').style = "visibility:hidden";
+      document.getElementById('ar_secondary_id_c').style = "visibility:hidden";
+      document.getElementById('ar_primary_id_p').style = "visibility:visible";
+      document.getElementById('ar_secondary_id_p').style = "visibility:visible";
+    } else if ( type == "company" ) {
+      document.getElementById('ar_primary_id_p').style = "visibility:hidden";
+      document.getElementById('ar_secondary_id_p').style = "visibility:hidden";
+      document.getElementById('ar_primary_id_c').style = "visibility:visible";
+      document.getElementById('ar_secondary_id_c').style = "visibility:visible";
+    }
+  }
+}
+</script>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0" onload="rep_type();">
+<h2><span class="bodytext">Manage Authorised Representatives: </span></h2>
+<p><a href="/base/manage/customers/edit/?customer_id={CUSTOMER_ID}">Back to Edit User</a> | <a href="/base/manage/customers/add/add_auth_rep/?customer_id={CUSTOMER_ID}">Add Authorised Representative</a></p>
+
+<table>
+  <tr>
+    <th>Authorised Representatives</th>
+  </tr>
+  {ROWS}
+</table>

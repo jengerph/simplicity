@@ -1,0 +1,61 @@
+
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">Manage  Groups: </span></h2>
+{MENU}
+  <label></label>
+</p>
+<p>[ <a href="/base/manage/wholesalers/">Back to Wholesalers</a> ]</p>
+
+{PLAN_GROUP_TABLE}
+
+<script type="text/javascript">
+	function show_form(group_id) {
+		var container = document.querySelector('#show_'+group_id).hidden;
+		if ( container == true ) {
+			document.querySelector('#show_'+group_id).hidden = false;
+		} else if ( container == false ) {
+			document.querySelector('#show_'+group_id).hidden = true;
+		}
+	}
+
+	function move_value_left(number){
+		    var selectedItem = $("#right_values_"+number+" option:selected");
+		    $("#left_values_"+number).append(selectedItem);
+		    var selectedItem = document.querySelector("select[id='right_values_"+number+"']");
+	    	var selectedItems_str = "";
+		    for (var i = 0; i < selectedItem.options.length; i++) {
+		    	selectedItems_str = selectedItem.options[i].value + "," + selectedItems_str;
+		    };
+	    	selectedItems_str = selectedItems_str.replace(/(^,)|(,$)/g, "");
+			$("#txtRight_"+number).val(selectedItems_str);
+	}
+
+	function move_value_right(number){
+		    var selectedItem = $("#left_values_"+number+" option:selected");
+		    $("#right_values_"+number).append(selectedItem);
+	    	var selectedItem = document.querySelector("select[id='right_values_"+number+"']");
+	    	var selectedItems_str = "";
+		    for (var i = 0; i < selectedItem.options.length; i++) {
+		    	selectedItems_str = selectedItem.options[i].value + "," + selectedItems_str;
+		    };
+	    	selectedItems_str = selectedItems_str.replace(/(^,)|(,$)/g, "");
+			$("#txtRight_"+number).val(selectedItems_str);
+	}
+
+	function confSubmit(number){
+		var selectedItem = document.querySelector("select[id='right_values_"+number+"']");
+    	var selectedItems_str = "";
+	    for (var i = 0; i < selectedItem.options.length; i++) {
+	    	selectedItems_str = selectedItem.options[i].value + "," + selectedItems_str;
+	    };
+    	selectedItems_str = selectedItems_str.replace(/(^,)|(,$)/g, "");
+		$("#txtRight_"+number).val(selectedItems_str);
+		return true;
+	}
+
+</script>

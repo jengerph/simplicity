@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/LineProfileType.xsd" />
+
+    <xsd:element name="DSLChangeProfileRequest" type="wsg:DSLChangeProfileRequest" />
+
+    <xsd:complexType name="DSLChangeProfileRequest">
+        <xsd:sequence>
+            <xsd:element name="serviceOrderID" type="wsg:ServiceID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each service order</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="lineProfile" type="wsg:LineProfileType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Requested line profile setting (Default, Noisy etc)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

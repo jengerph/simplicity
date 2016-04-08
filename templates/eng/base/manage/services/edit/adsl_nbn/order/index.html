@@ -1,0 +1,25 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<div><font color="green">&#9989;</font> Change of Service &#xbb; Qualify</div>
+<h2><span class="bodytext">Qualify Change of Service: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?service_id={SERVICE_ID}" method="post" name="form">
+<input name="service_id" type="text" id="service_id" value="{SERVICE_ID}" hidden>
+  <font color="red">*</font>Do you have an FNN of a service at the same location?</font></b></font>
+<font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input type="radio" name="fnn_service" id="fnn_service_y" value="yes" onChange='form.submit.click()' {FNN_SERVICE_YES}> Yes
+      <input type="radio" name="fnn_service" id="fnn_service_n" value="no" onChange='form.submit.click()' {FNN_SERVICE_NO}> No
+      </font>
+      <br/>
+{FNN_SECTION}
+  <input name="submit2" type="submit" id="submit2" value="Qualify">
+  <input name="submit" type="submit" id="submit" value="submit" hidden>
+<p>
+</p>
+</form>
+<!-- <form action="{SELF}?customer_id={CUSTOMER_ID}" method="post" name="form">
+</form> -->

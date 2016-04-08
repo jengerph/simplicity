@@ -1,0 +1,28 @@
+<td>Service Address:</td>
+  <td>{ADDRESS}</td>
+</tr>
+<tr>
+  <td>Access Type:</td>
+  <td>{ACCESSTYPE}</td>
+</tr>
+<tr>
+  <td>Access Method:</td>
+  <td>{ACCESSMETHOD}</td>
+</tr>
+<tr>
+  <td>Speed:</td>
+  <td>{SPEED}</td>
+</tr>
+<tr>
+  <td>Username:</td>
+  <td>{USERNAME}@{REALMS}</td>
+</tr>
+<tr>
+  <td>Password:</td>
+  <td>
+  <form action="{SELF}?service_id={SERVICE_ID}" method="POST">
+  <input type="text" name="radius_password" id="radius_password" value="{PASSWORD}"><input type="submit" name="submit" id="submit" value="save">
+  </form>
+  </td>
+</tr>
+{RADREPLY_ROW}

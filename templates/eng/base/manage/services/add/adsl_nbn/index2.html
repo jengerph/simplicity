@@ -1,0 +1,62 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Edit Service: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&service_id={SERVICE_ID}" method="post">
+  <input name="customer_id" type="text" id="customer_id" value="{CUSTOMER_ID}" hidden>
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Service Type:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {SERVICE_TYPE_LIST}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Start Date:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="start_date" type="text" id="start_date" value="{START_DATE}">
+    </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Contract End:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="contract_end" type="text" id="contract_end" value="{CONTRACT_END}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Retail Plan:</font></b></font></div></td>
+    <td>{RETAIL_PLAN_LIST}<input name="wholesale_plan" id="wholesale_plan" value="{WHOLESALE_PLAN}" hidden></td>
+  </tr>
+   <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> State:</font></b></font></div></td>
+    <td>
+      <!-- <font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">Creation</font> -->
+      <select name="state" id="state">
+        <option value="creation"{STATE_CREATION_SELECT}>Creation</option>
+        <option value="active"{STATE_ACTIVE_SELECT}>Active</option>
+        <option value="inactive"{STATE_INACTIVE_SELECT}>Inactive</option>
+      </select>
+    </td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Identifier:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <textarea name="identifier" id="identifier" readonly>{IDENTIFIER}
+      </textarea>
+      </font></td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Tag:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="tag" type="text" id="tag" value="{TAG}">
+      </font></td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Save">
+</p>
+</form>

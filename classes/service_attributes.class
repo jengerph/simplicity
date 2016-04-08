@@ -1,0 +1,464 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// service_attributes.class - Class for accessing service_attributes details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "audit.class";
+
+class service_attributes {
+
+  var $service_id;
+  var $param;
+  var $value;
+  var $datetime;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function service_attributes() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function service_attributes() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->service_id = strtoupper($this->service_id);
+
+    if (!$this->service_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->service_id) {
+      
+      $query = "SELECT * FROM service_attributes WHERE service_id = " . $this->db->quote($this->service_id);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->service_id = strtolower($this->service_id);
+    // Check we have an user
+    if (!$this->service_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT service_id FROM service_attributes WHERE service_id = " . $this->db->quote($this->service_id);
+    $query .= " AND param = " . $this->db->quote($this->param);
+
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count >= 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (service_attributes::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Create the property search
+    $query = "INSERT INTO service_attributes (service_id, param, value, datetime)";
+    $query .= " VALUES (" . $this->db->quote($this->service_id) . "," . $this->db->quote($this->param) . "," . $this->db->quote($this->value) . ",NOW())";
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      $audit = new audit();
+      $audit->order_id = $this->service_id;
+      $audit->param = $this->param;
+      $audit->value = $this->value;
+      $audit->store_first_changes_attributes("service_attributes");
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (service_attributes::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!service_attributes::exist()) {
+      return 0;
+      
+    }
+    
+    $query = "UPDATE service_attributes SET value = " . $this->db->quote($this->value);
+    $query .= " WHERE service_id = " . $this->db->quote($this->service_id) . " AND param = " . $this->db->quote($this->param);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+    $this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+    
+    // Prepare the query
+    $query = "DELETE FROM service_attributes WHERE service_id = " . $this->db->quote($this->service_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete_attribute() {
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+    
+    // Prepare the query
+    $query = "DELETE FROM service_attributes WHERE service_id = " . $this->db->quote($this->service_id) . " AND param = " . $this->db->quote($this->param);
+    
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    if ( !$this->service_id ) {
+
+      return 160;
+
+    }
+    
+    if ( !$this->param ) {
+
+      return 161;
+
+    }
+
+    //if ( $this->value == NULL ) {
+
+     // return 162;
+
+    //}
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_service_attributes()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of service attributes with correpsonding details
+  ** 
+  */
+
+  function get_service_attributes(){
+      
+      $query = "SELECT * FROM service_attributes ";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+  /* function get_attribute()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function get_attribute() {
+
+    $this->service_id = strtoupper($this->service_id);
+
+    if (!$this->service_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->service_id) {
+      
+      $query = "SELECT * FROM service_attributes WHERE service_id = " . $this->db->quote($this->service_id) . " AND param = " . $this->db->quote($this->param);
+      $query .= " ORDER BY datetime DESC LIMIT 1";
+      $result = $this->db->execute_query($query);
+  
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+  }
+
+function file_upload() {
+  
+    if ( !$this->customer_id ) {
+      return 0;
+    }
+
+  // Write file out
+    $config = new config();
+    $file_name = "temp_" . $this->customer_id;
+    file_put_contents ( $config->docs_dir . '/billing/temp/' . $file_name, $this->file );
+  return $file_name;
+  
+}
+
+
+}
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:complexType name="RadiusEntryUpdateStatus">
+        <xsd:sequence>
+            <xsd:element name="updateTask" type="xsd:string" />
+            <xsd:element name="updateStatus" type="xsd:string" />
+            <xsd:element name="completionTime" type="xsd:dateTime" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,29 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Once-Off Billing Action: </span></h2>
+<p>[ <a href="/base/manage/billing/once_off/pending_action">Pending Action</a> | <a href="/base/manage/billing/once_off/actioned">Actioned</a> | <a href="/base/manage/billing/once_off/invoiced">Invoiced</a> ]</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red">{ERROR_MSG}</font></p>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+	<tr>
+		<th>Wholesaler</th>
+		<th>Customer</th>
+		<th>Service</th>
+		<th>Description</th>
+		<th>Main Unit Amount</th>
+		<th>Wholesale Unit Amount</th>
+		<th>GST</th>
+		<th>Quantity</th>
+		<th>Date</th>
+	</tr>
+	{ROWS}
+</table>
+<div style="text-align:center" >
+<form action="{SELF}" method="POST">
+<a href="?page={PREVIOUS_PAGE}">&#171;&#171;</a> <input type="text" name="page" id="page" value="{CURRENT_PAGE}" style="width: 40px; text-align: center;"><a href="?page={NEXT_PAGE}">&#187;&#187;</a><br/><span> of {TOTAL_PAGES} Pages</span><br/><small>({ENTRIES} results)</small>
+<input type="submit" name="submit" id="submit" value="Submit" hidden>
+</form>
+</div>

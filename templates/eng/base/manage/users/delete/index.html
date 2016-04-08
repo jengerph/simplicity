@@ -1,0 +1,36 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+.style1 {font-family: Verdana, Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Delete  User: </span></h2>
+<p>[ <a href="/base/manage/users/edit/?&username={USERNAME}">Edit</a> | <a href="/base/manage/users/resetpw/?username={USERNAME}">Reset password</a> | <a href="/base/manage/users/history/?username={USERNAME}">View Login History</a> | <a href="/base/manage/users/delete/?username={USERNAME}">Delete</a> ]</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<p>Are you sure you wish to delete this user?</p>
+<form action="{SELF}" method="post">
+<table width="38%" border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Username:</font></b></font></div></td>
+    <td><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif">{USERNAME}</font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">First Name:</font></b></font></div></td>
+    <td><span class="style1"><font color="#000000" size="2">{FIRST_NAME}</font></span> </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td width="43%"><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Last Name:</font></b></font></div></td>
+    <td width="57%"><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif">{LAST_NAME}</font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Email Address:</font></b></font></div></td>
+    <td><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif">{EMAIL}</font></td>
+  </tr>
+</table>
+<p>
+  <input name="yes" type="submit" id="yes" value="Yes">
+  <input name="no" type="submit" id="no" value="No">
+  <input name="username" type="hidden" id="username" value="{USERNAME}">
+</p>
+</form>

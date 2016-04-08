@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema" 
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:element name="TicketHistory" type="wsg:TicketHistory" />
+
+    <xsd:complexType name="TicketHistory">
+        <xsd:sequence>
+            <xsd:element name="logTime" type="xsd:dateTime" minOccurs="0" />
+            <xsd:element name="logType" type="xsd:string" minOccurs="0" />
+            <xsd:element name="logText" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

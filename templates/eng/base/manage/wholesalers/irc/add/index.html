@@ -1,0 +1,54 @@
+
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">Add  International Rate Cards: </span></h2>
+{MENU}
+  <label></label>
+</p>
+<p>[ <a href="/base/manage/wholesalers/irc/?wholesaler_id={WHOLESALER_ID}">&#9664; Back to International Rate Cards List</a> ]</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red">{ERROR_MSG}</font></p>
+<form action="{SELF}?wholesaler_id={WHOLESALER_ID}" method="post">
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Description:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="description" type="text" id="description" value="{DESCRIPTION}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Service Type:</font></b></font></div></td>
+    <td><select name="service_type" id="service_type" onchange="form.submit2.click();">
+      <option value="0">Select a Service</option>
+      <option value="5" {ST_5_SELECT}>Inbound Voice</option>
+      <option value="6" {ST_6_SELECT}>Outbound Voice</option></select>
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Sub Type:</font></b></font></div></td>
+    <td><select name="sub_type" id="sub_type" onchange="form.submit2.click();">
+      <option value="0">Select Sub Type</option>
+      <option value="inbound" {STATE_INBOUND_SELECT}>Inbound</option>
+      <option value="rebilled" {STATE_REBILLED_SELECT}>Rebilled</option>
+      <option value="sip trunk" {STATE_SIP_TRUNK_SELECT}>SIP Trunk</option>
+      <option value="aapt isdn" {STATE_AAPT_ISDN_SELECT}>AAPT ISDN</option>
+    </select></td>
+  </tr>
+  {BASE_ROW}
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Active</font></b></font></div></td>
+    <td>
+      <input name="active" type="radio" value="no"{ACTIVE_NO_SELECT}>
+      No 
+      <input name="active" type="radio" value="yes"{ACTIVE_YES_SELECT}>
+      Yes</td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Create">
+  <input name="submit2" type="submit" id="submit2" value="Create" hidden>
+</p>
+</form>

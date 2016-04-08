@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccessMethod.xsd" />
+    <xsd:include schemaLocation="elements/AvailablePorts.xsd" />
+
+    <xsd:complexType name="AvailableAccess">
+        <xsd:sequence>
+            <xsd:element name="accessMethod" type="wsg:AccessMethod">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The AAPT access method available in the exchange</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="availablePorts" type="wsg:AvailablePorts" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The number of ports available at the Exchange for the product</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

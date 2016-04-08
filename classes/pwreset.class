@@ -1,0 +1,265 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// pwreset.class - Class for accessing password reset requests
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once("class.phpmailer.php");
+
+class pwreset {
+
+  var $reset_id;
+  var $email;
+  var $dt;
+  
+
+ 
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function event() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function pwreset() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+    
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->reset_id = strtoupper($this->reset_id);
+  
+    if ($this->reset_id) {
+      
+      $query = "SELECT * FROM pwresets WHERE reset_id = " . $this->db->quote($this->reset_id);
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        
+        while ($cel = each($row)) {
+
+	        $key = $cel['key'];
+          
+          $this->{$key} = $cel['value'];
+          
+        }      
+      }    
+    }
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->reset_id = strtoupper($this->reset_id);
+  
+    // Check we have an reset_id
+    if (!$this->reset_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT reset_id FROM pwresets WHERE reset_id = " . $this->db->quote($this->reset_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+	
+    // Validate
+    if (pwreset::validate()) {
+    
+      return 0;
+      
+    }
+    
+    // Create the company_id
+    $query = "INSERT INTO pwresets (email, dt)";
+    $query .= " VALUES (" . $this->db->quote($this->email) . ",NOW())";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+    
+	    $this->reset_id = $this->db->fetch_insert_id();
+			$this->load();
+			
+      return 1;
+					
+    }
+  }
+  
+  function create() {
+  
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+		$this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+
+    // Prepare the query
+    $query = "DELETE FROM pwresets WHERE reset_id = " . $this->db->quote($this->reset_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+	  	return 1;
+	  	
+	  	
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    $validate = new validate();
+
+		if (!$validate->email($this->email)) {
+			return 111;
+		}
+
+
+    // ALL OK
+    return 0;
+    
+  }
+  
+
+}
+
+?>

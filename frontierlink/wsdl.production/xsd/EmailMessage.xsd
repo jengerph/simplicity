@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsc="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="EmailAddresses.xsd"/>
+    <xsd:include schemaLocation="elements/EmailAddress.xsd"/>
+    <xsd:include schemaLocation="EmailAttachmentList.xsd"/>
+    <xsd:include schemaLocation="elements/EmailSubject.xsd"/>
+    <xsd:include schemaLocation="elements/NoteText.xsd"/>
+
+    <xsd:complexType name="EmailMessage">
+        <xsd:sequence>
+	        <xsd:element name="to" type="wsc:EmailAddresses" />
+	        <xsd:element name="cc" type="wsc:EmailAddresses" minOccurs="0" />
+	        <xsd:element name="bcc" type="wsc:EmailAddresses" minOccurs="0" />
+	        <xsd:element name="fromAddress" type="wsc:EmailAddress" />
+	        <xsd:element name="fromAlias" type="wsc:EmailAddress" />
+            <xsd:element name="subject" type="wsc:EmailSubject" />
+            <xsd:element name="message" type="wsc:NoteText" minOccurs="0" />
+            <xsd:element name="messageHTML" type="wsc:NoteText" minOccurs="0" />
+            <xsd:element name="attachmentList" type="wsc:EmailAttachmentList" minOccurs="0" />
+	    </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd" elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AddressInformation.xsd" />
+    <xsd:include schemaLocation="elements/SubAddressType.xsd" />
+    <xsd:include schemaLocation="elements/SubAddressNumber.xsd" />
+    <xsd:include schemaLocation="elements/StreetNumber.xsd" />
+    <xsd:include schemaLocation="elements/StreetNumberSuffix.xsd" />
+    <xsd:include schemaLocation="elements/StreetName.xsd" />
+    <xsd:include schemaLocation="elements/StreetType.xsd" />
+    <xsd:include schemaLocation="elements/StreetSuffix.xsd" />
+    <xsd:include schemaLocation="elements/Suburb.xsd" />
+    <xsd:include schemaLocation="elements/State.xsd" />
+    <xsd:include schemaLocation="elements/Postcode.xsd" />
+
+    <xsd:complexType name="SiteAddress">
+        <xsd:sequence>
+            <xsd:element name="addressInformation" type="wsg:AddressInformation" minOccurs="0" />
+            <xsd:element name="subAddressType" type="wsg:SubAddressType" minOccurs="0" />
+            <xsd:element name="subAddressNumber" type="wsg:SubAddressNumber" minOccurs="0" />
+            <xsd:element name="streetNumber" type="wsg:StreetNumber" minOccurs="0" />
+            <xsd:element name="streetNumberSuffix" type="wsg:StreetNumberSuffix" minOccurs="0" />
+            <xsd:element name="streetName" type="wsg:StreetName" minOccurs="0" />
+            <xsd:element name="streetType" type="wsg:StreetType" minOccurs="0" />
+            <xsd:element name="streetSuffix" type="wsg:StreetSuffix" minOccurs="0" />
+            <xsd:element name="suburb" type="wsg:Suburb" />
+            <xsd:element name="state" type="wsg:State" />
+            <xsd:element name="postcode" type="wsg:Postcode" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

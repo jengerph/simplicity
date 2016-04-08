@@ -1,0 +1,1069 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"is",
+				"isinstance	(builtin, function)"
+			],
+			[
+				"Invo",
+				"InvoiceReference"
+			],
+			[
+				"context",
+				"context_instance"
+			],
+			[
+				"tema",
+				"template_name"
+			],
+			[
+				"con",
+				"context_instance"
+			],
+			[
+				"Request",
+				"RequestContext"
+			],
+			[
+				"EWA",
+				"EWAY_CARDSTARTMONTH"
+			],
+			[
+				"Invoi",
+				"InvoiceReference"
+			],
+			[
+				"Redi",
+				"RedirectUrl"
+			],
+			[
+				"re",
+				"result	(local, instance)"
+			],
+			[
+				"rapid",
+				"rapidapi	import"
+			],
+			[
+				"Desc",
+				"Description"
+			],
+			[
+				"Descr",
+				"Description1"
+			],
+			[
+				"Jo",
+				"JobDescription"
+			],
+			[
+				"TokenCus",
+				"TokenCustomerID"
+			],
+			[
+				"Inte",
+				"IntegerField"
+			],
+			[
+				"ra",
+				"rapid"
+			],
+			[
+				"push",
+				"push_gaq"
+			],
+			[
+				"content",
+				"contentData"
+			],
+			[
+				"main",
+				"main_inc"
+			],
+			[
+				"get",
+				"get_payment"
+			],
+			[
+				"Cus",
+				"CustomerIP	(attribute, instance)"
+			],
+			[
+				"Stre",
+				"street"
+			],
+			[
+				"GetAccess",
+				"GetAccessCodeResult"
+			],
+			[
+				"reque",
+				"requestNode	(local, instance)"
+			],
+			[
+				"object",
+				"object_to_xml(request, is_create)	(global, function)"
+			],
+			[
+				"x",
+				"xmlrpclib	(imported, module)"
+			],
+			[
+				"to",
+				"tostring"
+			],
+			[
+				"param",
+				"paramsRequest	(local, instance)"
+			],
+			[
+				"objec",
+				"object_to_xml(request, is_create)	(global, function)"
+			],
+			[
+				"request",
+				"request_data	(local, instance)"
+			],
+			[
+				"obj",
+				"object_to_xml(request, is_create)	(global, function)"
+			],
+			[
+				"dict",
+				"dicttoxml	(imported, module)"
+			],
+			[
+				"create",
+				"create_access_code_request"
+			],
+			[
+				"acc",
+				"access_code	(local, instance)"
+			],
+			[
+				"_c",
+				"_convert_object_(obj, action)	(attribute, function)"
+			],
+			[
+				"_conver",
+				"_convert_response_(resp, action)	(attribute, function)"
+			],
+			[
+				"GetAcce",
+				"GetAccessCodeResult"
+			],
+			[
+				"Create",
+				"CreateAccessCode"
+			],
+			[
+				"debug",
+				"show_debug_info"
+			],
+			[
+				"rqeue",
+				"request_data	(local, instance)"
+			],
+			[
+				"js",
+				"json_to_object(request)	(imported, function)"
+			],
+			[
+				"RapidA",
+				"RapidAPIError	(global, class)"
+			],
+			[
+				"cus",
+				"customer_ip	(attribute, instance)"
+			],
+			[
+				"Cut",
+				"CustomerIP"
+			],
+			[
+				"sh",
+				"shipping_address	(attribute, instance)"
+			],
+			[
+				"Street",
+				"Street2"
+			],
+			[
+				"Stree",
+				"Street1"
+			],
+			[
+				"Las",
+				"LastName"
+			],
+			[
+				"assertEqu",
+				"assertEqual(first, second, msg)	(attribute, function)"
+			],
+			[
+				"rest",
+				"rest_url"
+			],
+			[
+				"res",
+				"result_json	(attribute, instance)"
+			],
+			[
+				"result_js",
+				"result_jsonrpc	(attribute, instance)"
+			],
+			[
+				"object_to",
+				"object_to_jsonrpc(request, action)	(imported, function)"
+			],
+			[
+				"pay",
+				"payment_password	(local, instance)"
+			],
+			[
+				"pa",
+				"payment_password	(local, instance)"
+			],
+			[
+				"requ",
+				"request_format	(local, instance)"
+			],
+			[
+				"req",
+				"request_method	(local, instance)"
+			],
+			[
+				"de",
+				"description	(local, instance)"
+			],
+			[
+				"invo",
+				"invoice_reference	(local, instance)"
+			],
+			[
+				"invoi",
+				"invoice_reference"
+			],
+			[
+				"inv",
+				"invoice_description	(local, instance)"
+			],
+			[
+				"stre",
+				"street2	(local, instance)"
+			],
+			[
+				"str",
+				"street2"
+			],
+			[
+				"ste",
+				"street1"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"FA",
+				"FACEBOOK_APP_SECRET	(global, instance)"
+			],
+			[
+				"ass",
+				"assertEquals	(attribute, instance)"
+			],
+			[
+				"GraA",
+				"GraphApi"
+			],
+			[
+				"fri",
+				"friends	(local, instance)"
+			],
+			[
+				"fb",
+				"fb_app_access_token	(local, instance)"
+			],
+			[
+				"url",
+				"urlopen(url, data, timeout)	(imported, function)"
+			],
+			[
+				"Fa",
+				"FACEBOOK_APP_SECRET	(global, instance)"
+			],
+			[
+				"F",
+				"FACEBOOK_APP_ID	(global, instance)"
+			],
+			[
+				"fb_to",
+				"fb_access_token"
+			],
+			[
+				"db",
+				"db_user	(local, instance)"
+			],
+			[
+				"new",
+				"newuser"
+			],
+			[
+				"remove",
+				"removeHover"
+			],
+			[
+				"remoe",
+				"removeHover"
+			],
+			[
+				"M",
+				"MultipartParam	(imported, instance)"
+			],
+			[
+				"image",
+				"image_lists	(local, instance)"
+			],
+			[
+				"AW",
+				"AWS_SECRET_ACCESS_KEY"
+			],
+			[
+				"File",
+				"fileName	(local, instance)"
+			],
+			[
+				"STAT",
+				"STATIC_URL"
+			],
+			[
+				"val",
+				"validate"
+			],
+			[
+				"su",
+				"submit"
+			],
+			[
+				"submit",
+				"submit_step"
+			],
+			[
+				"element",
+				"elementName"
+			],
+			[
+				"pad",
+				"padding-left"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"add",
+				"address_error"
+			],
+			[
+				"2-ad",
+				"id_2-address_1"
+			],
+			[
+				"ele",
+				"elementName"
+			],
+			[
+				"bor",
+				"border-left"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"STATI",
+				"STATIC_URL	(global, instance)"
+			],
+			[
+				"file",
+				"filePath	(local, instance)"
+			],
+			[
+				"se",
+				"session"
+			],
+			[
+				"set",
+				"settings	(imported, instance)"
+			],
+			[
+				"sett",
+				"settings"
+			],
+			[
+				"m",
+				"menuIndex"
+			],
+			[
+				"remo",
+				"removeClass"
+			],
+			[
+				"user",
+				"userProfileForm	(local, instance)"
+			],
+			[
+				"email",
+				"email_confirmation_token"
+			],
+			[
+				"insta",
+				"instance	(local, instance)"
+			],
+			[
+				"User",
+				"UserProfile	(global, class)"
+			],
+			[
+				"dispa",
+				"dispatch_uid"
+			],
+			[
+				"conf",
+				"confirms"
+			],
+			[
+				"chec",
+				"checked"
+			],
+			[
+				"check",
+				"checked"
+			],
+			[
+				"chan",
+				"changeStatus"
+			],
+			[
+				"sel",
+				"seller_agree"
+			],
+			[
+				"toggl",
+				"toggle_btn"
+			],
+			[
+				"conta",
+				"contact_us(request)	(global, function)"
+			],
+			[
+				"tre",
+				"treatment_devices(request)	(global, function)"
+			],
+			[
+				"T",
+				"TemplateView	(imported, instance)"
+			],
+			[
+				"AB",
+				"AboutMeet	(global, class)"
+			],
+			[
+				"TE",
+				"TEMPLATE_DIRS	(global, instance)"
+			],
+			[
+				"menu",
+				"menuIndex"
+			],
+			[
+				"v",
+				"visibility"
+			],
+			[
+				"vi",
+				"visible"
+			],
+			[
+				"mai",
+				"main_inc"
+			],
+			[
+				"conte",
+				"contentData"
+			],
+			[
+				"index",
+				"index_render"
+			],
+			[
+				"ma",
+				"main_inc"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 272.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/alex/sites/ewayapi/ewayapi.sublime-project",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapidapi/rapid.py",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapidapi/parser.py",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapid/views.py",
+		"/home/alex/.config/sublime-text-3/Packages/SublimeRope/README.markdown",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapid/forms.py",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/urls.py",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/settings.py",
+		"/home/alex/sites/ewayapi/conf/eWAY.Rapid3.0-PHP-SampleCode/Rapid3.0SampleCodePHP/default.php",
+		"/home/alex/sites/ewayapi/conf/eWAY.Rapid3.0-PHP-SampleCode/Rapid3.0SampleCodePHP/payment.php",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapid/templates/payment.html",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapid/templates/results.html",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/urls.py",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapid/templates/default.html",
+		"/home/alex/sites/ewayapi/conf/eWAY.Rapid3.0-PHP-SampleCode/Rapid3.0SampleCodePHP/results.php",
+		"/home/alex/sites/ewayapi/conf/eWAY.Rapid3.0-PHP-SampleCode/Rapid3.0SampleCodePHP/Rapid3.0.php",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/users/views.py",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapidapi/tests.py",
+		"/home/alex/sites/melody/melody/melody/main/views.py",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/templates/registration/registration_form1.html",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/settings.py",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/users/forms.py",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapid/tests.py",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/templates/registration/registration_form.html",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/forms.py",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/rapid/static/Styles/Site.css",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/templates/results.html",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/templates/payment.html",
+		"/home/alex/sites/ewayapi/rapidexample/rapidexample/templates/default.html",
+		"/home/alex/sites/ewayapi/.gitignore",
+		"/home/alex/sites/ewayapi/requirements.txt",
+		"/home/alex/test.scm",
+		"/home/alex/sites/onesocksite/public/js/coffee/portfoliorender.coffee",
+		"/home/alex/sites/onesocksite/public/js/coffee/portfolio_next.coffee",
+		"/home/alex/sites/onesocksite/views/index.jade",
+		"/home/alex/sites/onesocksite/views/main_inc.jade",
+		"/home/alex/sites/onesocksite/views/services.jade",
+		"/home/alex/sites/onesocksite/public/js/coffee/header.coffee",
+		"/home/alex/sites/onesocksite/views/basepages.jade",
+		"/home/alex/sites/onesocksite/views/main.jade",
+		"/home/alex/sites/onesocksite/templates.coffee",
+		"/home/alex/sites/onesocksite/compile.sh",
+		"/home/alex/sites/onesocksite/templates.js",
+		"/home/alex/sites/onesocksite/public/js/template/template.js",
+		"/home/alex/sites/onesocksite/.gitignore",
+		"/home/alex/learning/flaskFacebook/database.py",
+		"/home/alex/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/alex/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/alex/.config/sublime-text-3/Packages/SublimeJEDI/sublime_jedi.sublime-settings",
+		"/home/alex/.config/sublime-text-3/Packages/Djaneiro/Settings/Python (Django).sublime-settings",
+		"/home/alex/.config/sublime-text-3/Packages/GitGutter/GitGutter.sublime-settings",
+		"/home/alex/.config/sublime-text-3/Packages/SublimeJEDI/Default.sublime-keymap",
+		"/usr/lib/python2.7/genericpath.py",
+		"/home/alex/.config/sublime-text-3/Packages/Better CoffeeScript/CoffeeScript.sublime-settings",
+		"/home/alex/.config/sublime-text-3/Packages/User/CoffeeScript.sublime-settings",
+		"/home/alex/learning/flaskFacebook/flaskFacebook.sublime-project",
+		"/home/alex/asdasd.py",
+		"/home/alex/.config/sublime-text-3/Packages/User/Default.sublime-keymap",
+		"/home/alex/sites/monarchmarket/tmp",
+		"/home/alex/sites/monarchmarket/store/templates/base.html",
+		"/home/alex/sites/ewayapi/rapid.py",
+		"/home/alex/sites/ewayapi/tests.py",
+		"/home/alex/sites/ewayapi/use.txt",
+		"/home/alex/sites/ewayapi/parser.py",
+		"/home/alex/sites/ewayapi/testdata/json/create_access_code_request.py",
+		"/home/alex/sites/ewayapi/conf/python-eway/eway/tests/managed.py",
+		"/home/alex/sites/ewayapi/models.py",
+		"/home/alex/sites/ewayapi/testdata/json_pp_req.py",
+		"/home/alex/sites/chadmobileapp/app.py",
+		"/home/alex/sites/ewayapi/venv/lib/python2.7/site-packages/suds/client.py",
+		"/home/alex/sites/ewayapi/testdata/xml/create_access_code_request.xml",
+		"/home/alex/sites/ewayapi/venv/lib/python2.7/site-packages/suds/reader.py",
+		"/home/alex/sites/ewayapi/soap_log.txt",
+		"/home/alex/sites/ewayapi/testdata/json/process_payment_request.py",
+		"/home/alex/sites/chadmobileapp/venv/lib/python2.7/site-packages/facebook.py",
+		"/home/alex/sites/ewayapi/testdata/xml/create_access_code_response.xml",
+		"/home/alex/sites/ewayapi/tests_data/json_token_payment_request.py",
+		"/home/alex/sites/ewayapi/testdata/json_cac_req.py",
+		"/home/alex/sites/ewayapi/tests_data/json_cac_req.py",
+		"/home/alex/Загрузки/ExampleManaged.csv",
+		"/home/alex/sites/ewayapi/untitled",
+		"/home/alex/sites/ewayapi/tests_data/json_pp_req.py",
+		"/home/alex/sites/ewayapi/conf/e-way/e-way/rapidapi/rapidjson/__init__.py",
+		"/home/alex/sites/ewayapi/conf/e-way/e-way/rapidapi/accesscode.py",
+		"/home/alex/sites/ewayapi/conf/eWAY.Rapid3.0-PHP-SampleCode/Rapid3.0SampleCodePHP/config.ini",
+		"/home/alex/sites/ewayapi/test_data/json_pp_resp.py",
+		"/home/alex/sites/ewayapi/test_data/json_response.json",
+		"/home/alex/sites/ewayapi/test_data/json_request.py",
+		"/home/alex/sites/ewayapi/test_data/create_access_code/json_request.py",
+		"/home/alex/sites/chadmobileapp/tests.py",
+		"/home/alex/sites/ewayapi/cac_json_response.json",
+		"/home/alex/sites/ewayapi/cac_json_request.json",
+		"/home/alex/sites/ewayapi/conf/e-way/e-way/rapidapi/utils/dicttoxml.py",
+		"/home/alex/sites/ewayapi/conf/e-way/e-way/rapidapi/utils/xmltodict.py",
+		"/home/alex/sites/melody_bkp/melody/melody/urls.py",
+		"/home/alex/sites/melody_bkp/melody/manage.py",
+		"/home/alex/.config/sublime-text-3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+		"/home/alex/.config/sublime-text-3/Packages/User/Python (Django).sublime-settings",
+		"/home/alex/.config/sublime-text-3/Packages/Djaneiro/Settings/HTML (Django).sublime-settings",
+		"/home/alex/sites/monarchmarket/store/views/category.py",
+		"/home/alex/sites/monarchmarket/store/views/userstore.py",
+		"/home/alex/sites/monarchmarket/store/settings.py",
+		"/home/alex/Загрузки/b007.dump",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/templates/base.html",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/templates/registration/registration_form2.html",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/templates/registration/registration_form3.html",
+		"/home/alex/sites/selloncanvas/static/css/style.css",
+		"/home/alex/sites/chadmobileapp/helper.py",
+		"/home/alex/sites/monarchmarket/store/local_settings.py",
+		"/home/alex/sites/chadmobileapp/app2.py",
+		"/home/alex/sites/chadmobileapp/database.py",
+		"/home/alex/sites/chadmobileapp/user.py",
+		"/home/alex/learning/flaskFacebook/hello.py",
+		"/home/alex/sites/monarchmarket/store/templates/wishlist/friend_list.html",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/users/pipeline.py",
+		"/home/alex/learning/flaskFacebook/user.py",
+		"/home/alex/sites/selloncanvas/src/SellOnCanvas/users/models.py",
+		"/home/alex/learning/flaskFacebook/settings.py",
+		"/home/alex/sites/monarchmarket/store/script/auc_won.py",
+		"/home/alex/learning/flaskFacebook/schema.sql",
+		"/home/alex/sites/onesocksite/views/portfolio_content.jade",
+		"/home/alex/onesockteam-issues",
+		"/home/alex/sites/onesocksite/sass/mixins.sass",
+		"/home/alex/sites/onesocksite/views/portfolio.jade",
+		"/home/alex/sites/onesocksite/views/base.jade",
+		"/home/alex/sites/monarchmarket/store/views/models.py",
+		"/home/alex/sites/monarchmarket/store/templates/shop/store_settings.html",
+		"/home/alex/sites/monarchmarket/store/urls.py"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/home/alex/sites/ewayapi/",
+			"/home/alex/sites/ewayapi/venv/lib/python2.7/site-packages/suds",
+			"/home/alex/sites/ewayapi/conf/e-way/e-way/rapidapi",
+			"/home/alex/sites/ewayapi/conf/e-way",
+			"/home/alex/sites/ewayapi/conf/eWAY.Rapid3.0-PHP-SampleCode",
+			"<open folders>",
+			"/home/alex/sites/monarchmarket/venv/lib/python2.7/site-packages/boto",
+			"/home/alex/sites/monarchmarket/store",
+			"/home/alex/sites/selloncanvas/src/SellOnCanvas/templates",
+			"/home/alex/sites/selloncanvas",
+			"/home/alex/sites/melody/melody/melody/main/templates",
+			"/home/alex/sites/onesocksite",
+			"/home/alex/sites/onesocksite/sass",
+			"/home/alex/sites/onesocksite/views",
+			"/home/alex/sites/selloncanvas/venv/lib/python2.7/site-packages/notification",
+			"/home/alex/sites/selloncanvas/src/SellOnCanvas",
+			"/home/alex/sites/selloncanvas/src/SellOnCanvas/",
+			"/home/alex/sites/selloncanvas/src/SellOnCanvas/templates/canvas",
+			"/home/alex/sites/monarchmarket/store",
+			"/home/alex/sites/monarchmarket/store/payment/templates/shop/checkout",
+			"/home/alex/sites/monarchmarket/store/payment/templates",
+			"/home/alex/sites/monarchmarket/store/payment",
+			"/home/alex/sites/monarchmarket/store",
+			"<open folders>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"JSON",
+			"?>",
+			"<?php echo",
+			"PostToRapidAPI",
+			"AccessCode",
+			"payment",
+			"render",
+			"?>",
+			"<?php echo $Response->Customer->",
+			"$Response",
+			"session",
+			"# $request->Payment->",
+			" = ",
+			"$_POST['",
+			"];",
+			";",
+			" = ",
+			"method",
+			"Images",
+			"images",
+			"Images",
+			"top",
+			"\n    ",
+			"renderStateContent",
+			"removeHover()",
+			"jade.template",
+			"')\n",
+			"f1",
+			"win",
+			"toggle",
+			"indent",
+			"ctrl+[",
+			"ctrl+shift+f",
+			"catego",
+			"sandbox.",
+			"REST",
+			"Obj2JSONRPC",
+			"JSONRPC",
+			"xmlrpc_encode_request(",
+			"GetAcce",
+			"class Customer",
+			"Customer",
+			"Card",
+			"self",
+			"send",
+			"def service",
+			"service",
+			"CreateAccessCodeSOAP",
+			"Obj2ARRAY",
+			"getArra",
+			"({'",
+			"type",
+			"json.loads",
+			"json.dumps",
+			"function get_object_vars",
+			"var_dump",
+			"Parser",
+			"Update",
+			",",
+			" = ",
+			"request",
+			",",
+			"None",
+			",",
+			"CreateAccessCodeRequest",
+			"Payment",
+			"Parser",
+			"class APIConfig",
+			"APIConfig",
+			"category",
+			"include",
+			".address_error",
+			"id=\"triang",
+			"id=\"tdError\"",
+			"tdErr",
+			"147px",
+			"#FormError",
+			"#triang",
+			"#tdField",
+			"#tdError",
+			"id=\"tdError\"",
+			"OAuthRemoteApp",
+			"remote_app",
+			"GraphAPIError",
+			"get_facebook_oauth_token",
+			"GraphAPIError",
+			"request_token_params",
+			": ",
+			")",
+			" = ",
+			"newuser.",
+			"renderStateContent",
+			"index_render",
+			"settings.",
+			"connect",
+			"image_upload",
+			"alert(",
+			"this_server_error",
+			"500.html",
+			"main.css",
+			"There was an error with the store",
+			"There was an error with the store. The admin has been notified.",
+			"alert",
+			"complain(",
+			"complain",
+			"is improperly configured",
+			"store.settings",
+			"left: -2",
+			"Right",
+			"left: -",
+			".FormLeft",
+			".regfrom #content2 .FormLeft",
+			"NewUserFormErrorContainer",
+			"FormError",
+			"#worker",
+			"worker",
+			"edit",
+			"There was an error with the store. The admin has been notified.",
+			"worker",
+			"worker.qu",
+			"image_upload",
+			"    \nimage_upload",
+			"fb_access_token",
+			"worker.que",
+			"image_uplo",
+			"facebook",
+			"urllib",
+			"image_upload"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"XML",
+			" }}",
+			"{{ ",
+			" }}",
+			"{{ ",
+			"'",
+			"': ",
+			": ",
+			"data.get('",
+			"),",
+			",",
+			": ",
+			"{{ STATIC_URL }}Images",
+			"Images",
+			"{{ STATIC_URL }}images",
+			"",
+			"customer",
+			"loads",
+			"dumps",
+			"__var_dump__",
+			")",
+			" = data.get(",
+			"='',",
+			"=''",
+			"''",
+			"=None,",
+			"class=\"triang",
+			"class=\"tdError\"",
+			".FormError",
+			".triang",
+			".tdField",
+			".tdError",
+			"class=\"tdError\"",
+			"=",
+			": ",
+			"",
+			"Left",
+			"instance",
+			"user_profile",
+			"' %}",
+			"src=\"{{ STATIC_URL }}i",
+			"/about/",
+			"",
+			"BASE_DIR",
+			"renderStateContent",
+			"'",
+			"css",
+			"user",
+			"response"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"view",
+				"rapidexample/rapidexample/rapid/views.py"
+			],
+			[
+				"models",
+				"rapidapi/models.py"
+			],
+			[
+				"form",
+				"rapidexample/rapidexample/rapid/forms.py"
+			],
+			[
+				"tests",
+				"rapidapi/tests.py"
+			],
+			[
+				"result",
+				"rapidexample/rapidexample/rapid/templates/results.html"
+			],
+			[
+				"ra",
+				"conf/eWAY.Rapid3.0-PHP-SampleCode/Rapid3.0SampleCodePHP/Rapid3.0.php"
+			],
+			[
+				"rapid",
+				"conf/eWAY.Rapid3.0-PHP-SampleCode/Rapid3.0SampleCodePHP/Rapid3.0.php"
+			],
+			[
+				"def",
+				"rapidexample/rapidexample/rapid/templates/default.html"
+			],
+			[
+				"payment",
+				"rapidexample/rapidexample/rapid/templates/payment.html"
+			],
+			[
+				"default",
+				"conf/eWAY.Rapid3.0-PHP-SampleCode/Rapid3.0SampleCodePHP/default.php"
+			],
+			[
+				"test",
+				"rapidexample/rapidexample/rapidapi/tests.py"
+			],
+			[
+				"default.html",
+				"rapidexample/rapidexample/rapid/templates/default.html"
+			],
+			[
+				"sett",
+				"rapidexample/rapidexample/settings.py"
+			],
+			[
+				"style.css",
+				"rapidexample/rapidexample/rapid/static/Styles/Site.css"
+			],
+			[
+				"next",
+				"public/js/coffee/portfolio_next.coffee"
+			],
+			[
+				"head",
+				"public/js/coffee/header.coffee"
+			],
+			[
+				".coffee",
+				"public/js/coffee/portfolio_next.coffee"
+			],
+			[
+				"com",
+				"compile.sh"
+			],
+			[
+				"base",
+				"views/basepages.jade"
+			],
+			[
+				"templa",
+				"templates.coffee"
+			],
+			[
+				"temla",
+				"public/js/template/template.js"
+			],
+			[
+				"comp",
+				"compile.sh"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 250.0,
+	"status_bar_visible": true
+}

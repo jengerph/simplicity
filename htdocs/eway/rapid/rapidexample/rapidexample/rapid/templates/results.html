@@ -1,0 +1,111 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title></title>
+    <link href="{{ STATIC_URL }}Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}Styles/jquery-ui-1.8.11.custom.css" rel="stylesheet" type="text/css" />
+    <script src="{{ STATIC_URL }}Scripts/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}Scripts/jquery-ui-1.8.11.custom.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}Scripts/jquery.ui.datepicker-en-GB.js" type="text/javascript"></script>
+</head>
+<body>
+
+        <center>
+        <div id="outer">
+            <div id="toplinks">
+                <img alt="eWAY Logo" class="logo" src="{{ STATIC_URL }}Images/companylogo.gif" width="960px" height="65px" />
+            </div>
+            <div id="main">
+
+<div id="titlearea">
+    <h2>
+        Sample Response
+    </h2>
+</div>
+    <div id="maincontent">
+        <div class="response">
+            <div class="fields">
+                <label for="lblAccessCode">
+                    Access Code</label>
+                <label id="lblAccessCode">{{ AccessCode }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblAuthorisationCode">
+                    Authorisation Code</label>
+                <label id="lblAuthorisationCode">{{ AuthorisationCode }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblInvoiceNumber">
+                    Invoice Number</label>
+                <label id="lblInvoiceNumber">{{ InvoiceNumber }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblInvoiceReference">
+                    Invoice Reference</label>
+                <label id="lblInvoiceReference">{{ InvoiceReference }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblOption1">
+                    Option1</label>
+                <label id="lblOption1">{{ Option1 }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblOption2">
+                    Option2</label>
+                <label id="lblOption2">{{ Option2 }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblOption3">
+                    Option3</label>
+                <label id="lblOption3">{{ Option3 }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblResponseCode">
+                    Response Code</label>
+                <label id="lblResponseCode">{{ ResponseCode }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblResponseMessage">
+                    Response Message</label>
+                <label id="lblResponseMessage">
+                    {{ ResponseMessage }}
+                </label>
+            </div>
+            <div class="fields">
+                <label for="lblTokenCustomerID">
+                    TokenCustomerID
+                </label>
+                <label id="lblTokenCustomerID">{{ TokenCustomerID }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblTotalAmount">
+                    Total Amount</label>
+                <label id="lblTotalAmount">{{ TotalAmount }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblTransactionID">
+                    TransactionID</label>
+                <label id="lblTransactionID">{{ TransactionID }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblTransactionStatus">
+                    Transaction Status</label>
+                <label id="lblTransactionStatus"> {{ TransactionStatus }}</label>
+            </div>
+            <div class="fields">
+                <label for="lblBeagleScore">
+                    Beagle Score</label>
+                <label id="lblBeagleScore"> {{ BeagleScore }}</label>
+            </div>
+        </div>
+    </div>
+
+        <br />
+        <br />
+        <a href="/">[Start Over]</a>
+
+    </center>
+
+</body>
+</html>

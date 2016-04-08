@@ -1,0 +1,223 @@
+<link rel="stylesheet" href="/templates/jquery-ui.css">
+  <script src="/templates/jquery-1.10.2.js"></script>
+  <script src="/templates/jquery-ui.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#ar_birthdate").datepicker({
+      numberOfMonths: 2,
+      dateFormat: "dd/mm/yy",
+      onSelect: function(selected) {
+        $("#ar_birthdate").datepicker("option","maxDate", new Date());
+        document.form.submit.click();
+      }
+  });
+});
+</script>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+.wizard > .content {
+min-height: 0;
+}
+.wizard > .content > .body {
+height: auto;
+}
+p{
+  margin: 0;
+}
+</style>
+<body topmargin="0">
+<h2><span class="bodytext">Add Authorised Representative: </span></h2>
+<p>[ <a href="/base/manage/customers/edit/auth_rep/?customer_id={CUSTOMER_ID}">Back to Authorised Representatives</a> ]</p>
+<!-- <p><a href="/base/manage/customers/edit/?customer_id={CUSTOMER_ID}">Back to Edit User</a></p> -->
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000"><span id="error"></span></font></p>
+<!-- <form action="{SELF}?customer_id={CUSTOMER_ID}" method="post" enctype="multipart/form-data"> -->
+<form name="example-form" id="example-form" action="{SELF}?customer_id={CUSTOMER_ID}" method="post" enctype="multipart/form-data">
+    <div>
+        <h3>Basic Information</h3>
+        <section>
+            <div><div style="display:inline-block;width:110px;">Title </div>
+            <div style="display:inline-block">
+              <select name="ar_title" id="ar_title">
+                <option value="MR" {AR_TITLE_MR}>Mr.</option>
+                <option value="MRS" {AR_TITLE_MRS}>Mrs.</option>
+                <option value="MS" {AR_TITLE_MS}>Ms.</option>
+                <option value="MISS" {AR_TITLE_MISS}>Miss</option>
+              </select>
+            </div></div>
+
+            <div><div style="display:inline-block;width:110px;">First Name *</div>
+            <div style="display:inline-block"><p><input name="ar_first_name" type="text" id="ar_first_name" value="{AR_FIRST_NAME}" required style="display: inline-block;"></p></div></div>
+      
+      
+            <div><div style="display:inline-block;width:110px;">Middle Name *</div>
+            <div style="display:inline-block"><p><input name="ar_mid_name" type="text" id="ar_mid_name" value="{AR_MID_NAME}" required style="display: inline-block;"></p></div></div>
+      
+      
+            <div><div style="display:inline-block;width:110px;">Surname *</div>
+            <div style="display:inline-block"><p><input name="ar_surname" type="text" id="ar_surname" value="{AR_SURNAME}" required style="display: inline-block;"></p></div></div>
+      
+      
+            <div><div style="display:inline-block;width:110px;">Date of Birth *</div>
+            <div style="display:inline-block"><p><input name="ar_birthdate" type="text" id="ar_birthdate" value="{AR_BIRTHDATE}" placeholder="DD/MM/YY" required style="display: inline-block;"></p></div></div>
+      
+      
+            <div><div style="display:inline-block;width:110px;">Position *</div>
+            <div style="display:inline-block"><p><input name="ar_position" type="text" id="ar_position" value="{AR_POSITION}" required style="display: inline-block;"></p></div></div>
+      
+      
+            <div><div style="display:inline-block;width:110px;">Email *</div>
+            <div style="display:inline-block"><p><input name="ar_email" type="text" id="ar_email" value="{AR_EMAIL}" required style="display: inline-block;"></p></div></div>
+      
+      
+            <div><div style="display:inline-block;width:110px;">Contact Number *</div>
+            <div style="display:inline-block"><p><input name="ar_contact_number" type="text" id="ar_contact_number" value="{AR_CONTACT_NUMBER}" required style="display: inline-block;"></p></div></div>
+            <p>(*) Mandatory</p>
+        </section>
+        {PRIMARY_ID_SECTION}
+        {SECONDARY_ID_SECTION}
+    </div>
+<input name="submit" type="submit" id="submit" value="Save Authorised Representative" hidden>
+</form>
+<script src="/templates/jquery.validate.js"></script> 
+<script src="/templates/jquery.steps.js"></script> 
+<script type="text/javascript">
+
+var require_download = "{REQUIRE_DONWLOAD}";
+
+var form = $("#example-form");
+
+form.children("div").steps({
+    headerTag: "h3",
+    bodyTag: "section",
+    transitionEffect: "slideLeft",
+    onStepChanging: function (event, currentIndex, newIndex)
+    {
+        if ( currentIndex > newIndex ) {
+          return true;
+        } else {
+          form.validate().settings.ignore = ":disabled,:hidden";
+          return form.valid();
+        }
+    },
+    onFinishing: function (event, currentIndex)
+    { 
+        form.validate().settings.ignore = ":disabled";
+        return form.valid();
+    },
+    onFinished: function (event, currentIndex)
+    {
+        if ( $("#ar_primary_id").length >= 1 ) {
+          var primary_id = document.getElementById("ar_primary_id").value;
+          // var secondary_ids = document.getElementById("ar_secondary_list_").value;
+          var secondary_ids = document.querySelectorAll('select[name^="ar_secondary_list_"]');
+
+          var secondary = {};
+
+          for(var i = 0, l = secondary_ids.length; i < l; i++) {
+            secondary[secondary_ids[i].id] = secondary_ids[i].value;
+          }
+
+          var postData = {
+              primary_id
+          };
+          $.extend(postData, postData, secondary);
+          $.post("eval_points.php",postData,function(data){
+            if ( data < 100 ) {
+              return false;
+            } else {
+              document.getElementById("submit").click();
+              return true;
+            }
+          });
+        } else { 
+          document.getElementById("submit").click();
+          return true;
+        }
+    }
+});
+
+function evaluate_points(){
+  // alert('return sent');
+  var primary_id = document.getElementById("ar_primary_id").value;
+  // var secondary_ids = document.getElementById("ar_secondary_list_").value;
+  var secondary_ids = document.querySelectorAll('select[name^="ar_secondary_list_"]');
+
+  var secondary = {};
+
+  for(var i = 0, l = secondary_ids.length; i < l; i++) {
+    secondary[secondary_ids[i].id] = secondary_ids[i].value;
+  }
+
+  var postData = {
+      primary_id
+  };
+  $.extend(postData, postData, secondary);
+
+  $.post("eval_points.php",postData,function(data){
+    if ( data < 100 ) {
+      // alert("Points too low. " + data);
+      document.getElementById("error").innerHTML = "Points must be 100 or more. Your points: " + data;
+    } else {
+      document.getElementById("error").innerHTML = "";
+    }
+  })
+}
+
+function add_file(sender){
+
+  var number = $(sender).data("counter");
+  var pre = document.createElement("span");
+  pre.innerHTML="<br/>"+(parseInt(number)+1)+".";
+
+  //select
+  var secondary_id = document.querySelector("#ar_secondary_list_"+number);
+  var secondary_value = document.querySelector("#ar_secondary_list_"+number).value;
+
+  var sec_id = secondary_id.cloneNode(true);
+  sec_id.required=true;
+  var node = document.querySelector("#file_list");
+
+  pre.appendChild(sec_id);
+
+  //input
+  var secondary_num_id = document.querySelector("#ar_secondary_id_number_"+number);
+  var secondary_num_value = document.querySelector("#ar_secondary_id_number_"+number).value;
+
+  var sec_num_id = secondary_num_id.cloneNode(true);
+  sec_num_id.required=true;
+
+  pre.appendChild(sec_num_id);
+
+  //file
+  if ( require_download == "yes" ) {
+    var file = document.createElement("input");
+    file.type = "file";
+    file.name = "ar_s_attachment_"+number;
+    file.id = "ar_s_attachment_"+number;
+    file.setAttribute("style","display:inline-block;");
+    file.required=true;
+    // var secondary_file_id = document.querySelector("#ar_s_attachment_"+number);
+    // var secondary_file_value = document.querySelector("#ar_s_attachment_"+number).value;
+
+    // var sec_file_id = secondary_file_id.cloneNode(true);
+    // sec_file_id.required=true;
+
+    pre.appendChild(file);
+  }
+
+  node.appendChild(pre);
+
+  document.querySelectorAll("#ar_secondary_list_"+number)[0].id="ar_secondary_list_"+(parseInt(number) + 1);
+  document.querySelectorAll("select[name='ar_secondary_list_"+number+"']")[0].name="ar_secondary_list_"+(parseInt(number) + 1);
+  document.querySelector("#ar_secondary_list_"+number).value=secondary_value;
+  document.querySelectorAll("#ar_secondary_id_number_"+number)[0].id="ar_secondary_id_number_"+(parseInt(number) + 1);
+  document.querySelectorAll("input[name='ar_secondary_id_number_"+number+"']")[0].name="ar_secondary_id_number_"+(parseInt(number) + 1);
+  // document.querySelectorAll("#ar_s_attachment_"+number)[0].id="ar_s_attachment_"+(parseInt(number) + 1);
+  // document.querySelector("#add_file_btn").value= parseInt(number) + 1;
+  $("#add_file_link").data("counter",parseInt(number) + 1);
+
+}
+</script>

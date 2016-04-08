@@ -1,0 +1,19 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Add Once-Off Billing: </span></h2>
+<p>{BACK_LINK}</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red">{ERROR_MSG}</font></p>
+<form action="{SELF}?service_id={SERVICE_ID}" method="post" name="form">
+<p>Description:<input type="text" name="description" id="description" value="{DESCRIPTION}" /></p>
+{UNIT_AMOUNT}
+<p>GST: <input type="radio" name="gst" id="gst" value="yes" {GST_YES}/> Yes <input type="radio" name="gst" id="gst" value="no" {GST_NO}/> No</p>
+<p>Quantity:<input type="text" name="qty" id="qty" value="{QTY}" /></p>
+<p>Item Type:
+	{ITEM_TYPE}
+</p>
+<p><input name="submit" type="submit" id="submit" value="Submit"></p>
+</form>

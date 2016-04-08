@@ -1,0 +1,319 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// calls_cost.class - Class for accessing calls_cost details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "user.class";
+
+class calls_cost {
+
+  var $ir_id;
+  var $wholesaler_id;
+  var $band;
+  var $cost;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+  /* function calls_cost() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function calls_cost() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    if (!$this->ir_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->ir_id) {
+      
+      $query = "SELECT * FROM calls_cost WHERE ir_id = " . $this->db->quote($this->ir_id);
+      $query .= " AND wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+      $query .= " AND band = " . $this->db->quote($this->band);
+      $query .= " LIMIT 1";
+      
+      $result = $this->db->execute_query($query);
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+         if ( $row ) { 
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+          }
+        }
+      }    
+    }
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - service_type exists
+  ** 0 - service_type does not exist
+  ** 
+  */
+  function exist() {
+  
+    // Check we have an user
+    if (!$this->ir_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT ir_id FROM calls_cost WHERE ir_id = " . $this->db->quote($this->ir_id);
+    $query .= " AND wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    $query .= " AND band = " . $this->db->quote($this->band);
+    $query .= " LIMIT 1";
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (calls_cost::validate()) {
+    
+      return 0;
+      
+    }
+
+
+    $calls_cost = new calls_cost();
+
+    // Create the property search
+    $query = "INSERT INTO calls_cost (ir_id, wholesaler_id, band, cost)";
+    $query .= " VALUES (" . $this->db->quote($this->ir_id) . "," . $this->db->quote($this->wholesaler_id) . "," . $this->db->quote($this->band) . "," . $this->db->quote($this->cost) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+
+      $this->load();
+      
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"calls_cost",$this->ir_id);
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    if ( !$this->ir_id ) {
+      return 290;
+    }
+
+    if ( !$this->wholesaler_id ) {
+      return 100;
+    }
+
+    if ( !$this->band ) {
+      return 291;
+    }
+
+    // if (!$this->cost ) {
+    //   return ;
+    // }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+   /* function get_cost()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of cost with correpsonding details
+  ** 
+  */
+
+  function get_cost(){
+      $a = array();
+
+      $query = "SELECT * FROM calls_cost WHERE ir_id=" . $this->db->quote($this->ir_id);
+      $query .= " AND wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+      $query .= " AND band = " . $this->db->quote($this->band);
+      $query .= " LIMIT 1";
+
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function delete()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of services with correpsonding details
+  ** 
+  */
+
+  function delete(){
+
+    // Prepare the query
+    $query = "DELETE FROM calls_cost WHERE ir_id = " . $this->db->quote($this->ir_id);
+    $query .= " AND wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    $query .= " AND band = " . $this->db->quote($this->band);
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+    return 1;
+    }
+
+  }
+
+}
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/CustomerReference.xsd" />
+    <xsd:include schemaLocation="elements/QualificationID.xsd" />
+    <xsd:include schemaLocation="SiteContactDetails.xsd" />
+    <xsd:include schemaLocation="ServiceDetails.xsd" />
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/NbnLocationID.xsd" />
+
+    <xsd:element name="NewServiceRequest" type="wsg:NewServiceRequest" />
+
+    <xsd:complexType name="NewServiceRequest">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerReference" type="wsg:CustomerReference">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A customer assigned unique identifier for each Service instance requested</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="qualificationID" type="wsg:QualificationID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for the qualification performed for this order</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="nbnLocationID" type="wsg:NbnLocationID">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">An NBN assigned unique ID for the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:element name="siteContactDetails" type="wsg:SiteContactDetails">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details pertaining to site contacts</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceDetails" type="wsg:ServiceDetails">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details pertaining to the product</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

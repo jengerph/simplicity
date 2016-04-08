@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="RadiusEntryDetails.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+
+    <xsd:element name="RadiusEntryQueryRequest" type="wsg:RadiusEntryQueryRequest" />
+
+    <xsd:complexType name="RadiusEntryQueryRequest">
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="radiusEntryDetails" type="wsg:RadiusEntryDetails" />
+                <xsd:element name="serviceOrderId" type="wsg:ServiceID" />
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

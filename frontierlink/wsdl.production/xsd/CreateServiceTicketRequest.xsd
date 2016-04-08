@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/CaseDetails.xsd" />
+    <xsd:include schemaLocation="elements/CustomerReference.xsd" />
+    <xsd:include schemaLocation="TicketContact.xsd" />
+    <xsd:include schemaLocation="TicketSymptom.xsd" />
+    <xsd:include schemaLocation="Attachment.xsd" />
+
+    <xsd:element name="CreateServiceTicketRequest" type="wsg:CreateServiceTicketRequest" />
+
+    <xsd:complexType name="CreateServiceTicketRequest">
+        <xsd:sequence>
+            <xsd:element name="serviceOrderID" type="wsg:ServiceID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each service order</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ticketNotes" type="wsg:CaseDetails" minOccurs="0" />
+            <xsd:element name="attachment" type="wsg:Attachment" minOccurs="0" />
+            <xsd:element name="customerReference" type="wsg:CustomerReference" minOccurs="0" />
+            <xsd:element name="ticketContact" type="wsg:TicketContact" />
+            <xsd:element name="siteContact" type="wsg:TicketContact" minOccurs="0" />
+            <xsd:element name="ticketSymptom" type="wsg:TicketSymptom" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

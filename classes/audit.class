@@ -1,0 +1,690 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// audit.class - Class for accessing audit details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "user.class";
+include_once "service_types.class";
+
+class audit {
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function audit() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function audit() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+    
+    $this->active = 'yes';
+
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->username = strtoupper($this->username);
+
+    if (!$this->username) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->username) {
+      
+      $query = "SELECT * FROM audit WHERE username = " . $this->db->quote($this->username);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        while ($cel = each($row)) {
+
+          $key = $cel['key'];
+          
+          $this->{$key} = $cel['value'];
+          
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->username = $this->username;
+
+    $user = new user();
+    $user->username = $this->username;
+    $user->load();
+
+    if ( !$user->username ) {
+
+      return 1;
+
+    }
+    
+    
+    $query = "SELECT username FROM audit WHERE username = " . $this->db->quote($this->username);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+  
+    // Validate
+    if (audit::validate()) {
+      return 0;
+      
+    }
+    
+    // Create the property search
+    $query = "INSERT INTO audit (username, dt, ip, hostname, object, id, field, activity)";
+    $query .= " VALUES (" . $this->db->quote($this->username) . ",NOW()," . $this->db->quote($this->ip) . "," . $this->db->quote($this->hostname) . "," . $this->db->quote($this->object) . "," . $this->db->quote($this->id) . "," . $this->db->quote($this->field) .  "," . $this->db->quote($this->activity) .")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+      
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+    
+    if ( !$this->username ) {
+
+      return 1;
+
+    }
+
+    if ( !$this->object ) {
+
+      return 110;
+
+    }
+
+    if ( !$this->id ) {
+
+      return 111;
+
+    }
+
+    if ( !$this->activity ) {
+
+      return 112;
+
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+ /* function get_audit()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of audit details with correpsonding details for a certain username
+  ** 
+  */
+
+  function get_audit($start,$end,$sort){
+      
+      if ( !$this->username ) {
+
+        return 1;
+
+      }
+
+      $a = array();
+
+      $query = "SELECT * FROM audit WHERE username = " . $this->db->quote($this->username) . "ORDER BY dt " . $sort . " LIMIT " . $start . ", " . $end;
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+ /* function get_num_audit()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of audit details with correpsonding details for a certain username
+  ** 
+  */
+
+  function get_num_audit($username){
+
+      
+      if ( $username == "view_all" ) {
+        $query = "SELECT * FROM audit ";
+      } else {
+        $query = "SELECT * FROM audit WHERE username = " . $this->db->quote($this->username);
+      }
+      $result = $this->db->execute_query($query);
+    return mysql_num_rows($result);
+
+  }
+
+ /* function get_all_sort()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of audit details that are sorted by newest/oldest
+  ** 
+  */
+
+  function get_all_sort($sort){
+
+      $a = array();
+
+      $query = "SELECT * FROM audit ORDER BY dt " . $sort;
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_all()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all audit details in the table
+  ** 
+  */
+
+  function get_all($start,$end,$username,$sort){
+
+      $a = array();
+      
+      
+      if ( $username == "view_all" ) {
+        $query = "SELECT * FROM audit ORDER BY dt " . $sort . " LIMIT " . $start . ", 10 ";
+      } else {
+        $query = "SELECT * FROM audit WHERE username = " . $this->db->quote($username) . " ORDER BY dt " . $sort . " LIMIT " . $start . ", 10 ";
+      }
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_all_users()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all audit details in the table
+  ** 
+  */
+
+  function get_all_users(){
+
+      $a = array();
+      
+      $query = "SELECT DISTINCT username FROM audit ";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function store_changes()
+  **
+  ** DESCRIPTION: updates the audit table with the changes made by the user
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - none
+  ** 
+  */
+
+  function store_changes( $keys, $prev, $new , $object, $id){
+
+        for ( $x = 0; $x < count($keys); $x++ ) {
+          if ( $keys[$x] != "photo" ) {
+            if ( $new->{$keys[$x]} != $prev->{$keys[$x]} ) {
+              $activity = "Changed value " . $prev->{$keys[$x]} . " to " . $new->{$keys[$x]};
+
+              //Create audit trail
+              $audit = new audit();
+              $audit->username = $_SESSION['username'];
+              $audit->object = $object;
+              $audit->id = $id;
+              $audit->ip = $_SESSION['ip'];
+              $audit->hostname = $_SERVER["SERVER_NAME"];
+              $audit->field = $keys[$x];
+              $audit->activity = $activity;
+              $audit->create();
+            }
+          }
+        }
+    return 0;
+  }
+
+   /* function store_first_changes()
+  **
+  ** DESCRIPTION: updates the audit table with the changes made by the user
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - none
+  ** 
+  */
+
+  function store_first_changes($keys, $new , $object, $id){
+
+        for ($a=0; $a < count($keys); $a++) { 
+          if ( $new->{$keys[$a]} !="" ) {
+              $activity = "Changed value to " . $new->{$keys[$a]};
+
+              //Create audit trail
+              $audit = new audit();
+              $audit->username = $_SESSION['username'];
+              $audit->object = $object;
+              $audit->id = $id;
+              $audit->ip = $_SESSION['ip'];
+              $audit->hostname = $_SERVER["SERVER_NAME"];
+              $audit->field = $keys[$a];
+              $audit->activity = $activity;
+              $audit->create();
+
+          }
+        }
+
+    return 0;
+  }
+
+   /* function store_changes_wst()
+  **
+  ** DESCRIPTION: updates the audit table 
+  ** with the changes made by the user for wholesaler_service_types
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - none
+  ** 
+  */
+
+  function store_changes_wst($activity){
+
+        $service = new service_types();
+        $service->type_id = $this->type_id;
+        $service->load();
+
+        $activity = $activity . " service type " . $service->description;
+
+        //Create audit trail
+        $audit = new audit();
+        $audit->username = $_SESSION['username'];
+        $audit->object = "wholesalers_service_types";
+        $audit->id = $this->wholesaler_id;
+        $audit->ip = $_SESSION['ip'];
+        $audit->hostname = $_SERVER["SERVER_NAME"];
+        $audit->field = "service_type";
+        $audit->activity = $activity;
+        $audit->create();
+
+    return 0;
+  }
+
+   /* function store_changes_pa()
+  **
+  ** DESCRIPTION: updates the audit table 
+  ** with the changes made by the user for plan_attributes
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - none
+  ** 
+  */
+
+  function store_changes_pa(){
+
+        $activity = "Added new plan attribute value " . $this->value;
+
+        //Create audit trail
+        $audit = new audit();
+        $audit->username = $_SESSION['username'];
+        $audit->object = "plan_attributes";
+        $audit->id = $this->plan_id;
+        $audit->ip = $_SESSION['ip'];
+        $audit->hostname = $_SERVER["SERVER_NAME"];
+        $audit->field = $this->param;
+        $audit->activity = $activity;
+        $audit->create();
+
+    return 0;
+  }
+
+   /* function store_first_changes_attributes() //do not remove
+  **
+  ** DESCRIPTION: updates the audit table 
+  ** with the changes made by the user for plan_attributes
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - none
+  ** 
+  */
+
+  function store_first_changes_attributes($object){
+        $activity = "Added new order attribute " . $this->param . " with value " . $this->value;
+
+        //Create audit trail
+        $audit = new audit();
+        $audit->username = $_SESSION['username'];
+        $audit->object = $object;
+        $audit->id = $this->order_id;
+        $audit->ip = $_SESSION['ip'];
+        $audit->hostname = $_SERVER["SERVER_NAME"];
+        $audit->field = $this->param;
+        $audit->activity = $activity;
+        $audit->create();
+
+    return 0;
+  }
+
+   /* function store_changes_attributes()
+  **
+  ** DESCRIPTION: updates the audit table 
+  ** with the changes made by the user for plan_attributes
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - none
+  ** 
+  */
+
+  function store_changes_attributes($old,$object){
+
+        if ( $this->value != $old->value && $this->param == $old->param ) {
+          $activity = "Changed order attribute " . $this->param . " with value from " . $old->value. " to " . $this->value;
+          //Create audit trail
+          $audit = new audit();
+          $audit->username = $_SESSION['username'];
+          $audit->object = $object;
+          $audit->id = $this->order_id;
+          $audit->ip = $_SESSION['ip'];
+          $audit->hostname = $_SERVER["SERVER_NAME"];
+          $audit->field = $this->param;
+          $audit->activity = $activity;
+          $audit->create();
+        }
+
+    return 0;
+  }
+
+   /* function store_deletion()
+  **
+  ** DESCRIPTION: updates the audit table 
+  ** with the changes made by the user for plan_attributes
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - none
+  ** 
+  */
+
+  function store_deletion($id){
+
+          $activity = "Deleted " . $this->param;
+          //Create audit trail
+          $audit = new audit();
+          $audit->username = $_SESSION['username'];
+          $audit->object = $object;
+          $audit->id = $id;
+          $audit->ip = $_SESSION['ip'];
+          $audit->hostname = $_SERVER["SERVER_NAME"];
+          $audit->field = $this->param;
+          $audit->activity = $activity;
+          $audit->create();
+
+    return 0;
+  }
+
+   /* function pending_change_of_plan()
+  **
+  ** DESCRIPTION: updates the audit table 
+  ** with the changes made by the user for plan_attributes
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - none
+  ** 
+  */
+
+  function pending_change_of_plan($old){
+
+          $activity = "Ordered change of plan from plan_id = " . $old->value . " to " . $this->value;
+          //Create audit trail
+          $audit = new audit();
+          $audit->username = $_SESSION['username'];
+          $audit->object = "orders";
+          $audit->id = $id;
+          $audit->ip = $_SESSION['ip'];
+          $audit->hostname = $_SERVER["SERVER_NAME"];
+          $audit->field = $this->param;
+          $audit->activity = $activity;
+          $audit->create();
+
+    return 0;
+  }
+
+ /* function for_download()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of audit details that are sorted by newest/oldest
+  ** 
+  */
+
+  function for_download($username,$sort){
+
+      $a = array();
+
+      $query = "SELECT * FROM audit WHERE username = " . $this->db->quote($username) . " ORDER BY dt " . $sort;
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+}
+

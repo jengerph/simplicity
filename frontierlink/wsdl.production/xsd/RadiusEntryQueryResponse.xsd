@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="RateLimitSpecification.xsd" />
+
+    <xsd:element name="RadiusEntryQueryResponse" type="wsg:RadiusEntryQueryResponse" />
+
+    <xsd:complexType name="RadiusEntryQueryResponse">
+        <xsd:sequence>
+            <xsd:element name="userStatus" type="xsd:string" />
+            <xsd:element name="rateLimitDetails" type="wsg:RateLimitSpecification" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

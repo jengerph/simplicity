@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="IntervalUOM">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">Represent Unit Of Measure for Measuring time intervals</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="msec" />
+            <xsd:enumeration value="sec" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

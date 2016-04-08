@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="RateLimitSpecification.xsd" />
+    <xsd:include schemaLocation="RadiusEntry.xsd" />
+    <xsd:include schemaLocation="RadiusEntryDetails.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+
+    <xsd:element name="RadiusEntryUpdateRequest" type="wsg:RadiusEntryUpdateRequest" />
+
+    <xsd:complexType name="RadiusEntryUpdateRequest">
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="radiusEntryDetails" type="wsg:RadiusEntryDetails" />
+                <xsd:element name="serviceOrderId" type="wsg:ServiceID" />
+            </xsd:choice>
+            <xsd:choice>
+                <xsd:element name="rateLimitService" type="wsg:RateLimitSpecification" minOccurs="0" />
+                <xsd:element name="quarantineService" type="xsd:boolean" minOccurs="0" />
+                <xsd:element name="newRadiusEntryDetails" type="wsg:RadiusEntry" minOccurs="0" />
+            </xsd:choice>
+            <xsd:element name="resetSessionAfterRequest" type="xsd:boolean" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

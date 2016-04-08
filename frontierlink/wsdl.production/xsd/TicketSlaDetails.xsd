@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/SlaCoverageWindow.xsd" />
+    <xsd:include schemaLocation="elements/SlaRestorationTimeFrame.xsd" />
+    <xsd:include schemaLocation="elements/EventDate.xsd" />
+
+    <xsd:complexType name="TicketSlaDetails">
+        <xsd:sequence>
+            <xsd:element name="coverWindow" type="wsg:SlaCoverageWindow" minOccurs="0" />
+            <xsd:element name="targetTimeframe" type="wsg:SlaRestorationTimeFrame" minOccurs="0" />
+            <xsd:element name="nextPlannedActivity" type="wsg:EventDate" minOccurs="0" />
+            <xsd:element name="restorationTargetDate" type="wsg:EventDate" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

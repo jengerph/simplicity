@@ -1,0 +1,84 @@
+<p><!-- customize_outbound_voice_admins -->
+        <div>
+  <div>
+    <div style="display:inline-block; width:300px;">
+      
+    </div>
+    <div style="display:inline-block;vertical-align: bottom;">
+      <small><strong>New Plan</strong></small>
+    </div>
+  </div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+    <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Description:</font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;">
+    <input name="description" type="text" id="description" value="{DESCRIPTION}" class="input_custom">
+  </div>
+</div>
+<div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+    <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Active:</font></b></font>
+  </div>
+  <div style="display:inline-block;">
+    <div style="display:inline-block;vertical-align: bottom;">
+    <input name="active" type="radio" value="no"{ACTIVE_NO_SELECT} style="display:inline-block;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> No</font> 
+    </div>
+    <div style="display:inline-block;vertical-align: bottom;">
+    <input name="active" type="radio" value="yes"{ACTIVE_YES_SELECT} style="display:inline-block;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Yes</font>
+    </div>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Contract Length:</font></b></font>
+  </div>
+  <div style="display:inline-block;">
+  <select name="contract_length" id="contract_length">
+    <option value="0" {CL_SELECT_0}>0 Months</option>
+    <option value="12" {CL_SELECT_12}>12 Months</option>
+    <option value="24" {CL_SELECT_24}>24 Months</option>
+  </select>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Setup Fee: </font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: top;">
+    {SETUP_FEE_ROW}
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Monthly Fee: </font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;">
+    <input name="monthly_fee" id="monthly_fee" value="{MONTHLY_FEE}"/>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:300px;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Usage Types: </font></b></font>
+  </div>
+  <div style="margin-left: 110px;">
+    <div>
+      <div style="display: inline-block; width: 189px;">Local Calls</div>
+      <div style="display: inline-block;"><input type="text" name="local_calls" id="local_calls" value="{LOCAL_CALLS}"></div>
+    </div>
+    <div>
+      <div style="display: inline-block; width: 189px;">National Calls</div>
+      <div style="display: inline-block;"><input type="text" name="national_calls" id="national_calls" value="{NATIONAL_CALLS}"></div>
+    </div>
+    <div>
+      <div style="display: inline-block; width: 189px;">Mobile Calls</div>
+      <div style="display: inline-block;"><input type="text" name="mobile_calls" id="mobile_calls" value="{MOBILE_CALLS}"></div>
+    </div>
+    <div>
+      <div style="display: inline-block; width: 189px;">13/1300</div>
+      <div style="display: inline-block;"><input type="text" name="usage_type_13_1300" id="usage_type_13_1300" value="{USAGE_TYPE_13_1300}"></div>
+    </div>
+    {IRC_ROW}
+  </div>
+</div>
+</p>

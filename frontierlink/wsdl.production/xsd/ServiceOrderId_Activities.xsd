@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="OrderActivity.xsd" />
+    <xsd:include schemaLocation="ServiceOrderIdType.xsd" />
+
+    <xsd:complexType name="ServiceOrderId_Activities">
+        <xsd:sequence>
+            <xsd:element name="serviceOrderDetail" type="wsg:ServiceOrderIdType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details pertaining to the Service Orders making up the customer service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceOrderActivity" type="wsg:OrderActivity" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/CaseID.xsd" />
+    <xsd:include schemaLocation="ProductOrderDetail.xsd" />
+
+    <xsd:complexType name="SalesOrderDetail">
+        <xsd:sequence>
+            <xsd:element name="salesOrderID" type="wsg:CaseID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer sales order</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productOrders" type="wsg:ProductOrderDetail" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details pertaining to the Product Orders capturing the customers request</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

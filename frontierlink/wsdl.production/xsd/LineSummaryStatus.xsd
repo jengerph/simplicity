@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/InterfaceAdministrationStatus.xsd" />
+    <xsd:include schemaLocation="elements/InterfaceOperationalStatus.xsd" />
+    <xsd:include schemaLocation="elements/DSLMode.xsd" />
+
+    <xsd:complexType name="LineSummaryStatus">
+        <xsd:sequence>
+            <xsd:element name="administrationStatus" type="wsg:InterfaceAdministrationStatus" />
+            <xsd:element name="operationalStatus" type="wsg:InterfaceOperationalStatus" />
+            <xsd:element name="transmissionMode" type="wsg:DSLMode" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

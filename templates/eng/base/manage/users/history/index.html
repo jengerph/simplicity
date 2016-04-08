@@ -1,0 +1,21 @@
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">View a users login history: </span></h2>
+{MENU}
+  <label></label>
+</p>
+<p>[ <a href="/base/manage/users/edit/?&username={USERNAME}">Edit</a> | <a href="/base/manage/users/resetpw/?username={USERNAME}">Reset password</a> | <a href="/base/manage/users/history/?username={USERNAME}">View Login History</a>]</p>
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+<strong>  <tr>
+    <th>Date/Time</th>
+    <th>Hostname</th>
+    <th>Comment</th>
+  </tr>
+</strong>
+{ROWS}
+</table>
+

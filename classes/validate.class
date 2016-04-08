@@ -1,0 +1,550 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// validate.class - Field validation library
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// This library includes assorted validation functions
+//
+// Copyright (c) 2001 DHS International Pty Ltd.
+//
+// HISTORY:
+// $Log: validate.class,v $
+// Revision 1.7  2004/06/23 01:43:16  menger
+// allow dates < 1970 to skip stage 2 validation
+//
+// Revision 1.6  2004/06/23 01:23:49  menger
+// allow date 0000-00-00 00:00:00
+//
+// Revision 1.5  2004/06/23 00:44:53  menger
+// fix validate date function to check more closley date is valid for that month
+//
+// Revision 1.4  2003/12/11 22:20:35  menger
+// Added support for recurring availability data set
+//
+// Revision 1.3  2003/12/11 00:05:22  menger
+// Added constructor to connect to database
+// Added aust_postcode() function which checks an australian postcode
+//
+// Revision 1.2  2003/11/29 00:19:13  menger
+// Fixed validate email to support .info domains
+//
+// Revision 1.1.1.1  2003/11/28 23:29:24  menger
+// initial import into CVS
+//
+// Revision 1.3  2002/08/26 14:23:05  menger
+// Changed host length to 70
+//
+// Revision 1.2  2002/08/11 08:40:00  menger
+// MERGE in swicth-to-service-branch
+//
+// Revision 1.1.1.1.2.1  2002/08/03 07:33:52  menger
+// Fixed indentation
+//
+// Revision 1.1.1.1  2002/06/01 09:04:48  menger
+// Initial CVS commit
+//
+//
+///////////////////////////////////////////////////////////////////////////////
+
+
+class validate {
+
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+  
+
+  /* function validate() 
+  **
+  ** DESCRIPTION: class constructor, initalizes and sets up DB connection
+  **
+  ** PARAMETERS:
+	**
+  ** RETURNS:
+  ** 
+  */
+  function validate() { 
+
+    $config = new config();
+
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+        
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // check_email($email)
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Checks the syntax of the email address
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  // Email address
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  //   
+  //    status:
+  //      1 on sucess
+  //      0 on fail
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function email ($email) {
+
+    return(preg_match('/^[A-Za-z0-9\_\.\=\-]+\@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,4}$/', $email));
+    
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // check_login_id($login_id)
+  //  
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Checks the syntax of a login id
+  //  
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  // Login ID
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  // 
+  //    status:
+  //      1 on sucess
+  //      0 on fail
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function login_id ($login_id) {
+  
+
+    return(preg_match('/^[a-z0-9\_\.\=\-]{4,}$/', $login_id));
+    
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //  
+  // check_password($password)
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Checks the syntax of a password
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  // Password
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  // 
+  //    status:
+  //      1 on sucess
+  //      0 on fail
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function password ($password) {
+
+    // Is the length less then 4 and not over 32
+    if (strlen($password) < 4 || strlen($password) >32) {
+    
+	    return 0;
+	
+    }
+
+    return 1;
+        
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // check_host($host)
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Checks the syntax of a hostname
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  // Hostname
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  // 
+  //    status:
+  //      1 on sucess
+  //      0 on fail
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function host ($host) {
+  
+    // Is the length greater then 0 but less then 31
+    if (strlen($host) > 0 && strlen($host) < 70) {
+	
+  	  if (strlen($host) == 1) {
+
+		    return(preg_match('/^[a-z0-9]$/', $host));
+
+	    } else {
+
+		    return(preg_match('/^[a-z0-9][a-z0-9\-]*[a-z0-9]$/', $host));
+	    }
+			
+    
+    }
+
+    return 0;
+        
+  }
+
+
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // check_fqdn($fqdn)
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Checks the syntax of a fully qualified domain name
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  // FQDN
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  // 
+  //    status:
+  //      1 on sucess
+  //      0 on fail
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function fqdn ($fqdn) {
+
+  	if ($fqdn == '') {
+    
+	    return 0;
+		
+	  } else {
+	
+	    $hostbits = explode('.', $fqdn);
+		
+	    reset($hostbits);
+      
+      $i = 0;
+		
+	    while ($i < count($hostbits)) {
+      
+        $host = $hostbits[$i];
+        $i++;
+		
+		    $return_status = $this->host($host);
+			
+		    if ($return_status == 0) {
+		
+	        return 0;
+				
+	      }
+	    }
+		
+		
+      // Check the last host after the . is a 2 or 3 char string
+      if (strlen($hostbits[count($hostbits)-1]) == 2 || strlen($hostbits[count($hostbits)-1]) == 3) {
+
+        if (count($hostbits) > 1) {
+        
+          return 1;
+          
+        } else {
+        
+          return 0;
+          
+        }
+        
+      } else {
+      
+        return 0;
+        
+      }
+		
+	  }
+
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // check_ip($ip)
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Checks the syntax of an IP Address
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  // IP Address
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  // 
+  //    status:
+  //      1 on sucess
+  //      0 on fail
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function ip ($ip) {
+
+  	if ($ip == '') {
+		
+	    return 0;
+		
+	  } else {
+
+	
+	    $ipbits = explode('.', $ip);
+		
+	    reset($ipbits);
+    
+      $i = 0;
+		
+	    while ($i < count($ipbits)) {
+    
+        $ipbit = $ipbits[$i];
+      
+        $i++;
+
+	      if ($ipbit >= 0 && $ipbit <= 255) {
+			
+		      // OK
+				
+	      } else {
+        
+          return 0;
+				
+	      }
+		
+	    }
+      
+      if (count($ipbits) == 4) {
+      
+	      return 1;		
+        
+      } else {
+      
+        return 0;
+        
+      }
+    }
+
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // check_number($variable, $range_begin, $range_finish)
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Checks that a variable is a number within a range
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  // Variable
+  // Range begin
+  // Range finish
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  // 
+  //    status:
+  //      1 on sucess
+  //      0 on fail
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function number ($variable, $range_begin, $range_finish) {
+
+		if ($variable == '' && $variable != 0) {
+			return 0;
+  	} else {
+  	
+  	  if ($variable >= $range_begin && $variable <= $range_finish) {
+
+		    $bits = explode('.', $variable);
+    	
+    		if ($bits[0] == '') {
+    			$bits[0] = '0';
+    		}
+   			if (preg_match('/^[\+\-]*[0-9]+$/', $bits[0])) {
+   		
+   				if ($bits[1] != '') {
+  		 			if (!preg_match('/^[0-9]+$/', $bits[1])) {
+   						return 0;
+   					}
+   				}
+   				
+   				// OK
+  				return 1;
+    		} else {
+    			return 0;
+    		}
+  	  }else {
+  	  	return 0;
+  	  }
+    }
+   	return 0;
+
+	}
+
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // check_datetime($datetime)
+  //  
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Checks the syntax of a SQL DateTime field
+  //  
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  // Date/Time field
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  // 
+  //    status:
+  //      1 on sucess
+  //      0 on fail
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function datetime ($datetime) {
+  
+    if (preg_match('/^([0-9]{4})-([0-9]{2})-([0-9]{2})\s([0-9]{2}):([0-9]{2}):([0-9]{2})$/', $datetime)) {
+    
+      // Check date is valid
+      $bits = explode(' ', $datetime);
+    
+      $datebits = explode('-', $bits[0]);
+      $hourbits = explode(':', $bits[1]);
+    
+      $bits2 = array();
+    
+      $datebits[3] = $hourbits[0];
+      $datebits[4] = $hourbits[1];
+      $datebits[5] = $hourbits[2];
+      
+      $ts = mktime($datebits[3], $datebits[4], $datebits[5], $datebits[1], $datebits[2], $datebits[0], -1);
+
+      if ($datetime != '0000-00-00 00:00:00') {
+      
+        if ($datebits[0] > 1970) {
+      
+          if (date("Y-m-d H:i:s", $ts) == $datetime) {
+        
+            // Date is valid
+            return 1;
+          
+          }
+          
+        } else {
+        
+          return 1;
+          
+        }
+        
+      } else {
+      
+        return 1;
+        
+      }
+    
+    }
+    
+    return 0;
+    
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // check_time($time)
+  //  
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Checks the syntax of a SQL time field
+  //  
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  // Time field
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  // 
+  //    status:
+  //      1 on sucess
+  //      0 on fail
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function time ($time) {
+  
+    return(preg_match('/^([0-9]{2}):([0-9]{2}):([0-9]{2})$/', $time));
+    
+  }
+
+  function credit_card ($card) {
+
+    return(preg_match('/^[0-9]+$/', $card));
+
+  }
+
+	function aust_postcode($postcode, $city, $state) {
+
+    $query = "SELECT count(*) FROM postcodes WHERE pcode = " . $this->db->quote($postcode) . " AND locality = " . $this->db->quote(strtoupper($city)) .  " AND state = " . $this->db->quote(strtoupper($state));
+    
+    $results = array();
+    $count = 0;
+
+    $result = $this->db->execute_query($query);
+    
+    $row = $this->db->fetch_row_array($result);
+      
+    return $row['count(*)'];
+	
+	}
+
+}
+?>

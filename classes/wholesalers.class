@@ -1,0 +1,502 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// wholesalers.class - Class for accessing wholesalers details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "audit.class";
+
+class wholesalers {
+
+  var $wholesaler_id;
+  var $company_name;
+  var $email;
+  var $active;
+  var $phone;
+  var $address1;
+  var $address2;
+  var $city;
+  var $state;
+  var $postcode;
+  var $abn;
+  var $ts;
+  var $require_ar_download;
+  var $require_ar_idcheck;
+  var $customer_billing;
+  var $manage_own_plan;
+  var $block_customer_order_notif;
+  var $allow_credit_card;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function wholesalers() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function wholesalers() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+    
+    $this->active = 'yes';
+    $this->customer_billing = 'yes';
+    $this->manage_own_plan = 'yes';
+    $this->block_customer_order_notif = 'yes';
+    $this->allow_credit_card = 'no';
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->wholesaler_id = strtoupper($this->wholesaler_id);
+
+    if (!$this->wholesaler_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->wholesaler_id) {
+      
+      $query = "SELECT * FROM wholesalers WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ) {
+          while ($cel = each($row)) { 
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->wholesaler_id = strtoupper($this->wholesaler_id);
+  
+    // Check we have an wholesaler_id
+    if (!$this->wholesaler_id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT wholesaler_id FROM wholesalers WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+	
+    // Validate
+    if (wholesalers::validate()) {
+    
+      return 0;
+      
+    }
+
+    $ws = new wholesalers();
+    $ws->load();
+    
+    // Create the property search
+    $query = "INSERT INTO wholesalers (company_name, email, active, phone, address1, address2, city, state, postcode, abn, require_ar_download, require_ar_idcheck, customer_billing, manage_own_plan, block_customer_order_notif, allow_credit_card)";
+    $query .= " VALUES (" . $this->db->quote($this->company_name) . "," . $this->db->quote($this->email) . "," . $this->db->quote($this->active) . "," . $this->db->quote($this->phone) . "," . $this->db->quote($this->address1) . "," . $this->db->quote($this->address2) . "," . $this->db->quote($this->city) . "," . $this->db->quote($this->state) . "," . $this->db->quote($this->postcode) . "," . $this->db->quote($this->abn) . "," . $this->db->quote($this->require_ar_download) . "," . $this->db->quote($this->require_ar_idcheck) . "," . $this->db->quote($this->customer_billing) . "," . $this->db->quote($this->manage_own_plan) . "," . $this->db->quote($this->block_customer_order_notif) . "," . $this->db->quote($this->allow_credit_card) . ")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+    
+	    $this->wholesaler_id = $this->db->fetch_insert_id();
+
+			$this->load();
+
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"wholesalers",$this->wholesaler_id);
+
+			
+      return 1;
+					
+    }
+  }
+  
+  function create() {
+  
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+		$this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+
+    
+    // Prepare the query
+    $query = "DELETE FROM wholesalers WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+      return 1;
+      
+      
+    }
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    $validate = new validate();
+    
+    if ($this->company_name == '') {
+      
+      return 101;
+      
+    }
+
+    $this->active = strtolower($this->active);
+    if ($this->active != 'yes' && $this->active != 'no') {
+      
+      return 123;
+      
+    }
+    
+    if (!$validate->email($this->email)) {
+      
+      return 124;
+      
+    }
+    
+    if ($this->phone == '') {
+      return 126;
+    }
+
+    $this->state = strtoupper($this->state);
+    if ($this->state != 'VIC' && $this->state != 'ACT' && $this->state != 'NSW' && $this->state != 'QLD' && $this->state != 'SA' && $this->state != 'NT' && $this->state != 'WA' && $this->state != 'TAS') {
+
+      return 9;
+    }
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+  /* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (wholesalers::validate()) {
+		
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!wholesalers::exist()) {
+      return 0;
+      
+    }
+
+      $ws = new wholesalers();
+      $ws->wholesaler_id = $this->wholesaler_id;
+      $ws->load();
+
+    $query = "UPDATE wholesalers SET company_name = " . $this->db->quote($this->company_name) . ", email = " . $this->db->quote($this->email) . ", active = " . $this->db->quote($this->active) . ", phone = " . $this->db->quote($this->phone) . ", address1 = " . $this->db->quote($this->address1) . ", address2 = " . $this->db->quote($this->address2) . ", city = " . $this->db->quote($this->city) . ", state = " . $this->db->quote($this->state) . ", postcode = " . $this->db->quote($this->postcode) . ", abn = " . $this->db->quote($this->abn) . ", require_ar_download = " . $this->db->quote($this->require_ar_download) . ", require_ar_idcheck = " . $this->db->quote($this->require_ar_idcheck) . ", customer_billing = " . $this->db->quote($this->customer_billing) . ", manage_own_plan = " . $this->db->quote($this->manage_own_plan) . ", block_customer_order_notif = " . $this->db->quote($this->block_customer_order_notif) . ", allow_credit_card = " . $this->db->quote($this->allow_credit_card);
+    $query .= " WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+        //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_changes($keys,$ws,$this,"wholesalers",$this->wholesaler_id);
+
+     	return 1;
+				
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+		
+      return 0;
+      
+    }    
+      
+  }
+
+ /* function get_wholesalers()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of wholesalers with correpsonding details
+  ** 
+  */
+
+  function get_wholesalers(){
+      
+      $query = "SELECT * FROM wholesalers ";
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+ /* function wholesalers_list()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - array
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function wholesalers_list( $name, $array ){
+      
+    $list = '<select name="' . $name . '" id="' . $name . '">'; 
+    $list .= '<option value="0">Select Wholesaler</option>';
+
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+        if( $array[0]["active"] == "yes" ){
+          $list .= "<option value='" . $array[$x]["wholesaler_id"] . "' {WS_". $array[$x]["wholesaler_id"] ."_SELECT}>" . $array[$x]["company_name"] . "</option>";
+        }
+      }
+
+      $list .= '</select>';
+
+    }
+
+      return $list; 
+
+  }
+
+ /* function wholesalers_list2()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - array
+  **
+  ** RETURNS:
+  ** - String
+  ** 
+  */
+
+  function wholesalers_list2( $name, $array ){
+      
+    $list = '<select name="' . $name . '" id="' . $name . '" onchange="form.submit.click();">'; 
+    $list .= '<option value="0">Select Wholesaler</option>';
+
+    if ($array) {
+      for ( $x = 0; $x < count($array); $x++ ) {
+        if( $array[0]["active"] == "yes" ){
+          $list .= "<option value='" . $array[$x]["wholesaler_id"] . "' {WS_". $array[$x]["wholesaler_id"] ."_SELECT}>" . $array[$x]["company_name"] . "</option>";
+        }
+      }
+
+      $list .= '</select>';
+
+    }
+
+      return $list; 
+
+  }
+
+
+}
+

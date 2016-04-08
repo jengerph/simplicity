@@ -1,0 +1,101 @@
+<p><!-- customize_outbound_voice_wholesalers -->
+        <div>
+  <div>
+    <div style="display:inline-block; width:230px;">
+      
+    </div>
+    <div style="display:inline-block;vertical-align: bottom;width: 150px;">
+      <small><strong>Master Plan</strong></small>
+    </div>
+    <div style="display:inline-block;vertical-align: bottom;">
+      <small><strong>New Plan</strong></small>
+    </div>
+  </div>
+  <div style="display:inline-block; width:230px;vertical-align: top;">
+    <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Description:</font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;width: 150px;">
+      <small>{PARENT_PLAN_DESC}</small>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;">
+    <input name="description" type="text" id="description" value="{DESCRIPTION}" class="input_custom">
+  </div>
+</div>
+<div>
+<div>
+  <div style="display:inline-block; width:230px;vertical-align: top;">
+    <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Active:</font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;width: 150px;">
+      <small>{PARENT_PLAN_ACTIVE}</small>
+  </div>
+  <div style="display:inline-block;">
+    <div style="display:inline-block;vertical-align: bottom;">
+    <input name="active" type="radio" value="no"{ACTIVE_NO_SELECT} style="display:inline-block;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> No</font> 
+    </div>
+    <div style="display:inline-block;vertical-align: bottom;">
+    <input name="active" type="radio" value="yes"{ACTIVE_YES_SELECT} style="display:inline-block;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Yes</font>
+    </div>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:230px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Contract Length:</font></b></font>
+  </div>
+  <div style="display:inline-block;">
+  {PARENT_PLAN_CONTRACT_LENGTH}
+  </div>
+</div>
+  <div style="display:inline-block; width:230px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Setup Fee: </font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;width: 150px;">
+      <small>{PARENT_PLAN_SETUP_FEE}</small>
+  </div>
+  <div style="display:inline-block;vertical-align: top;">
+    {SETUP_FEE_ROW}
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:230px;vertical-align: top;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Monthly Fee: </font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;width: 150px;">
+      <small>{PARENT_PLAN_MONTHLY_FEE}</small>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;">
+    <input name="monthly_fee" id="monthly_fee" value="{MONTHLY_FEE}"/>
+  </div>
+</div>
+<div>
+  <div style="display:inline-block; width:230px;">
+  <font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Usage Types: </font></b></font>
+  </div>
+  <div style="display:inline-block;vertical-align: bottom;width: 150px;">
+      <small>{PARENT_PLAN_USAGE_TYPES}</small>
+  </div>
+  <div style="margin-left: 110px;">
+    <div>
+      <div style="display: inline-block; width: 120px;">Local Calls</div>
+      <div style="display: inline-block; width: 150px;">{PARENT_PLAN_LOCAL_CALLS}</div>
+      <div style="display: inline-block; vertical-align: top;"><input type="text" name="local_calls" id="local_calls" value="{LOCAL_CALLS}"></div>
+    </div>
+    <div>
+      <div style="display: inline-block; width: 120px;">National Calls</div>
+      <div style="display: inline-block; width: 150px;">{PARENT_PLAN_NATIONAL_CALLS}</div>
+      <div style="display: inline-block; vertical-align: top;"><input type="text" name="national_calls" id="national_calls" value="{NATIONAL_CALLS}"></div>
+    </div>
+    <div>
+      <div style="display: inline-block; width: 120px;">Mobile Calls</div>
+      <div style="display: inline-block; width: 150px;">{PARENT_PLAN_MOBILE_CALLS}</div>
+      <div style="display: inline-block; vertical-align: top;"><input type="text" name="mobile_calls" id="mobile_calls" value="{MOBILE_CALLS}"></div>
+    </div>
+    <div>
+      <div style="display: inline-block; width: 120px;">13/1300</div>
+      <div style="display: inline-block; width: 150px;">{PARENT_PLAN_USAGE_TYPE_13_1300}</div>
+      <div style="display: inline-block; vertical-align: top;"><input type="text" name="usage_type_13_1300" id="usage_type_13_1300" value="{USAGE_TYPE_13_1300}"></div>
+    </div>
+    {IRC_ROW}
+  </div>
+</div>
+      </p>

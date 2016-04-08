@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="NoConnectivity.xsd" />
+    <xsd:include schemaLocation="Dropouts.xsd" />
+    <xsd:include schemaLocation="Performance.xsd" />
+
+    <xsd:element name="TicketSymptom" type="wsg:TicketSymptom" />
+
+    <xsd:complexType name="TicketSymptom">
+        <xsd:sequence>
+            <xsd:element name="workedPreviously" type="xsd:boolean" />
+            <xsd:element name="isolationCheckDone" type="xsd:boolean" />
+            <xsd:element name="cpePowercycled" type="xsd:boolean" />
+            <xsd:element name="cablingChecked" type="xsd:boolean" />
+            <xsd:choice minOccurs="0">
+                <xsd:element name="noConnectivity" type="wsg:NoConnectivity" />
+                <xsd:element name="dropouts" type="wsg:Dropouts" />
+                <xsd:element name="performance" type="wsg:Performance" />
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

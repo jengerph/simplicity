@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="LineSpeed.xsd" />
+    <xsd:include schemaLocation="LineAttenuation.xsd" />
+    <xsd:include schemaLocation="LineNoise.xsd" />
+    <xsd:include schemaLocation="LinePower.xsd" />
+    <xsd:include schemaLocation="elements/LineProfileType.xsd" />
+
+    <xsd:complexType name="LineDetailsStatus">
+        <xsd:sequence>
+            <xsd:element name="outputPower" type="wsg:LinePower" />
+            <xsd:element name="lineAttenuation" type="wsg:LineAttenuation" />
+            <xsd:element name="lineNoiseMargin" type="wsg:LineNoise" />
+            <xsd:element name="connectionUpTime" type="xsd:duration" minOccurs="0" />
+            <xsd:element name="lineUpDownCounter" type="xsd:int" minOccurs="0" />
+            <xsd:element name="lineProfile" type="wsg:LineProfileType" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

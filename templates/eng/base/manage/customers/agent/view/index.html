@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/templates/jquery-ui.css">
+  <script src="/templates/jquery-1.10.2.js"></script>
+  <script src="/templates/jquery-ui.js"></script>
+<script>
+$(document).ready(function(){
+  $("#birthdate").datepicker({
+      numberOfMonths: 2,
+      dateFormat: "dd/mm/yy",
+      onSelect: function(selected) {
+        $("#birthdate").datepicker("option","maxDate", new Date());
+        document.form.submit.click();
+      }
+  });
+});
+</script>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">View Agent's Customers: </span></h2>
+<p>[ <a href="/base/manage/customers/?customer_id={CUSTOMER_ID}">&#9664; Back to View Customer </a> ]</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66" style="width:100%;">
+  <tr bgcolor="#FFFF99">
+    <th>Customers</th>
+  	<th>Creator</th>
+  </tr>
+  {ROWS}
+ </table>

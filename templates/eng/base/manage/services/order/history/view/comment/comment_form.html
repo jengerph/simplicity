@@ -1,0 +1,11 @@
+<form action="{SELF}?order_id={ORDER_ID}" method="POST">
+	Comment Visibility:
+	<select id="comment_visibility" name="comment_visibility">
+		<option>--Select Comment Visibility--</option>
+		<option value="customer">Customers</option>
+		<option value="wholesaler">Wholesalers</option>
+		<option value="internal">Internal</option><br/>
+	<textarea name="comment" id="comment" style="width:100%;height:100px;"></textarea><br/>
+	</select>
+	<input type="submit" name="submit_comment" id="submit_comment" value="Comment" style="float:right;"/>
+</form>

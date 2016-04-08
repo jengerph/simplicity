@@ -1,0 +1,82 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// config.class - global config options
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// Global configuration parameters for Global Management System
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+
+class config {
+
+  var $mysql_server_name;
+  var $mysql_user_name;
+  var $mysql_user_password;
+  var $mysql_database_name;
+  var $template_root;
+  var $session_cookie_name;
+  var $session_dir;
+  var $docs_dir;
+  var $force_ssl;
+  var $include_dir;
+  var $photos_dir;
+  
+  var $error_message = array();  
+      
+  
+  function config() {
+  
+    // Mysql host to connec to
+    $this->mysql_server_name = 'localhost';
+    
+    // Port MySQL server is on
+    $this->mysql_port     = '3306';
+
+    // User to connect to MySQL as
+    $this->mysql_user_name = 'webclient';
+
+    // Password used by that user
+    $this->mysql_user_password = 'webclient';
+
+    // Database
+    $this->mysql_database_name = 'simplicity';
+    
+    // Template root
+    $this->template_root  = '/var/www/simplicity/templates';
+
+    // Force SSL
+    $this->force_ssl = 1;
+
+    // Include Directory
+    $this->include_dir  = '/var/www/simplicity/includes';
+
+    // Session Directory
+    $this->session_dir  = '/var/www/simplicity/sessions';
+
+    // Documents folder (advocacy)
+    $this->docs_dir  = '/var/www/simplicity/docs';
+
+    // Documents folder (management)
+    $this->mgt_docs_dir  = '/var/www/simplicity/mgt_docs';
+
+    // Temporary Directory
+    $this->temp  = '/var/www/simplicity/temp';
+
+    // Photos folder
+    $this->photos_dir  = '/var/www/simplicity/photos';
+
+    // Frontierlink folder
+    $this->frontier_dir = '/var/www/simplicity/frontierlink';
+
+    // SETUP ERROR MESSAGES
+    include $this->include_dir . '/errors.inc';
+
+  }
+}
+
+?>

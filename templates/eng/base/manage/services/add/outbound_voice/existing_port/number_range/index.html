@@ -1,0 +1,20 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Number Range: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#0285AE ">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&outbound_kind={OUTBOUND_KIND}&sp={SP}" method="post" name="form">
+<input name="customer_id" type="text" id="customer_id" value="{CUSTOMER_ID}" hidden>
+  <font color="red">*</font>Do you require a number range?</font></b></font>
+<font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <p><input type="radio" name="number_range" id="number_range" value="no" {NO}> No - Single Number</p>
+      <p><input type="radio" name="number_range" id="number_range" value="yes_10" {YES_10}> Yes - 10 Numbers</p>
+      <p><input type="radio" name="number_range" id="number_range" value="yes_20" {YES_20}> Yes - 20 Numbers</p>
+      <p><input type="radio" name="number_range" id="number_range" value="yes_30" {YES_30}> Yes - 30 Numbers</p>
+      </font>
+      <br/>
+  <p><input name="submit" type="submit" id="submit" value="Next"></p>
+</form>

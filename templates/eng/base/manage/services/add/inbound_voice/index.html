@@ -1,0 +1,21 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<div>Initial</div>
+<h2><span class="bodytext">Inbound Voice: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&sp={SP}" method="POST">
+	Do you have an existing number? 
+		<font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+		<input type="radio" name="existing_number" id="existing_number" value="yes" onclick="form.number_btn.click();" {NUMBER_YES}> Yes
+		<input type="radio" name="existing_number" id="existing_number" value="no" onclick="form.number_btn.click();" {NUMBER_NO}> No
+		</font>
+{FORM_PART2}
+<!-- buttons -->
+<input type="submit" name="number_btn" id="number_btn" value="Existing Number" hidden/>
+<input type="submit" name="reserved_btn" id="reserved_btn" value="Reserved Number" hidden/>
+<p><input type="submit" name="submit" id="submit" value="Next"/></p>
+</form>

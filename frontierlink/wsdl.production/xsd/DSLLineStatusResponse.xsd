@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="LineSummaryStatus.xsd" />
+    <xsd:include schemaLocation="PVCStatusList.xsd" />
+    <xsd:include schemaLocation="ChannelStatus.xsd" />
+    <xsd:include schemaLocation="LineDetailsStatus.xsd" />
+    <xsd:include schemaLocation="elements/ExchangeCode.xsd" />
+
+    <xsd:element name="DSLLineStatusResponse" type="wsg:DSLLineStatusResponse" />
+
+    <xsd:complexType name="DSLLineStatusResponse">
+        <xsd:sequence>
+            <xsd:element name="exchangeCode" type="wsg:ExchangeCode">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A Telstra assigned unique code for each Exchange</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="lineSummaryStatus" type="wsg:LineSummaryStatus">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A summary of the line status including status, uptime and sync mode</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="pvcStatusList" type="wsg:PVCStatusList">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A list of the PVCs found on this line</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="channelStatus" type="wsg:ChannelStatus" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The channel status showing the mode, current and previous bit rates</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="lineDetailsStatus" type="wsg:LineDetailsStatus">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Details about the line status including trained up speed, signal to noise ratio, and line attenuation</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/FormID.xsd" />
+    <xsd:include schemaLocation="elements/NbnLocationID.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+
+    <xsd:element name="EnquireServiceRequest" type="wsg:EnquireServiceRequest" />
+
+    <xsd:complexType name="EnquireServiceRequest">
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A PSTN telephony service number</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="nbnLocationID" type="wsg:NbnLocationID">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">An NBN assigned unique ID for the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="productOrderID" type="wsg:FormID">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer product order</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="serviceOrderID" type="wsg:ServiceID">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each service order</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

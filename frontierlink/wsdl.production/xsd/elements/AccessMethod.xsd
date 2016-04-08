@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="AccessMethod">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="AAPT ADSL2+" />
+            <xsd:enumeration value="iiNet ADSL2+" />
+            <xsd:enumeration value="Telstra L2IG" />
+            <xsd:enumeration value="NBN" />
+            <xsd:enumeration value="On Net ADSL2+ Annex A (Type ii)" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

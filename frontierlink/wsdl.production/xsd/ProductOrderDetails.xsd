@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/FormID.xsd" />
+    <xsd:include schemaLocation="Contact.xsd" />
+    <xsd:include schemaLocation="Activity.xsd" />
+
+    <xsd:complexType name="ProductOrderDetails">
+        <xsd:sequence>
+            <xsd:element name="productOrderID" type="wsg:FormID" />
+            <xsd:element name="customerContact" type="wsg:Contact">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details relating to Contact responsible for ownership of the Service. Mandatory details of Name and Phone Number are required.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="productOrderActivities" type="wsg:Activity" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of AAPT workflow events and information</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceOrderActivities" type="wsg:Activity" minOccurs="0" maxOccurs="unbounded" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of AAPT workflow events and information</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

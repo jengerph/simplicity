@@ -1,0 +1,29 @@
+<script src="https://code.jquery.com/jquery-1.7.1.js" type="text/javascript"></script>
+ <link href="/select2/select2.css" rel="stylesheet"/>
+<script src="/select2/select2.js"></script>
+<script>
+$(document).ready(function() { $("#select_username").select2();});
+</script>
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">View  Usage: </span></h2>
+<p><a href="/base/manage/adsl_service/usage">Service Usage</a> | <a href="/base/manage/adsl_service/sessions">Sessions</a></p>
+</p>
+	<form action="{SELF}" method="POST" id="audit_form">
+		<select name="select_username" id="select_username" onchange='this.form.submit()'>
+	        <option value="view_all">View All</option>
+	        {OPTION}
+		</select>
+	<input name="contract_start" id="contract_start" placeholder="input connection date" value="{CONTRACT_START}" /><br/>
+	<input name="contract_end" id="contract_end" placeholder="input contract end date" value="{CONTRACT_END}" /><br/>
+	<button onclick="this.form.submit();">Set Contract Start and Contract End</button>
+	<br/>
+	{DATE_RANGE}
+	</form>
+{PAGES_HEADER}
+{USAGE_PER_MONTH}
+{VIEW_ALL}

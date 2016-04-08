@@ -1,0 +1,79 @@
+
+<link rel="stylesheet" href="/templates/jquery-ui.css">
+  <script src="/templates/jquery-1.10.2.js"></script>
+  <script src="/templates/jquery-ui.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#date_start").datepicker({
+        numberOfMonths: 2,
+        dateFormat: "dd/mm/yy",
+        onSelect: function(selected) {
+          $("#date_end").datepicker("option","minDate", selected);
+          document.form.submit.click();
+        }
+    });
+    $("#date_end").datepicker({
+        numberOfMonths: 2,
+        dateFormat: "dd/mm/yy",
+        onSelect: function(selected) {
+           $("#date_start").datepicker("option","maxDate", selected);
+           document.form.submit.click();
+        }
+ });
+});
+  // $( "#date_start" ).datepicker({ dateFormat: 'dd/mm/yy' });
+</script>
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">View  Service: </span></h2>
+
+<p>{BACK_LINK}</p>
+
+{ORDER}
+
+<table class="service_stats">
+  <tr>
+    <th colspan="2" style="padding-left: 5px;">Service Summary</th>
+  </tr>
+  <tr>
+  {STATUS_ROW}
+  <tr>
+    <td>Service ID:</td>
+    <td>{SERVICE_ID}</td>
+  </tr>
+  <tr>
+    <td>Type:</td>
+    <td>{SERVICE_TYPE}</td>
+  </tr>
+  <tr>
+    <td>Start Date:</td>
+    <td>{SERVICE_START_DATE}</td>
+  </tr>
+  <tr>
+    <td>Contract End:</td>
+    <td>{SERVICE_CONTRACT_END}</td>
+  </tr>
+  <tr>
+    <td>Retail Plan:</td>
+    <td>{SERVICE_RETAIL_PLAN}</td>
+  </tr>
+  <tr>
+    <td>Service State:</td>
+    <td>{SERVICE_STATE}</td>
+  </tr>
+  <tr>
+    <td>Identifier:</td>
+    <td>{SERVICE_IDENTIFIER}</td>
+  </tr>
+  <tr>
+    <td>Tag:</td>
+    <td>{SERVICE_TAG}</td>
+  </tr>
+    <tr>
+{EXTRAS}
+</table>
+{SERVICE_CALL_HISTORY}

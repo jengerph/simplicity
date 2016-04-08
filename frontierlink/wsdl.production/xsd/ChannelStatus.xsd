@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="LineSpeed.xsd" />
+    <xsd:include schemaLocation="LineDelay.xsd" />
+
+    <xsd:complexType name="ChannelStatus">
+        <xsd:sequence>
+            <xsd:element name="currentBitRate" type="wsg:LineSpeed" />
+            <xsd:element name="previousBitRate" type="wsg:LineSpeed" />
+            <xsd:element name="interleaveDelay" type="wsg:LineDelay" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,20 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Kind of Outbound Voice: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#0285AE ">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}" method="post" name="form">
+<input name="customer_id" type="text" id="customer_id" value="{CUSTOMER_ID}" hidden>
+  <font color="red">*</font>What kind of Outbound Voice?</font></b></font>
+<font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <p><input type="radio" name="outbound_kind" id="pstn" value="PSTN" {PSTN}> PSTN</p>
+      <p><input type="radio" name="outbound_kind" id="isdn2" value="ISDN_2" {ISDN_2}> ISDN 2</p>
+      <p><input type="radio" name="outbound_kind" id="isdnpri" value="ISDN_PRI" {ISDN_PRI}> ISDN 10/20/30</p>
+      <p><input type="radio" name="outbound_kind" id="siptrunk" value="SIP_TRUNK" {SIP_TRUNK}> SIP Trunk</p>
+      </font>
+      <br/>
+  <p><input name="submit" type="submit" id="submit" value="Next"></p>
+</form>

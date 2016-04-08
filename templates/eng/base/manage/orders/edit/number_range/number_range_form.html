@@ -1,0 +1,12 @@
+<div>
+	<h2>User has ordered a block of {TOTAL_NUMBER_RANGE} numbers. Please Provide start and finish number.</h2>
+</div>
+<form action="{SELF}?order_id={ORDER_ID}" method="POST">
+<table>
+	<tr>
+		<td>Start Number: <input type="text" name="fnn_start" id="fnn_start" value="{FNN_START}"></td>
+		<td>Finish Number: <input type="text" name="fnn_finish" id="fnn_finish" value="{FNN_FINISH}"></td>
+		<td><input type="submit" name="submit" id="submit" value="Submit"></td>
+	</tr>
+</table>
+</form>

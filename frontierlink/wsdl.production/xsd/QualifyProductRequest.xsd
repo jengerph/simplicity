@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="SiteAddress.xsd" />
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/ProductType.xsd" />
+
+    <xsd:element name="QualifyProductRequest" type="wsg:QualifyProductRequest" />
+
+    <xsd:complexType name="QualifyProductRequest">
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="siteAddress" type="wsg:SiteAddress">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">The customer site being qualified</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:element name="productType" type="wsg:ProductType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Product Type being qualified</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

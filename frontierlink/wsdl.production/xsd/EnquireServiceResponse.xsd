@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="SiteAddress.xsd" />
+    <xsd:include schemaLocation="ServiceDetails.xsd" />
+    <xsd:include schemaLocation="ServiceOrderDetail.xsd" />
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/FNN.xsd" />
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+
+    <xsd:element name="EnquireServiceResponse" type="wsg:EnquireServiceResponse" />
+
+    <xsd:complexType name="EnquireServiceResponse">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="siteAddress" type="wsg:SiteAddress">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details relating to the Site. Conforms to the Telstra constructs for DSL Sites.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A PSTN telephony service number</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FNN" type="wsg:FNN" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The Testra designated Full National Number. May or may not correspond to the PSTN telephony service number</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceDetails" type="wsg:ServiceDetails">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details pertaining to the product</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceOrderDetails" type="wsg:ServiceOrderDetail" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details pertaining to the Service Orders making up the customer service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

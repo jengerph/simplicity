@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ExchangeCode.xsd" />
+    <xsd:include schemaLocation="elements/State.xsd" />
+
+    <xsd:complexType name="Exchange">
+        <xsd:sequence>
+            <xsd:element name="exchangeCode" type="wsg:ExchangeCode">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A Telstra assigned unique code for each Exchange</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="name" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A full name for the Exchange</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="state" type="wsg:State">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The state where the exchange is located</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

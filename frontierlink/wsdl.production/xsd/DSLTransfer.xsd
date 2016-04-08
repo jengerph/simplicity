@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ServiceProviderName.xsd" />
+
+    <xsd:complexType name="DSLTransfer">
+        <xsd:sequence>
+            <xsd:element name="losingServiceProvider" type="wsg:ServiceProviderName">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Service Provider Name of the losing Service Provider. Must be a valid name as listed in the following file
+                        http://telstrawholesale.com.au/download/document/access-broadband-dsltransfer.pdf
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dslTransferDate" type="xsd:date">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Customer Transfer Authority Date. Must be less than or equal to today's date, but not older than 1 month.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

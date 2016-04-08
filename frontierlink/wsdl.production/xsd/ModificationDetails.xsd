@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+	<xsd:include schemaLocation="elements/BatteryBackupService.xsd" />
+    <xsd:include schemaLocation="SpeedModification.xsd" />
+
+    <xsd:complexType name="ModificationDetails">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">A complex definition of details relating to an AAPT Product to be activated at a Site. One and only one Product Type is valid.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="speedModification" type="wsg:SpeedModification">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en"> A complex definition of details relating to the speed modification for National Wholesale Broadband.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="batteryBackupModification" type="wsg:BatteryBackupService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">Option to switch between standard powered and battery backup for NBN delivered services.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

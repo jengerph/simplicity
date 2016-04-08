@@ -1,0 +1,184 @@
+<link rel="stylesheet" href="/templates/jquery-ui.css">
+  <script src="/templates/jquery-1.10.2.js"></script>
+  <script src="/templates/jquery-ui.js"></script>
+<script>
+$(document).ready(function(){
+  $("#birthdate").datepicker({
+      numberOfMonths: 2,
+      dateFormat: "dd/mm/yy",
+      onSelect: function(selected) {
+        $("#birthdate").datepicker("option","maxDate", new Date());
+        document.form.submit.click();
+      }
+  });
+});
+</script>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Edit Customer: </span></h2>
+<p>[ <a href="/base/manage/customers/?customer_id={CUSTOMER_ID}">&#9664; Back to View Customer </a> | <a href="/base/manage/customers/edit/auth_rep/?customer_id={CUSTOMER_ID}">Authorised Representative</a> | <a href="/base/manage/users/?customer_id={CUSTOMER_ID}">Users</a> ]</p>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}" method="post" enctype="multipart/form-data">
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Type:</font></b></font></div></td>
+    <td><select name="type" id="type">
+      <option value="person" {TYPE_PERSON_SELECT}>Person</option>
+      <option value="company" {TYPE_COMPANY_SELECT}>Company</option>
+    </select></td>
+  </tr>
+  {KIND_ROW_1}
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Company Name:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="company_name" type="text" id="company_name" value="{COMPANY_NAME}">
+      </font></td>
+  </tr>
+{ABN_ROW}
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">First Name:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="first_name" type="text" id="first_name" value="{FIRST_NAME}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Last Name:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="last_name" type="text" id="last_name" value="{LAST_NAME}">
+      </font></td>
+  </tr>
+{BIRTHDATE_ROW}
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Email Address:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="email" type="text" id="email" value="{EMAIL}">
+    </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Mobile:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="mobile" type="text" id="mobile" value="{MOBILE}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Phone:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="phone" type="text" id="phone" value="{PHONE}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Fax:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="fax" type="text" id="fax" value="{FAX}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Address 1:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="address1" type="text" id="address1" value="{ADDRESS1}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Address 2:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="address2" type="text" id="address2" value="{ADDRESS2}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Suburb:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="city" type="text" id="city" value="{CITY}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">State:</font></b></font></div></td>
+    <td><select name="state" id="state">
+      <option value="ACT" {STATE_ACT_SELECT}>ACT</option>
+      <option value="NSW" {STATE_NSW_SELECT}>NSW</option>
+      <option value="NT" {STATE_NT_SELECT}>NT</option>
+      <option value="QLD" {STATE_QLD_SELECT}>QLD</option>
+      <option value="SA" {STATE_SA_SELECT}>SA</option>
+      <option value="TAS" {STATE_TAS_SELECT}>TAS</option>
+      <option value="VIC" {STATE_VIC_SELECT}>VIC</option>
+      <option value="WA" {STATE_WA_SELECT}>WA</option>
+    </select></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Postcode:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="postcode" type="text" id="postcode" value="{POSTCODE}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Are the Postal the same?:</font></b></font></div></td>
+    <td>
+      <input name="postal_same" id="postal_same" type="radio" value="no"{POSTAL_NO_SELECT}>
+      No 
+      <input name="postal_same" id="postal_same" type="radio" value="yes"{POSTAL_YES_SELECT}>
+      Yes</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Postal Address 1:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="postal_address1" type="text" id="postal_address1" value="{POSTAL_ADDRESS1}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Postal Address 2:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="postal_address2" type="text" id="postal_address2" value="{POSTAL_ADDRESS2}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Postal City:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="postal_city" type="text" id="postal_city" value="{POSTAL_CITY}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Postal State:</font></b></font></div></td>
+    <td><select name="postal_state" id="postal_state">
+      <option value="ACT" {POSTAL_STATE_ACT_SELECT}>ACT</option>
+      <option value="NSW" {POSTAL_STATE_NSW_SELECT}>NSW</option>
+      <option value="NT" {POSTAL_STATE_NT_SELECT}>NT</option>
+      <option value="QLD" {POSTAL_STATE_QLD_SELECT}>QLD</option>
+      <option value="SA" {POSTAL_STATE_SA_SELECT}>SA</option>
+      <option value="TAS" {POSTAL_STATE_TAS_SELECT}>TAS</option>
+      <option value="VIC" {POSTAL_STATE_VIC_SELECT}>VIC</option>
+      <option value="WA" {POSTAL_STATE_WA_SELECT}>WA</option>
+    </select></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Postal Postcode:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="postal_postcode" type="text" id="postal_postcode" value="{POSTAL_POSTCODE}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Active:</font></b></font></div></td>
+    <td>
+      <input name="active" id="active" type="radio" value="no"{ACTIVE_NO_SELECT}>
+      No 
+      <input name="active" id="active" type="radio" value="yes"{ACTIVE_YES_SELECT}>
+      Yes</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Wholesaler:</font></b></font></div></td>
+    <td>
+    {WHOLESALER_COMPANY} 
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Agent:</font></b></font></div></td>
+    <td>
+    {AGENT} 
+    </td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Save">
+</p>
+</form>

@@ -1,0 +1,411 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// outbound_voice_fnn.class - Class for accessing outbound_voice_fnn details
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "user.class";
+include_once "service_types.class";
+
+class outbound_voice_fnn {
+  var $service_id;
+  var $fnn;
+  var $start;
+  var $stop;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function outbound_voice_fnn() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function outbound_voice_fnn() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->service_id = strtoupper($this->service_id);
+
+    if (!$this->service_id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->service_id) {
+      
+      $query = "SELECT * FROM outbound_voice_fnn WHERE service_id = " . $this->db->quote($this->service_id);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        while ($cel = each($row)) {
+
+          $key = $cel['key'];
+          
+          $this->{$key} = $cel['value'];
+          
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->service_id = $this->service_id;
+
+    $user = new user();
+    $user->service_id = $this->service_id;
+    $user->load();
+
+    if ( !$user->service_id ) {
+
+      return 1;
+
+    }
+    
+    
+    $query = "SELECT service_id FROM outbound_voice_fnn WHERE service_id = " . $this->db->quote($this->service_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+    
+    // Create the property search
+    $query = "INSERT INTO outbound_voice_fnn (service_id, fnn, start, stop)";
+    $query .= " VALUES (" . $this->db->quote($this->service_id) .", ". $this->db->quote($this->fnn) . "," . $this->db->quote($this->start) . "," . $this->db->quote($this->stop) .")";
+
+    $result = $this->db->execute_query($query);
+    
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+      
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+    if ($this->create_real() == 1) {
+
+      $this->load();
+      //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+
+        $changes = new audit();
+        $changes->store_first_changes($keys,$this,"outbound_voice_fnn",$this->service_id);
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+    
+    if ( !$this->service_id ) {
+
+      return 160;
+
+    }
+    
+    if ( !$this->fnn || !is_numeric($this->fnn) ) {
+      return 250;
+    }
+
+    // ALL OK
+    return 0;
+    
+  }
+
+/* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+    // Validate
+    if (outbound_voice_fnn::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!outbound_voice_fnn::exist()) {
+      return 0;
+      
+    }
+
+    $previous = new outbound_voice_fnn();
+    $previous->service_id = $this->service_id;
+    $previous->fnn = $this->fnn;
+    $previous->load();
+
+    $query = "UPDATE outbound_voice_fnn SET value = " . $this->db->quote($this->value);
+    $query .= " WHERE order_id = " . $this->db->quote($this->order_id) . " AND param = " . $this->db->quote($this->param);
+    
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+        //Audit section for storing first changes
+        $temp = get_object_vars($this);
+
+        unset($temp['db']);
+        unset($temp["server_name"]);
+        unset($temp["database_name"]);
+        unset($temp["user_name"]);
+        unset($temp["user_password"]);
+        $keys = array_keys($temp);
+        
+        $changes = new audit();
+        $changes->store_changes($keys,$user,$this,"outbound_voice_fnn",$this->service_id);
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+ /* function get_outbound_voice_fnn()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array of outbound_voice_fnn details with correpsonding details for a certain username
+  ** 
+  */
+
+  function get_outbound_voice_fnn($sort){
+      
+      if ( !$this->username ) {
+
+        return 1;
+
+      }
+
+      $a = array();
+
+      $query = "SELECT * FROM outbound_voice_fnn WHERE username = " . $this->db->quote($this->username) . "ORDER BY dt " . $sort;
+      $result = $this->db->execute_query($query);
+      
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_all()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all outbound_voice_fnn details in the table
+  ** 
+  */
+
+  function get_number_range(){
+      
+      $query = "SELECT * FROM outbound_voice_fnn WHERE service_id = " . $this->db->quote($this->service_id);
+      $result = $this->db->execute_query($query);
+      
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+   /* function get_active()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all outbound_voice_fnn details in the table
+  ** 
+  */
+
+  function get_active(){
+      
+      $query = "SELECT * FROM outbound_voice_fnn WHERE service_id = " . $this->db->quote($this->service_id) . " AND stop = '0000-00-00 00:00:00'";
+      $result = $this->db->execute_query($query);
+      
+      $a = array();
+
+      if ($result != 0 ) {
+
+        while($row = $this->db->fetch_row_array($result)) {
+          $a[] = $row;
+        }
+      }
+
+    return $a;
+
+  }
+
+}
+

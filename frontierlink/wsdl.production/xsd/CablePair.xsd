@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="CopperCable.xsd" />
+    <xsd:include schemaLocation="elements/PairType.xsd" />
+    <xsd:include schemaLocation="elements/PairKey.xsd" />
+
+    <xsd:element name="CablePair" type="wsg:CablePair" />
+
+    <xsd:complexType name="CablePair">
+        <xsd:sequence>
+            <xsd:element name="pairType" type="wsg:PairType" minOccurs="0" />
+            <xsd:element name="pairKey" type="wsg:PairKey" minOccurs="0" />
+            <xsd:element name="copperCable" type="wsg:CopperCable" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

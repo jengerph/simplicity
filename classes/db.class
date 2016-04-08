@@ -1,0 +1,207 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// db.class - WebKit database class
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// This class contains the interface to the Webkit databases
+//
+// Copyright (c) 2001 DHS International Pty Ltd.
+//
+// HISTORY:
+// $Log: db.class,v $
+// Revision 1.1.1.1  2003/11/28 23:29:24  menger
+// initial import into CVS
+//
+// Revision 1.1.1.1.2.2  2002/08/11 04:17:02  menger
+// Switched back to mysql_escape_string
+//
+// Revision 1.1.1.1.2.1  2002/08/06 07:40:25  menger
+// Fixed quote to actually work properly with '
+//
+// Revision 1.1.1.1  2002/06/01 09:04:48  menger
+// Initial CVS commit
+//
+//
+///////////////////////////////////////////////////////////////////////////////
+
+class db {
+
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+  var $connection;
+  var $supporess_errors;
+    
+  function check_connection() {
+  
+    if ($this->connection == 0) {
+    
+      $this->connect();
+        
+    }
+  }
+    
+  function db($server_name, $database_name, $user_name, $user_password) {
+  
+
+    // Setup variables
+    $this->server_name = $server_name;
+    $this->database_name = $database_name;
+    $this->user_name = $user_name;
+    $this->user_password = $user_password;
+    
+    $this->connection = 0;
+    
+    
+    // Turn off suppression of errors
+    $suppress_errors = 0;
+  
+  }
+  
+  function connect() {
+  
+    // Connect to database
+    $this->connection = mysql_pconnect($this->server_name, $this->user_name, $this->user_password);
+    
+    // Check connection
+    if ($this->connection == 0) {
+    
+      $this->print_error("Unable to establish a connection with the database server.");
+      
+    }
+
+    // Select database
+    $this->select_database($this->database_name);
+    
+    return $this->connection;
+    
+  }
+  
+  function select_database($db_name) {
+  
+    $this->check_connection();
+    
+    $result = mysql_select_db($db_name, $this->connection);
+    if ($result == 0) {
+    
+      $this->print_error("Unable to select the database (" . $db_name . "). Error returned: (" . $this->error_string() . ")");
+      
+    }
+    
+  }
+  
+  function print_error($error_string) {
+  
+    if (!$this->suppress_errors) {
+    
+      echo "Nonfatal Database Error: " . $error_string . " Please contact support.<br>";
+      
+    }
+    
+  }
+  
+  function error_string() {
+  
+    return mysql_error($this->connection);
+    
+  }
+  
+  function error_number() {
+  
+    return mysql_errno($this->connection);
+    
+  }
+  
+  function execute_query($query) {
+  
+    $this->check_connection();
+    
+    $result = mysql_query($query, $this->connection);
+    
+    if ($result == 0) {
+    
+      $this->print_error("Unable to execute mysql query(" . $query . "). Error returned is : (" . $this->error_string() . ").");
+    
+    }
+    
+    return $result;
+    
+  }
+  
+  function fetch_row_array($query_result) {
+    $this->check_connection();
+    
+    if ($query_result == 0) {
+    
+      $this->print_error("Unable to fetch result of a query. Error returned is (" . $this->error_string() . ").");
+      return 0;
+      
+    }
+    
+    return ( @mysql_fetch_array( $query_result, MYSQL_ASSOC) );
+    
+  }
+
+  function fetch_row_count($query_result) {
+
+    $this->check_connection();
+    
+    if ($query_result == 0) {
+    
+      $this->print_error("Unable to fetch result of a query. Error returned is (" . $this->error_string() . ").");
+      
+      return 0;
+      
+    }
+    
+    return (mysql_num_rows($query_result));
+    
+  }
+  
+  function fetch_insert_id() {
+  
+    return mysql_insert_id($this->connection);
+    
+   }
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // quote($string)
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Changes string to database firendly form by escaping appropiate characters
+  //
+  // This function should be used on ALL fields being inserted and updated into
+  // a MySQL database.
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Parameter:
+  //
+  //   string - text to be escaped
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  //
+  // Returns:
+  // 
+  //    string - the text escaped
+  //
+  ///////////////////////////////////////////////////////////////////////////////
+  function quote($string) {
+
+	  $foo = $string;
+
+    // $foo = "'" . mysql_escape_string($foo) . "'";
+    $foo = "'" . mysql_real_escape_string($foo) . "'";
+
+    return $foo;
+    	
+  }
+    
+    
+}

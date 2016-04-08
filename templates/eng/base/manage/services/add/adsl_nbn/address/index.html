@@ -1,0 +1,25 @@
+<script type="text/javascript">
+function select_service(index){
+	var checkbox = document.querySelectorAll('input[type="checkbox"]');
+	for ( x = 0; x < checkbox.length; x++ ) {
+	console.log(checkbox[x].value);
+		if ( checkbox[x].value != index ) {
+			checkbox[x].checked = false;
+		}
+	}
+}
+</script>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<div><font color="green">&#9989;</font> Qualified &#xbb; Address Confirmation</div>
+<h2><span class="bodytext">Select Address: </span></h2>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&sp={SP}" method="POST">
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+Addresses Available: <br/>
+{ADDRESSES_AVAILABLE}
+<br/>
+<input type="submit" name="submit" id="submit" value="Next"/>
+</form>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="SlaCoverageWindow">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="24/7" />
+            <xsd:enumeration value="Business Hours (Wk 7am-9pm / Sat 9am-5pm)" />
+            <xsd:enumeration value="Consumer Hours (Wk 8:30am-5:30pm)" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/DSLMode.xsd" />
+    <xsd:include schemaLocation="elements/DSLSyncStatus.xsd" />
+
+    <xsd:element name="DSLShowModeSyncResponse" type="wsg:DSLShowModeSyncResponse" />
+
+    <xsd:complexType name="DSLShowModeSyncResponse">
+        <xsd:sequence>
+            <xsd:element name="dslMode" type="wsg:DSLMode" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned ennumerated value representing the DSL Mode the DSLAM is reporting</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dslSyncStatus" type="wsg:DSLSyncStatus" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned ennumerated value indicating whether the DSLAM is in sync or not</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

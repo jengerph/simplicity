@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+    	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    	    xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+    	    elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/EndCustomerName.xsd" />
+    <xsd:include schemaLocation="Contact.xsd" />
+
+    <xsd:complexType name="SiteContactDetails">
+        <xsd:sequence>
+            <xsd:element name="orderContact" type="wsg:Contact">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details relating to Contact responsible for ownership of the Service. Mandatory details of Name and Phone Number are required.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="installationContact" type="wsg:Contact">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details relating to Contact responsible for installation and building access at the site.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="technicalContact" type="wsg:Contact" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details relating to Contact responsible for technical support of the Service. Optional.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

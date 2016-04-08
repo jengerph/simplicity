@@ -1,0 +1,144 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Add Wholesaler: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}" method="post">
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Company Name:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="company_name" type="text" id="company_name" value="{COMPANY_NAME}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Email Address:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="email" type="text" id="email" value="{EMAIL}">
+    </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Phone:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="phone" type="text" id="phone" value="{PHONE}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Active</font></b></font></div></td>
+    <td>
+      <input name="active" type="radio" value="no"{ACTIVE_NO_SELECT}>
+      No 
+      <input name="active" type="radio" value="yes"{ACTIVE_YES_SELECT}>
+      Yes</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Address 1:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="address1" type="text" id="address1" value="{ADDRESS1}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Address 2:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="address2" type="text" id="address2" value="{ADDRESS2}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Suburb:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="city" type="text" id="city" value="{CITY}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">State:</font></b></font></div></td>
+    <td><select name="state" id="state">
+      <option value="ACT" {STATE_ACT_SELECT}>ACT</option>
+      <option value="NSW" {STATE_NSW_SELECT}>NSW</option>
+      <option value="NT" {STATE_NT_SELECT}>NT</option>
+      <option value="QLD" {STATE_QLD_SELECT}>QLD</option>
+      <option value="SA" {STATE_SA_SELECT}>SA</option>
+      <option value="TAS" {STATE_TAS_SELECT}>TAS</option>
+      <option value="VIC" {STATE_VIC_SELECT}>VIC</option>
+      <option value="WA" {STATE_WA_SELECT}>WA</option>
+    </select></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Postcode:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="postcode" type="text" id="postcode" value="{POSTCODE}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Australian Business Number:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="abn" type="text" id="abn" value="{ABN}">
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Services: </font></b></font></div></td>
+    <td>
+    {SERVICE_OPTION}
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Document Upload for Authorised Rep: </font></b></font></div></td>
+    <td>
+      <!-- <input name="req_doc_upload" type="radio" value="no" {REQ_DOC_UPLOAD_NO_SELECT}>
+      No  -->
+      <input name="req_doc_upload" type="checkbox" value="yes" {REQ_DOC_UPLOAD_YES_SELECT}>
+      Require</td>
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">ID Check for Authorised Rep: </font></b></font></div></td>
+    <td>
+      <!-- <input name="req_doc_upload" type="radio" value="no"{REQ_DOC_UPLOAD_NO_SELECT}>
+      No  -->
+      <input name="req_id_check" type="checkbox" value="yes" {REQ_ID_CHECK_YES_SELECT}>
+      Require</td>
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Enable Wholesaler Customer Billing: </font></b></font></div></td>
+    <td>
+      <input name="customer_billing" type="radio" value="no"{CUSTOMER_BILLING_NO_SELECT}>
+      No 
+      <input name="customer_billing" type="radio" value="yes"{CUSTOMER_BILLING_YES_SELECT}>
+      Yes
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Wholesaler Manages Own Plans: </font></b></font></div></td>
+    <td>
+      <input name="manage_own_plan" type="radio" value="no"{MANAGE_OWN_PLAN_NO_SELECT}>
+      No 
+      <input name="manage_own_plan" type="radio" value="yes"{MANAGE_OWN_PLAN_YES_SELECT}>
+      Yes
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Block Customer Order Notifications: </font></b></font></div></td>
+    <td>
+      <input name="block_customer_order_notif" type="radio" value="no"{BLOCK_CUSTOMER_ORDER_NOTIF_NO_SELECT}>
+      No 
+      <input name="block_customer_order_notif" type="radio" value="yes"{BLOCK_CUSTOMER_ORDER_NOTIF_YES_SELECT}>
+      Yes
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Allow Credit Card: </font></b></font></div></td>
+    <td>
+      <input name="allow_credit_card" type="radio" value="no"{ALLOW_CREDIT_CARD_NO_SELECT}>
+      No 
+      <input name="allow_credit_card" type="radio" value="yes"{ALLOW_CREDIT_CARD_YES_SELECT}>
+      Yes
+    </td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Create">
+</p>
+</form>

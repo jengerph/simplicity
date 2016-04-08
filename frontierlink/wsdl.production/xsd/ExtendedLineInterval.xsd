@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="LineCounter.xsd" />
+
+    <xsd:complexType name="ExtendedLineInterval">
+        <xsd:sequence>
+            <xsd:element name="lossOfSignalSeconds" type="wsg:LineCounter" minOccurs="0" />
+            <xsd:element name="lossOfPowerSeconds" type="wsg:LineCounter" minOccurs="0" />
+            <xsd:element name="erroredSeconds" type="wsg:LineCounter" minOccurs="0" />
+            <xsd:element name="severelyErroredSeconds" type="wsg:LineCounter" minOccurs="0" />
+            <xsd:element name="unAvailableSeconds" type="wsg:LineCounter" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

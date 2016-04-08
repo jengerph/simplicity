@@ -1,0 +1,19 @@
+<form name="form" action="{SELF}?service_id={SERVICE_ID}#date" method="POST">
+  <div id="date">
+    <p>Date: From <input type="text" name="date_start" id="date_start" value="{DATE_START}" onchange="form.submit.click();"> To <input type="text" name="date_end" id="date_end" value="{DATE_END}" onchange="form.submit.click();"></p>
+    <input type="submit" name="submit" id="submit" value="Submit" hidden/>
+  </div>
+</form>
+<table class="service_stats">
+  <tr>
+    <th colspan="4" style="padding-left: 5px;">Service Call History</th>
+  </tr>
+  <tr>
+  <tr>
+    <td><font color="black"><strong>Date</strong></font></td>
+    <td><font color="black"><strong>Target</strong></font></td>
+    <td><font color="black"><strong>Usage Type</strong></font></td>
+    <td><font color="black"><strong>Duration(seconds)</strong></font></td>
+  </tr>
+{CALL_HISTORY_ROWS}
+</table>

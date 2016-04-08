@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/SignalOutputPower.xsd" />
+
+    <xsd:complexType name="LinePower">
+        <xsd:sequence>
+            <xsd:element name="up" type="wsg:SignalOutputPower" />
+            <xsd:element name="down" type="wsg:SignalOutputPower" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

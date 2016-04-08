@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/IntervalUOM.xsd" />
+    <xsd:include schemaLocation="elements/IntervalAmount.xsd" />
+
+    <xsd:complexType name="IntervalQuantity">
+        <xsd:sequence>
+            <xsd:element name="amount" type="wsg:IntervalAmount" />
+            <xsd:element name="unit" type="wsg:IntervalUOM" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

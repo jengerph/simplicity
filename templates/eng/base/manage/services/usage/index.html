@@ -1,0 +1,144 @@
+<script type="text/javascript">
+    function month(date){
+        window.location.assign("{SELF}?service_id={SERVICE_ID}&date="+date);
+    }
+</script>
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+
+#slider{
+    width:50%;
+    height:15px;
+    border:1px solid #00aba9;
+    overflow:hidden; }
+#consumed{
+    width:37%;
+    height:15px;
+    border-right: 1px solid #00aba9;
+    background: #00a300; }
+#days_elapsed{
+    width:37%;
+    height:15px;
+    border-right: 1px solid #00aba9;
+    background: #eff4ff; }
+#available {
+    color: #000000;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: bold;
+    left: 25px;
+    position: relative;
+    top: -16px; }
+canvas {
+width: 100% !important;
+max-width: 1000px;
+height: auto !important;
+
+}
+</style><body topmargin="0">
+<h2><span class="bodytest">View  Usage: </span></h2>
+<p>[ <a href="/base/manage/services/?service_id={SERVICE_ID}">&#9664;Back to Service</a> | <a href="/base/manage/services/edit/?service_id={SERVICE_ID}">Edit Service</a> | <a href="/base/manage/services/usage/?service_id={SERVICE_ID}">Service Usage</a> | <a href="/base/manage/services/sessions/?service_id={SERVICE_ID}">Sessions</a>{SERVICE_STATS_LINK} ]</p>
+
+<br/><br/>
+<strong>Monthly Data Allowance:</strong> {MONTHLY_DATA_ALLOWANCE}GB<br/>
+<br/>
+Total Used {TOTAL_USED}: {MONTHLY_CONSUMED_OUTPUT}GB <br/>
+{USED_TODAY}
+<br/>
+<div>
+<strong>USAGE</strong><br/>
+<strong>My Usage</strong><br/>
+<div id="slider">
+    <div id="consumed">
+    </div>
+    <div id="available">
+    </div>
+</div>
+<div style="width:50%;text-align:center">{MONTHLY_CONSUMED_OUTPUT}GB used of {MONTHLY_DATA_ALLOWANCE}GB ({MONTHLY_LEFT})</div>
+
+<strong>Days Elapsed</strong><br/>
+<div id="slider">
+    <div id="days_elapsed">
+    </div>
+    <div id="days_left">
+    </div>
+</div>
+<div style="width:50%;text-align:center">{PASSED_DAYS}days of {TOTAL_DAYS}days (<span id="percent_days"></span>)</div>
+</div>
+<br/>
+<div>
+<div><strong>{USAGE_FOR_THE_PAST}</strong></div>
+<div style="500px">
+    <div>
+        <canvas id="canvas" width="700" height="300"></canvas>
+    </div>
+</div>
+<div>
+    <small>Legend: <font color="#737373">&#9679;</font>Usage</small>
+</div>
+</div>
+<br/>
+<div>
+<form name="form" action="{SELF}?service_id={SERVICE_ID}#date" method="POST">
+  <div id="date">
+    <p><input type="button" name="prev_month" id="prev_month" value="<<" onclick="month('{PREV_MONTH}')" {PREVIOUS_STATE}><input type="text" name="date_start" id="date_start" value="{DATE_START} to {DATE_END}" style="width: 200px; text-align: center;" readonly/><input type="button" name="prev_month" id="prev_month" value=">>" onclick="month('{NEXT_MONTH}')" {NEXT_STATE}>
+    </p>
+    <input type="submit" name="submit" id="submit" value="Submit" hidden/>
+  </div>
+</form>
+<table width="50%" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+        <th><strong>Date</strong></th>
+        <th><strong>Download</strong></th>
+        <th><strong>Upload</strong></th>
+    </tr>
+{ROWS}
+</table>
+</div>
+<script>
+drawslider("consumed",{MONTHLY_DATA_ALLOWANCE_FOR_GRAPH}, {MONTHLY_CONSUMED_OUTPUT});
+drawslider("days_elapsed",{TOTAL_DAYS}, {PASSED_DAYS});
+
+function drawslider(key, value1, value2){
+    var available=Math.round((value2*100)/value1);
+    document.getElementById(key).style.width=available+'%';
+    if ( key != "consumed" ) {
+        document.getElementById("percent_days").innerHTML=available+'%';
+    }
+}
+</script>
+<script src="/templates/chart/Chart.js"></script>
+<script src="/templates/chart/Chart.Line.js"></script>
+<script>
+
+        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+        var lineChartData = {
+            labels : [{USAGE_DATES}],
+            datasets : [
+                {
+                    label: "My First dataset",
+                    fillColor : "rgba(220,220,220,0.2)",
+                    strokeColor : "#737373",
+                    pointColor : "#737373",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(220,220,220,1)",
+                    data : [{USAGE_DATA}]
+                }
+            ]
+
+        }
+
+    window.onload = function(){
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myLine = new Chart(ctx).Line(lineChartData, {
+            maintainAspectRatio: false,
+            responsive: true
+        });
+    }
+
+
+    </script>

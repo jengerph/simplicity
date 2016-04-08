@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="PacketLoss.xsd" />
+    <xsd:include schemaLocation="SpeedIssue.xsd" />
+
+    <xsd:element name="Performance" type="wsg:Performance" />
+
+    <xsd:complexType name="Performance">
+        <xsd:sequence>
+            <xsd:element name="packetLoss" type="wsg:PacketLoss" />
+            <xsd:element name="mtuIssue" type="xsd:boolean" />
+            <xsd:element name="crcErrors" type="xsd:boolean" />
+            <xsd:element name="speedIssue" type="wsg:SpeedIssue" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

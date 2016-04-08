@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/ServiceOrderType.xsd" />
+    <xsd:include schemaLocation="elements/ServiceStatus.xsd" />
+    <xsd:include schemaLocation="ProductOrderDetails.xsd" />
+
+    <xsd:complexType name="ServiceOrderDetail">
+        <xsd:sequence>
+            <xsd:element name="serviceOrderID" type="wsg:ServiceID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each service order</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceOrderType" type="wsg:ServiceOrderType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each service order type</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceStatus" type="wsg:ServiceStatus">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A AAPT specific indicator of Status of the Service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ProductOrderDetails" type="wsg:ProductOrderDetails" maxOccurs="unbounded" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of AAPT workflow events and information and the orders contact</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

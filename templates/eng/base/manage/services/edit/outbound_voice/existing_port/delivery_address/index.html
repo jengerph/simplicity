@@ -1,0 +1,13 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Delivery Address: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="red">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&outbound_kind={OUTBOUND_KIND}" method="post" name="form">
+{DELIVERY_ADDRESS_FORM}
+  <p><input name="submit" type="submit" id="submit" value="Next"></p>
+  <input name="submit2" type="submit" id="submit2" value="address_lookup" hidden>
+</form>

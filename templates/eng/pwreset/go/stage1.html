@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" >
+<head>
+<title>Please Log In - Simplicity</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel='stylesheet'  href='/templates/style.css' type='text/css' media='all' />
+</head>
+
+<body>
+
+<div id="wrap">
+
+<div id="header"> 
+	<h1 id="logo"><a href="https://simplicity.xi.com.au/">Simplicity</a></h1>
+</div> <!-- #header -->
+
+<div id="content">
+
+	<h1 id="please">Recover Simplicity password</h1>
+
+	<p id="logmessage">&nbsp;{ERROR_MSG}</p>
+	<form action="stage2.php" method="post">
+	  
+	  <div align="center">
+		<table width="600px" id="logform">
+		  <tr>
+			<td class="labels" >
+				&nbsp;
+			</td>
+			<td>
+				<b>Username:</b>
+			</td>
+		<td>
+				<b>First Name:</b>
+			</td>
+	
+    		<td>
+				<b>Last Name:</b>
+			</td>
+	
+		  </tr>
+          {ROWS}
+		</table>
+	  </div>
+	  <p align="center">
+      
+	    <input name="submit" type="submit" id="submit" value="Next">
+  <input name="reset_id" type="hidden" id="reset_id" value="{RESET_ID}">
+  <input name="token" type="hidden" id="token" value="{TOKEN}">
+	  </p>
+	</form>
+</div>
+
+
+
+
+</div> <!-- #wrap -->
+
+<div id="footer">
+<p>&copy; 2015 X Integration. All rights reserved</p>
+</div>
+</body>
+</html>

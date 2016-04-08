@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" 
+            xmlns="http://www.w3.org/2001/XMLSchema" 
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd" 
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="ExtendedLinePerformance.xsd" />
+
+    <xsd:element name="DSLQueryProgressExtendedLinePerformanceResponse" type="wsg:DSLQueryProgressExtendedLinePerformanceResponse" />
+
+    <xsd:complexType name="DSLQueryProgressExtendedLinePerformanceResponse">
+        <xsd:sequence>
+            <xsd:element name="extendedLinePerformance" type="wsg:ExtendedLinePerformance">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Details of line and channel performance available over 15 minute intervals (up to 4 hours) as well as some fixed intervals like last 15min, last day.
+                        Statistics include error rates as well as utilisation
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

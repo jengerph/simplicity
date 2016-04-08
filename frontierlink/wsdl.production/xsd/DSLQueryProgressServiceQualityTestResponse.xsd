@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="ExtendedSQTest.xsd" />
+
+    <xsd:element name="DSLQueryProgressServiceQualityTestResponse" type="wsg:DSLQueryProgressServiceQualityTestResponse" />
+
+    <xsd:complexType name="DSLQueryProgressServiceQualityTestResponse">
+        <xsd:sequence>
+            <xsd:element name="extendedServiceQualityTest" type="wsg:ExtendedSQTest" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Results of the Service Quality Test</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>  
+</xsd:schema>

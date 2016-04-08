@@ -1,0 +1,78 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<div><font color="green">&#9989;</font> Change of Service &#xbb; <font color="green">&#9989;</font> Qualified &#xbb; <font color="green">&#9989;</font> Service Type &#xbb; Create an Order</div>
+<h2><span class="bodytext">Create an Order: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?service_id={SERVICE_ID}" method="post" name="form">
+  <input name="customer_id" type="text" id="customer_id" value="{CUSTOMER_ID}" hidden>
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Identifier:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {IDENTIFIER}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Address:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {ORDER_ADDRESS}
+    </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Username:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="order_username" type="text" id="order_username" value="{ORDER_USERNAME}">@{REALM_OPTION} -->
+      {ORDER_USERNAME}
+    </font></td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Password:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="order_password" type="text" id="order_password" value="{ORDER_PASSWORD}"> -->
+      {ORDER_PASSWORD}
+    </font></td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Contract End:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {CONTRACT_END}
+    </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Service Type:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {SERVICE_TYPE}
+      </font></td>
+  </tr>
+  {WHOLESALER_ROW}
+  {RETAILER_ROW}
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Tag:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="tag" type="text" id="tag" value="{TAG}">
+      </font></td>
+  </tr>
+<!--     <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Is this a churn?</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input type="radio" name="order_churn" id="order_churn_y" value="yes" onChange='form.submit.click()' {ORDER_CHURN_YES}> Yes
+      <input type="radio" name="order_churn" id="order_churn_n" value="no" onChange='form.submit.click()' {ORDER_CHURN_NO}> No
+    </font></td>
+  </tr> -->
+  {CHURN}
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Order Contact:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {ORDER_CONTACT_LIST}
+    </font></td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Order Change of Service">
+  <input name="submit2" type="submit" id="submit2" value="submit" hidden>
+</p>
+</form>

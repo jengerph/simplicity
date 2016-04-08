@@ -1,0 +1,20 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<div><font color="green">&#9989;</font> Initial &#xbb; Distribution &#xbb; Create Service</div>
+<h2><span class="bodytext">Inbound Voice - Distribute: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&sp={SP}" method="POST">
+	How do you want the calls to be distributed? 
+		<font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+		<input type="radio" name="distribution" id="distribution" value="standard_one_destination" onclick="form.distribution_btn.click();" {DISTRIBUTION_SOD}> Standard One Destination
+		<input type="radio" name="distribution" id="distribution" value="complex_distribution" onclick="form.distribution_btn.click();" {DISTRIBUTION_CD}> Complex Distribution
+		</font>
+{FORM_PART2}
+<!-- buttons -->
+<input type="submit" name="distribution_btn" id="distribution_btn" value="Distribution" hidden/>
+<p><input type="submit" name="submit" id="submit" value="Submit"/></p>
+</form>

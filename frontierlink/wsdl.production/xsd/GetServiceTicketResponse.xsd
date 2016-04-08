@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/CustomerReference.xsd" />
+    <xsd:include schemaLocation="elements/TicketCondition.xsd" />
+    <xsd:include schemaLocation="elements/TicketStatus.xsd" />
+    <xsd:include schemaLocation="TicketFaultDetails.xsd" />
+    <xsd:include schemaLocation="TicketSlaDetails.xsd" />
+    <xsd:include schemaLocation="TicketContact.xsd" />
+    <xsd:include schemaLocation="TicketHistoryList.xsd" />
+
+    <xsd:element name="GetServiceTicketResponse" type="wsg:GetServiceTicketResponse" />
+
+    <xsd:complexType name="GetServiceTicketResponse">
+        <xsd:sequence>
+            <xsd:element name="ticketTitle" type="xsd:string" />
+            <xsd:element name="ticketCondition" type="wsg:TicketCondition" />
+            <xsd:element name="ticketStatus" type="wsg:TicketStatus" />
+            <xsd:element name="customerReference" type="wsg:CustomerReference" minOccurs="0" />
+            <xsd:element name="serviceNumber" type="xsd:string" />
+            <xsd:element name="ticketFaultDetails" type="wsg:TicketFaultDetails" />
+            <xsd:element name="ticketSlaDetails" type="wsg:TicketSlaDetails" />
+            <xsd:element name="ticketActivityContact" type="wsg:TicketContact" minOccurs="0" />
+            <xsd:element name="ticketSiteContact" type="wsg:TicketContact" minOccurs="0" />
+            <xsd:element name="ticketHistoryList" type="wsg:TicketHistoryList" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,40 @@
+<script src="https://code.jquery.com/jquery-1.7.1.js" type="text/javascript"></script>
+ <link href="/select2/select2.css" rel="stylesheet"/>
+<script src="/select2/select2.js"></script>
+<script>
+$(document).ready(function() { $("#select_username").select2();});
+</script>
+<style type="text/css">
+<!--
+.bodytest {font-family: Arial, Helvetica, sans-serif}
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytest">View  Audit: </span></h2>
+</p>
+	<form action="{SELF}" method="POST" id="audit_form">
+		<select name="select_username" id="select_username" onchange='form.submit.click()'>
+	        <option value="view_all">View All</option>
+	        {OPTION}
+		</select>
+		Sort Date by:
+			<input type="radio" name="sortby" value="ASC" id="sortbyd" onclick="form.submit.click()" {SORT_ASC_CHECK}> Oldest
+			<input type="radio" name="sortby" value="DESC" id="sortbya" onclick="form.submit.click()" {SORT_DESC_CHECK}> Newest
+	<!-- </form> -->
+<span style="float:right;"><a href="/base/manage/audit/download/?select_username={SELECT_USERNAME}">Download</a></span>
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+	<tr>
+	    <th><strong>Username</strong></th>
+	    <th><strong>Field</strong></th>
+	    <th><strong>ID</strong></th>
+	    <th><strong>Activity</strong></th>
+	    <th><strong>Date</strong></th>
+  	</tr>
+{ROWS}
+</table>
+<div style="text-align:center" >
+<!-- <form action="{SELF}" method="POST"> -->
+<a href="?select_username={SELECT_USERNAME}&page={PREVIOUS_PAGE}&sortby={SORT}">&#171;&#171;</a> <input type="text" name="page" id="page" value="{CURRENT_PAGE}" style="width: 40px; text-align: center;"><a href="?select_username={SELECT_USERNAME}&page={NEXT_PAGE}&sortby={SORT}">&#187;&#187;</a><br/><span> of {TOTAL_PAGES} Pages</span><br/><small>({ENTRIES} results)</small>
+<input type="submit" name="submit" id="submit" value="Submit" hidden>
+</form>
+</div>

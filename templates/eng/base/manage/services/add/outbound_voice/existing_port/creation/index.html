@@ -1,0 +1,75 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<!-- <div><font color="green">&#9989;</font> Initial &#xbb; <font color="green">&#9989;</font> Distribution &#xbb; Create Service</div> -->
+<h2><span class="bodytext">Create a Service: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?customer_id={CUSTOMER_ID}&sp={SP}" method="post" name="form">
+  <input name="customer_id" type="text" id="customer_id" value="{CUSTOMER_ID}" hidden>
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Identifier:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {IDENTIFIER}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Company Name:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {COMPANY_NAME}
+      </font></td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Delivery Address:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {DELIVERY_ADDRESS}
+      </font></td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Contract Length:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <select name="order_contract_length" id="order_contract_length"  onchange="form.submit_contract_length.click()">
+        <option value="0">--Select Contract Length--</option>
+        <option value="0" {CONTRACT_LENGTH_0}>0 months</option>
+        <option value="12" {CONTRACT_LENGTH_12}>12 months</option>
+        <option value="24" {CONTRACT_LENGTH_24}>24 months</option>
+      </select>
+    </font>
+    <input type="submit" name="submit_contract_length" id="submit_contract_length" hidden/>
+  </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Service Type:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {SERVICE_TYPE}
+      </font></td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Retail Plan:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="retail_plan" type="text" id="retail_plan" value="{RETAIL_PLAN}"> -->
+      {RETAIL_PLAN_LIST}
+      </font></td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Tag:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="tag" type="text" id="tag" value="{TAG}">
+      </font></td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Order Contact:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="order_churn_contact_0" type="text" id="order_churn_contact_0" value="{ORDER_CHURN_CONTACT_0}"> -->
+      {ORDER_CONTACT_LIST}
+    </font></td>
+  </tr>
+</table>
+<p>
+  <input name="submit2" type="submit" id="submit2" value="Create">
+  <input name="submit" type="submit" id="submit" value="submit" hidden>
+</p>
+</form>

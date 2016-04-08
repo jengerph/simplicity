@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ExchangeCode.xsd" />
+    <xsd:include schemaLocation="GeoCoordinates.xsd" />
+    <xsd:include schemaLocation="elements/NbnLocationID.xsd" />
+    <xsd:include schemaLocation="elements/CopperCableSource.xsd" />
+    <xsd:include schemaLocation="elements/Length.xsd" />
+
+    <xsd:complexType name="QualificationSiteDetails">
+        <xsd:sequence>
+            <xsd:element name="exchangeCode" type="wsg:ExchangeCode" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A Telstra assigned unique code for each Exchange. The Exchange the CSN or address exists in</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="exchangeServiceArea" type="wsg:ExchangeCode" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A Telstra assigned unique code for each Exchange Service Area. The Exchange Service Area the CSN or address exists in
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="gpsLocation" type="wsg:GeoCoordinates" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The calculated geocode detaild for the qualified site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="copperCableSource" type="wsg:CopperCableSource" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Method used to derive distance to exchange</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="distanceToExchange" type="wsg:Length" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Calculated distance to exchange for the qualified site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="nbnLocationID" type="wsg:NbnLocationID" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An NBN assigned unique ID for the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dslCodesOnLine" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Are there active DSL Codes on the line</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

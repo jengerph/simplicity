@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="SalesOrderDetail.xsd" />
+
+    <xsd:element name="NewServiceResponse" type="wsg:NewServiceResponse" />
+
+    <xsd:complexType name="NewServiceResponse">
+        <xsd:sequence>
+            <xsd:element name="salesOrder" type="wsg:SalesOrderDetail">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details pertaining to the Sales Order capturing the customers request</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
