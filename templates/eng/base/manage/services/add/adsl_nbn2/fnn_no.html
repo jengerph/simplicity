@@ -1,0 +1,45 @@
+<script type="text/javascript" src="http://expresscapture.datatoolscloud.net.au/js/expresscapture-2.20.min.js?key=ZA24-YT99-ER98-BK33"></script><link rel="stylesheet" type="text/css" href="http://expresscapture.datatoolscloud.net.au/css/expresscapture-2.20.min.css?key=ZA24-YT99-ER98-BK33" />
+<br/>
+    <table id="address">
+      <tr>
+        <td class="label" style="width:150px;">Enter address:</td>
+        <td colspan="3" class="slimField"><span class="wideField">
+          <input class="field" id="address_entry" name="address_entry" value="{ADDRESS_ENTRY}" />
+        </span></td>
+      </tr>
+      <tr>
+        <td class="label" style="width:150px;">Unit / Level</td>
+        <td class="slimField"><input class="field" id="unit_level" name="unit_level" value="{UNIT_LEVEL}" /></td>
+        <td class="wideField" colspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="label" style="width:150px;">Street address</td>
+        <td class="slimField"><input class="field" id="street_number" name="street_number" value="{STREET_NUMBER}" /></input></td>
+        <td class="wideField" colspan="2"><input class="field" id="street_name" name="street_name" value="{STREET_NAME}" /></input></td>
+      </tr>
+      <tr>
+        <td class="label">Suburb</td>
+        <td class="wideField" colspan="3"><input class="field" id="suburb" name="suburb" value="{SUBURB}" /></input></td>
+      </tr>
+      <tr>
+        <td class="label">State</td>
+        <td class="slimField">
+          <select name="state" id="state">
+            <option value="VIC"{STATE_VIC_SELECT}>VIC</option>
+            <option value="NSW"{STATE_NSW_SELECT}>NSW</option>
+            <option value="ACT"{STATE_ACT_SELECT}>ACT</option>
+            <option value="QLD"{STATE_QLD_SELECT}>QLD</option>
+            <option value="TAS"{STATE_TAS_SELECT}>TAS</option>
+            <option value="NT"{STATE_NT_SELECT}>NT</option>
+            <option value="SA"{STATE_SA_SELECT}>SA</option>
+            <option value="WA"{STATE_WA_SELECT}>WA</option>
+        </select> </td>
+        <td class="label">Post code</td>
+        <td class="wideField"><input class="field" id="post_code" name="post_code" value="{POST_CODE}" /></input></td>
+      </tr>
+      <tr>
+        <td class="label">Country</td>
+        <td class="wideField" colspan="3"><input class="field" id="country" name="country" value="AUSTRALIA" /></input></td>
+      </tr>
+    </table>
+{LOCATION_TABLE}

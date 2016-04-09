@@ -155,8 +155,8 @@ function servicequal_address1($address){
   $params['address'] = $address;
   $params['serviceProvider'] = array();
   $params['serviceProvider'][0] = 'Telstra';
-	echo "Matt:\n";
-  print_r($params); 
+	//echo "Matt:\n";
+  //print_r($params); 
   try{
           $response = $client->findServiceProviderLocationId($params);         
      }

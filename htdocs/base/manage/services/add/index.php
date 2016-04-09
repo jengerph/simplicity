@@ -41,6 +41,7 @@ if ($user->class == 'customer') {
 // Assign the templates to use
 $pt->setFile(array("service_option" => "base/manage/wholesalers/service_option.html",
                     "option_adsl_nbn" => "base/manage/services/add/option_adsl_nbn.html",
+                    "option_adsl_nbn2" => "base/manage/services/add/option_adsl_nbn2.html",
                     "option_inbound_voice" => "base/manage/services/add/option_inbound_voice.html",
                     "option_outbound_voice" => "base/manage/services/add/option_outbound_voice.html"));
 
@@ -115,6 +116,10 @@ if ( $services ) {
       case '2':
         if ( $adsl_nbn_count == 0 ) {
           $pt->parse("KINDS_SERVICES","option_adsl_nbn","true");
+          
+          if ($user->username = 'menger') {
+          	$pt->parse("KINDS_SERVICES","option_adsl_nbn2","true");
+          }
           $adsl_nbn_count = 1;
         }
         break;
