@@ -9,8 +9,6 @@
     <xsd:include schemaLocation="elements/PairType.xsd" />
     <xsd:include schemaLocation="elements/PairKey.xsd" />
 
-    <xsd:element name="CablePair" type="wsg:CablePair" />
-
     <xsd:complexType name="CablePair">
         <xsd:sequence>
             <xsd:element name="pairType" type="wsg:PairType" minOccurs="0" />

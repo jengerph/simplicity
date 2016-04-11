@@ -5,7 +5,7 @@
 
     <xsd:simpleType name="MobileTelephoneNumber">
         <xsd:restriction base="xsd:string">
-            <xsd:pattern value="04[0-9]{8}" />
+            <xsd:pattern value="(04|[+]614)\d{8}" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

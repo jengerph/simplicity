@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="LifeCycleStatus">
+        <xsd:restriction base="xsd:string" >
+        	<xsd:enumeration value="RESERVED" />
+        	<xsd:enumeration value="BOOKED" />
+        	<xsd:enumeration value="IN PROGRESS" />
+        	<xsd:enumeration value="COMPLETED" />
+        	<xsd:enumeration value="INCOMPLETE" />
+        	<xsd:enumeration value="CANCELLED" />
+        </xsd:restriction>
+    </xsd:simpleType>    
+</xsd:schema>

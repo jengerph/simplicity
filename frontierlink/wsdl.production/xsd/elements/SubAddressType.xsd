@@ -6,7 +6,7 @@
     <xsd:simpleType name="SubAddressType">
         <xsd:restriction base="xsd:string">
             <xsd:minLength value="1" />
-            <xsd:maxLength value="6" />
+            <xsd:maxLength value="15" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

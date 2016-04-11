@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AllocateNewLine.xsd" />
+    <xsd:include schemaLocation="elements/YesNo.xsd" />
+	<xsd:include schemaLocation="elements/UniVlanId.xsd" />
+    <xsd:include schemaLocation="CopperPairDetails.xsd" />
+    <xsd:include schemaLocation="UnlistedCopperPairDetails.xsd" />
+    
+    <xsd:complexType name="NCASDetails">
+        <xsd:sequence>
+	       	<xsd:choice>
+		        <xsd:element name="existingCopperPairDetails" type="wsg:CopperPairDetails" />
+	            <xsd:element name="allocateNewLine" type="wsg:AllocateNewLine" />
+	            <xsd:element name="unlistedCopperPairDetails" type="wsg:UnlistedCopperPairDetails" />
+	       	</xsd:choice>
+	       	<xsd:element name="uniVlanId" type="wsg:UniVlanId" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

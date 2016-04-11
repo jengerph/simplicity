@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+	        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+	        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="Contact.xsd" />
+    <xsd:include schemaLocation="PublicNumberCustomerName.xsd" />
+    <xsd:include schemaLocation="SiteAddress.xsd" />
+    
+    <xsd:include schemaLocation="elements/CarriageServiceProviderCode.xsd" />
+    <xsd:include schemaLocation="elements/DirectoryUsageCode.xsd" />
+    <xsd:include schemaLocation="elements/DirectoryListingCode.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+
+    <xsd:complexType name="ModifyIPNDRecord">
+        <xsd:sequence>
+            <xsd:element name="serviceOrderID" type="wsg:ServiceID" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each service order</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        	<xsd:element name="serviceAddress" type="wsg:SiteAddress">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Customer serviceAddress </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="directoryUsageCode" type="wsg:DirectoryUsageCode">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Type of directory usage</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="directoryListingCode" type="wsg:DirectoryListingCode">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Type of directory listing</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="carriageServiceProviderCode" type="wsg:CarriageServiceProviderCode" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Carriage Service Provide Code.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="publicNumberCustomerName" type="wsg:PublicNumberCustomerName">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Public number customer name</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

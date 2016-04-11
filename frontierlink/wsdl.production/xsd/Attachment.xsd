@@ -8,8 +8,6 @@
     <xsd:include schemaLocation="elements/FileName.xsd" />
     <xsd:include schemaLocation="elements/RawAttachment.xsd" />
 
-    <xsd:element name="Attachment" type="wsg:Attachment" />
-
     <xsd:complexType name="Attachment">
         <xsd:sequence>
             <xsd:element name="fileName" type="wsg:FileName" />

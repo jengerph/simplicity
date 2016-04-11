@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="NbnServiceabilityClass">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">0 indicates that the location is not NBN serviceable</xsd:documentation>
+            <xsd:documentation xml:lang="en">1 indicates that the location is fibre serviceable, but a physical connection is not yet in place</xsd:documentation>
+            <xsd:documentation xml:lang="en">2 indicates that the location is fibre serviceable, but the NTD is not yet installed</xsd:documentation>
+            <xsd:documentation xml:lang="en">3 indicates that the location is fibre serviceable, and that the NTD has been installed</xsd:documentation>
+            <xsd:documentation xml:lang="en">4 indicates that the location is wireless serviceable, but a physical connection is not yet in place</xsd:documentation>
+            <xsd:documentation xml:lang="en">5 indicates that the location is wireless serviceable, but the NTD is not yet installed</xsd:documentation>
+            <xsd:documentation xml:lang="en">6 indicates that the location is wireless serviceable, and that the NTD has been installed</xsd:documentation>
+            <xsd:documentation xml:lang="en">10 indicates that the location is planned to be serviceable by copper</xsd:documentation>
+            <xsd:documentation xml:lang="en">11 indicates that the location is serviceable by copper, active node present</xsd:documentation>
+            <xsd:documentation xml:lang="en">12 indicates that the location is serviceable by copper, jumpering is required</xsd:documentation>
+            <xsd:documentation xml:lang="en">13 indicates that the location is serviceable by copper, infrastructure in place</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="0" />
+            <xsd:enumeration value="1" />
+            <xsd:enumeration value="2" />
+            <xsd:enumeration value="3" />
+            <xsd:enumeration value="4" />
+            <xsd:enumeration value="5" />
+            <xsd:enumeration value="6" />
+            <xsd:enumeration value="10" />
+            <xsd:enumeration value="11" />
+            <xsd:enumeration value="12" />
+            <xsd:enumeration value="13" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

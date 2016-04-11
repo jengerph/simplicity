@@ -5,16 +5,14 @@
             xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
             elementFormDefault="qualified">
 
-    <xsd:include schemaLocation="elements/NationalWholesaleBroadbandSpeed.xsd" />
+    <xsd:include schemaLocation="elements/ServiceSpeed.xsd" />
     <xsd:include schemaLocation="elements/TestResult.xsd" />
-
-    <xsd:element name="SpeedStatus" type="wsg:SpeedStatus" />
 
     <xsd:complexType name="SpeedStatus">
         <xsd:sequence>
-            <xsd:element name="serviceSpeed" type="wsg:NationalWholesaleBroadbandSpeed">
+            <xsd:element name="serviceSpeed" type="wsg:ServiceSpeed">
                 <xsd:annotation>
-                    <xsd:documentation xml:lang="en">Speed of national wholesale broadband service</xsd:documentation>
+                    <xsd:documentation xml:lang="en">Speed of the service</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="status" type="wsg:TestResult">

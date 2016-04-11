@@ -5,7 +5,7 @@
 
     <xsd:simpleType name="Suburb">
         <xsd:restriction base="xsd:string">
-            <xsd:pattern value="[A-Z '\-]{1,40}" />
+            <xsd:minLength value="1" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

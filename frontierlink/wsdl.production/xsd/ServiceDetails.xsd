@@ -5,7 +5,12 @@
             xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
             elementFormDefault="qualified">
 
+    <xsd:include schemaLocation="CallTerminationService.xsd" />
     <xsd:include schemaLocation="NationalWholesaleBroadbandService.xsd" />
+    <xsd:include schemaLocation="OutboundSwitchedVoiceService.xsd" />
+    <xsd:include schemaLocation="RequestXpressService.xsd" />
+    <xsd:include schemaLocation="RezLineService.xsd" />
+    <xsd:include schemaLocation="HubAggregationCircuitService.xsd" />
 
     <xsd:complexType name="ServiceDetails">
         <xsd:annotation>
@@ -13,9 +18,34 @@
         </xsd:annotation>
         <xsd:sequence>
             <xsd:choice>
+                <xsd:element name="callTerminationService" type="wsg:CallTerminationService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en"> A complex definition of details relating to the Call Termination Service Product Type.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
                 <xsd:element name="nationalWholesaleBroadbandService" type="wsg:NationalWholesaleBroadbandService">
                     <xsd:annotation>
                         <xsd:documentation xml:lang="en"> A complex definition of details relating to the National Wholesale Broadband Product Type.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="outboundSwitchedVoiceService" type="wsg:OutboundSwitchedVoiceService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en"> A complex definition of details relating to the Outbound Switched Voice Product Type.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="requestXpressService" type="wsg:RequestXpressService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en"> A complex definition of details relating to the RequestXpress Product Type.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="rezLineService" type="wsg:RezLineService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en"> A complex definition of details relating to the Rezline Product Type.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="hubAggregationCircuitService" type="wsg:HubAggregationCircuitService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en"> A complex definition of details relating to the Hub Aggregation Service for Layer 2 FTTB Product Type</xsd:documentation>
                     </xsd:annotation>
                 </xsd:element>
             </xsd:choice>

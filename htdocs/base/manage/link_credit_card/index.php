@@ -18,6 +18,7 @@ include_once "wholesalers.class";
 include_once "customers.class";
 include_once "tokens_wholesalers.class";
 include_once "tokens_customers.class";
+//require_once 'eway-rapid-php-master/include_eway.php';
 include_once "eway/lib/eWAY/RapidAPI.php";
 
 $user = new user();

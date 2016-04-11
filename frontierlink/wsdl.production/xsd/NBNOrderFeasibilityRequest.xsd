@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ServiceSpeed.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    
+    <xsd:include schemaLocation="NCASDetails.xsd" />
+    <xsd:include schemaLocation="NFASDetails.xsd" />
+
+    <xsd:element name="NBNOrderFeasibilityRequest" type="wsg:NBNOrderFeasibilityRequest" />
+
+    <xsd:complexType name="NBNOrderFeasibilityRequest">
+        <xsd:sequence>
+             <xsd:element name="nbnLocationID" type="wsg:LocationId">
+                <xsd:annotation>
+                	<xsd:documentation xml:lang="en">An NBN assigned unique ID for the customer site</xsd:documentation>
+            	</xsd:annotation>
+         	</xsd:element>
+         	<xsd:choice minOccurs="0">
+         		<xsd:element name="nfasDetails" type="wsg:NFASDetails" />
+         		<xsd:element name="ncasDetails" type="wsg:NCASDetails">
+	                <xsd:annotation>
+	                    <xsd:documentation xml:lang="en">Nbn copper access service (ncas) details.</xsd:documentation>
+	                </xsd:annotation>
+            	</xsd:element>
+         	</xsd:choice>
+         	<xsd:element name="serviceSpeed" type="wsg:ServiceSpeed">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Speed of national wholesale broadband service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

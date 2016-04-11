@@ -21,7 +21,7 @@
                     <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="siteAddress" type="wsg:SiteAddress">
+            <xsd:element name="siteAddress" type="wsg:SiteAddress" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">A complex definition of details relating to the Site. Conforms to the Telstra constructs for DSL Sites.</xsd:documentation>
                 </xsd:annotation>
@@ -36,7 +36,7 @@
                     <xsd:documentation xml:lang="en">The Testra designated Full National Number. May or may not correspond to the PSTN telephony service number</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="serviceDetails" type="wsg:ServiceDetails">
+            <xsd:element name="serviceDetails" type="wsg:ServiceDetails" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">A complex definition of details pertaining to the product</xsd:documentation>
                 </xsd:annotation>

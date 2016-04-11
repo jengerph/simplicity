@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+	        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+	        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ListCode.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/UsageCode.xsd" />
+    <xsd:include schemaLocation="Contact.xsd" />
+
+    <xsd:complexType name="IpndDetails">
+        <xsd:sequence>
+            <xsd:element name="serviceOrderID" type="wsg:ServiceID" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each service order</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="locationId" type="wsg:LocationId">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A Telstra assigned unique ID for the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="contact" type="wsg:Contact">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Contact for the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="listCode" type="wsg:ListCode" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The list code used to identify the Customer's Directory Related Services requirements</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="usageCode" type="wsg:UsageCode" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The usage of the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

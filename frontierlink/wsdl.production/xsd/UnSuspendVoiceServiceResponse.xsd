@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd" 
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" 
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ServiceSuspendedFlag.xsd" />
+
+    <xsd:element name="UnSuspendVoiceServiceResponse" type="wsg:UnSuspendVoiceServiceResponse" />
+    
+    <xsd:complexType name="UnSuspendVoiceServiceResponse">
+        <xsd:sequence>
+            <xsd:element name="serviceSuspendedFlag" type="wsg:ServiceSuspendedFlag">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Used to determine if service has been suspended.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

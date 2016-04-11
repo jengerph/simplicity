@@ -6,16 +6,24 @@
             elementFormDefault="qualified">
 
     <xsd:include schemaLocation="elements/FormID.xsd" />
+    <xsd:include schemaLocation="elements/CaseID.xsd" />
 
     <xsd:element name="ListActivitiesRequest" type="wsg:ListActivitiesRequest" />
 
     <xsd:complexType name="ListActivitiesRequest">
         <xsd:sequence>
-            <xsd:element name="productOrderID" type="wsg:FormID">
-                <xsd:annotation>
-                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer product order</xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="productOrderID" type="wsg:FormID">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer product order</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="provisioningCaseID" type="wsg:CaseID"> 
+                    <xsd:annotation> 
+                        <xsd:documentation xml:lang="en">The AAPT assigned Order Number for each customer product order</xsd:documentation> 
+                    </xsd:annotation> 
+                </xsd:element>
+             </xsd:choice>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>

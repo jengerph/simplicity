@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/IpAddress.xsd" />
+
+    <xsd:complexType name="LanConfiguration">
+        <xsd:sequence>
+            <xsd:element name="ipAddress" type="wsg:IpAddress" />
+            <xsd:element name="netMask" type="wsg:IpAddress" />
+            <xsd:element name="lanGateway" type="wsg:IpAddress" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="ProductInList.xsd" />
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/CustomerRequiredDate.xsd" />
+    <xsd:include schemaLocation="elements/ISDN2Type.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    <xsd:include schemaLocation="elements/NewLineQuantity.xsd" />
+    <xsd:include schemaLocation="elements/RebillServiceTypes.xsd" />
+
+    <xsd:complexType name="VoiceOrderMultipleLines">
+        <xsd:sequence>
+            <xsd:element name="quantityOfNewLines" type="wsg:NewLineQuantity">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The number of new lines required</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceType" type="wsg:RebillServiceTypes">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The type of service number to be ordered</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerRequiredDate" type="wsg:CustomerRequiredDate">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The date the customer requires the service to be activated</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="telstraLocationID" type="wsg:LocationId">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A Telstra assigned unique ID for the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="products" type="wsg:ProductInList">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Products to be added</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

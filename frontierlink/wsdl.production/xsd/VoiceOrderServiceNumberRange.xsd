@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd" 
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" 
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/CustomerRequiredDate.xsd" />
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="FixedTelephoneNumberRange.xsd" />
+    <xsd:include schemaLocation="ProductInList.xsd" />
+
+    <xsd:complexType name="VoiceOrderServiceNumberRange">
+        <xsd:sequence>
+            <xsd:element name="primaryServiceNumber" type="wsg:FixedTelephoneNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceNumberRangeMinimum" type="wsg:FixedTelephoneNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A minimum range service number at the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="numberOfHundredSizeBlocks" type="xsd:int">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Number of 100 size blocks</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerRequiredDate" type="wsg:CustomerRequiredDate">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The date the customer requires the service to be activated</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

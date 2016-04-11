@@ -6,10 +6,28 @@
     <xsd:simpleType name="AccessMethod">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="AAPT ADSL2+" />
+            <xsd:enumeration value="AAPT SHDSL" />
             <xsd:enumeration value="iiNet ADSL2+" />
             <xsd:enumeration value="Telstra L2IG" />
             <xsd:enumeration value="NBN" />
             <xsd:enumeration value="On Net ADSL2+ Annex A (Type ii)" />
+            <!-- Ethernet Access Methods -->
+            <xsd:enumeration value="AAPT MBE TCPAM-64/128" />
+            <xsd:enumeration value="AAPT MBE" />
+            <xsd:enumeration value="AAPT Fibre (Metro E)" />
+            <xsd:enumeration value="AAPT Fibre (SDH)" />
+            <xsd:enumeration value="AAPT Fibre" />
+            <xsd:enumeration value="Optus e-Link" />
+            <xsd:enumeration value="Telstra TWBGE" />
+            <xsd:enumeration value="XYZed ZedE" />
+            <xsd:enumeration value="Telstra TWBDSL" />
+            <xsd:enumeration value="Telstra DA/MLL-S" />
+            <xsd:enumeration value="Telstra DA/MLL-E" />
+            <xsd:enumeration value="Telstra DA/Ethernet Access (Copper)" />
+            <xsd:enumeration value="Telstra DA/Ethernet Access (Fibre)" />
+            <xsd:enumeration value="EFM 4 Wire" />
+            <xsd:enumeration value="EFM 6 Wire" />
+            <xsd:enumeration value="EFM 8 Wire" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

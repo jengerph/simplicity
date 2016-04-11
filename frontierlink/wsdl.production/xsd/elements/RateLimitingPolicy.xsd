@@ -11,6 +11,7 @@
             <xsd:enumeration value="throttle-user-256k" />
             <xsd:enumeration value="throttle-user-512k" />
             <xsd:enumeration value="throttle-user-1024k" />
+            <xsd:enumeration value="throttle-user-10M" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

@@ -5,7 +5,7 @@
             xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
             elementFormDefault="qualified">
 
-	<xsd:include schemaLocation="elements/BatteryBackupService.xsd" />
+    <xsd:include schemaLocation="elements/BatteryBackupService.xsd" />
     <xsd:include schemaLocation="SpeedModification.xsd" />
 
     <xsd:complexType name="ModificationDetails">
@@ -21,7 +21,7 @@
                 </xsd:element>
                 <xsd:element name="batteryBackupModification" type="wsg:BatteryBackupService">
                     <xsd:annotation>
-                        <xsd:documentation xml:lang="en">Option to switch between standard powered and battery backup for NBN delivered services.</xsd:documentation>
+                        <xsd:documentation xml:lang="en"> Option to switch between standard powered and battery backup for NBN delivered services.</xsd:documentation>
                     </xsd:annotation>
                 </xsd:element>
             </xsd:choice>

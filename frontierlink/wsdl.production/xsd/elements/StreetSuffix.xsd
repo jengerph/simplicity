@@ -4,19 +4,25 @@
             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
     <xsd:simpleType name="StreetSuffix">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                Sample data values:
+                - NORTH
+                - SOUTH
+                - EAST
+                - WEST
+                - LOWER
+                - UPPER
+                - NORTH EAST
+                - NORTH WEST
+                - SOUTH EAST
+                - SOUTH WEST
+                - CENTRAL
+                - EXTENSION
+            </xsd:documentation>
+        </xsd:annotation>
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="NORTH" />
-            <xsd:enumeration value="SOUTH" />
-            <xsd:enumeration value="EAST" />
-            <xsd:enumeration value="WEST" />
-            <xsd:enumeration value="LOWER" />
-            <xsd:enumeration value="UPPER" />
-            <xsd:enumeration value="NORTH EAST" />
-            <xsd:enumeration value="NORTH WEST" />
-            <xsd:enumeration value="SOUTH EAST" />
-            <xsd:enumeration value="SOUTH WEST" />
-            <xsd:enumeration value="CENTRAL" />
-            <xsd:enumeration value="EXTENSION" />
+            <xsd:minLength value="1" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

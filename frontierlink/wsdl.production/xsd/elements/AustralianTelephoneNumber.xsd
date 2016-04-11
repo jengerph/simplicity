@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="AustralianTelephoneNumber">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="((0|[+]61)[2,3,4,7,8]\d{8})|((1300|1800)\d{6})|((13)\d{4})|((\+)\d*)" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

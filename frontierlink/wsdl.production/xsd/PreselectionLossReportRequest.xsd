@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+
+    <xsd:element name="PreselectionLossReportRequest" type="wsg:PreselectionLossReportRequest" />
+
+    <xsd:complexType name="PreselectionLossReportRequest">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber" />
+            <xsd:element name="lossDate" type="xsd:date" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

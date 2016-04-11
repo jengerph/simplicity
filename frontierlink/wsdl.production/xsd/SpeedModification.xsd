@@ -5,15 +5,18 @@
             xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
             elementFormDefault="qualified">
 
-    <xsd:include schemaLocation="elements/NationalWholesaleBroadbandSpeed.xsd" />
-
-    <xsd:element name="SpeedModification" type="wsg:SpeedModification" />
+    <xsd:include schemaLocation="elements/ServiceSpeed.xsd" />
 
     <xsd:complexType name="SpeedModification">
         <xsd:sequence>
-            <xsd:element name="newServiceSpeed" type="wsg:NationalWholesaleBroadbandSpeed">
+            <xsd:element name="newServiceSpeed" type="wsg:ServiceSpeed">
                 <xsd:annotation>
-                    <xsd:documentation xml:lang="en">Speed of national wholesale broadband service</xsd:documentation>
+                    <xsd:documentation xml:lang="en">New speed for the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="allowConditionalAccessMethods" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Allows condition access speed modification.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>

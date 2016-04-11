@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="CpeDeliveryDetails.xsd" />
+    <xsd:include schemaLocation="NameValuePairList.xsd" />
+    <xsd:include schemaLocation="elements/DSLMode.xsd" />
+    <xsd:include schemaLocation="elements/CpeModel.xsd" />
+    <xsd:include schemaLocation="elements/CpePurchaseOption.xsd" />
+    <xsd:include schemaLocation="elements/CpePassword.xsd" />
+    <xsd:include schemaLocation="elements/SnmpReadString.xsd" />
+
+    <xsd:complexType name="CpeOrdered">
+        <xsd:sequence>
+            <xsd:element name="cpeModel" type="wsg:CpeModel" />
+            <xsd:element name="cpePurchase" type="wsg:CpePurchaseOption" />
+            <xsd:element name="cpeManaged" type="xsd:boolean" />
+            <xsd:element name="siteVisitRequired" type="xsd:boolean" />
+            <xsd:element name="delivery" type="wsg:CpeDeliveryDetails" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Required if not(cpeManaged) and not(siteVisitRequired)</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="snmpReadAccessRequired" type="xsd:boolean" />
+            <xsd:element name="snmpReadString" type="wsg:SnmpReadString" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">SNMP Read String. Returned from EnquireService</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="cpePassword" type="wsg:CpePassword" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Cpe Password. Returned from EnquireService</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

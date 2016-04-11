@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="Contact.xsd" />
+    <xsd:include schemaLocation="FixedTelephoneNumberRange.xsd" />
+    <xsd:include schemaLocation="elements/CarrierName.xsd" />
+
+    <xsd:complexType name="PortInNumberRange">
+        <xsd:sequence>
+            <xsd:element name="telephoneNumbers" type="wsg:FixedTelephoneNumberRange" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The number ranges to be ported in to the new service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="existingCarrier" type="wsg:CarrierName">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The current carrier of the specified number ranges</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="carrierAccountNumber" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The current account number of the specified number ranges</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="portingSiteContact" type="wsg:Contact">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details relating to site contact for porting. Mandatory details of Name and Phone Number are required.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

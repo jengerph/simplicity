@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd" 
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" 
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/EndCustomerAccountNumber.xsd" />
+
+    <xsd:element name="UpdateEndCustomerAccountNumberRequest" type="wsg:UpdateEndCustomerAccountNumberRequest" />
+    
+    <xsd:complexType name="UpdateEndCustomerAccountNumberRequest">
+        <xsd:sequence>
+           <xsd:element name="serviceId" type="wsg:ServiceID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The service identifier.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="endCustomerAccountNumber" type="wsg:EndCustomerAccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">End customer account number.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

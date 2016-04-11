@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="IndividualContact.xsd" />
+    <xsd:include schemaLocation="elements/OrganisationName.xsd" />
+    <xsd:include schemaLocation="elements/AlternateAddressCustomerTelephoneNumber.xsd" />
+
+    <xsd:complexType name="PublicNumberCustomerName">
+        <xsd:sequence>
+          <xsd:choice>
+            	<xsd:element name="customerName" type="wsg:IndividualContact" >
+            		<xsd:annotation>
+	                    <xsd:documentation xml:lang="en">FirstName and LastName are limited to 40 characters, the rest will be truncated. Salutation is limited to 20 characters.</xsd:documentation>
+	                </xsd:annotation>
+	            </xsd:element>
+            	<xsd:element name="companyName" type="wsg:OrganisationName" >
+            		<xsd:annotation>
+	                    <xsd:documentation xml:lang="en">Company name is limited to 40 characters, the rest will be truncated.</xsd:documentation>
+	                </xsd:annotation>
+	           </xsd:element>
+        	</xsd:choice>
+        	<xsd:element name="alternateAddressCustomerContactNumber" type="wsg:AlternateAddressCustomerTelephoneNumber" minOccurs="0">
+          		<xsd:annotation>
+                    <xsd:documentation xml:lang="en">Alternate address customer contact number.</xsd:documentation>
+                </xsd:annotation>
+	        </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="NameValuePairList.xsd" />
+    <xsd:include schemaLocation="CpeSupportedAccessList.xsd" />
+    <xsd:include schemaLocation="elements/CpePurchaseOption.xsd" />
+    <xsd:include schemaLocation="elements/CpeModel.xsd" />
+
+    <xsd:complexType name="CpeDetail">
+        <xsd:sequence>
+            <xsd:element name="cpeModel" type="wsg:CpeModel" />
+            <xsd:element name="cpePurchase" type="wsg:CpePurchaseOption" />
+            <xsd:element name="supportedAccess" type="wsg:CpeSupportedAccessList" />
+            <xsd:element name="cpeFeatures" type="wsg:NameValuePairList">
+                <annotation>
+                    <xsd:documentation xml:lang="en">List of CPE features applicable to this device</xsd:documentation>
+                </annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

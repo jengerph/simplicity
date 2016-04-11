@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:element name="TelstraProductSetting" type="wsg:TelstraProductSetting" />
+
+    <xsd:complexType name="TelstraProductSetting">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" />
+            <xsd:element name="mandatory" type="xsd:boolean" minOccurs="0" />
+            <xsd:element name="valueOptions" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="value" type="xsd:string" minOccurs="0" />
+            <xsd:element name="result" type="xsd:boolean" minOccurs="0" />
+            <xsd:element name="invalidReasons" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

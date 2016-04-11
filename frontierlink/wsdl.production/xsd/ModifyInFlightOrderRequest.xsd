@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="ModifyInFlightOrderDetailsList.xsd" />
+    <xsd:include schemaLocation="Contact.xsd" />
+
+    <xsd:element name="ModifyInFlightOrderRequest" type="wsg:ModifyInFlightOrderRequest" />
+
+    <xsd:complexType name="ModifyInFlightOrderRequest">
+        <xsd:sequence>
+            <xsd:element name="orderContact" type="wsg:Contact">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details relating to Contact responsible for ownership of the Service. Mandatory details of Name and Phone Number are required.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="modifyInFlightOrderList" type="wsg:ModifyInFlightOrderDetailsList">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A list of elements to hold choice of in flight orders to be modified</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd" 
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" 
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+
+    <xsd:element name="UnSuspendVoiceServiceRequest" type="wsg:UnSuspendVoiceServiceRequest" />
+    
+    <xsd:complexType name="UnSuspendVoiceServiceRequest">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceNumber" type="wsg:FixedTelephoneNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

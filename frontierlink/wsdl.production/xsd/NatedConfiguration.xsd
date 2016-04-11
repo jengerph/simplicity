@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/IpAddress.xsd" />
+    <xsd:include schemaLocation="PortAddressTranslationList.xsd" />
+    <xsd:include schemaLocation="StaticNatDetails.xsd" />
+
+    <xsd:complexType name="NatedConfiguration">
+        <xsd:sequence>
+            <xsd:element name="wanIpAddress" type="wsg:IpAddress" />
+            <xsd:element name="staticNatDetails" type="wsg:StaticNatDetails" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="portAddressTranslationList" type="wsg:PortAddressTranslationList" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

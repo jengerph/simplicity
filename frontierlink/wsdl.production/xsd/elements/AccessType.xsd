@@ -7,8 +7,11 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="SSS" />
             <xsd:enumeration value="DSL-L2" />
+            <xsd:enumeration value="IULL" />
+            <xsd:enumeration value="VULL" />
             <xsd:enumeration value="NFAS" />
             <xsd:enumeration value="NWAS" />
+            <xsd:enumeration value="NCAS" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

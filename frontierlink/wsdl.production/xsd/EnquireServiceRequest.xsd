@@ -7,20 +7,31 @@
 
     <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
     <xsd:include schemaLocation="elements/FormID.xsd" />
-    <xsd:include schemaLocation="elements/NbnLocationID.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    <xsd:include schemaLocation="elements/ProductType.xsd" />
     <xsd:include schemaLocation="elements/ServiceID.xsd" />
 
     <xsd:element name="EnquireServiceRequest" type="wsg:EnquireServiceRequest" />
 
     <xsd:complexType name="EnquireServiceRequest">
         <xsd:sequence>
+            <xsd:element name="productType" type="wsg:ProductType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique code identifying an AAPT Product Type</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:choice>
                 <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber">
                     <xsd:annotation>
                         <xsd:documentation xml:lang="en">A PSTN telephony service number</xsd:documentation>
                     </xsd:annotation>
                 </xsd:element>
-                <xsd:element name="nbnLocationID" type="wsg:NbnLocationID">
+                <xsd:element name="telstraLocationID" type="wsg:LocationId">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A Telstra assigned unique ID for the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="nbnLocationID" type="wsg:LocationId">
                     <xsd:annotation>
                         <xsd:documentation xml:lang="en">An NBN assigned unique ID for the customer site</xsd:documentation>
                     </xsd:annotation>
@@ -36,6 +47,11 @@
                     </xsd:annotation>
                 </xsd:element>
             </xsd:choice>
+            <xsd:element name="returnEmailDetails" type="xsd:boolean" minOccurs="0" default="false">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Should stored email communications be returned for activities.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>

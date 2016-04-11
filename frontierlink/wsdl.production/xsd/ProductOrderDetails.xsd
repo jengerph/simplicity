@@ -7,7 +7,7 @@
 
     <xsd:include schemaLocation="elements/FormID.xsd" />
     <xsd:include schemaLocation="Contact.xsd" />
-    <xsd:include schemaLocation="Activity.xsd" />
+    <xsd:include schemaLocation="OrderActivity.xsd" />
 
     <xsd:complexType name="ProductOrderDetails">
         <xsd:sequence>
@@ -17,12 +17,12 @@
                     <xsd:documentation xml:lang="en">A complex definition of details relating to Contact responsible for ownership of the Service. Mandatory details of Name and Phone Number are required.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="productOrderActivities" type="wsg:Activity" minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="productOrderActivities" type="wsg:OrderActivity" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">A complex definition of AAPT workflow events and information</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="serviceOrderActivities" type="wsg:Activity" minOccurs="0" maxOccurs="unbounded" >
+            <xsd:element name="serviceOrderActivities" type="wsg:OrderActivity" minOccurs="0" maxOccurs="unbounded" >
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">A complex definition of AAPT workflow events and information</xsd:documentation>
                 </xsd:annotation>

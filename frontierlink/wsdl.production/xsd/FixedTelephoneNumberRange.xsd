@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+
+    <xsd:complexType name="FixedTelephoneNumberRange">
+        <xsd:sequence>
+            <xsd:element name="minServiceNumber" type="wsg:FixedTelephoneNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The starting number for the range of PSTN telephony service numbers at the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="maxServiceNumber" type="wsg:FixedTelephoneNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The end number for the range of PSTN telephony service numbers at the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccessMethod.xsd" />
+    <xsd:include schemaLocation="elements/AccessType.xsd" />
+    <xsd:include schemaLocation="elements/ServiceSpeed.xsd" />
+
+    <xsd:complexType name="CpeSupportedAccess">
+        <xsd:sequence>
+            <xsd:element name="accessMethod" type="wsg:AccessMethod">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The available AAPT access method</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accessType" type="wsg:AccessType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The AAPT access type relating to the access method</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="supportedSpeeds" type="wsg:ServiceSpeed" minOccurs="1" maxOccurs="unbounded">
+                <annotation>
+                    <xsd:documentation xml:lang="en">List of service speeds available on this device and access</xsd:documentation>
+                </annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

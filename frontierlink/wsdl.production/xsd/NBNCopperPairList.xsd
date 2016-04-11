@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="NBNCopperPair.xsd" />
+
+    <xsd:complexType name="NBNCopperPairList">
+       	<xsd:sequence>
+	        <xsd:element name="nbnCopperPairList" type="wsg:NBNCopperPair" minOccurs="1" maxOccurs="unbounded"/>
+       	</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

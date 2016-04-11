@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="VlanId">
+        <xsd:restriction base="xsd:int">
+        	<xsd:minInclusive value="2"/>
+        	<xsd:maxInclusive value="4001"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

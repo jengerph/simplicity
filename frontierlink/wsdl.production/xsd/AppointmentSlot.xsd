@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+	<xsd:include schemaLocation="elements/AppointmentTimeSlot.xsd" />
+	<xsd:include schemaLocation="elements/AppointmentLeadTime.xsd" />
+	
+	<xsd:include schemaLocation="AppointmentDateTime.xsd" />
+		
+    <xsd:complexType name="AppointmentSlot">
+        <xsd:sequence>
+			<xsd:element name="appointmentLeadTime" type="wsg:AppointmentLeadTime" />
+            <xsd:element name="appointmentSlotType" type="wsg:AppointmentTimeSlot" />
+            <xsd:element name="appointmentDate" type="wsg:AppointmentDateTime" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

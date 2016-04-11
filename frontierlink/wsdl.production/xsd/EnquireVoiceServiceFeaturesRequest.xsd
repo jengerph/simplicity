@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/UserName.xsd" />
+
+    <xsd:element name="EnquireVoiceServiceFeaturesRequest" type="wsg:EnquireVoiceServiceFeaturesRequest" />
+
+    <xsd:complexType name="EnquireVoiceServiceFeaturesRequest">
+        <xsd:sequence>
+            <xsd:element name="serviceId" type="wsg:ServiceID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The service identifier.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The account number the service identifier belongs to.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="username" type="wsg:UserName">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The username of the person who entered the modification request.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

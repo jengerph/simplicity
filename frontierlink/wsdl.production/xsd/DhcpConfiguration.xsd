@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+	        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+	        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="DhcpLocal.xsd" />
+    <xsd:include schemaLocation="DhcpRelay.xsd" />
+
+    <xsd:complexType name="DhcpConfiguration">
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="dhcpLocal" type="wsg:DhcpLocal" />
+                <xsd:element name="dhcpRelay" type="wsg:DhcpRelay" />
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

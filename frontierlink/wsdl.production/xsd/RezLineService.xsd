@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+	
+    <xsd:include schemaLocation="PortInNumber.xsd" />
+	<xsd:include schemaLocation="SiteAddress.xsd" />
+	<xsd:include schemaLocation="PublicNumberCustomerName.xsd" />
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/AllocateNewNumber.xsd" />
+    <xsd:include schemaLocation="elements/DirectoryUsageCode.xsd" />
+    <xsd:include schemaLocation="elements/DirectoryListingCode.xsd" />
+    <xsd:include schemaLocation="elements/PlanType.xsd" />
+    <xsd:include schemaLocation="elements/SipPassword.xsd" />
+    <xsd:include schemaLocation="elements/EndCustomerAccountNumber.xsd" />
+
+    <xsd:complexType name="RezLineService">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="planType" type="wsg:PlanType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Plan type for RizLine service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+	            <xsd:element name="portInNumber" type="wsg:PortInNumber">
+	                <xsd:annotation>
+	                    <xsd:documentation xml:lang="en">A telephone number that has been ported In</xsd:documentation>
+	                </xsd:annotation>
+	            </xsd:element>
+	            <xsd:element name="allocateNewNumber" type="wsg:AllocateNewNumber">
+	            	<xsd:annotation>
+	                    <xsd:documentation xml:lang="en">This will be the new number to be allocated.</xsd:documentation>
+	                </xsd:annotation>
+	            </xsd:element>
+            </xsd:choice>
+            <xsd:element name="serviceAddress" type="wsg:SiteAddress">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Customer serviceAddress </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="directoryUsageCode" type="wsg:DirectoryUsageCode">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Type of directory usage</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="directoryListingCode" type="wsg:DirectoryListingCode">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Type of directory listing</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sipPassword" type="wsg:SipPassword" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">SIP Password</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="endCustomerAccountNumber" type="wsg:EndCustomerAccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">End customer account number</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="publicNumberCustomerName" type="wsg:PublicNumberCustomerName">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Public number customer name</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

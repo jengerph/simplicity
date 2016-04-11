@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    <xsd:include schemaLocation="elements/ProductType.xsd" />
+
+    <xsd:complexType name="QualifyNationalWholesaleBroadbandProductRequest">
+        <xsd:sequence>
+            <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="telstraLocationID" type="wsg:LocationId" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A Telstra assigned unique ID for the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="nbnLocationID" type="wsg:LocationId" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An NBN assigned unique ID for the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="returnExtendedNbnSqData" type="xsd:boolean" minOccurs="0" default="false">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Should additional NBN qualification data be returned.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="standAloneQualification" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The qualification request is not to be used for ordering purposes - no qualification id will be returned</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="allowConditionalAccessMethods" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Allows qualification response to display CONDITIONAL SQ results.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerAuthorisationDate" type="xsd:date" minOccurs="0">
+            	<xsd:annotation>
+                    <xsd:documentation xml:lang="en">If provided in the SQ request, the ULL will be returned in the POTS Interconnect attribute for those copper pairs that have a ULL service. Must not be more than 45 calendar days old.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

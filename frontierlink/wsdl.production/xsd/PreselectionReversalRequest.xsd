@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/CustomerRequiredDate.xsd" />
+    <xsd:include schemaLocation="elements/CustomerAuthorisedDate.xsd" />
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+
+    <xsd:include schemaLocation="Contact.xsd" />
+
+    <xsd:element name="PreselectionReversalRequest" type="wsg:PreselectionReversalRequest" />
+
+    <xsd:complexType name="PreselectionReversalRequest">
+        <xsd:sequence>
+         	<xsd:element name="orderContact" type="wsg:Contact">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details relating to Contact responsible for ownership of the Service. Mandatory details of Name and Phone Number are required.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        	<xsd:element name="accountNumber" type="wsg:AccountNumber"> 
+                <xsd:annotation> 
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation> 
+                </xsd:annotation> 
+           	</xsd:element>
+            <xsd:element name="serviceNumber" type="wsg:FixedTelephoneNumber" > 
+                <xsd:annotation> 
+                    <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation> 
+                </xsd:annotation> 
+            </xsd:element>
+            <xsd:element name="customerReversalAuthorisationDate" type="wsg:CustomerAuthorisedDate" > 
+            	<xsd:annotation> 
+                	<xsd:documentation xml:lang="en">This is the date when end-customer authorised Long Distance churn reversal.</xsd:documentation> 
+                </xsd:annotation> 
+           </xsd:element>  
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

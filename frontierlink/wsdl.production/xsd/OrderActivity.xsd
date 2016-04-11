@@ -5,14 +5,43 @@
             xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
             elementFormDefault="qualified">
 
+    <xsd:include schemaLocation="ActivityNote.xsd" />
+    <xsd:include schemaLocation="ActivityNoteList.xsd" />
     <xsd:include schemaLocation="elements/EventType.xsd" />
+    <xsd:include schemaLocation="EmailMessage.xsd" />
 
     <xsd:complexType name="OrderActivity">
         <xsd:sequence>
-            <xsd:element name="activityType" type="wsg:EventType" />
-            <xsd:element name="scheduledStartDate" type="xsd:date" minOccurs="0" />
-            <xsd:element name="actualStartDate" type="xsd:date" minOccurs="0" />
-            <xsd:element name="actualEndDate" type="xsd:date" minOccurs="0" />
+            <xsd:element name="activityType" type="wsg:EventType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The activity type</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="scheduledStartDate" type="xsd:date" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The date the activity is scheduled</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="actualStartDate" type="xsd:date" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The date the activity started</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="actualEndDate" type="xsd:date" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The date the activity was completed</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="activityNoteList" type="wsg:ActivityNoteList" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex type representing notes for an activity and the date the notes were created</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerNotificationEmail" type="wsg:EmailMessage" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The email notifications sent to the customer for each activity</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>

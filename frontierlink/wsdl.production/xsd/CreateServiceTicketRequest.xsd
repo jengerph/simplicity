@@ -10,6 +10,7 @@
     <xsd:include schemaLocation="elements/CustomerReference.xsd" />
     <xsd:include schemaLocation="TicketContact.xsd" />
     <xsd:include schemaLocation="TicketSymptom.xsd" />
+    <xsd:include schemaLocation="FaultSymptom.xsd" />
     <xsd:include schemaLocation="Attachment.xsd" />
 
     <xsd:element name="CreateServiceTicketRequest" type="wsg:CreateServiceTicketRequest" />
@@ -26,7 +27,10 @@
             <xsd:element name="customerReference" type="wsg:CustomerReference" minOccurs="0" />
             <xsd:element name="ticketContact" type="wsg:TicketContact" />
             <xsd:element name="siteContact" type="wsg:TicketContact" minOccurs="0" />
-            <xsd:element name="ticketSymptom" type="wsg:TicketSymptom" />
+            <xsd:choice>
+            	<xsd:element name="ticketSymptom" type="wsg:TicketSymptom" />
+            	<xsd:element name="faultSymptom" type="wsg:FaultSymptom" />
+            </xsd:choice>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>

@@ -9,14 +9,18 @@
     <xsd:include schemaLocation="elements/ServiceID.xsd" />
     <xsd:include schemaLocation="elements/NetworkConnectionType.xsd" />
     <xsd:include schemaLocation="elements/CustomerReference.xsd" />
-
-    <xsd:element name="NetworkConnectionDetails" type="wsg:NetworkConnectionDetails" />
+    <xsd:include schemaLocation="elements/State.xsd" />
 
     <xsd:complexType name="NetworkConnectionDetails">
         <xsd:sequence>
             <xsd:element name="networkConnectionServiceId" type="wsg:ServiceID" />
             <xsd:element name="networkConnectionType" type="wsg:NetworkConnectionType" />
             <xsd:element name="customerReference" type="wsg:CustomerReference" minOccurs="0" />
+            <xsd:element name="state" type="wsg:State" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A standard Australian State Code</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="domainName" type="wsg:Domain" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>

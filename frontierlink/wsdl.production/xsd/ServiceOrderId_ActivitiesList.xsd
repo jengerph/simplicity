@@ -7,8 +7,6 @@
 
     <xsd:include schemaLocation="ServiceOrderId_Activities.xsd" />
 
-    <xsd:element name="ServiceOrderId_ActivitiesList" type="wsg:ServiceOrderId_ActivitiesList" />
-
     <xsd:complexType name="ServiceOrderId_ActivitiesList">
         <xsd:sequence>
             <xsd:element name="serviceOrder" type="wsg:ServiceOrderId_Activities" minOccurs="0" maxOccurs="unbounded">

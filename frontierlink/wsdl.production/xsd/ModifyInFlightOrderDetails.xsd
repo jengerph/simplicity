@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="ModifyInFlightOutboundSwitchedVoiceOrder.xsd" />
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+
+    <xsd:complexType name="ModifyInFlightOrderDetails">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="outboundSwitchedVoice" type="wsg:ModifyInFlightOutboundSwitchedVoiceOrder">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">Complex type supporting available in flight order modifications for Outbound Switched Voice</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -5,8 +5,6 @@
             xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
             elementFormDefault="qualified">
 
-    <xsd:element name="PacketLoss" type="wsg:PacketLoss" />
-
     <xsd:complexType name="PacketLoss">
         <xsd:sequence>
             <xsd:element name="valueInPercantage" type="xsd:float" />

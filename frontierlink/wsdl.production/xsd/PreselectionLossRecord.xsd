@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/PreselectionLossCode.xsd" />
+    <xsd:include schemaLocation="elements/PrimaryServiceDeliverer.xsd" />
+
+    <xsd:complexType name="PreselectionLossRecord">
+        <xsd:sequence>
+            <xsd:element name="serviceNumber" type="wsg:FixedTelephoneNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="lossReason" type="wsg:PreselectionLossCode">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Reason the service was changed</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="lossTo" type="wsg:PrimaryServiceDeliverer" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Provider who gained the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

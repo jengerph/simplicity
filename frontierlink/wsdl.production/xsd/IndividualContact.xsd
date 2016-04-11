@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/Salutation.xsd" />
+    <xsd:include schemaLocation="elements/FirstName.xsd" />
+    <xsd:include schemaLocation="elements/LastName.xsd" />
+
+    <xsd:complexType name="IndividualContact">
+        <xsd:sequence>
+            <xsd:element name="salutation" type="wsg:Salutation" minOccurs="0" />
+            <xsd:element name="firstName" type="wsg:FirstName" />
+            <xsd:element name="lastName" type="wsg:LastName" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

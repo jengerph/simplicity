@@ -7,8 +7,6 @@
 
     <xsd:include schemaLocation="AvailableAccessList.xsd" />
 
-    <xsd:element name="ExchangeDetails" type="wsg:ExchangeDetails" />
-
     <xsd:complexType name="ExchangeDetails">
         <xsd:sequence>
             <xsd:element name="availableAccessList" type="wsg:AvailableAccessList">

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="ModifyNationalWholesaleBroadbandService.xsd" />
+    <xsd:include schemaLocation="ModifyOutboundSwitchedVoiceService.xsd" />
+    <xsd:include schemaLocation="ModifyRequestXpressService.xsd" />
+    <xsd:include schemaLocation="ModifyIPNDRecord.xsd" />
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+
+    <xsd:complexType name="ModifyServiceDetails">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="nationalWholesaleBroadband" type="wsg:ModifyNationalWholesaleBroadbandService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">National Wholesale Broadband Service to be modified</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="outboundSwitchedVoice" type="wsg:ModifyOutboundSwitchedVoiceService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">Order the following mods - businessLink,customerLoopMetering,directoryListing,easyCall,exchangeBasedDiversions,faxstream,lineHuntOrRotary,messageBank,configureISDN2,configureISDN30
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="requestXpress" type="wsg:ModifyRequestXpressService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">RequestXpress Service to be modified</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="modifyIpnd" type="wsg:ModifyIPNDRecord">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">IPND Service to be modified</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

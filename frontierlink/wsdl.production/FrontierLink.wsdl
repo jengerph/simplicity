@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <wsdl:definitions name="FrontierLink"
                   targetNamespace="http://www.aapt.com.au/FrontierLink"
                   xmlns="http://schemas.xmlsoap.org/wsdl/"
@@ -14,12 +13,22 @@
     <wsdl:types>
         <xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
+            <xsd:include schemaLocation="xsd/FindServiceProviderLocationIdRequest.xsd" />
+            <xsd:include schemaLocation="xsd/FindServiceProviderLocationIdResponse.xsd" />
             <xsd:include schemaLocation="xsd/QualifyProductRequest.xsd" />
             <xsd:include schemaLocation="xsd/QualifyProductResponse.xsd" />
             <xsd:include schemaLocation="xsd/ListDslExchangesRequest.xsd" />
             <xsd:include schemaLocation="xsd/ListDslExchangesResponse.xsd" />
+            <xsd:include schemaLocation="xsd/ListCpeRequest.xsd" />
+            <xsd:include schemaLocation="xsd/ListCpeResponse.xsd" />
+            <xsd:include schemaLocation="xsd/ListNetworkConnectionPointsRequest.xsd" />
+            <xsd:include schemaLocation="xsd/ListNetworkConnectionPointsResponse.xsd" />
             <xsd:include schemaLocation="xsd/QualifyDslExchangeRequest.xsd" />
             <xsd:include schemaLocation="xsd/QualifyDslExchangeResponse.xsd" />
+            <xsd:include schemaLocation="xsd/GetLnpCarrierRequest.xsd" />
+            <xsd:include schemaLocation="xsd/GetLnpCarrierResponse.xsd" />
+            <xsd:include schemaLocation="xsd/GetLosingServiceProviderRequest.xsd" />
+            <xsd:include schemaLocation="xsd/GetLosingServiceProviderResponse.xsd" />
 
             <xsd:include schemaLocation="xsd/NewServiceRequest.xsd" />
             <xsd:include schemaLocation="xsd/NewServiceResponse.xsd" />
@@ -27,13 +36,53 @@
             <xsd:include schemaLocation="xsd/CancelServiceResponse.xsd" />
             <xsd:include schemaLocation="xsd/WithdrawServiceRequest.xsd" />
             <xsd:include schemaLocation="xsd/WithdrawServiceResponse.xsd" />
+            <xsd:include schemaLocation="xsd/ModifyInFlightOrderRequest.xsd" />
+            <xsd:include schemaLocation="xsd/ModifyInFlightOrderResponse.xsd" />
             <xsd:include schemaLocation="xsd/ModifyServiceRequest.xsd" />
             <xsd:include schemaLocation="xsd/ModifyServiceResponse.xsd" />
+            <xsd:include schemaLocation="xsd/GetProductCatalogRequest.xsd" />
+            <xsd:include schemaLocation="xsd/GetProductCatalogResponse.xsd" />
+            <xsd:include schemaLocation="xsd/IpndUpdateRequest.xsd" />
+            <xsd:include schemaLocation="xsd/IpndUpdateResponse.xsd" />
+            <xsd:include schemaLocation="xsd/SetLNPCutoverDateTimeRequest.xsd" />
+            <xsd:include schemaLocation="xsd/SetLNPCutoverDateTimeResponse.xsd" />
+            <xsd:include schemaLocation="xsd/SuspendVoiceServiceRequest.xsd" />
+            <xsd:include schemaLocation="xsd/SuspendVoiceServiceResponse.xsd" />
+            <xsd:include schemaLocation="xsd/UnSuspendVoiceServiceRequest.xsd" />
+            <xsd:include schemaLocation="xsd/UnSuspendVoiceServiceResponse.xsd" />
+            <xsd:include schemaLocation="xsd/UpdateEndCustomerAccountNumberRequest.xsd" />
+            <xsd:include schemaLocation="xsd/UpdateEndCustomerAccountNumberResponse.xsd" />
+            <xsd:include schemaLocation="xsd/ModifyVoiceServicePasswordRequest.xsd" />
+            <xsd:include schemaLocation="xsd/ModifyVoiceServicePasswordResponse.xsd" />
+            <xsd:include schemaLocation="xsd/QueryNBNAppointmentAvailabilityRequest.xsd" />
+            <xsd:include schemaLocation="xsd/QueryNBNAppointmentAvailabilityResponse.xsd" />
+            <xsd:include schemaLocation="xsd/CreateNBNAppointmentRequest.xsd" />
+            <xsd:include schemaLocation="xsd/CreateNBNAppointmentResponse.xsd" />
+            <xsd:include schemaLocation="xsd/CancelNBNAppointmentRequest.xsd" />
+            <xsd:include schemaLocation="xsd/CancelNBNAppointmentResponse.xsd" />
+            <xsd:include schemaLocation="xsd/QueryNBNAppointmentDetailsRequest.xsd" />
+            <xsd:include schemaLocation="xsd/QueryNBNAppointmentDetailsResponse.xsd" />
+            <xsd:include schemaLocation="xsd/UpdateNBNAppointmentRequest.xsd" />
+            <xsd:include schemaLocation="xsd/UpdateNBNAppointmentResponse.xsd" />
+            <xsd:include schemaLocation="xsd/RescheduleNBNAppointmentRequest.xsd" />
+            <xsd:include schemaLocation="xsd/RescheduleNBNAppointmentResponse.xsd" />
+            <xsd:include schemaLocation="xsd/AmendNBNOrderRequest.xsd" />
+            <xsd:include schemaLocation="xsd/AmendNBNOrderResponse.xsd" />
+            <xsd:include schemaLocation="xsd/NBNOrderFeasibilityRequest.xsd" />
+            <xsd:include schemaLocation="xsd/NBNOrderFeasibilityResponse.xsd" />
+            <xsd:include schemaLocation="xsd/PreselectionReversalRequest.xsd" />
+            <xsd:include schemaLocation="xsd/PreselectionReversalResponse.xsd" />
 
             <xsd:include schemaLocation="xsd/EnquireServiceRequest.xsd" />
             <xsd:include schemaLocation="xsd/EnquireServiceResponse.xsd" />
             <xsd:include schemaLocation="xsd/ListActivitiesRequest.xsd" />
             <xsd:include schemaLocation="xsd/ListActivitiesResponse.xsd" />
+            <xsd:include schemaLocation="xsd/LossReportRequest.xsd" />
+            <xsd:include schemaLocation="xsd/LossReportResponse.xsd" />
+            <xsd:include schemaLocation="xsd/PreselectionLossReportRequest.xsd" />
+            <xsd:include schemaLocation="xsd/PreselectionLossReportResponse.xsd" />
+            <xsd:include schemaLocation="xsd/GetPortedOutNumbersRequest.xsd" />
+            <xsd:include schemaLocation="xsd/GetPortedOutNumbersResponse.xsd" />
 
             <xsd:include schemaLocation="xsd/DSLLineStatusRequest.xsd" />
             <xsd:include schemaLocation="xsd/DSLLineStatusResponse.xsd" />
@@ -69,12 +118,24 @@
             <xsd:include schemaLocation="xsd/RadiusDomainListRequest.xsd" />
             <xsd:include schemaLocation="xsd/RadiusDomainListResponse.xsd" />
 
+            <xsd:include schemaLocation="xsd/EnquireVoiceServiceFeaturesRequest.xsd" />
+            <xsd:include schemaLocation="xsd/EnquireVoiceServiceFeaturesResponse.xsd" />
+            <xsd:include schemaLocation="xsd/ModifyVoiceServiceFeaturesRequest.xsd" />
+            <xsd:include schemaLocation="xsd/ModifyVoiceServiceFeaturesResponse.xsd" />
+
+			
             <xsd:include schemaLocation="xsd/Error.xsd" />
 
         </xsd:schema>
     </wsdl:types>
 
     <!-- Messages -->
+    <wsdl:message name="FindServiceProviderLocationIdRequest">
+        <wsdl:part name="parameters" element="wsg:FindServiceProviderLocationIdRequest" />
+    </wsdl:message>
+    <wsdl:message name="FindServiceProviderLocationIdResponse">
+        <wsdl:part name="parameters" element="wsg:FindServiceProviderLocationIdResponse" />
+    </wsdl:message>
     <wsdl:message name="QualifyProductRequest">
         <wsdl:part name="parameters" element="wsg:QualifyProductRequest" />
     </wsdl:message>
@@ -87,11 +148,35 @@
     <wsdl:message name="ListDslExchangesResponse">
         <wsdl:part name="parameters" element="wsg:ListDslExchangesResponse" />
     </wsdl:message>
+    <wsdl:message name="ListCpeRequest">
+        <wsdl:part name="parameters" element="wsg:ListCpeRequest" />
+    </wsdl:message>
+    <wsdl:message name="ListCpeResponse">
+        <wsdl:part name="parameters" element="wsg:ListCpeResponse" />
+    </wsdl:message>
+    <wsdl:message name="ListNetworkConnectionPointsRequest">
+        <wsdl:part name="parameters" element="wsg:ListNetworkConnectionPointsRequest" />
+    </wsdl:message>
+    <wsdl:message name="ListNetworkConnectionPointsResponse">
+        <wsdl:part name="parameters" element="wsg:ListNetworkConnectionPointsResponse" />
+    </wsdl:message>
     <wsdl:message name="QualifyDslExchangeRequest">
         <wsdl:part name="parameters" element="wsg:QualifyDslExchangeRequest" />
     </wsdl:message>
     <wsdl:message name="QualifyDslExchangeResponse">
         <wsdl:part name="parameters" element="wsg:QualifyDslExchangeResponse" />
+    </wsdl:message>
+    <wsdl:message name="GetLnpCarrierRequest">
+        <wsdl:part name="parameters" element="wsg:GetLnpCarrierRequest" />
+    </wsdl:message>
+    <wsdl:message name="GetLnpCarrierResponse">
+        <wsdl:part name="parameters" element="wsg:GetLnpCarrierResponse" />
+    </wsdl:message>
+    <wsdl:message name="GetLosingServiceProviderRequest">
+        <wsdl:part name="parameters" element="wsg:GetLosingServiceProviderRequest" />
+    </wsdl:message>
+    <wsdl:message name="GetLosingServiceProviderResponse">
+        <wsdl:part name="parameters" element="wsg:GetLosingServiceProviderResponse" />
     </wsdl:message>
 
     <wsdl:message name="NewServiceRequest">
@@ -112,13 +197,116 @@
     <wsdl:message name="WithdrawServiceResponse">
         <wsdl:part name="parameters" element="wsg:WithdrawServiceResponse" />
     </wsdl:message>
+    <wsdl:message name="ModifyInFlightOrderRequest">
+        <wsdl:part name="parameters" element="wsg:ModifyInFlightOrderRequest" />
+    </wsdl:message>
+    <wsdl:message name="ModifyInFlightOrderResponse">
+        <wsdl:part name="parameters" element="wsg:ModifyInFlightOrderResponse" />
+    </wsdl:message>
     <wsdl:message name="ModifyServiceRequest">
         <wsdl:part name="parameters" element="wsg:ModifyServiceRequest" />
     </wsdl:message>
     <wsdl:message name="ModifyServiceResponse">
         <wsdl:part name="parameters" element="wsg:ModifyServiceResponse" />
     </wsdl:message>
-
+    <wsdl:message name="GetProductCatalogRequest">
+        <wsdl:part name="parameters" element="wsg:GetProductCatalogRequest" />
+    </wsdl:message>
+    <wsdl:message name="GetProductCatalogResponse">
+        <wsdl:part name="parameters" element="wsg:GetProductCatalogResponse" />
+    </wsdl:message>
+    <wsdl:message name="IpndUpdateRequest">
+        <wsdl:part name="parameters" element="wsg:IpndUpdateRequest" />
+    </wsdl:message>
+    <wsdl:message name="IpndUpdateResponse">
+        <wsdl:part name="parameters" element="wsg:IpndUpdateResponse" />
+    </wsdl:message>
+    <wsdl:message name="SetLNPCutoverDateTimeRequest">
+        <wsdl:part name="parameters" element="wsg:SetLNPCutoverDateTimeRequest" />
+    </wsdl:message>
+    <wsdl:message name="SetLNPCutoverDateTimeResponse">
+    <wsdl:part name="parameters" element="wsg:SetLNPCutoverDateTimeResponse"/>
+    </wsdl:message>
+       <wsdl:message name="SuspendVoiceServiceRequest">
+        <wsdl:part name="parameters" element="wsg:SuspendVoiceServiceRequest" />
+    </wsdl:message>
+    <wsdl:message name="SuspendVoiceServiceResponse">
+        <wsdl:part name="parameters" element="wsg:SuspendVoiceServiceResponse" />
+    </wsdl:message>
+    <wsdl:message name="UnSuspendVoiceServiceRequest">
+        <wsdl:part name="parameters" element="wsg:UnSuspendVoiceServiceRequest" />
+    </wsdl:message>
+    <wsdl:message name="UnSuspendVoiceServiceResponse">
+        <wsdl:part name="parameters" element="wsg:UnSuspendVoiceServiceResponse" />
+    </wsdl:message>
+    <wsdl:message name="UpdateEndCustomerAccountNumberRequest">
+        <wsdl:part name="parameters" element="wsg:UpdateEndCustomerAccountNumberRequest" />
+    </wsdl:message>
+    <wsdl:message name="UpdateEndCustomerAccountNumberResponse">
+        <wsdl:part name="parameters" element="wsg:UpdateEndCustomerAccountNumberResponse" />
+    </wsdl:message>
+    <wsdl:message name="ModifyVoiceServicePasswordRequest">
+        <wsdl:part name="parameters" element="wsg:ModifyVoiceServicePasswordRequest" />
+    </wsdl:message>
+    <wsdl:message name="ModifyVoiceServicePasswordResponse">
+        <wsdl:part name="parameters" element="wsg:ModifyVoiceServicePasswordResponse" />
+    </wsdl:message>
+    <wsdl:message name="QueryNBNAppointmentAvailabilityRequest">
+        <wsdl:part name="parameters" element="wsg:QueryNBNAppointmentAvailabilityRequest" />
+    </wsdl:message>
+    <wsdl:message name="QueryNBNAppointmentAvailabilityResponse">
+        <wsdl:part name="parameters" element="wsg:QueryNBNAppointmentAvailabilityResponse" />
+    </wsdl:message>
+    <wsdl:message name="CreateNBNAppointmentRequest">
+        <wsdl:part name="parameters" element="wsg:CreateNBNAppointmentRequest" />
+    </wsdl:message>
+    <wsdl:message name="CreateNBNAppointmentResponse">
+        <wsdl:part name="parameters" element="wsg:CreateNBNAppointmentResponse" />
+    </wsdl:message>
+    <wsdl:message name="CancelNBNAppointmentRequest">
+        <wsdl:part name="parameters" element="wsg:CancelNBNAppointmentRequest" />
+    </wsdl:message>
+    <wsdl:message name="CancelNBNAppointmentResponse">
+        <wsdl:part name="parameters" element="wsg:CancelNBNAppointmentResponse" />
+    </wsdl:message>
+    <wsdl:message name="QueryNBNAppointmentDetailsRequest">
+        <wsdl:part name="parameters" element="wsg:QueryNBNAppointmentDetailsRequest" />
+    </wsdl:message>
+    <wsdl:message name="QueryNBNAppointmentDetailsResponse">
+        <wsdl:part name="parameters" element="wsg:QueryNBNAppointmentDetailsResponse" />
+    </wsdl:message>
+    <wsdl:message name="UpdateNBNAppointmentRequest">
+        <wsdl:part name="parameters" element="wsg:UpdateNBNAppointmentRequest" />
+    </wsdl:message>
+    <wsdl:message name="UpdateNBNAppointmentResponse">
+        <wsdl:part name="parameters" element="wsg:UpdateNBNAppointmentResponse" />
+    </wsdl:message>
+    <wsdl:message name="RescheduleNBNAppointmentRequest">
+        <wsdl:part name="parameters" element="wsg:RescheduleNBNAppointmentRequest" />
+    </wsdl:message>
+    <wsdl:message name="RescheduleNBNAppointmentResponse">
+        <wsdl:part name="parameters" element="wsg:RescheduleNBNAppointmentResponse" />
+    </wsdl:message>
+    <wsdl:message name="AmendNBNOrderRequest">
+        <wsdl:part name="parameters" element="wsg:AmendNBNOrderRequest" />
+    </wsdl:message>
+    <wsdl:message name="AmendNBNOrderResponse">
+        <wsdl:part name="parameters" element="wsg:AmendNBNOrderResponse" />
+    </wsdl:message>
+    <wsdl:message name="NBNOrderFeasibilityRequest">
+        <wsdl:part name="parameters" element="wsg:NBNOrderFeasibilityRequest" />
+    </wsdl:message>
+    <wsdl:message name="NBNOrderFeasibilityResponse">
+        <wsdl:part name="parameters" element="wsg:NBNOrderFeasibilityResponse" />
+    </wsdl:message>
+    <wsdl:message name="PreselectionReversalRequest">
+        <wsdl:part name="parameters" element="wsg:PreselectionReversalRequest" />
+    </wsdl:message>
+    <wsdl:message name="PreselectionReversalResponse">
+        <wsdl:part name="parameters" element="wsg:PreselectionReversalResponse" />
+    </wsdl:message>
+    
+    
     <wsdl:message name="EnquireServiceRequest">
         <wsdl:part name="parameters" element="wsg:EnquireServiceRequest" />
     </wsdl:message>
@@ -130,6 +318,24 @@
     </wsdl:message>
     <wsdl:message name="ListActivitiesResponse">
         <wsdl:part name="parameters" element="wsg:ListActivitiesResponse" />
+    </wsdl:message>
+    <wsdl:message name="LossReportRequest">
+        <wsdl:part name="parameters" element="wsg:LossReportRequest" />
+    </wsdl:message>
+    <wsdl:message name="LossReportResponse">
+        <wsdl:part name="parameters" element="wsg:LossReportResponse" />
+    </wsdl:message>
+    <wsdl:message name="PreselectionLossReportRequest">
+        <wsdl:part name="parameters" element="wsg:PreselectionLossReportRequest" />
+    </wsdl:message>
+    <wsdl:message name="PreselectionLossReportResponse">
+        <wsdl:part name="parameters" element="wsg:PreselectionLossReportResponse" />
+    </wsdl:message>
+    <wsdl:message name="GetPortedOutNumbersRequest">
+        <wsdl:part name="parameters" element="wsg:GetPortedOutNumbersRequest" />
+    </wsdl:message>
+    <wsdl:message name="GetPortedOutNumbersResponse">
+        <wsdl:part name="parameters" element="wsg:GetPortedOutNumbersResponse" />
     </wsdl:message>
 
     <wsdl:message name="DSLLineStatusRequest">
@@ -230,12 +436,30 @@
         <wsdl:part name="parameters" element="wsg:RadiusDomainListResponse" />
     </wsdl:message>
 
+    <wsdl:message name="EnquireVoiceServiceFeaturesRequest" >
+        <wsdl:part name="request" element="wsg:EnquireVoiceServiceFeaturesRequest" />
+    </wsdl:message>
+    <wsdl:message name="EnquireVoiceServiceFeaturesResponse" >
+        <wsdl:part name="response" element="wsg:EnquireVoiceServiceFeaturesResponse" />
+    </wsdl:message>
+    <wsdl:message name="ModifyVoiceServiceFeaturesRequest" >
+        <wsdl:part name="request" element="wsg:ModifyVoiceServiceFeaturesRequest" />
+    </wsdl:message>
+    <wsdl:message name="ModifyVoiceServiceFeaturesResponse" >
+        <wsdl:part name="response" element="wsg:ModifyVoiceServiceFeaturesResponse" />
+    </wsdl:message>
+
     <wsdl:message name="Error">
         <wsdl:part name="parameters" element="wsg:Error" />
     </wsdl:message>
 
     <!-- Port type -->
     <wsdl:portType name="ServiceQualificationPortType">
+        <wsdl:operation name="findServiceProviderLocationId">
+            <wsdl:input message="tns:FindServiceProviderLocationIdRequest" />
+            <wsdl:output message="tns:FindServiceProviderLocationIdResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
         <wsdl:operation name="qualifyProduct">
             <wsdl:input message="tns:QualifyProductRequest" />
             <wsdl:output message="tns:QualifyProductResponse" />
@@ -246,9 +470,29 @@
             <wsdl:output message="tns:ListDslExchangesResponse" />
             <wsdl:fault message="tns:Error" name="Error" />
         </wsdl:operation>
+        <wsdl:operation name="listCpe">
+            <wsdl:input message="tns:ListCpeRequest" />
+            <wsdl:output message="tns:ListCpeResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="listNetworkConnectionPoints">
+            <wsdl:input message="tns:ListNetworkConnectionPointsRequest" />
+            <wsdl:output message="tns:ListNetworkConnectionPointsResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
         <wsdl:operation name="qualifyDslExchange">
             <wsdl:input message="tns:QualifyDslExchangeRequest" />
             <wsdl:output message="tns:QualifyDslExchangeResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="getLnpCarrier">
+            <wsdl:input message="tns:GetLnpCarrierRequest" />
+            <wsdl:output message="tns:GetLnpCarrierResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="getLosingServiceProvider">
+            <wsdl:input message="tns:GetLosingServiceProviderRequest" />
+            <wsdl:output message="tns:GetLosingServiceProviderResponse" />
             <wsdl:fault message="tns:Error" name="Error" />
         </wsdl:operation>
     </wsdl:portType>
@@ -269,9 +513,99 @@
             <wsdl:output message="tns:WithdrawServiceResponse" />
             <wsdl:fault message="tns:Error" name="Error" />
         </wsdl:operation>
+        <wsdl:operation name="modifyInFlightOrder">
+            <wsdl:input message="tns:ModifyInFlightOrderRequest" />
+            <wsdl:output message="tns:ModifyInFlightOrderResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
         <wsdl:operation name="modifyService">
             <wsdl:input message="tns:ModifyServiceRequest" />
             <wsdl:output message="tns:ModifyServiceResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="getProductCatalog">
+            <wsdl:input message="tns:GetProductCatalogRequest" />
+            <wsdl:output message="tns:GetProductCatalogResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="ipndUpdate">
+            <wsdl:input message="tns:IpndUpdateRequest" />
+            <wsdl:output message="tns:IpndUpdateResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="modifyVoiceServiceFeatures">
+            <wsdl:input message="tns:ModifyVoiceServiceFeaturesRequest" />
+            <wsdl:output message="tns:ModifyVoiceServiceFeaturesResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="setLNPCutoverDateTime">
+            <wsdl:input message="tns:SetLNPCutoverDateTimeRequest" />
+            <wsdl:output message="tns:SetLNPCutoverDateTimeResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="suspendVoiceService">
+            <wsdl:input message="tns:SuspendVoiceServiceRequest" />
+            <wsdl:output message="tns:SuspendVoiceServiceResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="unSuspendVoiceService">
+            <wsdl:input message="tns:UnSuspendVoiceServiceRequest" />
+            <wsdl:output message="tns:UnSuspendVoiceServiceResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="updateEndCustomerAccountNumber">
+            <wsdl:input message="tns:UpdateEndCustomerAccountNumberRequest" />
+            <wsdl:output message="tns:UpdateEndCustomerAccountNumberResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="modifyVoiceServicePassword">
+            <wsdl:input message="tns:ModifyVoiceServicePasswordRequest" />
+            <wsdl:output message="tns:ModifyVoiceServicePasswordResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="queryNBNAppointmentAvailability">
+            <wsdl:input message="tns:QueryNBNAppointmentAvailabilityRequest" />
+            <wsdl:output message="tns:QueryNBNAppointmentAvailabilityResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="createNBNAppointment">
+            <wsdl:input message="tns:CreateNBNAppointmentRequest" />
+            <wsdl:output message="tns:CreateNBNAppointmentResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="cancelNBNAppointment">
+            <wsdl:input message="tns:CancelNBNAppointmentRequest" />
+            <wsdl:output message="tns:CancelNBNAppointmentResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="queryNBNAppointmentDetails">
+            <wsdl:input message="tns:QueryNBNAppointmentDetailsRequest" />
+            <wsdl:output message="tns:QueryNBNAppointmentDetailsResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="updateNBNAppointment">
+            <wsdl:input message="tns:UpdateNBNAppointmentRequest" />
+            <wsdl:output message="tns:UpdateNBNAppointmentResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="rescheduleNBNAppointment">
+            <wsdl:input message="tns:RescheduleNBNAppointmentRequest" />
+            <wsdl:output message="tns:RescheduleNBNAppointmentResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="amendNBNOrder">
+            <wsdl:input message="tns:AmendNBNOrderRequest" />
+            <wsdl:output message="tns:AmendNBNOrderResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="nbnOrderFeasibility">
+            <wsdl:input message="tns:NBNOrderFeasibilityRequest" />
+            <wsdl:output message="tns:NBNOrderFeasibilityResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="preselectionReversal">
+            <wsdl:input message="tns:PreselectionReversalRequest" />
+            <wsdl:output message="tns:PreselectionReversalResponse" />
             <wsdl:fault message="tns:Error" name="Error" />
         </wsdl:operation>
     </wsdl:portType>
@@ -285,6 +619,26 @@
         <wsdl:operation name="listActivities">
             <wsdl:input message="tns:ListActivitiesRequest" />
             <wsdl:output message="tns:ListActivitiesResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="lossReport">
+            <wsdl:input message="tns:LossReportRequest" />
+            <wsdl:output message="tns:LossReportResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="enquireVoiceServiceFeatures">
+            <wsdl:input message="tns:EnquireVoiceServiceFeaturesRequest" />
+            <wsdl:output message="tns:EnquireVoiceServiceFeaturesResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="preselectionLossReport">
+            <wsdl:input message="tns:PreselectionLossReportRequest" />
+            <wsdl:output message="tns:PreselectionLossReportResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="getPortedOutNumbers">
+            <wsdl:input message="tns:GetPortedOutNumbersRequest" />
+            <wsdl:output message="tns:GetPortedOutNumbersResponse" />
             <wsdl:fault message="tns:Error" name="Error" />
         </wsdl:operation>
     </wsdl:portType>
@@ -378,6 +732,18 @@
     <!-- Binding -->
     <wsdl:binding name="ServiceQualificationPortBinding" type="tns:ServiceQualificationPortType">
         <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="findServiceProviderLocationId">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
         <wsdl:operation name="qualifyProduct">
             <soap:operation soapAction="" style="document" />
             <wsdl:input>
@@ -402,7 +768,55 @@
                 <soap:fault name="Error" use="literal" />
             </wsdl:fault>
         </wsdl:operation>
+        <wsdl:operation name="listCpe">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="listNetworkConnectionPoints">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
         <wsdl:operation name="qualifyDslExchange">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getLnpCarrier">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getLosingServiceProvider">
             <soap:operation soapAction="" style="document" />
             <wsdl:input>
                 <soap:body use="literal" />
@@ -454,7 +868,223 @@
                 <soap:fault name="Error" use="literal" />
             </wsdl:fault>
         </wsdl:operation>
+        <wsdl:operation name="modifyInFlightOrder">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
         <wsdl:operation name="modifyService">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getProductCatalog">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="ipndUpdate">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="modifyVoiceServiceFeatures">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setLNPCutoverDateTime">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="suspendVoiceService">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="unSuspendVoiceService">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="updateEndCustomerAccountNumber">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="modifyVoiceServicePassword">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="queryNBNAppointmentAvailability">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="createNBNAppointment">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelNBNAppointment">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="queryNBNAppointmentDetails">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="updateNBNAppointment">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="rescheduleNBNAppointment">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="amendNBNOrder">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="nbnOrderFeasibility">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="preselectionReversal">
             <soap:operation soapAction="" style="document" />
             <wsdl:input>
                 <soap:body use="literal" />
@@ -483,6 +1113,54 @@
             </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="listActivities">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="lossReport">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="enquireVoiceServiceFeatures">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="preselectionLossReport">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPortedOutNumbers">
             <soap:operation soapAction="" style="document" />
             <wsdl:input>
                 <soap:body use="literal" />
@@ -655,6 +1333,7 @@
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
+
     <wsdl:binding name="AAPTRadiusInterfacePortBinding" type="tns:AAPTRadiusInterfacePortType">
         <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
         <wsdl:operation name="radiusEntryQuery">
@@ -698,19 +1377,19 @@
     <!-- Service -->
     <wsdl:service name="FrontierLink">
         <wsdl:port name="ServiceQualification" binding="tns:ServiceQualificationPortBinding">
-            <soap:address location="https://frontierlink.aapt.com.au:8481/FrontierLink/services/ServiceQualification" />
+            <soap:address location="https://frontierlink.aapt.com.au:9481/FrontierLink/services/ServiceQualification" />
         </wsdl:port>
         <wsdl:port name="ServiceRequest" binding="tns:ServiceRequestPortBinding">
-            <soap:address location="https://frontierlink.aapt.com.au:8481/FrontierLink/services/ServiceRequest" />
+            <soap:address location="https://frontierlink.aapt.com.au:9481/FrontierLink/services/ServiceRequest" />
         </wsdl:port>
         <wsdl:port name="ServiceStatus" binding="tns:ServiceStatusPortBinding">
-            <soap:address location="https://frontierlink.aapt.com.au:8481/FrontierLink/services/ServiceStatus" />
+            <soap:address location="https://frontierlink.aapt.com.au:9481/FrontierLink/services/ServiceStatus" />
         </wsdl:port>
         <wsdl:port name="ServiceAssurance" binding="tns:ServiceAssurancePortBinding">
-            <soap:address location="https://frontierlink.aapt.com.au:8481/FrontierLink/services/ServiceAssurance" />
+            <soap:address location="https://frontierlink.aapt.com.au:9481/FrontierLink/services/ServiceAssurance" />
         </wsdl:port>
         <wsdl:port name="AAPTRadiusInterface" binding="tns:AAPTRadiusInterfacePortBinding">
-            <soap:address location="https://frontierlink.aapt.com.au:8481/FrontierLink/services/AAPTRadiusInterface" />
+            <soap:address location="https://frontierlink.aapt.com.au:9481/FrontierLink/services/AAPTRadiusInterface" />
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

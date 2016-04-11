@@ -7,8 +7,6 @@
 
 	<xsd:include schemaLocation="TicketHistory.xsd" />
 
-    <xsd:element name="TicketHistoryList" type="wsg:TicketHistoryList" />
-
     <xsd:complexType name="TicketHistoryList">
         <xsd:sequence>
             <xsd:element name="ticketHistory" type="wsg:TicketHistory" minOccurs="0" maxOccurs="unbounded" />

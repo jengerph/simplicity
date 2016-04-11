@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+	<xsd:include schemaLocation="elements/CauseCode.xsd" />
+	<xsd:include schemaLocation="elements/LifeCycleStatus.xsd" />
+	
+    <xsd:element name="CancelNBNAppointmentResponse" type="wsg:CancelNBNAppointmentResponse" />
+
+    <xsd:complexType name="CancelNBNAppointmentResponse">
+        <xsd:sequence>
+        	<xsd:element name="causeCode" type="wsg:CauseCode" /> 
+            <xsd:element name="lifecycleStatus" type="wsg:LifeCycleStatus" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -24,5 +24,4 @@
             <xsd:element name="attachmentList" type="wsc:EmailAttachmentList" minOccurs="0" />
 	    </xsd:sequence>
     </xsd:complexType>
-
 </xsd:schema>

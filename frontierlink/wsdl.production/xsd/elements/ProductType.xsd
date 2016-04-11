@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" 
-            xmlns="http://www.w3.org/2001/XMLSchema" 
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
     <xsd:simpleType name="ProductType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="National Wholesale Broadband" />
+            <xsd:enumeration value="RequestXpress" />
+            <xsd:enumeration value="Outbound Switched Voice" />
+            <xsd:enumeration value="Call Termination Service" />
+            <xsd:enumeration value="RezLine" />
+            <xsd:enumeration value="Hub Aggregation Circuit" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

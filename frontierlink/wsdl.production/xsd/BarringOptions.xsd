@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+	        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+	        elementFormDefault="qualified">
+
+    <xsd:complexType name="BarringOptions">
+        <xsd:sequence>
+            <xsd:element name="barLongDistanceCalls" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Is long distance barring activated on the service?</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="barMobileCalls" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Is mobile barring activated on the service?</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="barInternationalCalls" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Is international barring activated on the service?</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

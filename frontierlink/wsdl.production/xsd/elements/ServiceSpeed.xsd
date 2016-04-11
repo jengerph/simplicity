@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="ServiceSpeed">
+        <xsd:restriction base="xsd:string">
+            <!--  ADSL/SDSL Access Speeds -->
+            <xsd:enumeration value="Up to 256kbps/64kbps" />
+            <xsd:enumeration value="Up to 512kbps/128kbps" />
+            <xsd:enumeration value="Up to 512kbps/512kbps" />
+            <xsd:enumeration value="Up to 1Mbps/1Mbps" />
+            <xsd:enumeration value="Up to 1.5Mbps/256kbps" />
+            <xsd:enumeration value="Up to 1.5Mbps/1.5Mbps" />
+            <xsd:enumeration value="Up to 2Mbps/384kbps" />
+            <xsd:enumeration value="Up to 2Mbps/2Mbps" />
+            <xsd:enumeration value="Up to 8Mbps/384kbps" />
+            <xsd:enumeration value="Up to 8Mbps/768kbps" />
+            <xsd:enumeration value="Up to 20Mbps/1Mbps" />
+            <xsd:enumeration value="Up to 20Mbps/3Mbps (Annex M)" />
+            <xsd:enumeration value="Up to 24Mbps/1Mbps (Annex A)" />
+
+            <!-- NBN Access Speeds -->
+            <xsd:enumeration value="12Mbps/1Mbps" />
+            <xsd:enumeration value="25Mbps/5Mbps" />
+            <xsd:enumeration value="25Mbps/10Mbps" />
+            <xsd:enumeration value="50Mbps/20Mbps" />
+            <xsd:enumeration value="100Mbps/40Mbps" />
+            <xsd:enumeration value="25Mbps/5-10Mbps" />
+            <xsd:enumeration value="25-50Mbps/5-20Mbps" />
+            <xsd:enumeration value="25-100Mbps/5-40Mbps" />
+         
+            <!-- EFM Speeds -->
+            <xsd:enumeration value="Up to 10Mbps" />
+            <xsd:enumeration value="Up to 20Mbps" />
+
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

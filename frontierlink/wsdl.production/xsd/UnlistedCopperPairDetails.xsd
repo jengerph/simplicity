@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/FNN.xsd" />
+    <xsd:include schemaLocation="elements/YesNo.xsd" />
+    <xsd:include schemaLocation="elements/ULLSIdentifier.xsd" />
+
+    <xsd:complexType name="UnlistedCopperPairDetails">
+        		<xsd:sequence>
+		            <xsd:element name="voiceBandContinuity" type="wsg:YesNo" >
+			             <xsd:annotation>
+	                        <xsd:documentation xml:lang="en">Voiceband Continuity enables the End User to maintain their active exchange-based voiceband service on the existing copper infrastructure. The End User's existing provider will continue to maintain the End User's voiceband service and it will not be carried over to the NBN Co FTTB Network.</xsd:documentation>
+	                    </xsd:annotation>
+                    </xsd:element>
+                    <xsd:choice>
+		            	<xsd:element name="fnn" type="wsg:FNN"/>
+		            	<xsd:element name="ullsIdentifier" type="wsg:ULLSIdentifier" />
+                    </xsd:choice>
+		            <xsd:element name="splitterInstallation" type="wsg:YesNo"/>
+	            </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

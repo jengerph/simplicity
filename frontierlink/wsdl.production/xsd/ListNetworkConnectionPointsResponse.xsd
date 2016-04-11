@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="NetworkConnectionDetailsList.xsd" />
+
+    <xsd:element name="ListNetworkConnectionPointsResponse" type="wsg:ListNetworkConnectionPointsResponse" />
+
+    <xsd:complexType name="ListNetworkConnectionPointsResponse">
+        <xsd:sequence>
+            <xsd:element name="networkConnectionDetailsList" type="wsg:NetworkConnectionDetailsList" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A list of netowrk connection points that support the AAPT Product</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

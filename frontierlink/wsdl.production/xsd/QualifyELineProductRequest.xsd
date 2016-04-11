@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    <xsd:include schemaLocation="elements/EthernetAccessType.xsd" />
+    <xsd:include schemaLocation="elements/ELineType.xsd" />
+
+    <xsd:complexType name="QualifyELineProductRequest">
+        <xsd:sequence>
+            <xsd:choice>
+                <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="aaptLocationID" type="wsg:LocationId">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">An AAPT assigned unique ID for the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="telstraLocationID" type="wsg:LocationId">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A Telstra assigned unique ID for the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:element name="eLineType" type="wsg:ELineType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The type of eLine service being qualified</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ethernetAccessType" type="wsg:EthernetAccessType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The ethernet access type for the service being qualified</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

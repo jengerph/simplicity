@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+	<xsd:include schemaLocation="Contact.xsd" />
+    <xsd:include schemaLocation="elements/CustomerAuthorisedDate.xsd" />
+    <xsd:include schemaLocation="elements/AutomaticCutover.xsd" />
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+
+    <xsd:complexType name="PortInNumber">
+        <xsd:sequence>
+            <xsd:element name="telephoneNumber" type="wsg:FixedTelephoneNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A telephone number that has been ported</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="carrierAccountNumber" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An account number for the losing provider</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="automaticCutover" type="wsg:AutomaticCutover">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Determines if cutover should be done automatically.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerAuthorisedDate" type="wsg:CustomerAuthorisedDate">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">This is the date when port in is authorised by customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

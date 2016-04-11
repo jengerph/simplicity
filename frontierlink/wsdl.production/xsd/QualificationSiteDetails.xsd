@@ -7,7 +7,8 @@
 
     <xsd:include schemaLocation="elements/ExchangeCode.xsd" />
     <xsd:include schemaLocation="GeoCoordinates.xsd" />
-    <xsd:include schemaLocation="elements/NbnLocationID.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    <xsd:include schemaLocation="elements/NbnServiceabilityClass.xsd" />
     <xsd:include schemaLocation="elements/CopperCableSource.xsd" />
     <xsd:include schemaLocation="elements/Length.xsd" />
 
@@ -39,14 +40,39 @@
                     <xsd:documentation xml:lang="en">Calculated distance to exchange for the qualified site</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="nbnLocationID" type="wsg:NbnLocationID" minOccurs="0">
+            <xsd:element name="telstraLocationID" type="wsg:LocationId" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A Telstra assigned unique ID for the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="nbnLocationID" type="wsg:LocationId" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">An NBN assigned unique ID for the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="nbnServiceabilityClass" type="wsg:NbnServiceabilityClass" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The NBN serviceability class for the customer site</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="dslCodesOnLine" type="xsd:boolean" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">Are there active DSL Codes on the line</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="firstCvc" type="xsd:boolean" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Does this order require CVC build activities in addition to normal service delivery activities. Only returned when returnExtendedNbnSqData is set to true.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="nbnPoiId" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The NBN POI ID servicing the customer site. Only returned when returnExtendedNbnSqData is set to true.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="nbnCustomerServiceAreaId" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The Customer Service Aread ID servicing the customer site. Only returned when returnExtendedNbnSqData is set to true.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>

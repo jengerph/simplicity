@@ -16,5 +16,4 @@
 	        <xsd:element name="contentID" type="wsg:ContentID" minOccurs="0" maxOccurs="1"/>
 	    </xsd:sequence>
     </xsd:complexType>
-
 </xsd:schema>

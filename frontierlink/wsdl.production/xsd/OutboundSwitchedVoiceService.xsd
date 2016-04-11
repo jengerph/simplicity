@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/CappedPlan.xsd" />
+    <xsd:include schemaLocation="elements/YesNo.xsd"/>
+    <xsd:include schemaLocation="VoiceOrderMultipleServiceNumbers.xsd" />
+    <xsd:include schemaLocation="VoiceOrderMultipleLines.xsd" />
+    <xsd:include schemaLocation="VoiceOrderServiceNumberRange.xsd" />
+    <xsd:include schemaLocation="DirectoryListingDetail.xsd" />
+
+    <xsd:complexType name="OutboundSwitchedVoiceService">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="directoryListingDetail" type="wsg:DirectoryListingDetail" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex element containing information required to facilitate directory listing requests</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="changeOfNumber" type="wsg:VoiceOrderMultipleServiceNumbers">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A change of number service order</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="newLine" type="wsg:VoiceOrderMultipleLines">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A new line service order</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="preselectAndRebill" type="wsg:VoiceOrderServiceNumberRange">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A preselect and rebill service order</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="whitelistOnly" type="wsg:VoiceOrderServiceNumberRange">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">Service order which only requires whitelisting</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="preselection" type="wsg:VoiceOrderServiceNumberRange">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A preselection service order</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="relocation" type="wsg:VoiceOrderMultipleServiceNumbers">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A relocation service order</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:element name="cappedPlan" type="wsg:CappedPlan" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Type of capped plan</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="acceptNewInstall" type="wsg:YesNo" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Accept installation of new line if there is no in place service available. By omitting this element you only accept in place installation.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

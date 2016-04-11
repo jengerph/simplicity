@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+
+    <xsd:include schemaLocation="PortInNumberRange.xsd" />
+    <xsd:include schemaLocation="NewNumberRange.xsd" />
+    <xsd:include schemaLocation="MoveExistingNumberRange.xsd" />
+
+
+    <xsd:complexType name="CallTerminationService">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:sequence>
+                <xsd:element name="callTerminationServiceTrunkId" type="wsg:ServiceID" minOccurs="1" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A list of the Call Termination Service Trunk Identifiers to be provisioned</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:element name="locationId" type="wsg:LocationId">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A Telstra assigned unique ID for the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="portInNumberRange" type="wsg:PortInNumberRange">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex type capturing details for port in of number ranges</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="newNumberRange" type="wsg:NewNumberRange">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex type capturing details for new number range allocations</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="moveExistingNumberRange" type="wsg:MoveExistingNumberRange">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex type capturing details for move of existing number ranges to CTS product</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

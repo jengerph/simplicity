@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd" 
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" 
+        elementFormDefault="qualified">
+
+    <xsd:element name="ModifyVoiceServiceFeaturesResponse" type="wsg:ModifyVoiceServiceFeaturesResponse" />
+
+    <xsd:complexType name="ModifyVoiceServiceFeaturesResponse">
+        <xsd:sequence>
+            <xsd:element name="status" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The status of the modify request being place in queue to be processed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

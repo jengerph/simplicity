@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="ListCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="LE" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Listed Entry</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="UL" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Unlisted Entry</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="SA" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Suppressed Address Entry</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

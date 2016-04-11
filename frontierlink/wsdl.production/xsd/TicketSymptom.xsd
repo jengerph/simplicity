@@ -9,8 +9,6 @@
     <xsd:include schemaLocation="Dropouts.xsd" />
     <xsd:include schemaLocation="Performance.xsd" />
 
-    <xsd:element name="TicketSymptom" type="wsg:TicketSymptom" />
-
     <xsd:complexType name="TicketSymptom">
         <xsd:sequence>
             <xsd:element name="workedPreviously" type="xsd:boolean" />

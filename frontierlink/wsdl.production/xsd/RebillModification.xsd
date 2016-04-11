@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+	        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+	        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="VoiceModSingleServiceNumber.xsd" />
+
+    <xsd:element name="RebillModification" type="wsg:RebillModification" />
+    
+    <xsd:complexType name="RebillModification">
+        <xsd:sequence>
+            <xsd:element name="modificationServiceDetails" type="wsg:VoiceModSingleServiceNumber" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

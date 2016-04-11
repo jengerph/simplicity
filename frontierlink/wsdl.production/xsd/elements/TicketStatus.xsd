@@ -5,9 +5,16 @@
 
     <xsd:simpleType name="TicketStatus">
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="In Progress" />
-            <xsd:enumeration value="On Hold" />
-            <xsd:enumeration value="Resolved" />
+            <xsd:enumeration value="New" />
+            <xsd:enumeration value="Delegated" />
+            <xsd:enumeration value="With AAPT" />
+            <xsd:enumeration value="With 3rd Party" />
+            <xsd:enumeration value="With Field Ops - External" />
+            <xsd:enumeration value="With Field Ops - AAPT" />
+            <xsd:enumeration value="With Vendor" />
+            <xsd:enumeration value="On-Hold Customer" />
+            <xsd:enumeration value="Restored Monitoring" />
+            <xsd:enumeration value="Restored Pending Closure" />
             <xsd:enumeration value="Closed" />
         </xsd:restriction>
     </xsd:simpleType>

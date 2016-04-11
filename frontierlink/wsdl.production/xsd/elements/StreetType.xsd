@@ -4,203 +4,273 @@
             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
     <xsd:simpleType name="StreetType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                - AVENUE
+                - ACCESS
+                - ALLEY
+                - ALLEYWAY
+                - AMBLE
+                - ANCHORAGE
+                - APPROACH
+                - ARCADE
+                - ARTERIAL
+                - ARTERY
+                - BANK
+                - BARRACKS
+                - BASIN
+                - BAY
+                - BEACH
+                - BEND
+                - BLOCK
+                - BOULEVARD
+                - BOUNDARY
+                - BOWL
+                - BRACE
+                - BRANCH
+                - BREAK
+                - BRIDGE
+                - BROADWAY
+                - BROW
+                - BUILDING
+                - BYPASS
+                - BYWAY
+                - CAUSEWAY
+                - CENTRE
+                - CENTREWAY
+                - CHAMBERS
+                - CHASE
+                - CIRCLE
+                - CIRCLET
+                - CIRCUIT
+                - CIRCUS
+                - CLOSE
+                - COLONNADE
+                - COMMON
+                - COMMUNITY
+                - COMPLEX
+                - CONCOURSE
+                - CONNECTION
+                - COPSE
+                - CORNER
+                - CORSO
+                - COURSE
+                - COURT
+                - COURTYARD
+                - COVE
+                - CREEK
+                - CRESCENT
+                - CREST
+                - CRIEF
+                - CROSS
+                - CROSSING
+                - CROSSROAD
+                - CROSSWAY
+                - CRUISEWAY
+                - CUL-DE-SAC
+                - CUTTING
+                - DALE
+                - DELL
+                - DEVIATION
+                - DIP
+                - DISTRIBUTOR
+                - DOWNS
+                - DRIVE
+                - DRIVEWAY
+                - EASEMENT
+                - EAST
+                - EDGE
+                - ELBOW
+                - END
+                - ENTRANCE
+                - ESPLANADE
+                - ESTABLISHMENT
+                - ESTATE
+                - EXPRESSWAY
+                - EXTENSION
+                - FAIR
+                - FAIRWAY
+                - FIRETRACK
+                - FIRETRAIL
+                - FLAT
+                - FOLLOW
+                - FOOTWAY
+                - FORESHORE
+                - FORMATION
+                - FREEWAY
+                - FRONT
+                - FRONTAGE
+                - GAP
+                - GARDEN
+                - GARDENS
+                - GATE
+                - GATES
+                - GATEWAY
+                - GLADE
+                - GLEN
+                - GRANGE
+                - GREEN
+                - GROUND
+                - GROVE
+                - GULLY
+                - HEATH
+                - HEIGHTS
+                - HIGHROAD
+                - HIGHWAY
+                - HILL
+                - HILLSIDE
+                - HOME
+                - HOMES
+                - HOUSE
+                - INTERCHANGE
+                - INTERSECTION
+                - ISLAND
+                - JUNCTION
+                - KEY
+                - KNOLL
+                - LANDING
+                - LANE
+                - LANEWAY
+                - LEES
+                - LEVEL
+                - LINE
+                - LINK
+                - LITTLE
+                - LOCATION
+                - LOOKOUT
+                - LOOP
+                - LOWER
+                - MALL
+                - MARKET
+                - MARKETLAND
+                - MARKETOWN
+                - MARKETTOWN
+                - MEAD
+                - MEANDER
+                - MEW
+                - MEWS
+                - MOTORWAY
+                - MOUNT
+                - MOUNTAIN
+                - NEW
+                - NO STREET TYPE
+                - NOOK
+                - NORTH
+                - NORTH WEST
+                - OUTLOOK
+                - OVAL
+                - PARADE
+                - PARADISE
+                - PARK
+                - PARKLANDS
+                - PARKWAY
+                - PART
+                - PASS
+                - PATH
+                - PATHWAY
+                - PENINSULA
+                - PIAZZA
+                - PIER
+                - PLACE
+                - PLATEAU
+                - PLAZA
+                - POCKET
+                - POINT
+                - PORT
+                - PROMENADE
+                - PURSUIT
+                - QUAD
+                - QUADRANGLE
+                - QUADRANT
+                - QUAY
+                - QUAYS
+                - RACECOURSE
+                - RAILWAY SIDING
+                - RAMBLE
+                - RAMP
+                - RANGE
+                - REACH
+                - RESERVE
+                - REST
+                - RETREAT
+                - RETURN
+                - RIDE
+                - RIDGE
+                - RIDGEWAY
+                - RIGHT OF WAY
+                - RING
+                - RISE
+                - RIVER
+                - RIVERWAY
+                - RIVIERA
+                - ROAD
+                - ROADS
+                - ROADSIDE
+                - ROADWAY
+                - RONDE
+                - ROSEBOWL
+                - ROTARY
+                - ROUND
+                - ROUTE
+                - ROW
+                - ROWE
+                - RUE
+                - RUN
+                - SECTION
+                - SERVICE WAY
+                - SIDING
+                - SLOPE
+                - SOUND
+                - SOUTH
+                - SPUR
+                - SQUARE
+                - STAIRS
+                - STATE HIGHWAY
+                - STATION
+                - STEPS
+                - STOP
+                - STRAIGHT
+                - STRAND
+                - STREET
+                - STRIP
+                - SUBWAY
+                - TARN
+                - TERRACE
+                - THOROUGHFARE
+                - TOLLWAY
+                - TOP
+                - TOR
+                - TOWER
+                - TOWERS
+                - TRACK
+                - TRAIL
+                - TRAILER
+                - TRIANGLE
+                - TRUNKWAY
+                - TURN
+                - UNDERPASS
+                - UPPER
+                - VALE
+                - VALLEY
+                - VIADUCT
+                - VIEW
+                - VILLAGE
+                - VILLAS
+                - VISTA
+                - WADE
+                - WALK
+                - WALKWAY
+                - WATERS
+                - WAY
+                - WEST
+                - WHARF
+                - WOOD
+                - WYND
+                - YARD
+            </xsd:documentation>
+        </xsd:annotation>
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="AVENUE" />
-            <xsd:enumeration value="COURT" />
-            <xsd:enumeration value="DRIVE" />
-            <xsd:enumeration value="HIGHWAY" />
-            <xsd:enumeration value="PLACE" />
-            <xsd:enumeration value="ROAD" />
-            <xsd:enumeration value="STREET" />
-            <xsd:enumeration value="WAY" />
-            <xsd:enumeration value="ACCESS" />
-            <xsd:enumeration value="ALLEY" />
-            <xsd:enumeration value="ALLEYWAY" />
-            <xsd:enumeration value="AMBLE" />
-            <xsd:enumeration value="ANCHORAGE" />
-            <xsd:enumeration value="APPROACH" />
-            <xsd:enumeration value="ARCADE" />
-            <xsd:enumeration value="ARTERY" />
-            <xsd:enumeration value="BASIN" />
-            <xsd:enumeration value="BANK" />
-            <xsd:enumeration value="BEACH" />
-            <xsd:enumeration value="BEND" />
-            <xsd:enumeration value="BLOCK" />
-            <xsd:enumeration value="BOULEVARD" />
-            <xsd:enumeration value="BRACE" />
-            <xsd:enumeration value="BRAE" />
-            <xsd:enumeration value="BREAK" />
-            <xsd:enumeration value="BRIDGE" />
-            <xsd:enumeration value="BROADWAY" />
-            <xsd:enumeration value="BROW" />
-            <xsd:enumeration value="BYPASS" />
-            <xsd:enumeration value="BYWAY" />
-            <xsd:enumeration value="CAUSEWAY" />
-            <xsd:enumeration value="CENTRE" />
-            <xsd:enumeration value="CENTREWAY" />
-            <xsd:enumeration value="CHASE" />
-            <xsd:enumeration value="CIRCLE" />
-            <xsd:enumeration value="CIRCLET" />
-            <xsd:enumeration value="CIRCUIT" />
-            <xsd:enumeration value="CIRCUS" />
-            <xsd:enumeration value="CLOSE" />
-            <xsd:enumeration value="COLONNADE" />
-            <xsd:enumeration value="COMMON" />
-            <xsd:enumeration value="CONCOURSE" />
-            <xsd:enumeration value="COPSE" />
-            <xsd:enumeration value="CORNER" />
-            <xsd:enumeration value="CORSO" />
-            <xsd:enumeration value="COURTYARD" />
-            <xsd:enumeration value="COVE" />
-            <xsd:enumeration value="CRESCENT" />
-            <xsd:enumeration value="CREST" />
-            <xsd:enumeration value="CROSS" />
-            <xsd:enumeration value="CROSSING" />
-            <xsd:enumeration value="CROSSROAD" />
-            <xsd:enumeration value="CROSSWAY" />
-            <xsd:enumeration value="CRUISEWAY" />
-            <xsd:enumeration value="CUL-DE-SAC" />
-            <xsd:enumeration value="CUTTING" />
-            <xsd:enumeration value="DALE" />
-            <xsd:enumeration value="DELL" />
-            <xsd:enumeration value="DEVIATION" />
-            <xsd:enumeration value="DIP" />
-            <xsd:enumeration value="DISTRIBUTOR" />
-            <xsd:enumeration value="DRIVEWAY" />
-            <xsd:enumeration value="EDGE" />
-            <xsd:enumeration value="ELBOW" />
-            <xsd:enumeration value="END" />
-            <xsd:enumeration value="ENTRANCE" />
-            <xsd:enumeration value="ESPLANADE" />
-            <xsd:enumeration value="EXPRESSWAY" />
-            <xsd:enumeration value="EXTENSION" />
-            <xsd:enumeration value="FAIRWAY" />
-            <xsd:enumeration value="FIRETRACK" />
-            <xsd:enumeration value="FIRETRAIL" />
-            <xsd:enumeration value="FLAT" />
-            <xsd:enumeration value="FOLLOW" />
-            <xsd:enumeration value="FOOTWAY" />
-            <xsd:enumeration value="FORESHORE" />
-            <xsd:enumeration value="FORMATION" />
-            <xsd:enumeration value="FREEWAY" />
-            <xsd:enumeration value="FRONT" />
-            <xsd:enumeration value="FRONTAGE" />
-            <xsd:enumeration value="GAP" />
-            <xsd:enumeration value="GARDEN" />
-            <xsd:enumeration value="GARDENS" />
-            <xsd:enumeration value="GATE" />
-            <xsd:enumeration value="GATES" />
-            <xsd:enumeration value="GLADE" />
-            <xsd:enumeration value="GLEN" />
-            <xsd:enumeration value="GRANGE" />
-            <xsd:enumeration value="GREEN" />
-            <xsd:enumeration value="GROUND" />
-            <xsd:enumeration value="GROVE" />
-            <xsd:enumeration value="GULLY" />
-            <xsd:enumeration value="HEIGHTS" />
-            <xsd:enumeration value="HIGHROAD" />
-            <xsd:enumeration value="HILL" />
-            <xsd:enumeration value="INTERCHANGE" />
-            <xsd:enumeration value="INTERSECTION" />
-            <xsd:enumeration value="JUNCTION" />
-            <xsd:enumeration value="KEY" />
-            <xsd:enumeration value="LANE" />
-            <xsd:enumeration value="LANEWAY" />
-            <xsd:enumeration value="LEES" />
-            <xsd:enumeration value="LINE" />
-            <xsd:enumeration value="LINK" />
-            <xsd:enumeration value="LITTLE" />
-            <xsd:enumeration value="LOOKOUT" />
-            <xsd:enumeration value="LOOP" />
-            <xsd:enumeration value="LOWER" />
-            <xsd:enumeration value="MALL" />
-            <xsd:enumeration value="MEANDER" />
-            <xsd:enumeration value="MEW" />
-            <xsd:enumeration value="MEWS" />
-            <xsd:enumeration value="MOTORWAY" />
-            <xsd:enumeration value="MOUNT" />
-            <xsd:enumeration value="NOOK" />
-            <xsd:enumeration value="OUTLOOK" />
-            <xsd:enumeration value="PARADE" />
-            <xsd:enumeration value="PARK" />
-            <xsd:enumeration value="PARKLANDS" />
-            <xsd:enumeration value="PARKWAY" />
-            <xsd:enumeration value="PART" />
-            <xsd:enumeration value="PASS" />
-            <xsd:enumeration value="PATH" />
-            <xsd:enumeration value="PATHWAY" />
-            <xsd:enumeration value="PIAZZA" />
-            <xsd:enumeration value="PLAZA" />
-            <xsd:enumeration value="POCKET" />
-            <xsd:enumeration value="POINT" />
-            <xsd:enumeration value="PORT" />
-            <xsd:enumeration value="PROMENADE" />
-            <xsd:enumeration value="PURSUIT" />
-            <xsd:enumeration value="QUAD" />
-            <xsd:enumeration value="QUADRANGLE" />
-            <xsd:enumeration value="QUADRANT" />
-            <xsd:enumeration value="QUAY" />
-            <xsd:enumeration value="QUAYS" />
-            <xsd:enumeration value="RAMBLE" />
-            <xsd:enumeration value="RAMP" />
-            <xsd:enumeration value="RANGE" />
-            <xsd:enumeration value="RESERVE" />
-            <xsd:enumeration value="REST" />
-            <xsd:enumeration value="RETREAT" />
-            <xsd:enumeration value="RIDE" />
-            <xsd:enumeration value="RIDGE" />
-            <xsd:enumeration value="RIDGEWAY" />
-            <xsd:enumeration value="RIGHT OF WAY" />
-            <xsd:enumeration value="RING" />
-            <xsd:enumeration value="RISE" />
-            <xsd:enumeration value="RIVER" />
-            <xsd:enumeration value="RIVERWAY" />
-            <xsd:enumeration value="RIVIERA" />
-            <xsd:enumeration value="ROADS" />
-            <xsd:enumeration value="ROADSIDE" />
-            <xsd:enumeration value="ROADWAY" />
-            <xsd:enumeration value="RONDE" />
-            <xsd:enumeration value="ROSEBOWL" />
-            <xsd:enumeration value="ROTARY" />
-            <xsd:enumeration value="ROUND" />
-            <xsd:enumeration value="ROUTE" />
-            <xsd:enumeration value="ROW" />
-            <xsd:enumeration value="RUE" />
-            <xsd:enumeration value="RUN" />
-            <xsd:enumeration value="SIDING" />
-            <xsd:enumeration value="SLOPE" />
-            <xsd:enumeration value="SPUR" />
-            <xsd:enumeration value="SQUARE" />
-            <xsd:enumeration value="STAIRS" />
-            <xsd:enumeration value="STATE HIGHWAY" />
-            <xsd:enumeration value="STEPS" />
-            <xsd:enumeration value="STRAND" />
-            <xsd:enumeration value="STRIP" />
-            <xsd:enumeration value="SUBWAY" />
-            <xsd:enumeration value="TARN" />
-            <xsd:enumeration value="TERRACE" />
-            <xsd:enumeration value="THOROUGHFARE" />
-            <xsd:enumeration value="TOLLWAY" />
-            <xsd:enumeration value="TOP" />
-            <xsd:enumeration value="TOR" />
-            <xsd:enumeration value="TOWERS" />
-            <xsd:enumeration value="TRACK" />
-            <xsd:enumeration value="TRAIL" />
-            <xsd:enumeration value="TRIANGLE" />
-            <xsd:enumeration value="TRUNKWAY" />
-            <xsd:enumeration value="TURN" />
-            <xsd:enumeration value="UNDERPASS" />
-            <xsd:enumeration value="VALE" />
-            <xsd:enumeration value="VIADUCT" />
-            <xsd:enumeration value="VIEW" />
-            <xsd:enumeration value="VILLAS" />
-            <xsd:enumeration value="VISTA" />
-            <xsd:enumeration value="WADE" />
-            <xsd:enumeration value="WALK" />
-            <xsd:enumeration value="WALKWAY" />
-            <xsd:enumeration value="WHARF" />
-            <xsd:enumeration value="WYND" />
-            <xsd:enumeration value="YARD" />
+            <xsd:minLength value="1" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

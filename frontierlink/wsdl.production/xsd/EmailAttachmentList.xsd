@@ -12,5 +12,4 @@
 	        <xsd:element name="emailAttachments" type="wsg:EmailAttachments" minOccurs="0" maxOccurs="unbounded"/>
 	    </xsd:sequence>
     </xsd:complexType>
-
 </xsd:schema>

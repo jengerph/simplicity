@@ -5,31 +5,37 @@
             xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
             elementFormDefault="qualified">
 
-    <xsd:include schemaLocation="SiteAddress.xsd" />
-    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
-    <xsd:include schemaLocation="elements/ProductType.xsd" />
+    <xsd:include schemaLocation="QualifyNationalWholesaleBroadbandProductRequest.xsd" />
+    <xsd:include schemaLocation="QualifyRequestXpressProductRequest.xsd" />
+    <xsd:include schemaLocation="QualifyELanProductRequest.xsd" />
+    <xsd:include schemaLocation="QualifyELineProductRequest.xsd" />
 
     <xsd:element name="QualifyProductRequest" type="wsg:QualifyProductRequest" />
 
     <xsd:complexType name="QualifyProductRequest">
         <xsd:sequence>
             <xsd:choice>
-                <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber">
+                <xsd:element name="qualifyNationalWholesaleBroadbandProductRequest" type="wsg:QualifyNationalWholesaleBroadbandProductRequest">
                     <xsd:annotation>
-                        <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                        <xsd:documentation xml:lang="en">A complex type capturing required data for National Wholesale Broadband qualification</xsd:documentation>
                     </xsd:annotation>
                 </xsd:element>
-                <xsd:element name="siteAddress" type="wsg:SiteAddress">
+                <xsd:element name="qualifyRequestXpressProductRequest" type="wsg:QualifyRequestXpressProductRequest">
                     <xsd:annotation>
-                        <xsd:documentation xml:lang="en">The customer site being qualified</xsd:documentation>
+                        <xsd:documentation xml:lang="en">A complex type capturing required data for RequestXpress qualification</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="qualifyELanProductRequest" type="wsg:QualifyELanProductRequest">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex type capturing required data for ELan qualification</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="qualifyELineProductRequest" type="wsg:QualifyELineProductRequest">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex type capturing required data for ELine qualification</xsd:documentation>
                     </xsd:annotation>
                 </xsd:element>
             </xsd:choice>
-            <xsd:element name="productType" type="wsg:ProductType">
-                <xsd:annotation>
-                    <xsd:documentation xml:lang="en">Product Type being qualified</xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>

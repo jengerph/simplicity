@@ -12,5 +12,4 @@
 	        <xsd:element name="emailAddress" type="wsg:EmailAddress" maxOccurs="unbounded" />
 	    </xsd:sequence>
     </xsd:complexType>
-
 </xsd:schema>

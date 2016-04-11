@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/CustomerReference.xsd" />
+    <xsd:include schemaLocation="ServiceOrderIdType.xsd" />
+    <xsd:include schemaLocation="elements/LossType.xsd" />
+    <xsd:include schemaLocation="elements/ServiceProviderName.xsd" />
+
+    <xsd:complexType name="LossRecord">
+        <xsd:sequence>
+            <xsd:element name="lossDate" type="xsd:date">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The date the loss event occured</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceNumber" type="wsg:FixedTelephoneNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerReference" type="wsg:CustomerReference">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A customer assigned unique identifier for each Service instance requested</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceOrders" type="wsg:ServiceOrderIdType" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details pertaining to the Service Orders making up the customer service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="lossType" type="wsg:LossType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The type of loss transaction</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="losingServiceProvider" type="wsg:ServiceProviderName" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Service Provider Name of the losing Service Provider.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="gainingServiceProvider" type="wsg:ServiceProviderName" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Service Provider Name of the gaining Service Provider.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

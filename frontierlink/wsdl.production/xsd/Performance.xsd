@@ -8,8 +8,6 @@
     <xsd:include schemaLocation="PacketLoss.xsd" />
     <xsd:include schemaLocation="SpeedIssue.xsd" />
 
-    <xsd:element name="Performance" type="wsg:Performance" />
-
     <xsd:complexType name="Performance">
         <xsd:sequence>
             <xsd:element name="packetLoss" type="wsg:PacketLoss" />

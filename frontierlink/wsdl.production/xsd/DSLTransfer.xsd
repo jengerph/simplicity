@@ -17,7 +17,7 @@
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="dslTransferDate" type="xsd:date">
+            <xsd:element name="dslTransferAuthorityDate" type="xsd:date">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">Customer Transfer Authority Date. Must be less than or equal to today's date, but not older than 1 month.</xsd:documentation>
                 </xsd:annotation>

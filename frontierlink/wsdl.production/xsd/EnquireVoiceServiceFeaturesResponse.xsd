@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/UserName.xsd" />
+    <xsd:include schemaLocation="elements/YesNo.xsd" />
+    <xsd:include schemaLocation="elements/AustralianTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="BarringOptions.xsd" />
+
+    <xsd:element name="EnquireVoiceServiceFeaturesResponse" type="wsg:EnquireVoiceServiceFeaturesResponse" />
+
+    <xsd:complexType name="EnquireVoiceServiceFeaturesResponse">
+        <xsd:sequence>
+            <xsd:element name="serviceId" type="wsg:ServiceID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The service identifier.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The account number the service identifier belongs to.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <element name="barringOptions" type="wsg:BarringOptions" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The barring values for mobile, long distance and international.</xsd:documentation>
+                </xsd:annotation>
+            </element>
+            <xsd:element name="allowCLI" type="wsg:YesNo" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Is caller line identification activated for the service?</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="callForwardingNoAnswer" type="wsg:YesNo" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Is call forwarding for no answer activated for the service?</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="callForwardingNoAnswerNumber" type="wsg:AustralianTelephoneNumber" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The number to forward to when call forwarding for no answer is activated.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="callForwardingBusy" type="wsg:YesNo" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Is call forwarding for a busy line activated for the service?</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="callForwardingBusyNumber" type="wsg:AustralianTelephoneNumber" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The number to forward to when call forwarding for a busy line is activated.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="callForwardingImmediate" type="wsg:YesNo" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Is call forwarding immediate activated for the service?</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="callForwardingImmediateNumber" type="wsg:AustralianTelephoneNumber" minOccurs="0" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The number to forward to when call forwarding immediate is activated.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

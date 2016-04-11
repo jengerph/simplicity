@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="UsageCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="B" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Business Service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="C" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Charity Service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="G" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Government Service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="R" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Residential Service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="N" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Usage Not Available</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

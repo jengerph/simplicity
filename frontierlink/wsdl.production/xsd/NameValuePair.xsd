@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AttributeName.xsd" />
+    <xsd:include schemaLocation="elements/AttributeValue.xsd" />
+
+    <xsd:complexType name="NameValuePair">
+        <xsd:sequence>
+            <xsd:element name="attributeName" type="wsg:AttributeName">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Attribute name for name value pair</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="attributeValue" type="wsg:AttributeValue" >
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Value string for name value pair</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

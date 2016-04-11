@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/LossType.xsd" />
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+
+    <xsd:element name="LossReportRequest" type="wsg:LossReportRequest" />
+
+    <xsd:complexType name="LossReportRequest">
+        <xsd:sequence>
+            <xsd:element name="fromDate" type="xsd:date" />
+            <xsd:element name="toDate" type="xsd:date" />
+            <xsd:element name="lossType" type="wsg:LossType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The type of loss transaction</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

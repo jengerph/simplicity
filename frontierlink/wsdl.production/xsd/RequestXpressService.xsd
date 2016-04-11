@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccessType.xsd" />
+    <xsd:include schemaLocation="elements/AccessMethod.xsd" />
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/ContractTermMonths.xsd" />
+    <xsd:include schemaLocation="elements/CpeModel.xsd" />
+    <xsd:include schemaLocation="elements/CustomerRequiredDate.xsd" />
+    <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/ServiceSpeed.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/SupportLevel.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    <xsd:include schemaLocation="elements/QualificationID.xsd" />
+    <xsd:include schemaLocation="CpeOrdered.xsd" />
+    <xsd:include schemaLocation="DhcpConfiguration.xsd" />
+    <xsd:include schemaLocation="DSLTransfer.xsd" />
+    <xsd:include schemaLocation="RadiusEntry.xsd" />
+    <xsd:include schemaLocation="LanConfiguration.xsd" />
+    <xsd:include schemaLocation="WanConfiguration.xsd" />
+
+    <xsd:complexType name="RequestXpressService">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="qualificationID" type="wsg:QualificationID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for the qualification performed for this order</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="endCSN" type="wsg:FixedTelephoneNumber">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A PSTN telephony service number at the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="telstraLocationID" type="wsg:LocationId">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A Telstra assigned unique ID for the customer site</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+            <xsd:element name="accessMethod" type="wsg:AccessMethod">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The AAPT access method for the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accessType" type="wsg:AccessType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The AAPT access type relating to the access method</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serviceSpeed" type="wsg:ServiceSpeed">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Speed of the RequestXpress service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="networkConnectionServiceId" type="wsg:ServiceID">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The network connection point the customer service will terminate to</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="contractTerm" type="wsg:ContractTermMonths">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The AAPT contract term for the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="supportLevel" type="wsg:SupportLevel">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The AAPT support level for the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="radiusEntry" type="wsg:RadiusEntry" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The radius entry used by the service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="cpeOrdered" type="wsg:CpeOrdered" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The CPE to be supplied for this service, if required</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="lanConfiguration" type="wsg:LanConfiguration">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The LAN configuration to be applied for this service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="wanConfiguration" type="wsg:WanConfiguration">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The WAN configuration to be applied for this service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dhcpConfiguration" type="wsg:DhcpConfiguration" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The DHCP configuration to be applied for this service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dslTransfer" type="wsg:DSLTransfer" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The DSL Transfer details for the service, if applicable</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="installationDate" type="wsg:CustomerRequiredDate" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The date of service activiation - populated in enquire service response</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

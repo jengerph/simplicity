@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd" 
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" 
+        elementFormDefault="qualified">
+
+    <xsd:element name="UpdateEndCustomerAccountNumberResponse" type="wsg:UpdateEndCustomerAccountNumberResponse" />
+    
+    <xsd:complexType name="UpdateEndCustomerAccountNumberResponse">
+        <xsd:sequence>
+        </xsd:sequence>
+    </xsd:complexType>    
+</xsd:schema>

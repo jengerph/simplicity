@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/AppointmentSLA.xsd" />
+    <xsd:include schemaLocation="elements/AppointmentTimeSlot.xsd" />
+    <xsd:include schemaLocation="elements/DemandType.xsd" />
+    <xsd:include schemaLocation="elements/LocationId.xsd" />
+    <xsd:include schemaLocation="elements/PriorityAssist.xsd" />
+    <xsd:include schemaLocation="elements/ServiceRestorationSLA.xsd" />
+
+    <xsd:include schemaLocation="AppointmentDateTime.xsd" />
+
+    <xsd:element name="QueryNBNAppointmentAvailabilityRequest" type="wsg:QueryNBNAppointmentAvailabilityRequest" />
+
+    <xsd:complexType name="QueryNBNAppointmentAvailabilityRequest">
+        <xsd:sequence>
+            <xsd:element name="appointmentTimeSlot" type="wsg:AppointmentTimeSlot" minOccurs="0"/>
+			<xsd:element name="appointmentDate" type="wsg:AppointmentDateTime" />
+			<xsd:element name="nbnLocationID" type="wsg:LocationId" />
+			<xsd:element name="priorityAssist" type="wsg:PriorityAssist" />
+			<xsd:element name="demandType" type="wsg:DemandType" />
+			<xsd:element name="appointmentSLA" type="wsg:AppointmentSLA" />
+			<xsd:element name="serviceRestorationSLA" type="wsg:ServiceRestorationSLA" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

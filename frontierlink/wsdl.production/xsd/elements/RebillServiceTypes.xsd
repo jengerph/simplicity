@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.aapt.com.au/FrontierLink/xsd">
+
+    <xsd:simpleType name="RebillServiceTypes">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="PSTN" />
+            <xsd:enumeration value="ISDN2 Direct Indial" />
+            <xsd:enumeration value="ISDN2 Enhanced" />
+            <xsd:enumeration value="ISDN2 Standard" />
+            <xsd:enumeration value="ISDN 10" />
+            <xsd:enumeration value="ISDN 20" />
+            <xsd:enumeration value="ISDN 30" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

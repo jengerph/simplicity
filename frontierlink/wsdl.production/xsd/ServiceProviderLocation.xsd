@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="LocationList.xsd" />
+    <xsd:include schemaLocation="elements/LocationIdProvider.xsd" />
+
+    <xsd:complexType name="ServiceProviderLocation">
+        <xsd:sequence>
+            <xsd:element name="serviceProvider" type="wsg:LocationIdProvider" />
+            <xsd:element name="locationList" type="wsg:LocationList" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

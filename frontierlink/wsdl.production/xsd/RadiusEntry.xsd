@@ -9,8 +9,6 @@
     <xsd:include schemaLocation="elements/Password.xsd" />
     <xsd:include schemaLocation="elements/UserName.xsd" />
 
-    <xsd:element name="RadiusEntry" type="wsg:RadiusEntry" />
-
     <xsd:complexType name="RadiusEntry">
         <xsd:sequence>
             <xsd:element name="radiusUserName" type="wsg:UserName" />

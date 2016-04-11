@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="SiteAddress.xsd" />
+    <xsd:include schemaLocation="ServiceOrderIdTypeList.xsd" />
+
+    <xsd:complexType name="CtsProductOrderDetails">
+        <xsd:sequence>
+            <xsd:element name="cspCode" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">cspCode for service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="callTerminationServiceTrunkIds" type="wsg:ServiceOrderIdTypeList">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A list of the Call Termination Service Identifiers provisioned</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="siteAddress" type="wsg:SiteAddress">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex definition of details relating to the Site. Conforms to the Telstra constructs for DSL Sites.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -7,8 +7,6 @@
 
     <xsd:include schemaLocation="NetworkConnectionDetails.xsd" />
 
-    <xsd:element name="NetworkConnectionDetailsList" type="wsg:NetworkConnectionDetailsList" />
-
     <xsd:complexType name="NetworkConnectionDetailsList">
         <xsd:sequence>
             <xsd:element name="networkConnectionDetails" type="wsg:NetworkConnectionDetails" minOccurs="1" maxOccurs="unbounded" />

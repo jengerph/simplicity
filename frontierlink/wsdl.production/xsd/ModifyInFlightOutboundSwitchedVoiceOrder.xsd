@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+        targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="ModifyInFlightOrderAppointmentDate.xsd" />
+
+    <xsd:complexType name="ModifyInFlightOutboundSwitchedVoiceOrder">
+        <xsd:choice>
+            <xsd:sequence>
+                <xsd:element name="changeAppointmentDate" type="wsg:ModifyInFlightOrderAppointmentDate" />
+            </xsd:sequence>
+        </xsd:choice>
+    </xsd:complexType>
+</xsd:schema>

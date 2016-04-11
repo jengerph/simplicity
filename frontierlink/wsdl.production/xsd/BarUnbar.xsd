@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+	        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+	        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+    <xsd:include schemaLocation="elements/BarUnbarType.xsd" />
+    <xsd:include schemaLocation="elements/CustomerRequiredDate.xsd" />
+
+
+    <xsd:complexType name="BarUnbar">
+        <xsd:sequence>
+            <xsd:element name="barUnbarType" type="wsg:BarUnbarType" />
+            <xsd:element name="customerRequiredDate" type="wsg:CustomerRequiredDate">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The date the customer requires the service to be activated</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:sequence>
+                <xsd:element name="serviceOrders" type="wsg:ServiceID" minOccurs="1" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A list of to the Service Orders Ids making up the customer service to be barred or unbarred</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/IpAddress.xsd" />
+    <xsd:include schemaLocation="elements/IpProtocol.xsd" />
+    <xsd:include schemaLocation="elements/PatPort.xsd" />
+
+    <xsd:complexType name="PortAddressTranslation">
+        <xsd:sequence>
+            <xsd:element name="ipAddress" type="wsg:IpAddress" />
+            <xsd:element name="protocolType" type="wsg:IpProtocol" />
+            <xsd:element name="portInside" type="wsg:PatPort" />
+            <xsd:element name="portOutside" type="wsg:PatPort" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

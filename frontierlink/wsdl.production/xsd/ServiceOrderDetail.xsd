@@ -9,6 +9,9 @@
     <xsd:include schemaLocation="elements/ServiceOrderType.xsd" />
     <xsd:include schemaLocation="elements/ServiceStatus.xsd" />
     <xsd:include schemaLocation="ProductOrderDetails.xsd" />
+    <xsd:include schemaLocation="VoiceProductOrderDetails.xsd" />
+    <xsd:include schemaLocation="CtsProductOrderDetails.xsd" />
+    <xsd:include schemaLocation="RezLineProductOrderDetails.xsd" />
 
     <xsd:complexType name="ServiceOrderDetail">
         <xsd:sequence>
@@ -27,11 +30,28 @@
                     <xsd:documentation xml:lang="en">A AAPT specific indicator of Status of the Service</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="ProductOrderDetails" type="wsg:ProductOrderDetails" maxOccurs="unbounded" >
-                <xsd:annotation>
-                    <xsd:documentation xml:lang="en">A complex definition of AAPT workflow events and information and the orders contact</xsd:documentation>
-                </xsd:annotation>
-            </xsd:element>
+            <xsd:choice>
+                <xsd:element name="ProductOrderDetails" type="wsg:ProductOrderDetails" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex definition of AAPT workflow events and information and the orders contact</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="VoiceProductOrderDetails" type="wsg:VoiceProductOrderDetails">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex definition of Rebill records and Products</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="CtsProductOrderDetails" type="wsg:CtsProductOrderDetails">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex definition of CTS service details</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="RezLineProductOrderDetails" type="wsg:RezLineProductOrderDetails">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex definition of RezLine service details</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>

@@ -5,13 +5,13 @@
             xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
             elementFormDefault="qualified">
 
-    <xsd:element name="NoConnectivity" type="wsg:NoConnectivity" />
+    <xsd:include schemaLocation="elements/IpAddress.xsd" />
 
     <xsd:complexType name="NoConnectivity">
         <xsd:sequence>
             <xsd:element name="haveDialTone" type="xsd:boolean" />
             <xsd:element name="synchCarrierDetect" type="xsd:boolean" />
-            <xsd:element name="wanIPAddress" type="xsd:string" />
+            <xsd:element name="wanIPAddress" type="wsg:IpAddress" />
             <xsd:element name="chapUsername" type="xsd:string" />
         </xsd:sequence>
     </xsd:complexType>

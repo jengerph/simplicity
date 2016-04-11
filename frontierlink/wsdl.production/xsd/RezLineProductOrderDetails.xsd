@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/SipPassword.xsd" />
+
+    <xsd:complexType name="RezLineProductOrderDetails">
+        <xsd:sequence>
+            <xsd:element name="sipPassword" type="wsg:SipPassword" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Sip password</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -6,6 +6,8 @@
     <xsd:simpleType name="ContractTermMonths">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="0" />
+            <xsd:enumeration value="3" />
+            <xsd:enumeration value="6" />
             <xsd:enumeration value="12" />
             <xsd:enumeration value="24" />
         </xsd:restriction>

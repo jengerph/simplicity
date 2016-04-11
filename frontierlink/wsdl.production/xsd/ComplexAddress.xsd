@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:complexType name="ComplexAddress">
+        <xsd:sequence>
+            <xsd:element name="ruralMailNumber" type="xsd:string" minOccurs="0" />
+            <xsd:element name="ruralMailType" type="xsd:string" minOccurs="0" />
+            <xsd:element name="levelNumber" type="xsd:string" minOccurs="0" />
+            <xsd:element name="levelType" type="xsd:string" minOccurs="0" />
+            <xsd:element name="unitNumber" type="xsd:string" minOccurs="0" />
+            <xsd:element name="unitType" type="xsd:string" minOccurs="0" />
+            <xsd:element name="planNumber" type="xsd:string" minOccurs="0" />
+            <xsd:element name="lotNumber" type="xsd:string" minOccurs="0" />
+            <xsd:element name="streetNumber" type="xsd:string" minOccurs="0" />
+            <xsd:element name="streetNumberSuffix" type="xsd:string" minOccurs="0" />
+            <xsd:element name="siteName" type="xsd:string" minOccurs="0" />
+            <xsd:element name="streetName" type="xsd:string" minOccurs="0" />
+            <xsd:element name="streetType" type="xsd:string" minOccurs="0" />
+            <xsd:element name="streetTypeSuffix" type="xsd:string" minOccurs="0" />
+            <xsd:element name="suburb" type="xsd:string" />
+            <xsd:element name="state" type="xsd:string" />
+            <xsd:element name="postcode" type="xsd:string" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

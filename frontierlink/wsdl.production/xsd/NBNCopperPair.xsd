@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/AllocateNewLine.xsd" />
+    <xsd:include schemaLocation="elements/YesNo.xsd" />
+    <xsd:include schemaLocation="CopperPairDetails.xsd" />
+
+    <xsd:complexType name="NBNCopperPair">
+       	<xsd:sequence>
+	        <xsd:element name="ID" type="string" />
+			<xsd:element name="POTSInterconnect" type="string" minOccurs="0" />
+			<xsd:element name="isLineInUse" type="boolean" minOccurs="0" />
+			<xsd:element name="isCopperActive" type="boolean" minOccurs="0" />
+			<xsd:element name="TC4DownstreamUpperRate" type="string" minOccurs="0" />
+			<xsd:element name="TC4DownstreamLowerRate" type="string" minOccurs="0" />
+			<xsd:element name="TC4UpstreamUpperRate" type="string" minOccurs="0" />
+			<xsd:element name="TC4UpstreamLowerRate" type="string" minOccurs="0" />
+			<xsd:element name="isCoexistingNetwork" type="boolean" minOccurs="0" />			
+			<xsd:element name="isPOTSInterconnectMatch" type="boolean" minOccurs="0" />			
+			<xsd:element name="ServiceabilityClass" type="string" minOccurs="0" />			
+       	</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

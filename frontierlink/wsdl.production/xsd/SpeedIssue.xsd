@@ -7,8 +7,6 @@
 
     <xsd:include schemaLocation="Attachment.xsd" />
 
-    <xsd:element name="SpeedIssue" type="wsg:SpeedIssue" />
-
     <xsd:complexType name="SpeedIssue">
         <xsd:sequence>
             <xsd:element name="roundTripTimeInMs" type="xsd:double" />

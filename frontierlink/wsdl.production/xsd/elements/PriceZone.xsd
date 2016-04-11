@@ -7,6 +7,19 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="Metro" />
             <xsd:enumeration value="Regional" />
+            <xsd:enumeration value="Zone 1" />
+            <xsd:enumeration value="Zone 2" />
+            <xsd:enumeration value="Zone 3" />
+            <!-- Additional price zones for Ethernet access -->
+            <xsd:enumeration value="CBD" />
+            <xsd:enumeration value="Region1" />
+            <xsd:enumeration value="Region2" />
+            <xsd:enumeration value="Region3" />
+            <xsd:enumeration value="Region4" />
+            <xsd:enumeration value="Class1 Metro" />
+            <xsd:enumeration value="Class2 Metro" />
+            <xsd:enumeration value="Regional2" />
+            <xsd:enumeration value="Rural" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

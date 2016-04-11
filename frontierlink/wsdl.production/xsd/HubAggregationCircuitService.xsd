@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+	
+    <xsd:include schemaLocation="elements/AccountNumber.xsd" />
+    <xsd:include schemaLocation="elements/FTTBFibreHubId.xsd" />
+    <xsd:include schemaLocation="elements/HacBandwidth.xsd" />
+    <xsd:include schemaLocation="elements/NniPsi.xsd" />
+    <xsd:include schemaLocation="elements/TargetUse.xsd" />
+    <xsd:include schemaLocation="elements/VlanId.xsd" />
+
+    <xsd:complexType name="HubAggregationCircuitService">
+        <xsd:sequence>
+            <xsd:element name="accountNumber" type="wsg:AccountNumber">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">An AAPT assigned unique identifier for each customer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="nniPsi" type="wsg:NniPsi">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Nni psi</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="targetUse" type="wsg:TargetUse">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Target use is either Local Access Line or Voice Virtual Circuit</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="hacBandwidth" type="wsg:HacBandwidth">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Hac bandwidth (Mpbs) with increments of 25 Mbps.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="vlanId" type="wsg:VlanId">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Unique for a given NNI. From 2-4001. Should be unique for a given NNI.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="fttbFibreHubId" type="wsg:FTTBFibreHubId">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Fibre Hub Id</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

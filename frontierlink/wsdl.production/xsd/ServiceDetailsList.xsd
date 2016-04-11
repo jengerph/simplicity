@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd" 
+        xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd" 
+        elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="ServiceDetails.xsd" />
+
+    <xsd:complexType name="ServiceDetailsList">
+        <xsd:sequence>
+            <xsd:element name="serviceDetails" type="wsg:ServiceDetails" maxOccurs="10">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en"> A complex definition of details relating to the Product Type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/FormID.xsd" />
+    <xsd:include schemaLocation="elements/ServiceID.xsd" />
+
+    <xsd:element name="SetLNPCutoverDateTimeRequest" type="wsg:SetLNPCutoverDateTimeRequest" />
+
+    <xsd:complexType name="SetLNPCutoverDateTimeRequest">
+        <xsd:sequence>
+             <xsd:element name="productOrderId" type="wsg:FormID" />
+             <xsd:element name="serviceOrderId" type="wsg:ServiceID" />
+             <xsd:element name="cutoverDateTime" type="xsd:dateTime" /> 
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

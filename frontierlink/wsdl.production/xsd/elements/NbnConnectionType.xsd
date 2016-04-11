@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:simpleType name="NbnConnectionType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">Specify Type 1 if the End User already has an existing broadband service (e.g. broadband service delivered via DSL, cable, satellite, etc) , otherwise specify Type 2</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="1" />
+            <xsd:enumeration value="2" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

@@ -6,13 +6,13 @@
             elementFormDefault="qualified">
 
     <xsd:include schemaLocation="elements/EmailAddress.xsd" />
-    <xsd:include schemaLocation="elements/LandLineTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/AustralianTelephoneNumber.xsd" />
     <xsd:include schemaLocation="elements/OrganisationName.xsd" />
 
     <xsd:complexType name="TicketContact">
         <xsd:sequence>
             <xsd:element name="name" type="wsg:OrganisationName" />
-            <xsd:element name="phone" type="wsg:LandLineTelephoneNumber" />
+            <xsd:element name="phone" type="wsg:AustralianTelephoneNumber" />
             <xsd:element name="email" type="wsg:EmailAddress" minOccurs="0" />
         </xsd:sequence>
     </xsd:complexType>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="elements/DemandType.xsd" />
+    <xsd:include schemaLocation="elements/OrderFeasibilityStatus.xsd" />
+    
+    <xsd:include schemaLocation="NameValuePairList.xsd" />
+
+    <xsd:element name="NBNOrderFeasibilityResponse" type="wsg:NBNOrderFeasibilityResponse" />
+
+    <xsd:complexType name="NBNOrderFeasibilityResponse">
+        <xsd:sequence>
+            <xsd:element name="orderFeasibilityStatus" type="wsg:OrderFeasibilityStatus" />
+            <xsd:element name="demandType" type="wsg:DemandType" minOccurs="0" />
+            <xsd:element name="orderFeasibilityAttributes" type="wsg:NameValuePairList" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -8,8 +8,6 @@
     <xsd:include schemaLocation="CablePair.xsd" />
     <xsd:include schemaLocation="elements/TransmissionPathStatus.xsd" />
 
-    <xsd:element name="CableDetails" type="wsg:CableDetails" />
-
     <xsd:complexType name="CableDetails">
         <xsd:sequence>
             <xsd:element name="transmissionPathStatus" type="wsg:TransmissionPathStatus" minOccurs="0" />
