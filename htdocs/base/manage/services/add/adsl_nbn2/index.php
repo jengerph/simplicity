@@ -109,7 +109,7 @@ if (isset($_REQUEST['submit2'])) {
   	$_SESSION['qual_' . $qual_id]['customer_id']=$cust->customer_id;
    	$_SESSION['qual_' . $qual_id]['provider']='Telstra';
   	$_SESSION['qual_' . $qual_id]['type']='location';
-  	$_SESSION['qual_' . $qual_id]['locationID']=$_REQUEST['location_id'];
+  	$_SESSION['qual_' . $qual_id]['location_id']=$_REQUEST['location_id'];
   	
   	
   	// Single result, redirect to qual page
@@ -235,7 +235,7 @@ if (isset($_REQUEST['submit2'])) {
     	$_SESSION['qual_' . $qual_id]['customer_id']=$cust->customer_id;
     	$_SESSION['qual_' . $qual_id]['type']='location';
     	$_SESSION['qual_' . $qual_id]['provider']='Telstra';
-    	$_SESSION['qual_' . $qual_id]['locationID']=$response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation->locationId;
+    	$_SESSION['qual_' . $qual_id]['location_id']=$response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation->locationId;
     	
     	
     	// Single result, redirect to qual page
