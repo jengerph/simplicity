@@ -110,54 +110,52 @@ while ($cel = each($orders_list)) {
 						$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['accountNumber'] = '2000027399';
 						$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['qualificationID'] = get_attribute( $orders->order_id, "order_qualificationID" );
 						
-						if ($params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['qualificationID'] == '') {
-							
-							// Need to preform service qual as no qual id is recorded (recommended method)
-							
-						  $qparams = array();
-							$qparams['qualifyNationalWholesaleBroadbandProductRequest'] = array();
+						// Need to preform service qual
+						
+					  $qparams = array();
+						$qparams['qualifyNationalWholesaleBroadbandProductRequest'] = array();
 
-							// How are we qualifying  			
-							if (get_attribute( $orders->order_id, "order_service_number" ) != '') {
-								// Phone Number
-								$qparams['qualifyNationalWholesaleBroadbandProductRequest']['endCSN'] = get_attribute( $orders->order_id, "order_service_number" );
+						// How are we qualifying  			
+						if (get_attribute( $orders->order_id, "order_service_number" ) != '') {
+							// Phone Number
+							$qparams['qualifyNationalWholesaleBroadbandProductRequest']['endCSN'] = get_attribute( $orders->order_id, "order_service_number" );
+						} else {
+							if (get_attribute( $orders->order_id, "order_nbnLocationID" ) != '') {
+								// NBN ID
+								$qparams['qualifyNationalWholesaleBroadbandProductRequest']['nbnLocationID'] = get_attribute( $orders->order_id, "order_nbnLocationID" );
 							} else {
-  							if (get_attribute( $orders->order_id, "order_nbnLocationID" ) != '') {
-  								// NBN ID
-									$qparams['qualifyNationalWholesaleBroadbandProductRequest']['nbnLocationID'] = get_attribute( $orders->order_id, "order_nbnLocationID" );
-								} else {
-									// Telstra ID
-									$qparams['qualifyNationalWholesaleBroadbandProductRequest']['telstraLocationID'] = get_attribute( $orders->order_id, "order_telstraLocationID" );
-								}
+								// Telstra ID
+								$qparams['qualifyNationalWholesaleBroadbandProductRequest']['telstraLocationID'] = get_attribute( $orders->order_id, "order_telstraLocationID" );
 							}
-
-              try{
-                      $response = $client->QualifyProduct($qparams);
-                 }
-              catch (SoapFault $exception) {
-  							$comment = new order_comments();
-  							$comment->order_id = $orders->order_id;
-  							$comment->username = 'system';
-  							$comment->comment_visibility = "internal";
-  							$comment->comment = $exception;
-  							$comment->create();
-  
-  							$orders->status = 'on hold';
-  							$orders->save();
-  
-  							soapDebug($client);
-  
-  							$orders_states = new orders_states();
-  							$orders_states->order_id = $orders->order_id;
-  							$orders_states->state_name = 'on hold';
-  							$orders_states->create();
-  
-  							$do_accept = 0;              
-              }
-              
-              $params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['qualificationID'] = $response->qualificationID;
-							
 						}
+
+            try{
+                    $response = $client->QualifyProduct($qparams);
+               }
+            catch (SoapFault $exception) {
+							$comment = new order_comments();
+							$comment->order_id = $orders->order_id;
+							$comment->username = 'system';
+							$comment->comment_visibility = "internal";
+							$comment->comment = $exception;
+							$comment->create();
+
+							$orders->status = 'on hold';
+							$orders->save();
+
+							soapDebug($client);
+
+							$orders_states = new orders_states();
+							$orders_states->order_id = $orders->order_id;
+							$orders_states->state_name = 'on hold';
+							$orders_states->create();
+
+							$do_accept = 0;              
+            }
+            
+            $params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['qualificationID'] = $response->qualificationID;
+						
+					
 
 						if ($services->type_id == 1) {
 							$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['endCSN'] = get_attribute( $orders->order_id, "order_service_number" );
