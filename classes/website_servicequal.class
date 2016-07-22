@@ -28,6 +28,7 @@ class website_servicequal {
   var $status;
   var $result_nbn_wireless;
   var $result_nbn_fiber;
+  var $result_nbn_fttn;
   var $result_adsl_onnet;
   var $result_adsl_offnet;
 
@@ -279,7 +280,7 @@ class website_servicequal {
       
     }
 
-    $query = "UPDATE website_servicequal SET status = " . $this->db->quote($this->status) . ", result_nbn_wireless = " . $this->db->quote($this->result_nbn_wireless) . ", result_nbn_fiber = " . $this->db->quote($this->result_nbn_fiber) . ", result_adsl_onnet = " . $this->db->quote($this->result_adsl_onnet) . ", result_adsl_offnet = " . $this->db->quote($this->result_adsl_offnet);
+    $query = "UPDATE website_servicequal SET status = " . $this->db->quote($this->status) . ", result_nbn_wireless = " . $this->db->quote($this->result_nbn_wireless) . ", result_nbn_fttn = " . $this->db->quote($this->result_nbn_fttn) . ", result_nbn_fiber = " . $this->db->quote($this->result_nbn_fiber) . ", result_adsl_onnet = " . $this->db->quote($this->result_adsl_onnet) . ", result_adsl_offnet = " . $this->db->quote($this->result_adsl_offnet);
     $query .= " WHERE qual_id = " . $this->db->quote($this->qual_id);
     $result = $this->db->execute_query($query);
 
