@@ -3,8 +3,8 @@
 
 include "/var/www/simplicity/htdocs/setup.inc";
 
-$date = "20020108";
-$file_seq = 2;
+$date = "20020114";
+$file_seq = 6;
 
 $filename = "662TELW" . sprintf("%04d", $file_seq) . $date;
 
@@ -12,21 +12,11 @@ $output = array();
 
 $output[] = make_header($date, $file_seq);
 
-$rec_count = 7;
+$rec_count = 29;
 $rec_count++;
-$output[] = make_transfer($rec_count, "0386051107", '099', $date);
+$output[] = make_reversal($rec_count, "00000000006", '0386051106');
 $rec_count++;
-$output[] = make_transfer($rec_count, "0386051108", '099', $date);
-$rec_count++;
-$output[] = make_transfer($rec_count, "0386051109", '099', $date);
-$rec_count++;
-$output[] = make_transfer($rec_count, "0386051110", '099', $date);
-$rec_count++;
-$output[] = make_transfer($rec_count, "0386051111", '099', $date);
-$rec_count++;
-$output[] = make_transfer($rec_count, "0386051112", '099', $date);
-$rec_count++;
-$output[] = make_reversal($rec_count, "00000000004", "0386051104");
+$output[] = make_long_distance_package_reversal($rec_count, "00000000028", '0386051111');
 
 
 $output[] = make_footer(sizeof($output)-1);
@@ -61,9 +51,25 @@ function make_transfer($seq, $service_number, $wholesale_redirection_group_code,
 	
 }	 
 
+function make_long_distance_transfer($seq, $service_number, $ca_date) {
+	
+	$str = sprintf("%02d%09d%010d%8d", '13', $seq, $service_number, $ca_date);
+
+	return pad($str);
+	
+}	 
+
 function make_reversal($seq, $original_seq, $service_number) {
 	
 	$str = sprintf("%02d%09d%09d%-17s", '50', $seq, $original_seq, $service_number);
+
+	return pad($str);
+	
+}	 
+
+function make_long_distance_package_reversal($seq, $original_seq, $service_number) {
+	
+	$str = sprintf("%02d%09d%09d%010d", '53', $seq, $original_seq, $service_number);
 
 	return pad($str);
 	

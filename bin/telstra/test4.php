@@ -3,8 +3,8 @@
 
 include "/var/www/simplicity/htdocs/setup.inc";
 
-$date = "20020108";
-$file_seq = 2;
+$date = "20020110";
+$file_seq = 4;
 
 $filename = "662TELW" . sprintf("%04d", $file_seq) . $date;
 
@@ -12,21 +12,21 @@ $output = array();
 
 $output[] = make_header($date, $file_seq);
 
-$rec_count = 7;
+$rec_count = 20;
 $rec_count++;
-$output[] = make_transfer($rec_count, "0386051107", '099', $date);
+$output[] = make_transfer($rec_count, "0386051119", '099', $date);
 $rec_count++;
-$output[] = make_transfer($rec_count, "0386051108", '099', $date);
+$output[] = make_transfer($rec_count, "0386051120", '099', $date);
 $rec_count++;
-$output[] = make_transfer($rec_count, "0386051109", '099', $date);
+$output[] = make_transfer($rec_count, "0386051121", '099', $date);
 $rec_count++;
-$output[] = make_transfer($rec_count, "0386051110", '099', $date);
+$output[] = make_transfer($rec_count, "0386051122", '099', $date);
 $rec_count++;
-$output[] = make_transfer($rec_count, "0386051111", '099', $date);
+$output[] = make_transfer($rec_count, "0386051123", '099', $date);
 $rec_count++;
-$output[] = make_transfer($rec_count, "0386051112", '099', $date);
-$rec_count++;
-$output[] = make_reversal($rec_count, "00000000004", "0386051104");
+$output[] = make_transfer($rec_count, "0386051124", '099', $date);
+//$rec_count++;
+//$output[] = make_reversal($rec_count, "00000000004", "0386051104");
 
 
 $output[] = make_footer(sizeof($output)-1);

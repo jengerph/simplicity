@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="AddressServiceV3" targetNamespace="http://TypesLibrary/northbound/lolig/AddressServiceV3" xmlns:bons1="http://com/telstra/lolo/nbn" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://TypesLibrary/northbound/lolig/AddressServiceV3" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://TypesLibrary/northbound/lolig/AddressServiceV3" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://com/telstra/lolo/nbn"/>
+			<xsd:element name="searchRequest" type="tns:searchRequest"/>
+			<xsd:element name="searchResponse" type="tns:searchResponse"/>
+			
+			<xsd:element name="searchByCSNRequest" type="tns:searchByCSNRequest"/>
+			<xsd:element name="searchByCSNResponse" type="tns:searchResponse"/>
+			
+			<xsd:element name="getLocalityPostcodeRequest" type="tns:getLocalityPostcodeRequest"/>
+			<xsd:element name="getLocalityPostcodeResponse" type="tns:getLocalityPostcodeResponse"/>
+			
+			<xsd:complexType name="searchRequest">
+				<xsd:choice>
+					<xsd:sequence>
+						<xsd:element name="line1" type="tns:SearchLine"/>
+						<xsd:element minOccurs="0" name="line2" type="tns:SearchLine"/>
+						<xsd:element minOccurs="0" name="line3" type="tns:SearchLine"/>
+						<xsd:element minOccurs="1" name="postcode" type="tns:PostCode"/>
+						<xsd:element minOccurs="1" name="locality" type="tns:Locality"/>
+						<xsd:element minOccurs="1" name="state" type="tns:State"/>
+					</xsd:sequence>
+					<xsd:sequence>
+						<xsd:element minOccurs="1" name="postcode" type="tns:PostCode"/>
+						<xsd:element minOccurs="1" name="locality" type="tns:Locality"/>
+						<xsd:element minOccurs="1" name="state" type="tns:State"/>
+						<xsd:element minOccurs="0" name="streetName" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="streetType" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="streetSuffix" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="propertyName" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="propertyNumberFrom" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="propertyNumberFromSuffix" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="planNumber" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="parcelTypeFrom" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="parcelNumberFrom" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="ruralMailType" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="ruralMailNumber" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="subAddressType" type="xsd:string"/>
+						<xsd:element minOccurs="0" name="subAddressNumberFrom" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:choice>
+			</xsd:complexType>
+			<xsd:complexType name="searchResponse">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" name="primaryAddress" type="tns:PrimaryAddress"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="searchByCSNRequest">
+				<xsd:sequence>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="customerServiceNumber" type="tns:CSN"/> 
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="getLocalityPostcodeRequest">
+				<xsd:sequence>
+				  <xsd:element maxOccurs="1" minOccurs="0" name="locality" type="tns:Locality"/> 
+				  <xsd:element maxOccurs="1" minOccurs="0" name="postCode" type="tns:PostCode"/> 
+				  <xsd:element maxOccurs="1" minOccurs="0" name="state" type="tns:State"/> 
+  				</xsd:sequence>
+  			</xsd:complexType>
+  			
+  			<xsd:complexType name="getLocalityPostcodeResponse">
+							<xsd:sequence>
+								<xsd:element maxOccurs="unbounded" name="postCodeLocality" type="tns:PostcodeLocality"/>
+							</xsd:sequence>
+			</xsd:complexType>
+			
+  			<xsd:complexType name="PostcodeLocality">
+				<xsd:sequence>
+				  <xsd:element maxOccurs="1" minOccurs="1" name="locality" type="tns:Locality"/> 
+				  <xsd:element maxOccurs="1" minOccurs="1" name="postCode" type="tns:PostCode"/> 
+				  <xsd:element maxOccurs="1" minOccurs="1" name="state" type="tns:State"/> 
+  				</xsd:sequence>
+  			</xsd:complexType>
+			
+			
+			<xsd:simpleType name="CSN">
+				<xsd:restriction base="xsd:string">
+			  		<xsd:pattern value="[0-9]{10}"/> 
+			  	</xsd:restriction>
+			</xsd:simpleType>
+						
+			<xsd:simpleType name="PostCode">
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="[0-9]{4}"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="Locality">
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="46"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="State">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="AAT"/>
+					<xsd:enumeration value="ACT"/>
+					<xsd:enumeration value="NSW"/>
+					<xsd:enumeration value="NT"/>
+					<xsd:enumeration value="QLD"/>
+					<xsd:enumeration value="SA"/>
+					<xsd:enumeration value="TAS"/>
+					<xsd:enumeration value="VIC"/>
+					<xsd:enumeration value="WA"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="PrimaryAddress">
+				<xsd:sequence>
+					<xsd:element minOccurs="1" name="postcode" type="xsd:string"/>
+					<xsd:element minOccurs="1" name="state" type="xsd:string"/>
+					<xsd:element minOccurs="1" name="locality" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="streetName" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="streetType" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="streetSuffix" type="xsd:string"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="addressSummary" type="tns:AddressSummary"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="AddressSummary">
+				<xsd:sequence>
+					<xsd:element name="addressId" type="xsd:string"/>
+									
+					<xsd:element name="confirmedFlag" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="propertyName" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="propertyNumberFrom" type="xsd:int"/>
+					<xsd:element minOccurs="0" name="propertyNumberFromSuffix" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="propertyNumberTo" type="xsd:int"/>
+					<xsd:element minOccurs="0" name="propertyNumberToSuffix" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="planNumber" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="parcelPrefixFrom" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="parcelTypeFrom" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="parcelNumberFrom" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="parcelPrefixTo" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="parcelTypeTo" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="parcelNumberTo" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="ruralMailType" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="ruralMailNumber" type="xsd:string"/>
+					<!--Start of R1304 Changes -->
+					<xsd:element minOccurs="0" name="ESA" type="xsd:string">
+					</xsd:element>
+					<xsd:element minOccurs="0" name="FACSRealm" type="xsd:string">
+					</xsd:element>
+					<!--End of R1304 Changes -->
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="subAddress" type="tns:SubAddress"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="SubAddress">
+				<xsd:sequence>
+					<xsd:element name="addressId" type="xsd:string"/>
+					
+					<xsd:element name="parentAddressId" type="xsd:string"/>
+					<xsd:element name="confirmedFlag" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="subAddressType" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="subAddressNumberFrom" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="subAddressNumberTo" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="privateStreetName" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="privateStreetType" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="privateStreetSuffix" type="xsd:string"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="subAddress" type="tns:SubAddress"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="SearchLine">
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="0"/>
+					<xsd:maxLength value="40"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:element name="searchFault1_searchFault" nillable="true" type="bons1:Error"/>
+		</xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://com/telstra/lolo/nbn" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:complexType name="Error">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="code" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="description" type="xsd:string">
+			</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getLocalityPostcodeResponseMsg">
+    <wsdl:part element="tns:getLocalityPostcodeResponse" name="getLocalityPostcodeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="searchResponseMsg">
+    <wsdl:part element="tns:searchResponse" name="searchResponse"/>
+  </wsdl:message>
+  <wsdl:message name="searchByCSNRequestMsg">
+    <wsdl:part element="tns:searchByCSNRequest" name="searchByCSNRequest"/>
+  </wsdl:message>
+  <wsdl:message name="search_searchFaultMsg">
+    <wsdl:part element="tns:searchFault1_searchFault" name="searchFault"/>
+  </wsdl:message>
+  <wsdl:message name="searchRequestMsg">
+    <wsdl:part element="tns:searchRequest" name="searchRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getLocalityPostcodeRequestMsg">
+    <wsdl:part element="tns:getLocalityPostcodeRequest" name="getLocalityPostcodeRequest"/>
+  </wsdl:message>
+  <wsdl:message name="searchByCSNFaultMsg">
+    <wsdl:part element="tns:searchFault1_searchFault" name="searchByCSNFault"/>
+  </wsdl:message>
+  <wsdl:message name="getLocalityPostcodeFaultMsg">
+    <wsdl:part element="tns:searchFault1_searchFault" name="getLocalityPostcodeFault"/>
+  </wsdl:message>
+  <wsdl:message name="searchByCSNResponseMsg">
+    <wsdl:part element="tns:searchByCSNResponse" name="searchByCSNResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="AddressServiceV3Port">
+    <wsdl:operation name="search">
+      <wsdl:input message="tns:searchRequestMsg" name="searchRequest"/>
+      <wsdl:output message="tns:searchResponseMsg" name="searchResponse"/>
+      <wsdl:fault message="tns:search_searchFaultMsg" name="searchFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="searchByCSN">
+      <wsdl:input message="tns:searchByCSNRequestMsg" name="searchByCSNRequest"/>
+      <wsdl:output message="tns:searchByCSNResponseMsg" name="searchByCSNResponse"/>
+      <wsdl:fault message="tns:searchByCSNFaultMsg" name="searchByCSNFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="getLocalityPostcode">
+      <wsdl:input message="tns:getLocalityPostcodeRequestMsg" name="getLocalityPostcodeRequest"/>
+      <wsdl:output message="tns:getLocalityPostcodeResponseMsg" name="getLocalityPostcodeResponse"/>
+      <wsdl:fault message="tns:getLocalityPostcodeFaultMsg" name="getLocalityPostcodeFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AddressServiceV3HttpBinding" type="tns:AddressServiceV3Port">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="search">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="searchRequest">
+        <soap:body parts="searchRequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchResponse">
+        <soap:body parts="searchResponse" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="searchFault">
+        <soap:fault name="searchFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="searchByCSN">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="searchByCSNRequest">
+        <soap:body parts="searchByCSNRequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchByCSNResponse">
+        <soap:body parts="searchByCSNResponse" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="searchByCSNFault">
+        <soap:fault name="searchByCSNFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getLocalityPostcode">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getLocalityPostcodeRequest">
+        <soap:body parts="getLocalityPostcodeRequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLocalityPostcodeResponse">
+        <soap:body parts="getLocalityPostcodeResponse" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="getLocalityPostcodeFault">
+        <soap:fault name="getLocalityPostcodeFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AddressServiceV3">
+    <wsdl:port binding="tns:AddressServiceV3HttpBinding" name="AddressServiceV3Port">
+      <soap:address location="https://shopfront3.telstra.com.au:443/LOLOSTGBb2b/services/AddressServiceV3"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -57,15 +57,56 @@ while ($line = fgets($fh)) {
 		$rec['additional address information'] = substr($line, 195, 20);
 		$rec['auxilary service numbers'] = substr($line, 225, 20);
 
+	} else if ($rec['record type']== '16') {
+		
+		// Header record
+		$rec['record type description'] = 'Long Distance Package Redirection Completion Advice Record';
+		$rec['sp record sequence'] = substr($line, 2, 9);
+		$rec['service number'] = substr($line, 11, 17);
+		$rec['completion date'] = substr($line, 21, 8);
+		$rec['class code'] = substr($line, 29, 2);		
+		$rec['auxilary service numbers'] = substr($line, 31, 20);		
+		
 	} else if ($rec['record type']== '20') {
 		
 		// Header record
 		$rec['record type description'] = 'Rejection Advice Record';
-		$rec['sp record sequemce'] = substr($line, 2, 9);
-		$rec['service number'] = substr($line, 11, 17);
-		$rec['wholesale redirection group code'] = substr($line, 28, 3);
+		$rec['sp record sequence'] = substr($line, 2, 9);
+		$rec['service number'] = substr($line, 11, 10);
+		$rec['completion date'] = substr($line, 21, 3);
 		$rec['rejection date'] = substr($line, 31, 8);
 		$rec['rejection code'] = substr($line, 39, 2);		
+
+	} else if ($rec['record type']== '25') {
+		
+		// Header record
+		$rec['record type description'] = 'Loss Advice Record';
+		$rec['sp record sequence'] = substr($line, 2, 9);
+		$rec['service number'] = substr($line, 11, 17);
+		$rec['wholesale redirection group code'] = substr($line, 28, 3);
+		$rec['gaining sp'] = substr($line, 31, 3);
+		$rec['loss date'] = substr($line, 34, 8);		
+		$rec['loss code'] = substr($line, 42, 2);		
+		$rec['provisioning reference'] = substr($line, 44, 16);		
+	} else if ($rec['record type']== '26') {
+		
+		// Header record
+		$rec['record type description'] = 'Long Distance Package Redirection Loss Advice Record';
+		$rec['sp record sequence'] = substr($line, 2, 9);
+		$rec['service number'] = substr($line, 11, 10);
+		$rec['loss date'] = substr($line, 21, 8);
+		$rec['loss code'] = substr($line, 29, 2);
+
+	} else if ($rec['record type']== '85') {
+		
+		// Header record
+		$rec['record type description'] = 'Status Request Response Record';
+		$rec['sp record sequence'] = substr($line, 2, 9);
+		$rec['wno file sent date'] = substr($line, 11, 8);
+		$rec['wno file sent sequence number'] = substr($line, 19, 4);
+		$rec['response code'] = substr($line, 23, 2);
+		$rec['response date'] = substr($line, 25, 8);
+				
 	} else {
 
 		$rec['record type description'] = 'Unknown Record Type!';
