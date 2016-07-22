@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+	<xsd:include schemaLocation="elements/Availability.xsd" />
+	<xsd:include schemaLocation="elements/AddressString.xsd" />
+	<xsd:include schemaLocation="elements/FNN.xsd" />
+	<xsd:include schemaLocation="elements/InplaceDetailsStatus.xsd" />
+
+    <xsd:complexType name="TelstraCopperInplaceDetails">
+        <xsd:sequence>
+         	<xsd:element name="customerServiceNumber" type="wsg:FNN" />
+         	<xsd:element name="inplaceDetailsStatus" type="wsg:InplaceDetailsStatus"> 
+	         	<xsd:annotation>
+        	    	<xsd:documentation xml:lang="en">Active or Inactive</xsd:documentation>
+	         	</xsd:annotation>
+         	</xsd:element>
+         	<xsd:element name="availability" type="wsg:Availability"> 
+         		<xsd:annotation>
+        	    	<xsd:documentation xml:lang="en">Values of only Available, Unavailable or date in-place will become available.</xsd:documentation>
+	         	</xsd:annotation>
+         	</xsd:element>
+         	<xsd:element name="addressString" type="wsg:AddressString" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

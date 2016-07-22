@@ -12,6 +12,7 @@
             <xsd:enumeration value="NFAS" />
             <xsd:enumeration value="NWAS" />
             <xsd:enumeration value="NCAS" />
+            <xsd:enumeration value="NHAS" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

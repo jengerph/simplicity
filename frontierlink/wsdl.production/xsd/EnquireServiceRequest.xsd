@@ -52,6 +52,11 @@
                     <xsd:documentation xml:lang="en">Should stored email communications be returned for activities.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            <xsd:element name="returnAVC" type="xsd:boolean" minOccurs="0" default="false">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Returns AVC ID for NBN access.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>

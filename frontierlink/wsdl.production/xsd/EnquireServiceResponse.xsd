@@ -11,6 +11,7 @@
     <xsd:include schemaLocation="elements/AccountNumber.xsd" />
     <xsd:include schemaLocation="elements/FNN.xsd" />
     <xsd:include schemaLocation="elements/FixedTelephoneNumber.xsd" />
+    <xsd:include schemaLocation="elements/AvcId.xsd" />
 
     <xsd:element name="EnquireServiceResponse" type="wsg:EnquireServiceResponse" />
 
@@ -44,6 +45,11 @@
             <xsd:element name="serviceOrderDetails" type="wsg:ServiceOrderDetail" minOccurs="1" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">A complex definition of details pertaining to the Service Orders making up the customer service</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="avcId" type="wsg:AvcId" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">NBN Access (AVC)</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>

@@ -72,6 +72,9 @@
             <xsd:include schemaLocation="xsd/NBNOrderFeasibilityResponse.xsd" />
             <xsd:include schemaLocation="xsd/PreselectionReversalRequest.xsd" />
             <xsd:include schemaLocation="xsd/PreselectionReversalResponse.xsd" />
+            <xsd:include schemaLocation="xsd/GetTelstraCopperInplaceListRequest.xsd" />
+            <xsd:include schemaLocation="xsd/GetTelstraCopperInplaceListResponse.xsd" />
+
 
             <xsd:include schemaLocation="xsd/EnquireServiceRequest.xsd" />
             <xsd:include schemaLocation="xsd/EnquireServiceResponse.xsd" />
@@ -304,6 +307,12 @@
     </wsdl:message>
     <wsdl:message name="PreselectionReversalResponse">
         <wsdl:part name="parameters" element="wsg:PreselectionReversalResponse" />
+    </wsdl:message>
+    <wsdl:message name="GetTelstraCopperInplaceListRequest">
+        <wsdl:part name="parameters" element="wsg:GetTelstraCopperInplaceListRequest" />
+    </wsdl:message>
+    <wsdl:message name="GetTelstraCopperInplaceListResponse">
+        <wsdl:part name="parameters" element="wsg:GetTelstraCopperInplaceListResponse" />
     </wsdl:message>
     
     
@@ -606,6 +615,11 @@
         <wsdl:operation name="preselectionReversal">
             <wsdl:input message="tns:PreselectionReversalRequest" />
             <wsdl:output message="tns:PreselectionReversalResponse" />
+            <wsdl:fault message="tns:Error" name="Error" />
+        </wsdl:operation>
+        <wsdl:operation name="getTelstraCopperInplaceList">
+            <wsdl:input message="tns:GetTelstraCopperInplaceListRequest" />
+            <wsdl:output message="tns:GetTelstraCopperInplaceListResponse" />
             <wsdl:fault message="tns:Error" name="Error" />
         </wsdl:operation>
     </wsdl:portType>
@@ -1085,6 +1099,18 @@
             </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="preselectionReversal">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="Error">
+                <soap:fault name="Error" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getTelstraCopperInplaceList">
             <soap:operation soapAction="" style="document" />
             <wsdl:input>
                 <soap:body use="literal" />

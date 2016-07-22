@@ -12,6 +12,7 @@
     <xsd:include schemaLocation="elements/LocationId.xsd" />
     <xsd:include schemaLocation="elements/NewLineQuantity.xsd" />
     <xsd:include schemaLocation="elements/RebillServiceTypes.xsd" />
+    <xsd:include schemaLocation="elements/FNN.xsd" />
 
     <xsd:complexType name="VoiceOrderMultipleLines">
         <xsd:sequence>
@@ -38,6 +39,11 @@
             <xsd:element name="products" type="wsg:ProductInList">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">Products to be added</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerServiceNumber" type="wsg:FNN" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Customer service number derived from getTelstraCopperInplaceList</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>

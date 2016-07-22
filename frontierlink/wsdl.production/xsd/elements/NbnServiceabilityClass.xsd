@@ -16,6 +16,11 @@
             <xsd:documentation xml:lang="en">11 indicates that the location is serviceable by copper, active node present</xsd:documentation>
             <xsd:documentation xml:lang="en">12 indicates that the location is serviceable by copper, jumpering is required</xsd:documentation>
             <xsd:documentation xml:lang="en">13 indicates that the location is serviceable by copper, infrastructure in place</xsd:documentation>
+            <xsd:documentation xml:lang="en">20 indicates that the location is planned to be serviced by HFC, outside plant does not exist</xsd:documentation>
+            <xsd:documentation xml:lang="en">21 indicates that the location is serviceable by HFC, the location has a street TAP but requires a lead-in, PCD, internal tie cable, and wall-plate/socket</xsd:documentation>
+            <xsd:documentation xml:lang="en">22 indicates that the location is serviceable by HFC, the location has a street TAP, lead-in and PCD in place, but no internal tie-cables with wall plates/sockets</xsd:documentation>
+            <xsd:documentation xml:lang="en">23 indicates that the location is serviceable by HFC, the location has a wall-plate/socket but no HFC NTD</xsd:documentation>
+            <xsd:documentation xml:lang="en">24 indicates that the location is serviceable by HFC, the location has a wall-plate/socket and HFC NTD and is Ready to Connect</xsd:documentation>
         </xsd:annotation>
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="0" />
@@ -29,6 +34,11 @@
             <xsd:enumeration value="11" />
             <xsd:enumeration value="12" />
             <xsd:enumeration value="13" />
+            <xsd:enumeration value="20" />
+            <xsd:enumeration value="21" />
+            <xsd:enumeration value="22" />
+            <xsd:enumeration value="23" />
+            <xsd:enumeration value="24" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>
