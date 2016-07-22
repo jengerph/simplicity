@@ -166,6 +166,10 @@ class radius {
 
     }
     
+    if (strlen($this->password) < 6) {
+    	return 7;
+    }
+    
     // ALL OK
     return 0;
     
@@ -370,9 +374,9 @@ class radius {
       
     }
 
-    if ( !isset($this->password) ) {
-      $this->password = "rg0943";
-    }
+    //if ( !isset($this->password) ) {
+    //  $this->password = "rg0943";
+    //}
 
     // Create the property search
     $query = "INSERT INTO radius.radcheck (username, attribute, op, value)";
