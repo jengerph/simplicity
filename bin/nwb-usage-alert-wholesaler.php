@@ -287,7 +287,7 @@ while ($wholesaler = each($wholesalers)) {
   	
   	
   	$message->setTo(array($w->email));
-  	$message->setCC(array('alerts@xi.com.au' => 'X Integration Alerts'));
+  	$message->setCC(array('notifications@xi.com.au' => 'X Integration Notifictions'));
   
   	$result = $mailer->send($message);
   	unlink('/tmp/services.csv');
