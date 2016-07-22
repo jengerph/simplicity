@@ -197,7 +197,7 @@ class order_attributes {
   function create() {
     if ($this->create_real() == 1) {
 
-      $this->load();
+      //$this->load();
     
       return 1;
       
