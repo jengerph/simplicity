@@ -4,7 +4,7 @@
 $client = new SoapClient("../wsdl/FrontierLink.wsdl", array('local_cert'     => "../cert/frontierlink-cert.xi.com.au.cer",'trace'=>1));
 
 $params = array();
-$params['serviceNumber'] = '0290000001';
+$params['serviceNumber'] = '0398415846';
 
 
 try{
@@ -18,6 +18,8 @@ echo $exception;
 }
 //echo "REQUEST:\n" . $client->__getLastRequest() . "\n";
 var_dump($response);
+
+ 
 //soapDebug($client);
 
 function soapDebug($client){
@@ -76,3 +78,4 @@ function prettyXML($xml, $debug=false) {
   }
   return $formatted; // pretty format
 }
+
