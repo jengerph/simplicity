@@ -70,12 +70,30 @@ if (!isset($qual['result'])) {
   }
   
   
+	$nbnServiceabilityClass = array();
+	
+  $nbnServiceabilityClass[0] = '0 indicates that the location is not NBN serviceable';
+  $nbnServiceabilityClass[1] = '1 indicates that the location is fibre serviceable, but a physical connection is not yet in place';
+  $nbnServiceabilityClass[2] = '2 indicates that the location is fibre serviceable, but the NTD is not yet installed';
+  $nbnServiceabilityClass[3] = '3 indicates that the location is fibre serviceable, and that the NTD has been installed';
+  $nbnServiceabilityClass[4] = '4 indicates that the location is wireless serviceable, but a physical connection is not yet in place';
+  $nbnServiceabilityClass[5] = '5 indicates that the location is wireless serviceable, but the NTD is not yet installed';
+  $nbnServiceabilityClass[6] = '6 indicates that the location is wireless serviceable, and that the NTD has been installed';
+  $nbnServiceabilityClass[10] = '10 indicates that the location is planned to be serviceable by copper';
+  $nbnServiceabilityClass[11] = '11 indicates that the location is serviceable by copper, active node present';
+  $nbnServiceabilityClass[12] = '12 indicates that the location is serviceable by copper, jumpering is required';
+  $nbnServiceabilityClass[13] = '13 indicates that the location is serviceable by copper, infrastructure in place';
+  
+  
   $arr = array();
   $arr['displayAddress'] = $fnn;
   $arr['siteAddress'] = $response->siteAddress;
   $arr['qualificationID'] = $response->qualificationID;
   $arr['nbnLocationID'] = $response->siteDetails->nbnLocationID;
   $arr['dslCodesOnLine'] = $response->siteDetails->dslCodesOnLine;
+  $arr['manual_order'] = $nbn_manual;
+  $arr['nbnServiceabilityClass'] = $response->siteDetails->nbnServiceabilityClass;
+  $arr['nbnServiceabilityClassText'] = $nbnServiceabilityClass[$response->siteDetails->nbnServiceabilityClass];
   
   $arr['results'] = array();
   $arr['results']['ADSL'] = array();
@@ -142,13 +160,63 @@ if (!isset($qual['result'])) {
           $arr['results']['NBN'][$cel['value']->accessType]['availableServiceSpeeds'] = $cel['value']->availableServiceSpeeds->serviceSpeed;
           $arr['results']['NBN'][$cel['value']->accessType]['nbnNewDevelopmentsChargeApplies'] = $cel['value']->nbnNewDevelopmentsChargeApplies;
           
-          
+					if (isset($cel['value']->nbnCopperPairList)) {
+          	
+          	// Pairs...
+          	$arr['results']['NBN'][$cel['value']->accessType]['pairs'] = $cel['value']->nbnCopperPairList;
+          	
+          }
         }
-        
       }
     }
+    
   }
   
+  if ($qual['manual'] === true && sizeof($arr['results']['NBN']) == 0) {
+  	
+  	// NBN Manual order, lets return results
+  	reset($response->accessQualificationList);
+  	while ($cel = each($response->accessQualificationList)) {
+  		
+  		if ($cel['value']->accessMethod == 'NBN') {
+  		
+  			// We have NBN, does this result return more than one reason?
+  			
+  			if (sizeof($cel['value']->testOutcomes) > 1) {
+  				
+  				// This is the NBN Type
+  	      $arr['results']['NBN'][$cel['value']->accessType]['accessMethod'] = $cel['value']->accessMethod;
+          $arr['results']['NBN'][$cel['value']->accessType]['accessType'] = $cel['value']->accessType;
+          $arr['results']['NBN'][$cel['value']->accessType]['priceZone'] = $cel['value']->priceZone;
+          $arr['results']['NBN'][$cel['value']->accessType]['availableServiceSpeeds'] = $cel['value']->availableServiceSpeeds->serviceSpeed;
+          $arr['results']['NBN'][$cel['value']->accessType]['nbnNewDevelopmentsChargeApplies'] = $cel['value']->nbnNewDevelopmentsChargeApplies;
+          
+					if (isset($cel['value']->nbnCopperPairList)) {
+          	
+          	// Pairs...
+          	$arr['results']['NBN'][$cel['value']->accessType]['pairs'] = $cel['value']->nbnCopperPairList;
+          	
+          }
+  			}
+  		}
+  	}
+  }
+
+  // Cable Pairs for FTTN
+  
+  // Unlisted / Telstra Pairs
+  if (is_array($response->telstraCableDetails->cablePair)) {
+  	
+  	// Multiple pairs found
+  	
+  	while ($pair = each($response->telstraCableDetails->cablePair)) {
+  		
+  		$arr['pairs']['telstra'][] = $pair['value']->pairKey;
+  	}
+  } else if (isset($response->telstraCableDetails->cablePair->pairKey)) {
+  	$arr['pairs']['telstra'][] = $response->telstraCableDetails->cablePair->pairKey;
+  }  
+
   $_SESSION['qual_' . $_REQUEST['qual_id']]['result'] = $arr;
   
   // Loop through results and make qual list
@@ -247,6 +315,10 @@ foreach ($qual['result']['siteAddress'] as $key => $value) {
 
 $pt->setVar('ORDER_ADDRESS', $address);
 $pt->setVar('SERVICE_NUMBER', $qual['fnn']);
+$pt->setVar('NBN_LOCATIONID', $qual['result']['nbnLocationID']);
+$pt->setVar('MANUAL', $qual['manual']);
+$pt->setVar('NBNSERVICEABILITYCLASS', $qual['result']['nbnServiceabilityClass']);
+$pt->setVar('NBNSERVICEABILITYCLASSTEXT', $qual['result']['nbnServiceabilityClassText']);
 $pt->setVar('NBNNEWDEVELOPMENTSCHARGEAPPLIES',$nbnNewDevelopmentsChargeApplies);
 
 

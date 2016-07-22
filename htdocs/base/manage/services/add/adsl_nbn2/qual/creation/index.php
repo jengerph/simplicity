@@ -91,6 +91,7 @@ $pt->setFile(array( "main" => "base/manage/services/add/adsl_nbn2/qual/creation/
 										"wholesaler_row" => "base/manage/services/add/adsl_nbn2/qual/creation/wholesaler_row.html", 
                     "add_contact" => "base/manage/services/add/adsl_nbn/qual/creation/add_contact.html", 
                     "churn" => "base/manage/services/add/adsl_nbn2/qual/creation/churn.html",
+                    "fttn" => "base/manage/services/add/adsl_nbn2/qual/creation/fttn.html",
                     "extra_staticip" => "base/manage/services/edit/extra_staticip.html",
                     "extra_ipblock4" => "base/manage/services/edit/extra_ipblock4.html",
                     "extra_ipblock8" => "base/manage/services/edit/extra_ipblock8.html",
@@ -122,6 +123,11 @@ if (isset($qual['fnn'])) {
 } else {
 	$pt->setVar('IDENTIFER', $qual['result']['nbnLocationID']);
 }	
+
+$pt->setVar('MANUAL', $qual['manual']);
+$pt->setVar('NBNSERVICEABILITYCLASS', $qual['result']['nbnServiceabilityClass']);
+$pt->setVar('NBNSERVICEABILITYCLASSTEXT', $qual['result']['nbnServiceabilityClassText']);
+
 $wholesaler = new wholesalers();
 $wholesaler->wholesaler_id = $customer->wholesaler_id;
 $wholesaler->load();
@@ -192,7 +198,27 @@ if (isset($_REQUEST['submit2'])) {
   $validate = new validate();
   
   $error_order = array();
-  
+
+ 	if ($qual['quals'][$_REQUEST['result_id']]['accessType'] == 'NCAS') {
+  	
+  	if ($_REQUEST['pair'] == '') {
+	  	$error_order[] = "A pair needs to be selected.";
+	  }
+
+		$_REQUEST['splitter_install'] = strtolower($_REQUEST['splitter_install']);
+  	if ($_REQUEST['splitter_install'] != 'yes' && $_REQUEST['splitter_install'] != 'no') {
+	  	$error_order[] = "Splitter install flag needs to be set.";
+	  }
+	  
+		$_REQUEST['voiceband_continuity'] = strtolower($_REQUEST['voiceband_continuity']);
+  	if ($_REQUEST['voiceband_continuity'] != 'yes' && $_REQUEST['voiceband_continuity'] != 'no') {
+	  	$error_order[] = "Voiceband continuity install flag needs to be set.";
+	  }
+	  
+	  if ($_REQUEST['voiceband_continuity'] == 'yes' && $qual['fnn'] == '') {
+	  	$error_order[] = "Voiceband continuity can't be used if qualification is not done by using Phone Number (FNN).";
+		}
+	}	  	  
   if ( !isset($_REQUEST['order_username']) || $_REQUEST["order_username"] == "" ) {
   	$error_order[] = "Invalid Username.";
   } 
@@ -216,6 +242,8 @@ if (isset($_REQUEST['submit2'])) {
   	$error_order[] = "Invalid Password.";
   }
   
+  
+  
   if ( $qual['result']['dslCodesOnLine'] == 'yes' ) {
   	if ( !isset($_REQUEST["order_churn_provider"]) || $_REQUEST["order_churn_provider"] == "0" ) {
   		$error_order[] = "Provider invalid.";
@@ -225,7 +253,10 @@ if (isset($_REQUEST['submit2'])) {
   if ( !isset($_REQUEST["order_contact"]) || $_REQUEST["order_contact"] == "" ) {
   	$error_order[] = "Authorized Contact invalid.";
   }
-  
+ 
+ 
+  		
+ 
   $vc = $services->validate();
   
   if ( count($error_order) > 0 ) {
@@ -309,8 +340,8 @@ if (isset($_REQUEST['submit2'])) {
 	  		$service_attr->create();
     	}
   	  		
-  	  // Insert into radius
-  	  $radcheck->create();
+  	  // Insert into radius - not reqired as done in run_orders
+  	  //$radcheck->create();
   	  
   		// Lets create the order for the service
     	$orders = new orders();
@@ -318,7 +349,14 @@ if (isset($_REQUEST['submit2'])) {
     	$orders->start = date("Y-m-d H:i:s");
     	$orders->request_type = strtolower($service_type->description);
     	$orders->action = "new";
-    	$orders->status = "pending";  		
+    	
+    	$order_comment_text = '';
+    	if ($qual['manual'] === true) {
+     		$orders->status = "on hold";  		
+    	} else {
+    		$orders->status = "pending";  		
+    	}
+    		
     	
     	if (!$orders->create()) {
     		
@@ -342,71 +380,91 @@ if (isset($_REQUEST['submit2'])) {
   	  	$order_attributes->param = "order_username";
     		$order_attributes->value = $_REQUEST['order_username'];
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
   
     		// Realms
   	  	$order_attributes->param = "order_realms";
     		$order_attributes->value = $_REQUEST["order_realms"];
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
     		
     		// Password
   	  	$order_attributes->param = "order_password";
     		$order_attributes->value = $_REQUEST["order_password"];
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
     		
     		// contract_length
   	  	$order_attributes->param = "order_contract_length";
     		$order_attributes->value = $_REQUEST["order_contract_length"];
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
   
     		// contact
   	  	$order_attributes->param = "order_contact";
     		$order_attributes->value = $_REQUEST["order_contact"];
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
     		
     		// address
   	  	$order_attributes->param = "order_address";
     		$order_attributes->value = $address;
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
   
     		// type
   	  	$order_attributes->param = "order_type";
     		$order_attributes->value = $qual['quals'][$_REQUEST['result_id']]['type'];
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
   
     		// accessType
   	  	$order_attributes->param = "order_accessType";
     		$order_attributes->value = $qual['quals'][$_REQUEST['result_id']]['accessType'];
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
   
     		// accessMethod
   	  	$order_attributes->param = "order_accessMethod";
     		$order_attributes->value = $qual['quals'][$_REQUEST['result_id']]['accessMethod'];
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
   
     		// serviceSpeed
   	  	$order_attributes->param = "order_serviceSpeed";
     		$order_attributes->value = $qual['quals'][$_REQUEST['result_id']]['speed'];
     		$order_attributes->create();
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
   
     		// priceZone
   	  	$order_attributes->param = "order_priceZone";
     		$order_attributes->value = $qual['quals'][$_REQUEST['result_id']]['priceZone'];
     		$order_attributes->create();  			
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
     		
     		// nbnLocationID
   	  	$order_attributes->param = "order_nbnLocationID";
     		$order_attributes->value = $qual['result']['nbnLocationID'];
     		$order_attributes->create();  			
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
     		// telstra location id
   	  	$order_attributes->param = "order_telstraLocationID";
     		$order_attributes->value = $qual['location_id'];
     		$order_attributes->create();  			
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
     		// order_service_number
   	  	$order_attributes->param = "order_service_number";
     		$order_attributes->value = $qual['fnn'];
     		$order_attributes->create();  			
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
+
+    		// order_manual?
+  	  	$order_attributes->param = "order_manual";
+    		$order_attributes->value = $qual['manual'];
+    		$order_attributes->create();  			
+	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
 				// DSL Churn
 			  if ( $qual['result']['dslCodesOnLine'] == 'yes' ) {
@@ -415,12 +473,37 @@ if (isset($_REQUEST['submit2'])) {
   		  	$order_attributes->param = "order_churn";
     			$order_attributes->value = 'yes';
     			$order_attributes->create();  			
+		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
 	    		// order_churn_provider
   		  	$order_attributes->param = "order_churn_provider";
     			$order_attributes->value = $_REQUEST["order_churn_provider"];
     			$order_attributes->create();  
-    		}			
+		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
+
+    		}		
+    		
+    		// FTTN
+    		if ($qual['quals'][$_REQUEST['result_id']]['accessType'] == 'NCAS') {
+	    		// Pair
+  		  	$order_attributes->param = "order_ncas_pair";
+    			$order_attributes->value = $_REQUEST['pair'];
+    			$order_attributes->create();  			
+		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
+
+	    		// voiceband_continuity
+  		  	$order_attributes->param = "order_ncas_voiceband_continuity";
+    			$order_attributes->value = $_REQUEST['voiceband_continuity'];
+    			$order_attributes->create();  			
+		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
+
+	    		// voiceband_continuity
+  		  	$order_attributes->param = "order_ncas_splitter_install";
+    			$order_attributes->value = $_REQUEST['splitter_install'];
+    			$order_attributes->create();  			
+		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
+
+				}	
   		
 	  		// Do we need to create any additional sub orders (i.e. static IP)
 		  	$extras = array("staticip","ipblock4","ipblock8","ipblock16");
@@ -455,6 +538,13 @@ if (isset($_REQUEST['submit2'])) {
         		$order_attr->create();
         	}
         }
+        
+				$comment = new order_comments();
+				$comment->order_id = $orders->order_id;
+				$comment->username = 'system';
+				$comment->comment_visibility = "internal";
+				$comment->comment = $order_comment_text;
+				$comment->create();        
       }
     }
         		
@@ -497,6 +587,125 @@ if ($qual['result']['dslCodesOnLine']) {
 
 }
 
+// NCAS
+if ($qual['quals'][$_REQUEST['result_id']]['accessType'] == 'NCAS') {
+	
+	// Fibre to the Node, pair selection required
+	
+	// Setup pair list
+	$list = '<select name="pair" id="pair">';
+  $list .= '<option value="">Select Pair</option>';
+  $list .= '<option value="new"';
+  
+  if ($_REQUEST['pair'] == 'new') {
+  	$list .= ' selected';
+  }
+  $list .= '>New Copper Pair</option>';
+	
+	$notes = '';
+	// Do we have NBN Pairs?
+	
+	$pairs = $qual['result']['results']['NBN'][$qual['quals'][$_REQUEST['result_id']]['accessType']]['pairs']->nbnCopperPairList;
+	$count = 0;
+	if (is_array($pairs)) {
+	
+		while ($cel = each($pairs)) {
+		  $list .= '<option value="nbn-' . $cel['value']->ID . '"';
+		  if ($_REQUEST['pair'] == 'nbn-' . $cel['value']->ID) {
+		  	$list .= ' selected';
+	  	}
+	  	$list .=  '>' . $cel['value']->ID;
+		  
+		  if ($cel['value']->isCopperActive == 1) {
+		  	
+		  	if (!isset($cel['value']->POTSInterconnect)) {
+		  		echo "NOTE";
+		  		$notes .= $cel['value']->ID . " copper pair has an active service on it. To use this ensure you qualify using the Phone Number (FNN)!<br>";
+		  	} else {
+		  		$list .= ' (' . $cel['value']->POTSInterconnect . ')';
+		  	}
+		  }
+
+			$list .= '</option>';		  
+			
+		  $count++;
+		}
+	} else {
+		
+		if (isset($pairs->ID)) {
+  	  $list .= '<option value="nbn-' . $pairs->ID . '"';
+  	  if ($_REQUEST['pair'] == 'nbn-' . $pairs->ID) {
+  	  	$list .= ' selected';
+  	  }
+  	  $list .= '>' . $pairs->ID;
+  	  
+  	  if ($pairs->isCopperActive == 1) {
+  	  	
+  	  	if (!isset($pairs->POTSInterconnect)) {
+  	  		$notes .= $pairs->ID . " copper pair has an active service on it. To use this ensure you qualify using the Phone Number (FNN)!<br>";
+  	  	} else {
+  	  		$list .= ' (' . $pairs->POTSInterconnect . ')';
+  	  	}
+  	  }
+  		  
+  		$count++;
+  		$list .= '</option>';
+  	}
+	}
+	
+	if ($notes != '') {
+		$pt->setVar('PAIR_NOTICES', $notes);
+	}
+	if ($count == 0) {
+		
+		// Unlisted pair mode
+  	$pairs = $qual['result']['pairs']['telstra'];
+  	
+  	$count = 0;
+  	if (is_array($pairs)) {
+  	
+  		while ($cel = each($pairs)) {
+  		  $list .= '<option value="telstra-' . $cel['value'] . '"';
+  		  
+  		  if ($_REQUEST['pair'] == 'telstra-' . $cel['value']) {
+  		  	$list .= ' selected';
+  		  }
+	  		$list .= '>Unlisted pair ' . $cel['value'] . '</option>';
+
+  		  $count++;
+  		}
+  	} else {
+  		
+  	  $list .= '<option value="telstra-' . $pairs . '"';
+		  if ($_REQUEST['pair'] == 'telstra-' . $pairs) {
+		  	$list .= ' selected';
+		  }
+	  	$list .=  '>Unlisted pair ' . $pairs . '</option>';
+  	    		  
+  		$count++;
+  	}
+	}			
+	$list .= '</select>';
+	
+	$pt->setVar('PAIR_LIST',$list);		
+	
+	
+  $pt->parse("CHURN",'fttn','true');
+  
+  // Splitter
+  if (!isset($_REQUEST['splitter_install'])) {
+  	$_REQUEST['splitter_install'] = 'no';
+  }
+  $pt->setVar('SPLITTER_INSTALL_' . strtoupper($_REQUEST['splitter_install']) . '_SELECT', ' checked');
+
+  // Voiceband continuity
+  if (!isset($_REQUEST['voiceband_continuity'])) {
+  	$_REQUEST['voiceband_continuity'] = 'yes';
+  }
+  $pt->setVar('VOICEBAND_CONTINUITY_' . strtoupper($_REQUEST['voiceband_continuity']) . '_SELECT', ' checked');
+  
+	
+}
 
 
 
@@ -667,6 +876,7 @@ while ($cel = each($qual['quals'][$_REQUEST['result_id']])) {
 	
 	$pt->setVar('RES_' . strtoupper($cel['key']), $cel['value']);
 }
+
 
 
 // Parse the main page

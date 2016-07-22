@@ -115,11 +115,9 @@ if ( $services ) {
       case '1':
       case '2':
         if ( $adsl_nbn_count == 0 ) {
-          $pt->parse("KINDS_SERVICES","option_adsl_nbn","true");
+          //$pt->parse("KINDS_SERVICES","option_adsl_nbn","true");
           
-          if ($user->username = 'menger') {
-          	$pt->parse("KINDS_SERVICES","option_adsl_nbn2","true");
-          }
+          $pt->parse("KINDS_SERVICES","option_adsl_nbn2","true");
           $adsl_nbn_count = 1;
         }
         break;

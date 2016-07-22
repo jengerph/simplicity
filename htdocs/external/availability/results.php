@@ -39,6 +39,7 @@ if (!$wsq->exist()) {
 		$return['adsl_offnet'] = $wsq->result_adsl_offnet;
 		$return['nbn_wireless'] = $wsq->result_nbn_wireless;
 		$return['nbn_fiber'] = $wsq->result_nbn_fiber;
+		$return['nbn_fttn'] = $wsq->result_nbn_fttn;
 	}
 		
 }

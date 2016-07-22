@@ -69,6 +69,11 @@ if ( empty($cust->type) ) {
   exit(1);
 }
 
+if (!isset($_REQUEST['manual'])) {
+	$_REQUEST['manual'] = 'no';
+}
+
+$pt->setVar('MANUAL_' . strtoupper($_REQUEST['manual']) . '_SELECT', ' checked');
 
 if (isset($_REQUEST['fnn_service'])) {
 	
@@ -78,6 +83,12 @@ if (isset($_REQUEST['fnn_service'])) {
   	$pt->setVar('SERVICE_NUMBER', $_REQUEST['service_number']);
 
   	$pt->setVar('FNN_SERVICE_YES', ' checked');
+
+	} else if ( $_REQUEST["fnn_service"] == "nbn" ) {
+  	$pt->setFile(array("fnn_section" => "base/manage/services/add/adsl_nbn2/nbn_yes.html"));
+  	$pt->setVar('NBN_LOCATIONID', $_REQUEST['nbn_locationid']);
+
+  	$pt->setVar('FNN_SERVICE_NBN', ' checked');
   	
   } else {
     $pt->setFile(array("fnn_section" => "base/manage/services/add/adsl_nbn2/fnn_no.html"));
@@ -110,6 +121,7 @@ if (isset($_REQUEST['submit2'])) {
    	$_SESSION['qual_' . $qual_id]['provider']='Telstra';
   	$_SESSION['qual_' . $qual_id]['type']='location';
   	$_SESSION['qual_' . $qual_id]['location_id']=$_REQUEST['location_id'];
+  	$_SESSION['qual_' . $qual_id]['manual']=$_REQUEST['manual'];
   	
   	
   	// Single result, redirect to qual page
@@ -134,15 +146,41 @@ if (isset($_REQUEST['submit2'])) {
 	// Begin Qualification
 
 		
+   if (isset($_REQUEST['nbn_locationid'])) {
+  	
+  	$_SESSION['qual_' . $qual_id] = array();
+  	$_SESSION['qual_' . $qual_id]['customer_id']=$cust->customer_id;
+   	$_SESSION['qual_' . $qual_id]['provider']='NBN';
+  	$_SESSION['qual_' . $qual_id]['type']='location';
+  	$_SESSION['qual_' . $qual_id]['location_id']= $_REQUEST['nbn_locationid'];
+  	$_SESSION['qual_' . $qual_id]['manual']=$_REQUEST['manual'];
+  	
+  	
+  	// Single result, redirect to qual page
+    $url = "";
+        
+    if ( isset($_SERVER["HTTPS"]) ) {
+        
+      $url = "https://";
+          
+    } else {
+        
+      $url = "http://";
+    }
+
+    $url .= $_SERVER["SERVER_NAME"] . ':' . $_SERVER['SERVER_PORT'] . "/base/manage/services/add/adsl_nbn2/qual/?qual_id=" . $qual_id;
+
+    header("Location: $url");
+	  exit(); 
   
-  
-  if (isset($_REQUEST['service_number'])) {
+  } else if (isset($_REQUEST['service_number'])) {
   	
   	$_SESSION['qual_' . $qual_id] = array();
   	$_SESSION['qual_' . $qual_id]['customer_id']=$cust->customer_id;
   	$_SESSION['qual_' . $qual_id]['type']='fnn';
   	$_SESSION['qual_' . $qual_id]['fnn']= $_REQUEST['service_number'];
-  	
+   	$_SESSION['qual_' . $qual_id]['manual']=$_REQUEST['manual'];
+ 	
   	
   	// Single result, redirect to qual page
     $url = "";
@@ -236,6 +274,7 @@ if (isset($_REQUEST['submit2'])) {
     	$_SESSION['qual_' . $qual_id]['type']='location';
     	$_SESSION['qual_' . $qual_id]['provider']='Telstra';
     	$_SESSION['qual_' . $qual_id]['location_id']=$response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation->locationId;
+	  	$_SESSION['qual_' . $qual_id]['manual']=$_REQUEST['manual'];
     	
     	
     	// Single result, redirect to qual page

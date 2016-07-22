@@ -119,12 +119,17 @@ if ($wsq->status == 'pending') {
 					$wsq->result_nbn_wireless = 'yes';
 				}
 			}
+			if ($method['value']['accessType'] == 'NCAS') {
+				if ($method['value']['qualificationResult'] == 'PASS') {
+					$wsq->result_nbn_fttn = 'yes';
+				}
+			}
 		}
 		
 		
 	}
 	
-	if ($wsq->result_nbn_fiber == 'yes' || $wsq->result_nbn_wireless == 'yes') {
+	if ($wsq->result_nbn_fiber == 'yes' || $wsq->result_nbn_wireless == 'yes' || $wsq->result_nbn_fttn == 'yes') {
 		$wsq->result_adsl_onnet = 'no';
 		$wsq->result_adsl_offnet = 'no';
 	}

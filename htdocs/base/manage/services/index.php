@@ -49,6 +49,7 @@ $pt->setFile(array("adsl_nbn_extra" => "base/manage/services/adsl_nbn/adsl_nbn_e
 					"adsl_nbn_status_normal" => "base/manage/services/adsl_nbn/adsl_nbn_status_normal.html",
 					"adsl_nbn_radreply_row" => "base/manage/services/adsl_nbn/adsl_nbn_radreply_row.html",
 					"back_link_adsl_nbn" => "base/manage/services/back_link/back_link_adsl_nbn.html",
+					"back_link_admin_adsl_nbn" => "base/manage/services/back_link/back_link_admin_adsl_nbn.html",
 					"back_link_inbound_voice" => "base/manage/services/back_link/back_link_inbound_voice.html",
 					"back_link_service_stats" => "base/manage/services/back_link/back_link_service_stats.html",
 					"back_link_outbound_voice" => "base/manage/services/back_link/back_link_outbound_voice.html",
@@ -126,10 +127,17 @@ if ( isset($_REQUEST["service_id"]) ) {
 
 	switch ($service->type_id) {
 		case '1':
+		
+			if ($user->class == 'admin') {
+				$pt->parse("ADMIN_LINKS","back_link_admin_adsl_nbn","true");
+			} 
 			if ( preg_match("/telstra/i", strtolower($retail_plan->access_method)) == 0 ) {
 				$pt->parse("SERVICE_STATS","back_link_service_stats","true");
 			}
 		case '2':
+			if ($user->class == 'admin') {
+				$pt->parse("ADMIN_LINKS","back_link_admin_adsl_nbn","true");
+			} 
 		case '3':
 		case '4':
 			if ( $service->type_id == 1 || $service->type_id == 2 ) {

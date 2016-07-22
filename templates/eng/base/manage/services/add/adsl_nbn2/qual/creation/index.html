@@ -15,49 +15,69 @@
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
       {IDENTIFER}
       </font></td>
+    <td>&nbsp;</td>
   </tr>
   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Address:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
       {ORDER_ADDRESS}
     </font></td>
+    <td>&nbsp;</td>
   </tr>
   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Type:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_TYPE} </font></td>
+    <td>&nbsp;</td>
   </tr>
   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Access Type:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_ACCESSTYPE} </font></td>
+    <td>&nbsp;</td>
   </tr>
   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Price Zone:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_PRICEZONE} </font></td>
+    <td>&nbsp;</td>
   </tr>
   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Access Method:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_ACCESSMETHOD} </font></td>
+    <td>&nbsp;</td>
   </tr>
   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Speed:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_SPEED} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Manual Order?</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {MANUAL} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">NBN Service Class:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {NBNSERVICEABILITYCLASS} - {NBNSERVICEABILITYCLASSTEXT} </font></td>
+    <td>&nbsp;</td>
   </tr>
   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">NBN New Dev Charge:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_NBNNEWDEVELOPMENTSCHARGEAPPLIES} </font></td>
+    <td>&nbsp;</td>
   </tr>
   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Username:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
       <input name="order_username" type="text" id="order_username" value="{ORDER_USERNAME}">@{REALM_OPTION}
     </font></td>
+    <td>&nbsp;</td>
   </tr>
     <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Password:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
       <input name="order_password" type="text" id="order_password" value="{ORDER_PASSWORD}">
     </font></td>
-  </tr>
+    <td>&nbsp;</td>
+    </tr>
     <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Contract Length:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
@@ -70,20 +90,23 @@
     </font>
     <input type="submit" name="submit_contract_length" id="submit_contract_length" hidden/>
   </td>
-  </tr>
+    <td>&nbsp;</td>
+    </tr>
     <tr bgcolor="#FFFF99">
       <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Retail Plan:</font></b></font></div></td>
       <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
         <!-- <input name="retail_plan" type="text" id="retail_plan" value="{RETAIL_PLAN}"> -->
         {RETAIL_PLAN_LIST}
       </font></td>
+      <td>&nbsp;</td>
     </tr>
     <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Tag:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
       <input name="tag" type="text" id="tag" value="{TAG}">
       </font></td>
-  </tr>
+    <td>&nbsp;</td>
+    </tr>
 <!--     <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Is this a churn?</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
@@ -100,7 +123,8 @@
       <!-- <input name="order_churn_contact_0" type="text" id="order_churn_contact_0" value="{ORDER_CHURN_CONTACT_0}"> -->
       {ORDER_CONTACT_LIST}
     </font></td>
-  </tr>
+    <td>&nbsp;</td>
+    </tr>
 <!--   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Contact Number:</font></b></font></div></td>
     <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
@@ -121,6 +145,7 @@
       <!-- <input name="order_churn_contact_0" type="text" id="order_churn_contact_0" value="{ORDER_CHURN_CONTACT_0}"> -->
       {EXTRA_OPTION}
     </font></td>
+    <td>&nbsp;</td>
   </tr>
 </table>
 <p>
