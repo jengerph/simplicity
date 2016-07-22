@@ -95,7 +95,7 @@ while ($cel = each($orders_list)) {
 						$params['orderContact']['name'] = 'XIntegration Provisioning';
 						$params['orderContact']['phone'] = '1300789299';
 						$params['orderContact']['mobile'] = '0406532792';
-						$params['orderContact']['email'] = 'alerts@xi.com.au';
+						$params['orderContact']['email'] = 'notifications@xi.com.au';
 						$params['installationContact'] = array();
 						$params['installationContact']['individual']['salutation'] = 'Mr';
 						$params['installationContact']['individual']['firstName'] = $customer->first_name;
@@ -115,10 +115,12 @@ while ($cel = each($orders_list)) {
 					  $qparams = array();
 						$qparams['qualifyNationalWholesaleBroadbandProductRequest'] = array();
 
-						// How are we qualifying  			
-						if (get_attribute( $orders->order_id, "order_service_number" ) != '') {
-							// Phone Number
-							$qparams['qualifyNationalWholesaleBroadbandProductRequest']['endCSN'] = get_attribute( $orders->order_id, "order_service_number" );
+						// How are we qualifying  
+						if ($services->type_id == 1) {			
+							if (get_attribute( $orders->order_id, "order_service_number" ) != '') {
+								// Phone Number
+								$qparams['qualifyNationalWholesaleBroadbandProductRequest']['endCSN'] = get_attribute( $orders->order_id, "order_service_number" );
+							}
 						} else {
 							if (get_attribute( $orders->order_id, "order_nbnLocationID" ) != '') {
 								// NBN ID
@@ -130,6 +132,8 @@ while ($cel = each($orders_list)) {
 						}
 
             try{
+            	
+            				print_r($response);
                     $response = $client->QualifyProduct($qparams);
                }
             catch (SoapFault $exception) {
@@ -169,7 +173,76 @@ while ($cel = each($orders_list)) {
 						} else {
 							$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['nbnLocationID'] = get_attribute( $orders->order_id, "order_nbnLocationID" );
 							$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['nbnConnectionType'] = 2;
-							$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['batteryBackupService'] = "FALSE";
+							$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['batteryBackupService'] = 0;
+							
+							if (get_attribute( $orders->order_id, "order_accessType" ) == 'NCAS') {
+								
+								// NCAS / FTTN
+								
+								$ncas_arr = array();
+								if (get_attribute( $orders->order_id, "order_ncas_pair" ) == 'new') {
+									
+									// NEW PAIR
+									$ncas_arr['allocateNewLine'] = "Yes";
+
+									
+								} else {
+
+									
+									$bits = explode('-', get_attribute( $orders->order_id, "order_ncas_pair" ));
+									
+									if ($bits[0] == 'nbn') {
+										$ncas_arr['existingCopperPairDetails'] = array();
+										$ncas_arr['existingCopperPairDetails']['copperPairId'] = $bits[1]; 
+										
+										if (get_attribute( $orders->order_id, "order_ncas_voiceband_continuity" ) == 'yes') {
+											$ncas_arr['existingCopperPairDetails']['voiceBandContinuity'] = 'yes'; 
+											
+											if ($response->siteDetails->nbnServiceabilityClass != 13) {
+												$ncas_arr['existingCopperPairDetails']['fnn'] = get_attribute( $orders->order_id, "order_service_number" ); 
+											}
+										} else {
+											$ncas_arr['existingCopperPairDetails']['voiceBandContinuity'] = 'no'; 
+											
+											if (get_attribute( $orders->order_id, "order_service_number" ) != '') {
+												if ($response->siteDetails->nbnServiceabilityClass != 13) {
+													$ncas_arr['existingCopperPairDetails']['fnn'] = get_attribute( $orders->order_id, "order_service_number" ); 
+												}
+											}
+										}
+
+										if (get_attribute( $orders->order_id, "order_ncas_splitter_install" ) == 'yes') {
+											$ncas_arr['existingCopperPairDetails']['splitterInstallation'] = 'yes'; 
+										} else {
+											$ncas_arr['existingCopperPairDetails']['splitterInstallation'] = 'no'; 
+										}
+										
+									} else if ($bits[0] == 'telstra') {
+										$ncas_arr['unlistedCopperPairDetails'] = array();
+										
+										if (get_attribute( $orders->order_id, "order_service_number" ) != '') {
+											$ncas_arr['unlistedCopperPairDetails']['fnn'] = get_attribute( $orders->order_id, "order_service_number" ); 
+										} else {
+											$ncas_arr['unlistedCopperPairDetails']['ullsIdentifier'] = $bits[1]; 
+										}
+										
+										if (get_attribute( $orders->order_id, "order_ncas_voiceband_continuity" ) == 'yes') {
+											$ncas_arr['unlistedCopperPairDetails']['voiceBandContinuity'] = 'yes'; 
+										} else {
+											$ncas_arr['unlistedCopperPairDetails']['voiceBandContinuity'] = 'no'; 
+										}
+
+										if (get_attribute( $orders->order_id, "order_ncas_splitter_install" ) == 'yes') {
+											$ncas_arr['unlistedCopperPairDetails']['splitterInstallation'] = 'yes'; 
+										} else {
+											$ncas_arr['unlistedCopperPairDetails']['splitterInstallation'] = 'no'; 
+										}
+										
+									}
+								}
+								$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['ncasDetails'] = $ncas_arr;
+							}
+
 						}
 						$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['accessMethod'] = get_attribute( $orders->order_id, "order_accessMethod" );
 						$params['serviceDetailsList'][0]['nationalWholesaleBroadbandService']['accessType'] = get_attribute( $orders->order_id, "order_accessType" );
@@ -186,7 +259,6 @@ while ($cel = each($orders_list)) {
 						
 						if ($do_accept = 1) {
 
-							print_r($params);
   						try{
   							$response = $client->NewService($params);
   						}
@@ -362,7 +434,7 @@ while ($cel = each($orders_list)) {
     
     						//$mail->AddAddress($customer->email);
     						$mail->AddCC($wholesaler->email);
-    						$mail->AddBCC("alerts@xi.com.au");
+    						$mail->AddBCC("notifications@xi.com.au");
     
     						$mail->Body    = $text_body;
     
@@ -397,7 +469,7 @@ while ($cel = each($orders_list)) {
 						$params['orderContact']['name'] = 'XIntegration Provisioning';
 						$params['orderContact']['phone'] = '1300789299';
 						$params['orderContact']['mobile'] = '0406532792';
-						$params['orderContact']['email'] = 'alerts@xi.com.au';
+						$params['orderContact']['email'] = 'notifications@xi.com.au';
 
 						$params['customerReference'] = $services->service_id . '/' . $orders->order_id . '/' . get_attribute( $orders->order_id, "order_username" ) . "@" . get_attribute( $orders->order_id, "order_realms" );
 
@@ -579,7 +651,7 @@ while ($cel = each($orders_list)) {
 
 						//$mail->AddAddress($customer->email);
 						$mail->AddCC($wholesaler->email);
-						$mail->AddBCC("alerts@xi.com.au");
+						$mail->AddBCC("notifications@xi.com.au");
 
 						$mail->Body    = $text_body;
 
@@ -815,7 +887,7 @@ while ($cel = each($orders_list)) {
 
 									//$mail->AddAddress($customer->email);
 									$mail->AddCC($wholesaler->email);
-									$mail->AddBCC("alerts@xi.com.au");
+									$mail->AddBCC("notifications@xi.com.au");
 
 
 									$mail->Body    = $text_body;
@@ -912,7 +984,7 @@ while ($cel = each($orders_list)) {
 
 								//$mail->AddAddress($customer->email);
 								$mail->AddCC($wholesaler->email);
-								$mail->AddBCC("alerts@xi.com.au");
+								$mail->AddBCC("notifications@xi.com.au");
 
 
 								$mail->Body    = $text_body;
@@ -987,7 +1059,7 @@ while ($cel = each($orders_list)) {
 
 								//$mail->AddAddress($customer->email);
 								$mail->AddCC($wholesaler->email);
-								$mail->AddBCC("alerts@xi.com.au");
+								$mail->AddBCC("notifications@xi.com.au");
 
 
 								$mail->Body    = $text_body;
