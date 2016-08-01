@@ -50,6 +50,7 @@ switch ($user->class) {
 
 // Assign the templates to use
 $pt->setFile(array("main" => "base/manage/services/radius/index.html", 
+					"radreply_row" => "base/manage/services/radius/radreply_row.html", 
 					"radcheck_row" => "base/manage/services/radius/radcheck_row.html", 
 					"radgroupcheck_row" => "base/manage/services/radius/radgroupcheck_row.html", 
 					"radgroupreply_row" => "base/manage/services/radius/radgroupreply_row.html", 
