@@ -166,7 +166,8 @@ class radius {
 
     }
     
-    if (strlen($this->password) < 6) {
+    if (strlen($this->value) < 6) {
+    	
     	return 7;
     }
     
@@ -440,7 +441,7 @@ class radius {
 
     // Validate
     if (radius::validate()) {
-    
+    	
       return 0;
       
     }
@@ -456,7 +457,7 @@ class radius {
     $radius->radcheck_load();
 
     $query = "UPDATE radius.radcheck SET value = " . $this->db->quote($this->value) . " WHERE username = " . $this->db->quote($this->username) . " AND attribute = 'Cleartext-Password'";
-
+    
     $result = $this->db->execute_query($query);
 
     if ($result == 0) {
