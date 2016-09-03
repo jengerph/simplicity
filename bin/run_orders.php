@@ -25,7 +25,7 @@ include_once "authorised_rep.class";
 $CONTROL_PROCESS_NEW = 1;
 
 // Do we process cancellations?
-$CONTROL_PROCESS_CANCEL = 0;
+$CONTROL_PROCESS_CANCEL = 1;
 
 // Talk to AAPT
 $CONTROL_TALK_AAPT = 1;
