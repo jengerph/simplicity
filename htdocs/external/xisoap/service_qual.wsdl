@@ -1,0 +1,71 @@
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:tns="urn:ServiceQualification" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+             targetNamespace="urn:ServiceQualification">
+    <types>
+        <xsd:schema targetNamespace="urn:ServiceQualification">
+            <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+            <xsd:complexType name="ServiceQualificationRequest">
+                <xsd:all>
+                    <xsd:element name="unit_no" type="xsd:string"/>
+                    <xsd:element name="house_no" type="xsd:string"/>
+                    <xsd:element name="lot_no" type="xsd:string"/>
+                    <xsd:element name="street_name" type="xsd:string"/>
+                    <xsd:element name="street_type" type="xsd:string"/>
+                    <xsd:element name="suburb" type="xsd:string"/>
+                    <xsd:element name="state_name" type="xsd:string"/>
+                    <xsd:element name="postcode" type="xsd:string"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="ServiceQualificationResponse">
+                <xsd:all>
+                    <xsd:element name="status_code" type="xsd:string"/>
+                    <xsd:element name="property_id" type="xsd:string"/>
+                    <xsd:element name="unit_no" type="xsd:string"/>
+                    <xsd:element name="house_no" type="xsd:string"/>
+                    <xsd:element name="lot_no" type="xsd:string"/>
+                    <xsd:element name="street_name" type="xsd:string"/>
+                    <xsd:element name="street_type" type="xsd:string"/>
+                    <xsd:element name="suburb" type="xsd:string"/>
+                    <xsd:element name="state_name" type="xsd:string"/>
+                    <xsd:element name="postcode" type="xsd:string"/>
+                    <xsd:element name="estate_name" type="xsd:string"/>
+                    <xsd:element name="stage" type="xsd:string"/>
+                    <xsd:element name="property_class" type="xsd:string"/>
+                </xsd:all>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+    <message name="AddressSearchRequest">
+        <part name="property" type="tns:ServiceQualificationRequest"/>
+    </message>
+    <message name="AddressSearchResponse">
+        <part name="return" type="tns:ServiceQualificationResponse_Array"/>
+    </message>
+    <portType name="ServiceQualificationPortType">
+        <operation name="AddressSearch">
+            <documentation>This is the Property Search</documentation>
+            <input message="tns:AddressSearchRequest"/>
+            <output message="tns:AddressSearchResponse"/>
+        </operation>
+    </portType>
+    <binding name="ServiceQualificationBinding" type="tns:ServiceQualificationPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="AddressSearch">
+            <soap:operation soapAction="urn:ServiceQualification#AddressSearch" style="rpc"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:ServiceQualification" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:ServiceQualification" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="ServiceQualification">
+        <port name="ServiceQualificationPort" binding="tns:ServiceQualificationBinding">
+            <soap:address location="https://portal.opticomm.net.au:4005/components/com_soapxml/ServiceQualification.php"/>
+        </port>
+    </service>
+</definitions>

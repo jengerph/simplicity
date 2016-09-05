@@ -1,0 +1,52 @@
+<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ServiceQualification">
+<SOAP-ENV:Header>
+    <wsse:Security SOAP-ENV:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss- wssecurity-secext-1.0.xsd">
+        <wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext- 1.0.xsd">
+            <wsse:Username>menger</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile- 1.0#PasswordText">isi0Lixe</wsse:Password>
+        </wsse:UsernameToken>
+    </wsse:Security>
+</SOAP-ENV:Header>
+
+<soapenv:Body>
+    <tns:AddressSearch xmlns:tns="urn:ServiceQualification">
+        <request xsi:type="tns:ServiceQualificationRequest">
+            <unit_no xsi:type="xsd:string"></unit_no>
+            <house_no xsi:type="xsd:string">8</house_no>
+            <lot_no xsi:type="xsd:string">3</lot_no>
+            <street_name xsi:type="xsd:string">Harbour</street_name>
+            <street_type xsi:type="xsd:string">Road</street_type>
+            <suburb xsi:type="xsd:string">Hamilton</suburb>
+            <state_name xsi:type="xsd:string">QLD</state_name>
+            <postcode xsi:type="xsd:string">4007</postcode>
+        </request>
+    </tns:AddressSearch>
+</soapenv:Body>
+</soapenv:Envelope>
+
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:ServiceQualification"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="wsse"
+xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+<SOAP-ENV:Header>
+    <ns2:Security SOAP-ENV:mustUnderstand="1">
+        <ns2:UsernameToken>
+            <ns2:Username>menger</ns2:Username>
+            <ns2:Password>isi0Lixe</ns2:Password>
+        </ns2:UsernameToken>
+    </ns2:Security>
+</SOAP-ENV:Header>
+<SOAP-ENV:Body>
+    <ns1:AddressSearch>
+        <property xsi:type="ns1:ServiceQualificationRequest">
+            <unit_no xsi:type="xsd:string"></unit_no>
+            <house_no xsi:type="xsd:string">16</house_no>
+            <lot_no xsi:type="xsd:string"></lot_no>
+            <street_name xsi:type="xsd:string">Skimmer Street</street_name>
+            <street_type xsi:type="xsd:string"></street_type>
+            <suburb xsi:type="xsd:string">Chisholm</suburb>
+            <state_name xsi:type="xsd:string">NSW</state_name>
+            <postcode xsi:type="xsd:string">2322</postcode>
+        </property>
+    </ns1:AddressSearch>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="dfe549a9-0875-4c32-971e-f98a7f6167ea" activeEnvironment="Default" name="xintegration-opticomm" resourceRoot="" soapui-version="5.2.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="373aa444-a402-4215-8157-a87fb6c0fa04" wsaVersion="NONE" name="ServiceQualificationBinding" type="wsdl" bindingName="{urn:ServiceQualification}ServiceQualificationBinding" soapVersion="1_1" anonymous="optional" definition="file:/Users/gab/Documents/Dev/projects/PHP/xintegration/xisoap/service_qual.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/Users/gab/Documents/Dev/projects/PHP/xintegration/xisoap/service_qual.wsdl"><con:part><con:url>file:/Users/gab/Documents/Dev/projects/PHP/xintegration/xisoap/service_qual.wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="urn:ServiceQualification" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:ServiceQualification" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema targetNamespace="urn:ServiceQualification">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+      <xsd:complexType name="ServiceQualificationRequest">
+        <xsd:all>
+          <xsd:element name="unit_no" type="xsd:string"/>
+          <xsd:element name="house_no" type="xsd:string"/>
+          <xsd:element name="lot_no" type="xsd:string"/>
+          <xsd:element name="street_name" type="xsd:string"/>
+          <xsd:element name="street_type" type="xsd:string"/>
+          <xsd:element name="suburb" type="xsd:string"/>
+          <xsd:element name="state_name" type="xsd:string"/>
+          <xsd:element name="postcode" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ServiceQualificationResponse">
+        <xsd:all>
+          <xsd:element name="status_code" type="xsd:string"/>
+          <xsd:element name="property_id" type="xsd:string"/>
+          <xsd:element name="unit_no" type="xsd:string"/>
+          <xsd:element name="house_no" type="xsd:string"/>
+          <xsd:element name="lot_no" type="xsd:string"/>
+          <xsd:element name="street_name" type="xsd:string"/>
+          <xsd:element name="street_type" type="xsd:string"/>
+          <xsd:element name="suburb" type="xsd:string"/>
+          <xsd:element name="state_name" type="xsd:string"/>
+          <xsd:element name="postcode" type="xsd:string"/>
+          <xsd:element name="estate_name" type="xsd:string"/>
+          <xsd:element name="stage" type="xsd:string"/>
+          <xsd:element name="property_class" type="xsd:string"/>
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </types>
+  <message name="AddressSearchRequest">
+    <part name="property" type="tns:ServiceQualificationRequest"/>
+  </message>
+  <message name="AddressSearchResponse">
+    <part name="return" type="tns:ServiceQualificationResponse_Array"/>
+  </message>
+  <portType name="ServiceQualificationPortType">
+    <operation name="AddressSearch">
+      <documentation>This is the Property Search</documentation>
+      <input message="tns:AddressSearchRequest"/>
+      <output message="tns:AddressSearchResponse"/>
+    </operation>
+  </portType>
+  <binding name="ServiceQualificationBinding" type="tns:ServiceQualificationPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="AddressSearch">
+      <soap:operation soapAction="urn:ServiceQualification#AddressSearch" style="rpc"/>
+      <input>
+        <soap:body use="encoded" namespace="urn:ServiceQualification" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="urn:ServiceQualification" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ServiceQualification">
+    <port name="ServiceQualificationPort" binding="tns:ServiceQualificationBinding">
+      <soap:address location="https://portal.opticomm.net.au:4005/components/com_soapxml/ServiceQualification.php"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://portal.opticomm.net.au:4005/components/com_soapxml/ServiceQualification.php</con:endpoint></con:endpoints><con:operation id="4a01ba25-a22d-472e-9a97-0a84e41d374e" isOneWay="false" action="urn:ServiceQualification#AddressSearch" name="AddressSearch" bindingOperationName="AddressSearch" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b536d221-4ade-44ef-b06c-d0eed732f469" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://portal.opticomm.net.au:4005/components/com_soapxml/ServiceQualification.php</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ServiceQualification">
+   <SOAP-ENV:Header>
+    <ns2:Security SOAP-ENV:mustUnderstand="1">
+        <ns2:UsernameToken>
+            <ns2:Username>menger</ns2:Username>
+            <ns2:Password>isi0Lixe</ns2:Password>
+        </ns2:UsernameToken>
+    </ns2:Security>
+</SOAP-ENV:Header>
+   <soapenv:Body>
+      <urn:AddressSearch soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+         <property xsi:type="urn:ServiceQualificationRequest">
+            <!--You may enter the following 8 items in any order-->
+            <unit_no xsi:type="xsd:string"></unit_no>
+            <house_no xsi:type="xsd:string">28</house_no>
+            <lot_no xsi:type="xsd:string"></lot_no>
+            <street_name xsi:type="xsd:string">Coriyule</street_name>
+            <street_type xsi:type="xsd:string">Road</street_type>
+            <suburb xsi:type="xsd:string">Drysdale</suburb>
+            <state_name xsi:type="xsd:string">VIC</state_name>
+            <postcode xsi:type="xsd:string">3222</postcode>
+         </property>
+      </urn:AddressSearch>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:ServiceQualification#AddressSearch"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
