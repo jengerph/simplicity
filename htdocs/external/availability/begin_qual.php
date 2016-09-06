@@ -40,7 +40,7 @@ if ($_REQUEST['pass'] == '') {
         "lot_no"      => $validator->sanitiseString((($_GET["level"]) ?: "")),
         "unit_no"     => $validator->sanitiseString((($_GET["unit_no"]) ?: "")),
         "house_no"    => $validator->validateString((($_GET["street_number"]) ?: "")),
-        "street_type" => $validator->sanitiseString((($street_type) ?: "")),
+        "street_type" => $validator->sanitiseString((($_GET["street_type"]) ?: "")),
         "street_name" => $validator->validateString((($_GET["street_name"]) ?: "")),
         "suburb"      => $validator->validateString((($_GET["locality"]) ?: "")),
         "state_name"  => $validator->sanitiseString((($_GET["state"]) ?: "")),
