@@ -13,23 +13,44 @@
 // Get the path of the include files
 include_once "../../setup.inc";
 include_once "website_servicequal.class";
+include_once dirname(__FILE__) . "/../xisoap/includes/FactoryXiSoap.php";
+include_once dirname(__FILE__) . "/../xisoap/includes/Validate.php";
 
 $return = array();
 
 if ($_REQUEST['pass'] == '') {
 
-	$return['qual_id'] = 0;
-	$return['msg'] = 'Error: password for qualification missing.';
-	
+    $return['qual_id'] = 0;
+    $return['msg'] = 'Error: password for qualification missing.';
+
 } else {
 
-  //print_r($_GET);
-  
+    //print_r($_GET);
 
-  
-  //echo '<br>';
-  //print_r($params);
-  
+
+
+    //echo '<br>';
+    //print_r($params);
+
+    $street_type = substr(strrchr($_GET["street_name"], " "), 1);
+
+    //Sanitise only if values can be empty and not required by soap server
+    $param = array(
+        "lot_no"      => $validator->sanitiseString((($_GET["level"]) ?: "")),
+        "unit_no"     => $validator->sanitiseString((($_GET["unit_no"]) ?: "")),
+        "house_no"    => $validator->validateString((($_GET["street_number"]) ?: "")),
+        "street_type" => $validator->sanitiseString((($street_type) ?: "")),
+        "street_name" => $validator->validateString((($_GET["street_name"]) ?: "")),
+        "suburb"      => $validator->validateString((($_GET["locality"]) ?: "")),
+        "state_name"  => $validator->sanitiseString((($_GET["state"]) ?: "")),
+        "postcode"    => $validator->validatePostcode((($_GET["postcode"]) ?: ""))
+    );
+
+    $factorySoap = new \XiSoap\FactoryXiSoap();
+    if($factorySoap->hasResults("service_qual.wsdl", "AddressSearch", $param)) {
+        return true;
+    }
+
   
   $wsq = new website_servicequal();
   $wsq->level = $_REQUEST['level'];
@@ -40,7 +61,7 @@ if ($_REQUEST['pass'] == '') {
   $wsq->postcode = $_REQUEST['postcode'];
   $wsq->pass = $_REQUEST['pass'];
   $wsq->create();
-  
+
   //echo '<br>';
   //echo $wsq->qual_id;
   
@@ -50,7 +71,7 @@ if ($_REQUEST['pass'] == '') {
   
   //echo $command;
 
-	exec( "$command > /dev/null &", $arrOutput);  
+	exec( "$command > /dev/null &", $arrOutput);
 
 }
 

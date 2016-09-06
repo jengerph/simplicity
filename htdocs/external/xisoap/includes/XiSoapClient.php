@@ -35,17 +35,20 @@ class XiSoapClient
             $this->client = new \SoapClient($this->url, $options);
             $this->setClient($this->client);
 
-            if($username && $password) {
-                $wsseHeader = new Auth\WsseAuthHeader($username, $password, "wsse");
-                $this->client->__setSoapHeaders($wsseHeader);
-            }
-
         } catch (\SoapFault $exception) {
             trigger_error("SOAP Fault: (faultcode: {$exception->faultcode}, faultstring: {$exception->faultstring})", E_USER_ERROR);
         } catch(\Exception $e) {
             trigger_error($e->getMessage());
         }
 
+    }
+
+    /**
+     * @param \SoapHeader $header
+     */
+    public function setHeaders(\SoapHeader $header)
+    {
+        $this->client->__setSoapHeaders($header);
     }
 
     /**
