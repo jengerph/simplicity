@@ -32,6 +32,7 @@ if ($_REQUEST['pass'] == '') {
     //echo '<br>';
     //print_r($params);
 
+    $validator = new \XiSoap\Validate();
     $street_type = substr(strrchr($_GET["street_name"], " "), 1);
 
     //Sanitise only if values can be empty and not required by soap server
