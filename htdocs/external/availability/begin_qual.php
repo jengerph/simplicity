@@ -32,8 +32,10 @@ if ($_REQUEST['pass'] == '') {
     //echo '<br>';
     //print_r($params);
 
+
+    //Check for Opticomm eligibility
     $validator = new \XiSoap\Validate();
-    $street_type = substr(strrchr($_GET["street_name"], " "), 1);
+    //$street_type = substr(strrchr($_GET["street_name"], " "), 1);
 
     //Sanitise only if values can be empty and not required by soap server
     $param = array(
