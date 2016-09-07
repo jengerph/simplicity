@@ -37,14 +37,14 @@ if ($_REQUEST['pass'] == '') {
 
     //Sanitise only if values can be empty and not required by soap server
     $param = array(
-        "lot_no"      => $validator->sanitiseString((($_GET["level"]) ?: "")),
-        "unit_no"     => $validator->sanitiseString((($_GET["unit_no"]) ?: "")),
-        "house_no"    => $validator->validateString((($_GET["street_number"]) ?: "")),
-        "street_type" => $validator->sanitiseString((($_GET["street_type"]) ?: "")),
-        "street_name" => $validator->validateString((($_GET["street_name"]) ?: "")),
-        "suburb"      => $validator->validateString((($_GET["locality"]) ?: "")),
-        "state_name"  => $validator->sanitiseString((($_GET["state"]) ?: "")),
-        "postcode"    => $validator->validatePostcode((($_GET["postcode"]) ?: ""))
+        "lot_no"      => ($_GET["level"]) ? $validator->sanitiseString($_GET["level"]) : "",
+        "unit_no"     => ($_GET["unit_no"]) ? $validator->sanitiseString($_GET["unit_no"]) : "",
+        "house_no"    => ($_GET["street_number"]) ? $validator->validateString($_GET["street_number"]) : "",
+        "street_type" => ($_GET["street_type"]) ? $validator->sanitiseString($_GET["street_type"]) : "",
+        "street_name" => ($_GET["street_name"]) ? $validator->validateString($_GET["street_name"]) : "",
+        "suburb"      => ($_GET["locality"]) ? $validator->validateString($_GET["locality"]) : "",
+        "state_name"  => ($_GET["state"]) ? $validator->sanitiseString($_GET["state"]) : "",
+        "postcode"    => ($_GET["postcode"]) ? $validator->validatePostcode($_GET["postcode"]) : ""
     );
 
     $factorySoap = new \XiSoap\FactoryXiSoap();
