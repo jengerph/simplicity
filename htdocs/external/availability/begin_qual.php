@@ -48,7 +48,7 @@ if ($_REQUEST['pass'] == '') {
     );
 
     $factorySoap = new \XiSoap\FactoryXiSoap();
-    if($factorySoap->hasResults("service_qual.wsdl", "AddressSearch", $param)) {
+    if($factorySoap->hasResults(dirname(__FILE__) . "/../xisoap/service_qual.wsdl", "AddressSearch", $param)) {
         return true;
     }
 
