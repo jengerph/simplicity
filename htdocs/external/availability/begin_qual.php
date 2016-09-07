@@ -35,9 +35,8 @@ if ($_REQUEST['pass'] == '') {
 
     //Check for Opticomm eligibility
     $validator = new \XiSoap\Validate();
-    //$street_type = substr(strrchr($_GET["street_name"], " "), 1);
 
-    //Sanitise only if values can be empty and not required by soap server
+    //Sanitise only, if values can be empty and not required by soap server
     $param = array(
         "lot_no"      => ($_GET["level"]) ? $validator->sanitiseString($_GET["level"]) : "",
         "unit_no"     => ($_GET["unit_no"]) ? $validator->sanitiseString($_GET["unit_no"]) : "",
@@ -51,7 +50,9 @@ if ($_REQUEST['pass'] == '') {
 
     $factorySoap = new \XiSoap\FactoryXiSoap();
     if($factorySoap->hasResults(dirname(__FILE__) . "/../xisoap/service_qual.wsdl", "AddressSearch", $param)) {
-        return true;
+        $return["qual_id"] = true;
+        echo json_encode($return);
+        die();
     }
 
   
