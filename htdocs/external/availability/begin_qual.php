@@ -40,13 +40,18 @@ if ($_REQUEST['pass'] == '') {
     $param = array(
         "lot_no"      => ($_GET["level"]) ? $validator->sanitiseString($_GET["level"]) : "",
         "unit_no"     => ($_GET["unit_no"]) ? $validator->sanitiseString($_GET["unit_no"]) : "",
-        "house_no"    => ($_GET["street_number"]) ? $validator->validateString($_GET["street_number"]) : "",
+        "house_no"    => ($_GET["street_number"] && $validator->validateString($_GET["street_number"])) ? $_GET["street_number"] : "",
         "street_type" => ($_GET["street_type"]) ? $validator->sanitiseString($_GET["street_type"]) : "",
-        "street_name" => ($_GET["street_name"]) ? $validator->validateString($_GET["street_name"]) : "",
-        "suburb"      => ($_GET["locality"]) ? $validator->validateString($_GET["locality"]) : "",
+        "street_name" => ($_GET["street_name"] && $validator->validateString($_GET["street_name"])) ? $_GET["street_name"] : "",
+        "suburb"      => ($_GET["locality"] && $validator->validateString($_GET["locality"])) ? $_GET["locality"] : "",
         "state_name"  => ($_GET["state"]) ? $validator->sanitiseString($_GET["state"]) : "",
-        "postcode"    => ($_GET["postcode"]) ? $validator->validatePostcode($_GET["postcode"]) : ""
+        "postcode"    => ($_GET["postcode"] && $validator->validatePostcode($_GET["postcode"])) ? $_GET["postcode"] : ""
     );
+
+    //Opticomm street name can only contains the name and not the type (e.g. Cotters, instead of Cotters Road)
+    $param["street_name"] = substr($param["street_name"], 0, strrpos($param["street_name"], " "));
+    //Google Places API somtimes doesn't include street_number
+    $param["house_no"] = $param["house_no"] ?: substr($_GET["autocomplete"], 0, strpos($_GET["autocomplete"], " "));
 
     $factorySoap = new \XiSoap\FactoryXiSoap();
     if($factorySoap->hasResults(dirname(__FILE__) . "/../xisoap/service_qual.wsdl", "AddressSearch", $param)) {

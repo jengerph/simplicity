@@ -24,7 +24,7 @@ class FactoryXiSoap
         $soapClient->setHeaders($header);
         $result = $soapClient->wdslCall($functionName, $values);
 
-        if(is_array($result) && count($result) > 0) {
+        if(is_array($result) && $result[0]->property_id != "") {
             return true;
         }
 

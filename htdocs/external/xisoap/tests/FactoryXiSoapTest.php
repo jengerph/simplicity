@@ -15,12 +15,12 @@ class FactoryXiSoapTest extends TestCase
 
         $lot_no = "";
         $unit_no = "";
-        $house_no = "13";
-        $street_type = "Place";
-        $street_name = "Joseba";
-        $suburb = "Springfield Lakes";
-        $state_name = "qld";
-        $postcode = "4300";
+        $house_no = "16";
+        $street_type = "";
+        $street_name = "Skimmer";
+        $suburb = "Chisholm";
+        $state_name = "nsw";
+        $postcode = "2322";
 
         $param = array(
             "lot_no" => ($lot_no) ?: "",
@@ -34,5 +34,6 @@ class FactoryXiSoapTest extends TestCase
         );
 
         $this->assertNotFalse($client->hasResults("service_qual.wsdl", "AddressSearch", $param));
+        //var_dump($client->hasResults("service_qual.wsdl", "AddressSearch", $param));
     }
 }
