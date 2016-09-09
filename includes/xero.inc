@@ -30,6 +30,25 @@ if ($checkErrors > 0) {
 	exit();
 } 
 
+function xero_setup($XeroOAuth, $wholesaler_id) {
+
+	$wholesaler = new wholesalers();	
+	$wholesaler->wholesaler_id = $wholesaler_id;
+	
+	if (!$wholesaler->exist()) {
+		echo "Invalid wholesaler selected";
+		exit();
+	}
+	
+	if (!$wholesaler->load()) {
+		echo "Unable to load wholesaler";
+		exit();
+	}
+	
+	$XeroOAuth->config['access_token']        = $wholesaler->xero_access_token;
+  $XeroOAuth->config['access_token_secret'] = $wholesaler->xero_access_token_secret;
+  $XeroOAuth->config['session_handle'] 			= $wholesaler->xero_session_handle;
+}
 
 function xero_outputError($XeroOAuth)
 {

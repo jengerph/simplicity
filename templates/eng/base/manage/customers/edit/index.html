@@ -19,7 +19,7 @@ $(document).ready(function(){
 -->
 </style><body topmargin="0">
 <h2><span class="bodytext">Edit Customer: </span></h2>
-<p>[ <a href="/base/manage/customers/?customer_id={CUSTOMER_ID}">&#9664; Back to View Customer </a> | <a href="/base/manage/customers/edit/auth_rep/?customer_id={CUSTOMER_ID}">Authorised Representative</a> | <a href="/base/manage/users/?customer_id={CUSTOMER_ID}">Users</a> ]</p>
+<p>[ <a href="/base/manage/customers/?customer_id={CUSTOMER_ID}">&#9664; Back to View Customer </a> | <a href="/base/manage/customers/edit/auth_rep/?customer_id={CUSTOMER_ID}">Authorised Representative</a> | <a href="/base/manage/customers/edit/xero_link/?customer_id={CUSTOMER_ID}">Xero</a> | <a href="/base/manage/users/?customer_id={CUSTOMER_ID}">Users</a> ]</p>
 <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
 <form action="{SELF}?customer_id={CUSTOMER_ID}" method="post" enctype="multipart/form-data">
 <table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
@@ -173,8 +173,12 @@ $(document).ready(function(){
   </tr>
   <tr bgcolor="#FFFF99">
     <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Agent:</font></b></font></div></td>
+    <td> {AGENT} </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Xero Contact ID:</font></b></font></div></td>
     <td>
-    {AGENT} 
+    <a href="/base/manage/customers/edit/xero_link/?customer_id={CUSTOMER_ID}">{XERO_CONTACTID} </a>
     </td>
   </tr>
 </table>

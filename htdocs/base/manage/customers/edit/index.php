@@ -204,6 +204,7 @@ $pt->setVar('POSTAL_' . strtoupper($customers->postal_same) . '_SELECT', ' check
 $pt->setVar('STATE_' . strtoupper($customers->state) . '_SELECT', ' selected');
 $pt->setVar('POSTAL_STATE_' . strtoupper($customers->postal_state) . '_SELECT', ' selected');
 $pt->setVar('KIND_' . strtoupper($customers->kind) . '_SELECT', ' selected');
+$pt->setVar("XERO_CONTACTID",$customers->xero_contactid);
 
 $agent = new customers();
 $agent->customer_id = $customers->agent;

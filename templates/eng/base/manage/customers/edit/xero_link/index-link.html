@@ -1,0 +1,60 @@
+
+<script type="text/javascript">
+rep_type();
+function rep_type(){
+  var type = document.getElementById('type').value;
+  var table = document.getElementById('ar_table').style.visibility;
+  if ( table != "hidden" ) {
+    if ( type == "person" ) {
+      document.getElementById('ar_primary_id_c').style = "visibility:hidden";
+      document.getElementById('ar_secondary_id_c').style = "visibility:hidden";
+      document.getElementById('ar_primary_id_p').style = "visibility:visible";
+      document.getElementById('ar_secondary_id_p').style = "visibility:visible";
+    } else if ( type == "company" ) {
+      document.getElementById('ar_primary_id_p').style = "visibility:hidden";
+      document.getElementById('ar_secondary_id_p').style = "visibility:hidden";
+      document.getElementById('ar_primary_id_c').style = "visibility:visible";
+      document.getElementById('ar_secondary_id_c').style = "visibility:visible";
+    }
+  }
+}
+</script>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0" onload="rep_type();">
+<h2><span class="bodytext">Xero Information: </span></h2>
+<p><a href="/base/manage/customers/edit/?customer_id={CUSTOMER_ID}">Back to Edit Customer</a> | <a href="/base/manage/customers/edit/xero_link/?cmd=link&customer_id={CUSTOMER_ID}">Link to existing xero contact</a></p>
+<form method="POST" action="{SELF}"><input type="hidden" name="cmd" value="link"><input type="hidden" name="customer_id" value="{CUSTOMER_ID}">
+<table border="1" cellpadding="3" cellspacing="0" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Type:</font></b></font></div></td>
+    <td>{TYPE}</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Company Name:</font></b></font></div></td>
+    <td>
+      {COMPANY_NAME}
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">First Name:</font></b></font></div></td>
+    <td>
+      {FIRST_NAME}
+    </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Last Name:</font></b></font></div></td>
+    <td> {LAST_NAME} </td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Xero contact ID:</font></b></font></div></td>
+    <td><select name="xero_contact_id" id="xero_contact_id">{XERO_CONTACT_LIST}
+    </select></td>
+  </tr>
+</table>
+<p>
+  <input name="submit" type="submit" id="submit" value="Save">
+</p>
+</form>
