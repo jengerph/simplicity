@@ -35,6 +35,14 @@ class wholesalers {
   var $manage_own_plan;
   var $block_customer_order_notif;
   var $allow_credit_card;
+  var $xero_oauth_token;
+  var $xero_oauth_token_secret;
+  var $xero_access_token;
+  var $xero_access_token_secret;
+  var $xero_session_handle;
+  var $xero_name;
+  var $xero_apikey;
+  
   
   var $db;
   var $server_name;
@@ -115,10 +123,57 @@ class wholesalers {
     }
 
 
-    return 0;
+    return 1;
     
   }
 
+ /* function load_xero_oauth_token()
+  **
+  ** DESCRIPTION: loads data from table from xero oauth token
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load_xero_oauth_token() {
+
+    $this->xero_oauth_token = strtoupper($this->xero_oauth_token);
+
+    if (!$this->xero_oauth_token) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->xero_oauth_token) {
+      
+      $query = "SELECT * FROM wholesalers WHERE xero_oauth_token = " . $this->db->quote($this->xero_oauth_token);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ( $row ) {
+          while ($cel = each($row)) { 
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 1;
+    
+  }
+  
   /* function exist()
   **
   ** DESCRIPTION: checks to see if an id exists
@@ -143,6 +198,53 @@ class wholesalers {
     }
     
     $query = "SELECT wholesaler_id FROM wholesalers WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+  
+   /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist_xero_oauth_token() {
+  
+    $this->xero_oauth_token = strtoupper($this->xero_oauth_token);
+  
+    // Check we have an xero_oauth_token
+    if (!$this->xero_oauth_token) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT wholesaler_id FROM wholesalers WHERE xero_oauth_token = " . $this->db->quote($this->xero_oauth_token);
     $result = $this->db->execute_query($query);
       
     if ($result != 0 ) {
@@ -362,7 +464,11 @@ class wholesalers {
       $ws->load();
 
     $query = "UPDATE wholesalers SET company_name = " . $this->db->quote($this->company_name) . ", email = " . $this->db->quote($this->email) . ", active = " . $this->db->quote($this->active) . ", phone = " . $this->db->quote($this->phone) . ", address1 = " . $this->db->quote($this->address1) . ", address2 = " . $this->db->quote($this->address2) . ", city = " . $this->db->quote($this->city) . ", state = " . $this->db->quote($this->state) . ", postcode = " . $this->db->quote($this->postcode) . ", abn = " . $this->db->quote($this->abn) . ", require_ar_download = " . $this->db->quote($this->require_ar_download) . ", require_ar_idcheck = " . $this->db->quote($this->require_ar_idcheck) . ", customer_billing = " . $this->db->quote($this->customer_billing) . ", manage_own_plan = " . $this->db->quote($this->manage_own_plan) . ", block_customer_order_notif = " . $this->db->quote($this->block_customer_order_notif) . ", allow_credit_card = " . $this->db->quote($this->allow_credit_card);
+    $query .=  ", xero_oauth_token = " . $this->db->quote($this->xero_oauth_token) . ", xero_oauth_token_secret = " . $this->db->quote($this->xero_oauth_token_secret) . ", xero_access_token = " . $this->db->quote($this->xero_access_token) . ", xero_access_token_secret = " . $this->db->quote($this->xero_access_token_secret) . ", xero_session_handle = " . $this->db->quote($this->xero_session_handle) . ", xero_name = " . $this->db->quote($this->xero_name) . ", xero_apikey = " . $this->db->quote($this->xero_apikey);
     $query .= " WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
+    
+    //echo $query;
+    
     $result = $this->db->execute_query($query);
     
     if ($result == 0) {

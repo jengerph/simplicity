@@ -25,6 +25,9 @@ class config {
   var $force_ssl;
   var $include_dir;
   var $photos_dir;
+  var $xero_consumer_key;
+  var $xero_consumer_secret;
+  
   
   var $error_message = array();  
       
@@ -71,12 +74,14 @@ class config {
     $this->photos_dir  = '/var/www/simplicity/photos';
 
     // Frontierlink folder
-    $this->frontier_dir = '/var/www/simplicity/frontierlink';
+    $this->xero_consumer_key = 'GAG4EGSMNYKLVSOO14WLAEECZTHYFY';
+
+    // Xero Consumer Key
+    $this->xero_consumer_secret = '3BYK61MKOY7CITRJSWHE8MSLXVMJKK';
+
 
     // SETUP ERROR MESSAGES
     include $this->include_dir . '/errors.inc';
 
   }
 }
-
-?>
