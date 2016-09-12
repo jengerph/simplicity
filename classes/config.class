@@ -74,7 +74,7 @@ class config {
     $this->photos_dir  = '/var/www/simplicity/photos';
 
     // Frontierlink folder
-    $this->frontier_dir = '/var/www/simplicity/frontierlink'
+    $this->frontier_dir = '/var/www/simplicity/frontierlink';
     
     // Xero Customer Key
     $this->xero_consumer_key = 'GAG4EGSMNYKLVSOO14WLAEECZTHYFY';
