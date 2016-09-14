@@ -276,7 +276,7 @@ if ( isset($_REQUEST["service_id"]) ) {
 	if ( isset($_REQUEST["radius_password"]) ) {
 		$radius = new radius();
 		$radius->username = $username;
-		$radius->value = $_REQUEST["radius_password"];
+		$radius->password = $_REQUEST["radius_password"];
 		$radius->save();
 
 		$service_attr = new service_attributes();

@@ -21,8 +21,10 @@ class radius {
   var $db;
   var $server_name;
   var $database_name;
-  var $user_name;
-  var $user_password;
+  
+  
+  var $username;
+  var $password;
 
 
   /* function radius() 
@@ -166,7 +168,8 @@ class radius {
 
     }
     
-    if (strlen($this->value) < 6) {
+    // Password length
+    if (strlen($this->password) < 6) {
     	
     	return 7;
     }
@@ -456,7 +459,7 @@ class radius {
     $radius->username = $this->username;
     $radius->radcheck_load();
 
-    $query = "UPDATE radius.radcheck SET value = " . $this->db->quote($this->value) . " WHERE username = " . $this->db->quote($this->username) . " AND attribute = 'Cleartext-Password'";
+    $query = "UPDATE radius.radcheck SET value = " . $this->db->quote($this->password) . " WHERE username = " . $this->db->quote($this->username) . " AND attribute = 'Cleartext-Password'";
     
     $result = $this->db->execute_query($query);
 
