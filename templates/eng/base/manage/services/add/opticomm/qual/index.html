@@ -1,0 +1,35 @@
+<script type="text/javascript">
+var data = '{SERVICE_QUAL_DATA}';
+function select_service(index){
+	var checkbox = document.querySelectorAll('input[type="checkbox"]');
+	for ( x = 0; x < checkbox.length; x++ ) {
+	console.log(checkbox[x].value);
+		if ( checkbox[x].value != index ) {
+			checkbox[x].checked = false;
+		}
+	}
+}
+
+</script>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<div><font color="green">&#9989;</font> Qualified <font color="green">&#9989;</font> Address Confirmation &#xbb; Service Type</div>
+<h2><span class="bodytext">Results: </span></h2>
+<form action="creation/?qual_id={QUAL_ID}" method="POST">
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+Service Number: {SERVICE_NUMBER}<br/>
+NBN Location ID: {NBN_LOCATIONID}<br/>
+  Address: {ORDER_ADDRESS}<br/>
+  Manual Order? {MANUAL}<br/>
+  NBN Service Class: {NBNSERVICEABILITYCLASS} - {NBNSERVICEABILITYCLASSTEXT}<br/>
+  NBN New Development Charge Applies: {NBNNEWDEVELOPMENTSCHARGEAPPLIES}<br/>
+  Services Available: <br/>
+  {SERVICES_AVAILABLE}
+  <br/>
+  
+  <input type="submit" name="submit" id="submit" value="Next"/>
+
+</form>

@@ -15,6 +15,7 @@
 include_once "setup.inc";
 include_once "auth.inc";
 include_once "login_history.class";
+include_once "service_type.class";
 
 $pt->setVar("PAGE_TITLE", "Login");
 
@@ -24,7 +25,7 @@ if (isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
   $_SESSION['username'] = $_REQUEST['username'];
   $_SESSION['password'] = md5($_REQUEST['password']);
   $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-  
+
 }
   
 if (isset($_REQUEST['forgot'])) {

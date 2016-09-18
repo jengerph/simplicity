@@ -24,7 +24,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR  . '/var/www/simplicity/includes' . PATH_SEPARATOR  . '/var/www/simplicity/classes');
+//ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR  . '/var/www/simplicity/includes' . PATH_SEPARATOR  . '/var/www/simplicity/classes');
+ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR  . dirname(__FILE__) . '/../includes' . PATH_SEPARATOR  . dirname(__FILE__) . '/../classes');
 
 ini_set('magic_quotes_gpc','0');
 //ini_set('display_errors','on');

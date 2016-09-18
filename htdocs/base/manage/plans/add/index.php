@@ -65,6 +65,7 @@ $pt->setFile(array( "customize_adsl_nbn_admins" => "base/manage/wholesalers/mana
                     "customize_setup_fee_sip_trunk" => "base/manage/wholesalers/management/add/customize/customize_setup_fee_sip_trunk.html",
                     "customize_access_method_adsl" => "base/manage/wholesalers/management/add/customize/customize_access_method_adsl.html",
                     "customize_access_method_nbn" => "base/manage/wholesalers/management/add/customize/customize_access_method_nbn.html",
+                    "customize_access_method_opticomm" => "base/manage/wholesalers/management/add/customize/customize_access_method_opticomm.html",
                     "customize_adsl_speed_aapt" => "base/manage/wholesalers/management/add/customize/customize_adsl_speed_aapt.html",
                     "customize_adsl_speed_telstra" => "base/manage/wholesalers/management/add/customize/customize_adsl_speed_telstra.html",
                     "extras_section" => "base/manage/wholesalers/management/add/extras/extras_section.html",
@@ -390,6 +391,7 @@ switch ($plan->type_id) {
   case '2':
   case '3':
   case '4':
+  case '8':
     if ($wholesaler->wholesaler_id == 1) {
       $pt->parse("CUSTOMIZE","customize_adsl_nbn_admins","true");
       $pt->parse("EXTRAS_SECTION","extras_section","true");
@@ -404,6 +406,8 @@ switch ($plan->type_id) {
       $pt->parse("ACCESS_METHOD_OPTION","customize_access_method_adsl","true");
     } else if ( $plan->type_id == 2 ) {
       $pt->parse("ACCESS_METHOD_OPTION","customize_access_method_nbn","true");
+    } else if ( $plan->type_id == 8 ) {
+        $pt->parse("ACCESS_METHOD_OPTION","customize_access_method_opticomm","true");
     }
 
     break;

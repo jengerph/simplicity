@@ -1,0 +1,155 @@
+
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<div><font color="green">&#9989;</font> Qualified <font color="green">&#9989;</font> Address Confirmation &#xbb; <font color="green">&#9989;</font> Service Type &#xbb; Create Service</div>
+<h2><span class="bodytext">Create a Service: </span></h2>
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
+<form action="{SELF}?qual_id={QUAL_ID}&result_id={RESULT_ID}" method="post" name="form">
+  <input name="customer_id" type="text" id="customer_id" value="{CUSTOMER_ID}" hidden>
+<table border="1" cellspacing="0" cellpadding="3" bordercolor="#FFFF99" bgcolor="#FFCC66">
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Identifier:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {IDENTIFER}
+      </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Address:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      {ORDER_ADDRESS}
+    </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Type:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_TYPE} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Access Type:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_ACCESSTYPE} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Price Zone:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_PRICEZONE} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Access Method:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_ACCESSMETHOD} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Speed:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_SPEED} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Manual Order?</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {MANUAL} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">NBN Service Class:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {NBNSERVICEABILITYCLASS} - {NBNSERVICEABILITYCLASSTEXT} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">NBN New Dev Charge:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000"> {RES_NBNNEWDEVELOPMENTSCHARGEAPPLIES} </font></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Username:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="order_username" type="text" id="order_username" value="{ORDER_USERNAME}">@{REALM_OPTION}
+    </font></td>
+    <td>&nbsp;</td>
+  </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Password:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="order_password" type="text" id="order_password" value="{ORDER_PASSWORD}">
+    </font></td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Contract Length:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <select name="order_contract_length" id="order_contract_length"  onchange="form.submit_contract_length.click()">
+        <option value="0">--Select Contract Length--</option>
+        <option value="0" {CONTRACT_LENGTH_0}>0 months</option>
+        <option value="12" {CONTRACT_LENGTH_12}>12 months</option>
+        <option value="24" {CONTRACT_LENGTH_24}>24 months</option>
+      </select>
+    </font>
+    <input type="submit" name="submit_contract_length" id="submit_contract_length" hidden/>
+  </td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+      <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Retail Plan:</font></b></font></div></td>
+      <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+        <!-- <input name="retail_plan" type="text" id="retail_plan" value="{RETAIL_PLAN}"> -->
+        {RETAIL_PLAN_LIST}
+      </font></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Tag:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="tag" type="text" id="tag" value="{TAG}">
+      </font></td>
+    <td>&nbsp;</td>
+    </tr>
+<!--     <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Is this a churn?</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input type="radio" name="order_churn" id="order_churn_y" value="yes" onChange='form.churn_opt.click()' {ORDER_CHURN_YES}> Yes
+      <input type="radio" name="order_churn" id="order_churn_n" value="no" onChange='form.churn_opt.click()' {ORDER_CHURN_NO}> No
+    </font>
+    <button name="churn_opt" id="churn_opt" hidden>Churn</button>
+  </td>
+  </tr> -->
+  {CHURN}
+    <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Order Contact:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="order_churn_contact_0" type="text" id="order_churn_contact_0" value="{ORDER_CHURN_CONTACT_0}"> -->
+      {ORDER_CONTACT_LIST}
+    </font></td>
+    <td>&nbsp;</td>
+    </tr>
+<!--   <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Contact Number:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <input name="order_churn_contact_num_0" type="text" id="order_churn_contact_num_0" value="{ORDER_CHURN_CONTACT_NUM_0}">
+    </font></td>
+  </tr> -->
+  <!-- {ADD_CONTACT}
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2"></font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <button name="add_contact" id="add_contact" value="{ADD_CONTACT_COUNT}">Add Another Contact</button>
+      <input name="add_contact_value" id="add_contact_value" value="{ADD_CONTACT_COUNT_VALUE}" hidden/>
+    </font></td>
+  </tr> -->
+  <tr bgcolor="#FFFF99">
+    <td><div align="right"><font color="#000000"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Activate:</font></b></font></div></td>
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+      <!-- <input name="order_churn_contact_0" type="text" id="order_churn_contact_0" value="{ORDER_CHURN_CONTACT_0}"> -->
+      {EXTRA_OPTION}
+    </font></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>
+  <input name="submit2" type="submit" id="submit2" value="Create">
+  <input name="submit" type="submit" id="submit" value="submit" hidden>
+</p>
+</form>

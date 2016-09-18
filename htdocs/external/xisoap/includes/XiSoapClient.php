@@ -2,8 +2,6 @@
 
 namespace XiSoap;
 
-use XiSoap\Auth as Auth;
-
 class XiSoapClient 
 {
 

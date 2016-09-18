@@ -1,0 +1,97 @@
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style>
+      #locationField, #controls {
+        position: relative;
+        width: 480px;
+      }
+      #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+      }
+      .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+      }
+      #address {
+        border: 1px solid #000090;
+        background-color: #f0f0ff;
+        width: 480px;
+        padding-right: 2px;
+      }
+      #address td {
+        font-size: 10pt;
+      }
+      .field {
+        width: 99%;
+      }
+      .slimField {
+        width: 80px;
+      }
+      .wideField {
+        width: 200px;
+      }
+      #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+      }
+    </style>
+<style type="text/css">
+<!--
+.bodytext {font-family: Arial, Helvetica, sans-serif}
+-->
+</style><body topmargin="0">
+<h2><span class="bodytext">Qualify a Service: </span></h2>
+<font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font>
+<form action="{SELF}?customer_id={CUSTOMER_ID}" method="post" name="form" id="form" autocomplete="off">
+
+  <input name="customer_id" type="hidden" id="customer_id" value="{CUSTOMER_ID}" >
+
+<table width="100%" border="0" cellspacing="1" cellpadding="1">
+  <tbody>
+    <tr>
+      <td width="50%"><p><font color="red">*</font>How do you wish to qualify this service?</font></b></font></p>
+        <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+          <input type="radio" name="fnn_service" id="fnn_service_y" value="yes" onChange='form.submit.click()' {FNN_SERVICE_YES}>
+          Phone Number<br>
+          </font><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">
+            <input type="radio" name="fnn_service" id="nbn" value="nbn" onChange='form.submit.click()' {FNN_SERVICE_NBN}>
+            NBN location ID <br>
+  <input type="radio" name="fnn_service" id="fnn_service_n" value="no" onChange='form.submit.click()' {FNN_SERVICE_NO}>
+        Address </font></p></td>
+      <td valign="top"><p><font color="red">*</font>Is this a manual order?</p>
+        <p>
+          <label>
+            <input type="radio" name="manual" value="no" id="manual_0" {MANUAL_NO_SELECT}>
+            <font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">No</font></label>
+          <br>
+          <label>
+            <input type="radio" name="manual" value="yes" id="manual_1" {MANUAL_YES_SELECT}>
+            <font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#000000">Yes</font></label>
+        </p></td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  {FNN_SECTION}
+  <input name="submit2" type="submit" id="submit2" value="Qualify">
+  <input name="submit" type="submit" id="submit" value="submit" hidden>
+  <input name="location" type="submit" id="location" value="location" hidden>
+</p>
+</form>
+<!-- <form action="{SELF}?customer_id={CUSTOMER_ID}" method="post" name="form">
+</form> -->

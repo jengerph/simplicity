@@ -425,8 +425,8 @@ class plan_groups {
       $query = "SELECT * FROM plan_groups WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
 
       if ( isset($this->type_id) && !empty($this->type_id) ) {
-        if ( $this->type_id == 1 || $this->type_id == 2 ) {
-          $query .= " AND (type_id = 1 OR type_id = 2)";
+        if ( $this->type_id == 1 || $this->type_id == 2 || $this->type_id == 8) {
+          $query .= " AND (type_id = 1 OR type_id = 2 OR type_id = 8)";
         } else {
           $query .= " AND type_id = " . $this->db->quote($this->type_id);
         }
