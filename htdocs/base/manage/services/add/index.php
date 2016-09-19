@@ -42,6 +42,7 @@ if ($user->class == 'customer') {
 $pt->setFile(array("service_option" => "base/manage/wholesalers/service_option.html",
                     "option_adsl_nbn" => "base/manage/services/add/option_adsl_nbn.html",
                     "option_adsl_nbn2" => "base/manage/services/add/option_adsl_nbn2.html",
+                    "opticomm" => "base/manage/services/add/opticomm.html" ,
                     "option_inbound_voice" => "base/manage/services/add/option_inbound_voice.html",
                     "option_outbound_voice" => "base/manage/services/add/option_outbound_voice.html"));
 
@@ -126,6 +127,9 @@ if ( $services ) {
         break;
       case '6':
         $pt->parse("KINDS_SERVICES","option_outbound_voice","true");
+        break;
+      case '8':
+        $pt->parse("KINDS_SERVICES","opticomm","true");
         break;
       default:
         # code...
