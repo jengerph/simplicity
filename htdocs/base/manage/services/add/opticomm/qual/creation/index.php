@@ -1,7 +1,7 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 //
-// htdocs/base/manage/services/add/adsl_nbn2/qual/creation/index.php - Create order
+// htdocs/base/manage/services/add/opticomm/qual/creation/index.php - Create order
 // $Id$
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,18 +59,6 @@ if (!isset($_SESSION['qual_' . $_REQUEST['qual_id']])) {
 
 $qual = $_SESSION['qual_' . $_REQUEST['qual_id']];
 
-if (!isset($_REQUEST['result_id'])) {
-	
-	echo "No selection made.";
-	exit();
-} else if (!isset($qual['quals'][$_REQUEST['result_id']])) {
-	
-	echo "Selection is not available";
-	exit();
-}
-$pt->setVar('RESULT_ID', $_REQUEST['result_id']);
-
-
 $user = new user();
 $user->username = $_SESSION['username'];
 $user->load();
@@ -87,11 +75,11 @@ if ($user->class == 'customer') {
   
 }
 
-$pt->setFile(array( "main" => "base/manage/services/add/adsl_nbn2/qual/creation/index.html", 
-										"wholesaler_row" => "base/manage/services/add/adsl_nbn2/qual/creation/wholesaler_row.html", 
-                    "add_contact" => "base/manage/services/add/adsl_nbn/qual/creation/add_contact.html", 
-                    "churn" => "base/manage/services/add/adsl_nbn2/qual/creation/churn.html",
-                    "fttn" => "base/manage/services/add/adsl_nbn2/qual/creation/fttn.html",
+$pt->setFile(array( "main" => "base/manage/services/add/opticomm/qual/creation/index.html", 
+                    "wholesaler_row" => "base/manage/services/add/opticomm/qual/creation/wholesaler_row.html",
+                    "add_contact" => "base/manage/services/add/opticomm/qual/creation/add_contact.html",
+                    "churn" => "base/manage/services/add/opticomm/qual/creation/churn.html",
+                    "fttn" => "base/manage/services/add/opticomm/qual/creation/fttn.html",
                     "extra_staticip" => "base/manage/services/edit/extra_staticip.html",
                     "extra_ipblock4" => "base/manage/services/edit/extra_ipblock4.html",
                     "extra_ipblock8" => "base/manage/services/edit/extra_ipblock8.html",
@@ -111,32 +99,15 @@ if ( $user->class == 'customer' ) {
   }
 }
 
-foreach ($qual['result']['siteAddress'] as $key => $value) {
-  $address .= $value . " ";
-}
-
-$pt->setVar('ORDER_ADDRESS', $address);
-
-if (isset($qual['fnn'])) {
-	
-	$pt->setVar('IDENTIFER', $qual['fnn']);
-} else {
-	$pt->setVar('IDENTIFER', $qual['result']['nbnLocationID']);
-}	
-
+$pt->setVar('ORDER_ADDRESS', $qual['address']);
+$pt->setVar('IDENTIFER', $qual['location_id']);
 $pt->setVar('MANUAL', $qual['manual']);
-$pt->setVar('NBNSERVICEABILITYCLASS', $qual['result']['nbnServiceabilityClass']);
-$pt->setVar('NBNSERVICEABILITYCLASSTEXT', $qual['result']['nbnServiceabilityClassText']);
 
 $wholesaler = new wholesalers();
 $wholesaler->wholesaler_id = $customer->wholesaler_id;
 $wholesaler->load();
 $services = new services();
-if ($qual['quals'][$_REQUEST['result_id']]['accessMethod'] == 'NBN') {
-	$services->type_id = 2;
-} else {
-	$services->type_id = 1;
-}
+$services->type_id = 8; //Opticomm type id
 
 // Save values
 if (isset($_REQUEST['retail_plan'])) {
@@ -182,14 +153,7 @@ if (isset($_REQUEST['submit2'])) {
   
   $services->wholesale_plan_id = $pp_id;
   $services->state = "creation";
-  
-  if ($services->type_id == 1) {
-  	// ADSL
-  	$services->identifier = $qual['fnn'];
-  } else {
-  	// NBN
-  	$services->identifier = $qual['reesult']['nbnLocationID'];
-	}  	
+  $services->identifier = $qual['location_id'];
   $services->tag = $_REQUEST['tag'];
   
   if ( $services->wholesale_plan_id == "" && $user->class == 'customer' ) {
@@ -241,8 +205,7 @@ if (isset($_REQUEST['submit2'])) {
   if ( !isset($_REQUEST['order_password']) || $validate->password($_REQUEST['order_password']) == 0 || $_REQUEST["order_password"] == "" ) {
   	$error_order[] = "Invalid Password.";
   }
-  
-  
+
   
   if ( $qual['result']['dslCodesOnLine'] == 'yes' ) {
   	if ( !isset($_REQUEST["order_churn_provider"]) || $_REQUEST["order_churn_provider"] == "0" ) {

@@ -78,6 +78,7 @@ $pt->setVar('NBNSERVICEABILITYCLASSTEXT', $qual['result']['nbnServiceabilityClas
 $pt->setVar('NBNNEWDEVELOPMENTSCHARGEAPPLIES',$nbnNewDevelopmentsChargeApplies);
 */
 
+//TODO add Opticomm speeds
 
 // Parse the main page
 $pt->parse("MAIN", "main");
