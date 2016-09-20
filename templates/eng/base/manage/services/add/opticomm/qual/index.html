@@ -21,13 +21,9 @@ function select_service(index){
 <form action="creation/?qual_id={QUAL_ID}" method="POST">
 <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2" color="#FF0000">{ERROR_MSG}</font></p>
 Service Number: {SERVICE_NUMBER}<br/>
-NBN Location ID: {NBN_LOCATIONID}<br/>
+Opticomm Property ID: {LOCATIONID}<br/>
   Address: {ORDER_ADDRESS}<br/>
   Manual Order? {MANUAL}<br/>
-  NBN Service Class: {NBNSERVICEABILITYCLASS} - {NBNSERVICEABILITYCLASSTEXT}<br/>
-  NBN New Development Charge Applies: {NBNNEWDEVELOPMENTSCHARGEAPPLIES}<br/>
-  Services Available: <br/>
-  {SERVICES_AVAILABLE}
   <br/>
   
   <input type="submit" name="submit" id="submit" value="Next"/>
