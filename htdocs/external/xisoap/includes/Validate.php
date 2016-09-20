@@ -25,4 +25,13 @@ class Validate
         return filter_var(trim($postcode), FILTER_SANITIZE_NUMBER_INT);
     }
 
+    public function sanitiseData(Array $values)
+    {
+        foreach($values as &$value) {
+            $this->sanitiseString($value);
+        }
+
+        return $values;
+    }
+
 }

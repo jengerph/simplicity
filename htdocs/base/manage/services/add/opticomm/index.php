@@ -203,18 +203,38 @@ if (isset($_REQUEST['submit2'])) {
 
   	// Address lookup, more tricky
 
-//TODO: check if address is available on Opticomm through XiSoapClient
+       //ini_set("display_errors", 1);
 
-    if (sizeof($response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation) == 1) {
-    	
+       require_once dirname(__FILE__) . "/../../../../../external/xisoap/includes/FactoryXiSoap.php";
+       $client = new \XiSoap\FactoryXiSoap();
+
+       $param = array(
+           "lot_no" => ($_POST["lot_no"]) ?: "",
+           "unit_no" => ($_POST["unit_no"]) ?: "",
+           "house_no" => ($_POST["street_number"]) ?: "",
+           "street_type" => ($_POST["street_type"]) ?: "",
+           "street_name" => ($_POST["street_name"]) ?: "",
+           "suburb" => ($_POST["suburb"]) ?: "",
+           "state_name" => ($_POST["state"]) ?: "",
+           "postcode" => ($_POST["post_code"]) ?: ""
+       );
+
+       $param["street_name"] = substr($param["street_name"], 0, strrpos($param["street_name"], " "));
+
+       $results = $client->getResults(dirname(__FILE__) . "/../../../../../external/xisoap/service_qual.wsdl", "AddressSearch", $param);
+
+       //TODO: check if soap returns only 1 address or multiple
+
+    if (sizeof($result) == 1) {
+
     	$_SESSION['qual_' . $qual_id] = array();
     	$_SESSION['qual_' . $qual_id]['customer_id']=$cust->customer_id;
     	$_SESSION['qual_' . $qual_id]['type']='location';
     	$_SESSION['qual_' . $qual_id]['provider']='Telstra';
     	$_SESSION['qual_' . $qual_id]['location_id']=$response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation->locationId;
 	  	$_SESSION['qual_' . $qual_id]['manual']=$_REQUEST['manual'];
-    	
-    	
+
+
     	// Single result, redirect to qual page
       $url = "";
           
