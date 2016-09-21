@@ -165,6 +165,11 @@ if (isset($_REQUEST['submit2'])) {
 
         $results = $client->getResults(dirname(__FILE__) . "/../../../../../external/xisoap/service_qual.wsdl", "AddressSearch", $param);
 
+        if (sizeof($results) <= 0) {
+            echo "Address not available on Opticomm";
+            die();
+        }
+
         if (sizeof($results) == 1) {
 
             $_SESSION['qual_' . $qual_id] = array();
