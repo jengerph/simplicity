@@ -1,0 +1,379 @@
+<?php
+///////////////////////////////////////////////////////////////////////////////
+//
+// telstra_infotrans_records.class - Class for accessing telstra_infotrans_records
+// $Id$
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// HISTORY:
+// $Log$
+///////////////////////////////////////////////////////////////////////////////
+include_once "db.class";
+include_once "config.class";
+include_once "validate.class";
+include_once "misc.class";
+include_once "audit.class";
+
+class telstra_infotrans_record {
+
+  var $id;
+  var $seq;
+  var $file_seq;
+  var $type;
+  var $order_id;
+  var $param1;
+  var $param2;
+  var $param3;
+  var $param4;
+  var $param5;
+  var $param6;
+  
+  var $db;
+  var $server_name;
+  var $database_name;
+  var $user_name;
+  var $user_password;
+
+
+  /* function telstra_infotrans_records() 
+  **
+  ** DESCRIPTION: Class constructor, initalizes and sets up DB connectoin
+  **
+  ** PARAMETERS:
+  **
+  ** RETURNS:
+  ** 
+  */
+  function telstra_infotrans_record() { 
+    
+	
+    $config = new config();
+    
+    $this->server_name = $config->mysql_server_name;
+    $this->database_name = $config->mysql_database_name;
+    $this->user_name = $config->mysql_user_name;
+    $this->user_password = $config->mysql_user_password;
+
+    $this->db = new db($this->server_name, $this->database_name, $this->user_name, $this->user_password);
+    
+  }
+
+  /* function load()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function load() {
+
+    $this->id = strtoupper($this->id);
+
+    if (!$this->id) {
+    
+      return 0;
+      
+    }
+  
+    if ($this->id) {
+      
+      $query = "SELECT * FROM telstra_infotrans_records WHERE id = " . $this->db->quote($this->id);
+      $result = $this->db->execute_query($query);
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        if ($row) {
+          while ($cel = each($row)) {
+
+            $key = $cel['key'];
+            
+            $this->{$key} = $cel['value'];
+            
+          }
+        }
+      }    
+    }
+
+
+    return 0;
+    
+  }
+
+  /* function exist()
+  **
+  ** DESCRIPTION: checks to see if an id exists
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - user exists
+  ** 0 - user does not exist
+  ** 
+  */
+  function exist() {
+  
+    $this->id = strtoupper($this->id);
+  
+    // Check we have an customer_id
+    if (!$this->id) {
+    
+      return 0;
+      
+    }
+    
+    $query = "SELECT id FROM telstra_infotrans_records WHERE id = " . $this->db->quote($this->id);
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+    
+      $row_count = $this->db->fetch_row_count($result);
+      
+      if ($row_count == 1) {
+      
+        return 1;
+        
+      } else {
+      
+        return 0;
+        
+      }
+      
+    }
+    
+    return 0;
+  
+    
+  }
+
+
+
+  /* function create()
+  **
+  ** DESCRIPTION: creates a new entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function create_real() {
+
+    // Create the account
+    $query = "INSERT INTO telstra_infotrans_records (type, order_id, param1, param2, param3, param4, param5, param6)";
+    $query .= " VALUES (" . $this->db->quote($this->type) . ", " . $this->db->quote($this->order_id) . ", " . $this->db->quote($this->param1) . ", " . $this->db->quote($this->param2) . ", " . $this->db->quote($this->param3) . ", " . $this->db->quote($this->param4) . ", " . $this->db->quote($this->param5) . ", " . $this->db->quote($this->param6). ")";
+  
+    $result = $this->db->execute_query($query);
+  
+    if ($result == 0) {
+      return 0;
+      
+    } else {
+    
+      $this->id = $this->db->fetch_insert_id();
+
+      $this->load();
+
+
+      return 1;
+          
+    }
+  }
+  
+  function create() {
+  
+    if ($this->create_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+    
+      return 0;
+      
+    }    
+      
+  }
+
+  /* function delete()
+  **
+  ** DESCRIPTION: Deletes an entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function delete() {
+  
+		$this->load();
+    
+    if (!$this->exist()) {
+    
+      return 0;
+      
+    }
+
+    
+    // Prepare the query
+    $query = "DELETE FROM telstra_infotrans_records WHERE id = " . $this->db->quote($this->id);
+    $result = $this->db->execute_query($query);
+
+    if ($result == 0) {
+    
+      return 0;
+      
+    } else {
+
+      return 1;
+      
+      
+    }
+  }
+
+/* function save_real()
+  **
+  ** DESCRIPTION: saves current data into an already existant entry
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 1 - sucess
+  ** 0 - fail
+  ** 
+  */
+  function save_real() {
+  
+    // Validate
+    if (telstra_infotrans_record::validate()) {
+    
+      return 0;
+      
+    }
+
+    // Check if id exists    
+    if (!telstra_infotrans_record::exist()) {
+      return 0;
+      
+    }
+    
+    $query = "UPDATE telstra_infotrans_records SET seq = " . $this->db->quote($this->seq) . ", file_seq = " . $this->db->quote($this->file_seq);
+    $query .= " WHERE id = " . $this->db->quote($this->id);
+    $result = $this->db->execute_query($query);
+
+    
+    if ($result == 0) {
+
+      return 0;
+      
+    } else {
+
+      return 1;
+        
+    }
+  }
+
+  function save() {
+  
+    if ($this->save_real() == 1) {
+
+      $this->load();
+    
+      return 1;
+      
+    } else {
+		
+      return 0;
+      
+    }    
+      
+  }
+  
+  /* function validate()
+  **
+  ** DESCRIPTION: validates data currently stored in variables
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** 0 - sucess
+  ** 
+  */
+  function validate() {
+
+    $validate = new validate();
+
+    
+    // ALL OK
+    return 0;
+    
+  }
+
+  
+  /* function get_last_seq()
+  **
+  ** DESCRIPTION: retrieves all customer details from the table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - an array containing all the list of customer details
+  ** 
+  */
+  function get_last_seq() {
+    $query = "SELECT seq FROM telstra_infotrans_records ORDER BY seq DESC limit 1";
+    $result = $this->db->execute_query($query);
+      
+    if ($result != 0 ) {
+	    $row = $this->db->fetch_row_array($result);
+	    
+	    return $row['seq'];
+		}
+    return 0;
+  }
+
+  /* function get_pending()
+  **
+  ** DESCRIPTION: retrieves all customer details from the table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - an array containing all the list of customer details
+  ** 
+  */
+  function get_pending() {
+    $query = "SELECT id FROM telstra_infotrans_records WHERE file_seq = 0";
+    $result = $this->db->execute_query($query);
+
+    $a = array();
+      
+    if ($result != 0 ) {
+    	
+	    while ($row = $this->db->fetch_row_array($result)) {
+	    	
+	    	$a[] = $row['id'];
+	    }
+		}
+    return $a;
+  }
+}
+
