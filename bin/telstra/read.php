@@ -77,6 +77,12 @@ while ($line = fgets($fh)) {
 		$rec['rejection date'] = substr($line, 31, 8);
 		$rec['rejection code'] = substr($line, 39, 2);		
 
+	} else if ($rec['record type']== '21') {
+		
+		// Header record
+		$rec['record type description'] = 'Invalid Formatted Request Advice Record';
+		$rec['invalid record'] = substr($line, 2, 598);
+
 	} else if ($rec['record type']== '25') {
 		
 		// Header record
