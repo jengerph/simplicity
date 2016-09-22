@@ -69,7 +69,7 @@ $customer->load();
 
 
 $pt->setVar('ORDER_ADDRESS', $qual['address']);
-//$pt->setVar('SERVICE_NUMBER', $qual['fnn']);
+$pt->setVar('SERVICE_NUMBER', $qual['fnn']);
 $pt->setVar('LOCATIONID', $qual['location_id']);
 $pt->setVar('MANUAL', $qual['manual']);
 /*

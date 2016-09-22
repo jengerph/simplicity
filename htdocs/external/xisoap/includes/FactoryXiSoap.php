@@ -26,7 +26,7 @@ class FactoryXiSoap
     {
         try {
 
-            $this->config = require_once dirname(__FILE__) . "/../config/config.php";
+            $this->config = include dirname(__FILE__) . "/../config/config.php";
             $this->validate = new Validate();
 
             if(!$this->validate->validateString($serviceType)) {
@@ -42,6 +42,7 @@ class FactoryXiSoap
 
         } catch (\Exception $e) {
             trigger_error("An error occurred, please contact technical support");
+            //trigger_error($e->getMessage());
         }
 
     }
