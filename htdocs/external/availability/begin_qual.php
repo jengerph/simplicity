@@ -53,8 +53,8 @@ if ($_REQUEST['pass'] == '') {
     //Google Places API somtimes doesn't include street_number
     $param["house_no"] = $param["house_no"] ?: substr($_GET["autocomplete"], 0, strpos($_GET["autocomplete"], " "));
 
-    $factorySoap = new \XiSoap\FactoryXiSoap();
-    if($factorySoap->hasResults(dirname(__FILE__) . "/../xisoap/service_qual.wsdl", "AddressSearch", $param)) {
+    $factorySoap = new \XiSoap\FactoryXiSoap("search.service");
+    if($factorySoap->hasResults("AddressSearch", $param)) {
         $return["qual_id"] = true;
         echo json_encode($return);
         die();

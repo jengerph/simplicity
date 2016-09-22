@@ -6,19 +6,19 @@ class XiSoapClient
 {
 
     private $client;
-    private $url;
 
     /**
      * XiSoapClient constructor.
-     * @param $url
+     * @param ISoapService $service
      * @param $username
      * @param $password
      * @param int $soapVersion
+     * @internal param $url
      */
-    public function __construct($url, $username, $password, $soapVersion = SOAP_1_1)
+    public function __construct(ISoapService $service, $username, $password, $soapVersion = SOAP_1_1)
     {
         try {
-            $this->url = $url;
+            $wsdl = $service->getWSDL();
             $options = array(
                 "uri" => "http://schemas.xmlsoap.org/soap/envelope/",
                 "style" => SOAP_RPC,
@@ -30,7 +30,7 @@ class XiSoapClient
                 "encoding" => "UTF-8",
                 "exceptions" => false,
             );
-            $this->client = new \SoapClient($this->url, $options);
+            $this->client = new \SoapClient($wsdl, $options);
             $this->setClient($this->client);
 
         } catch (\SoapFault $exception) {
@@ -58,7 +58,7 @@ class XiSoapClient
      * @param null $outputHeaders
      * @return mixed|string
      */
-    public function nonWdslCall($functionName, Array $arguments, Array $options = null, $inputHeaders = null, $outputHeaders = null)
+    public function nonWsdlCall($functionName, Array $arguments, Array $options = null, $inputHeaders = null, $outputHeaders = null)
     {
         $result = "";
         try {
@@ -78,7 +78,7 @@ class XiSoapClient
      * @param $arguments
      * @return string
      */
-    public function wdslCall($functionName, $arguments)
+    public function wsdlCall($functionName, $arguments)
     {
         $result = "";
         try {

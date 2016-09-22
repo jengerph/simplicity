@@ -11,7 +11,7 @@ class FactoryXiSoapTest extends TestCase
 
     public function testCall()
     {
-        $client = new \XiSoap\FactoryXiSoap();
+        $client = new \XiSoap\FactoryXiSoap("search.service");
 
         $lot_no = "";
         $unit_no = "";
@@ -33,7 +33,6 @@ class FactoryXiSoapTest extends TestCase
             "postcode" => ($postcode) ?: ""
         );
 
-        $this->assertNotFalse($client->hasResults("service_qual.wsdl", "AddressSearch", $param));
-        //var_dump($client->hasResults("service_qual.wsdl", "AddressSearch", $param));
+        $this->assertNotFalse($client->hasResults("AddressSearch", $param));
     }
 }

@@ -148,7 +148,7 @@ if (isset($_REQUEST['submit2'])) {
         //ini_set("display_errors", 1);
 
         require_once dirname(__FILE__) . "/../../../../../external/xisoap/includes/FactoryXiSoap.php";
-        $client = new \XiSoap\FactoryXiSoap();
+        $client = new \XiSoap\FactoryXiSoap("search.service");
 
         $param = array(
             "lot_no" => ($_POST["lot_no"]) ?: "",
@@ -163,7 +163,7 @@ if (isset($_REQUEST['submit2'])) {
 
         $param["street_name"] = substr($param["street_name"], 0, strrpos($param["street_name"], " "));
 
-        $results = $client->getResults(dirname(__FILE__) . "/../../../../../external/xisoap/service_qual.wsdl", "AddressSearch", $param);
+        $results = $client->getResults("AddressSearch", $param);
 
         if (sizeof($results) <= 0) {
             echo "Address not available on Opticomm";

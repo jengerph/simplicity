@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:ConnectService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:ConnectService">
+<types>
+<xsd:schema targetNamespace="urn:ConnectService"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="ConnectRequest">
+  <xsd:all>
+   <xsd:element name="Property_ID" type="xsd:string"/>
+   <xsd:element name="Contact_Name" type="xsd:string"/>
+   <xsd:element name="Contact_Phone" type="xsd:string"/>
+   <xsd:element name="Contact_Mobile" type="xsd:string"/>
+   <xsd:element name="Contact_Email" type="xsd:string"/>
+   <xsd:element name="Provider_Ref" type="xsd:string"/>
+   <xsd:element name="Product_Type" type="xsd:string"/>
+   <xsd:element name="Product_Code" type="xsd:string"/>
+   <xsd:element name="FNN" type="xsd:string"/>
+   <xsd:element name="SIP_Username" type="xsd:string"/>
+   <xsd:element name="SIP_Password" type="xsd:string"/>
+   <xsd:element name="POI" type="xsd:string"/>
+   <xsd:element name="CLID" type="xsd:string"/>
+   <xsd:element name="Comment" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="ConnectReturn">
+  <xsd:all>
+   <xsd:element name="Status_code" type="xsd:string"/>
+   <xsd:element name="Service_ID" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+</xsd:schema>
+</types>
+<message name="ConnectServiceRequest">
+  <part name="request" type="tns:ConnectRequest" /></message>
+<message name="ConnectServiceResponse">
+  <part name="return" type="tns:ConnectReturn" /></message>
+<portType name="ConnectServicePortType">
+  <operation name="ConnectService">
+    <documentation>This is the Connect Service</documentation>
+    <input message="tns:ConnectServiceRequest"/>
+    <output message="tns:ConnectServiceResponse"/>
+  </operation>
+</portType>
+<binding name="ConnectServiceBinding" type="tns:ConnectServicePortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="ConnectService">
+    <soap:operation soapAction="urn:ConnectService#ConnectService" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:ConnectService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:ConnectService" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+</binding>
+<service name="ConnectService">
+  <port name="ConnectServicePort" binding="tns:ConnectServiceBinding">
+    <soap:address location="https://portal.opticomm.net.au:4005/components/com_soapxml/ConnectService.php"/>
+  </port>
+</service>
+</definitions>

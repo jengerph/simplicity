@@ -2,3 +2,5 @@ _notes
 dwsync.xml
 *.bak
 .DS_Store
+.idea/
+simplicitysync
