@@ -206,6 +206,10 @@ if (isset($_REQUEST['submit2'])) {
   	$error_order[] = "Invalid Password.";
   }
 
+  if(!isset($_REQUEST["poi"])) {
+      $error_order[] = "POI is invalid";
+  }
+
   
   if ( $qual['result']['dslCodesOnLine'] == 'yes' ) {
   	if ( !isset($_REQUEST["order_churn_provider"]) || $_REQUEST["order_churn_provider"] == "0" ) {
@@ -319,7 +323,6 @@ if (isset($_REQUEST['submit2'])) {
     	} else {
     		$orders->status = "pending";  		
     	}
-    		
     	
     	if (!$orders->create()) {
     		
@@ -327,6 +330,35 @@ if (isset($_REQUEST['submit2'])) {
     		$services->delete();
 
     	} else {
+
+            // Start connect service request to Opticomm via SOAP
+            $client = new \XiSoap\FactoryXiSoap("connect.service");
+
+            $param = [
+                "Property_ID" => $qual["property_id"],
+                "Contact_Name" => "Matthew Enger",
+                "Contact_Phone" => "",
+                "Contact_Mobile" => "",
+                "Contact_Email" => "m.enger@xi.com.au",
+                "FNN" => "",
+                "SIP_Username" => "",
+                "SIP_Password" => "",
+                "CLID" => "",
+                "Comment" => "",
+                "Provider_Ref" => $qual["property_id"] . "/" . $order->order_id . "/" . $_REQUEST['order_username'] . "@" . $_REQUEST['order_realms'],
+                "Product_Type" => "Broadband",
+                "Product_Code" => "OPHAEB-12",
+                "POI" => $_REQUEST['poi'],
+            ];
+
+            $client = new \XiSoap\FactoryXiSoap("connect.service");
+            $result = $client->getResults("ConnectService", $param);
+
+            if(!is_array($result) || count($result) == 0) {
+                die("An error occurred while sending the request to Opticomm. Please contact technical support");
+            }
+            // End connect service request to Opticomm
+
     	
     		// Setup Order state
 		  	$orders_states = new orders_states();
@@ -406,20 +438,14 @@ if (isset($_REQUEST['submit2'])) {
 	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
     		
     		// nbnLocationID
-  	  	$order_attributes->param = "order_nbnLocationID";
-    		$order_attributes->value = $qual['result']['nbnLocationID'];
-    		$order_attributes->create();  			
-	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
-
-    		// telstra location id
-  	  	$order_attributes->param = "order_telstraLocationID";
-    		$order_attributes->value = $qual['location_id'];
+  	  	$order_attributes->param = "order_opticommPropertyID";
+    		$order_attributes->value = $qual["property_id"];
     		$order_attributes->create();  			
 	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
     		// order_service_number
   	  	$order_attributes->param = "order_service_number";
-    		$order_attributes->value = $qual['fnn'];
+    		$order_attributes->value = $result[0]->service_id;
     		$order_attributes->create();  			
 	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
@@ -429,6 +455,7 @@ if (isset($_REQUEST['submit2'])) {
     		$order_attributes->create();  			
 	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
+            /*
 				// DSL Churn
 			  if ( $qual['result']['dslCodesOnLine'] == 'yes' ) {
 
@@ -466,7 +493,8 @@ if (isset($_REQUEST['submit2'])) {
     			$order_attributes->create();  			
 		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
-				}	
+				}
+				*/
   		
 	  		// Do we need to create any additional sub orders (i.e. static IP)
 		  	$extras = array("staticip","ipblock4","ipblock8","ipblock16");

@@ -67,18 +67,20 @@ $customer = new customers();
 $customer->customer_id = $qual['customer_id'];
 $customer->load();
 
+$opticommPropertyClass[0] = "0 indicates the property class cannot be retrieved at this address";
+$opticommPropertyClass[1] = '1 indicates this property will get service when it actually exists';
+$opticommPropertyClass[2] = '2 indicates the property is serviceable but no ONT is installed yet';
+$opticommPropertyClass[3] = '3 indicates that the service is active and has an ONT installed';
 
 $pt->setVar('ORDER_ADDRESS', $qual['address']);
 $pt->setVar('SERVICE_NUMBER', $qual['fnn']);
-$pt->setVar('LOCATIONID', $qual['location_id']);
+$pt->setVar('LOCATIONID', $qual['property_id']);
 $pt->setVar('MANUAL', $qual['manual']);
+$pt->setVar('NBNSERVICEABILITYCLASS', $qual['property_class']);
+$pt->setVar('NBNSERVICEABILITYCLASSTEXT', $opticommPropertyClass[$qual['property_class']]);
 /*
-$pt->setVar('NBNSERVICEABILITYCLASS', $qual['result']['nbnServiceabilityClass']);
-$pt->setVar('NBNSERVICEABILITYCLASSTEXT', $qual['result']['nbnServiceabilityClassText']);
 $pt->setVar('NBNNEWDEVELOPMENTSCHARGEAPPLIES',$nbnNewDevelopmentsChargeApplies);
 */
-
-//TODO add Opticomm speeds
 
 // Parse the main page
 $pt->parse("MAIN", "main");

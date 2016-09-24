@@ -148,7 +148,7 @@ if (isset($_REQUEST['submit2'])) {
         //ini_set("display_errors", 1);
 
         require_once dirname(__FILE__) . "/../../../../../external/xisoap/includes/FactoryXiSoap.php";
-        $client = new \XiSoap\FactoryXiSoap("search.service");
+        $client = new \XiSoap\FactoryXiSoap("search.service"); //search.service is the operation type
 
         $param = array(
             "lot_no" => ($_POST["lot_no"]) ?: "",
@@ -166,8 +166,7 @@ if (isset($_REQUEST['submit2'])) {
         $results = $client->getResults("AddressSearch", $param);
 
         if (sizeof($results) <= 0) {
-            echo "Address not available on Opticomm";
-            die();
+            die("Address not available on Opticomm");
         }
 
         if (sizeof($results) == 1) {
@@ -176,10 +175,11 @@ if (isset($_REQUEST['submit2'])) {
             $_SESSION['qual_' . $qual_id]['customer_id'] = $cust->customer_id;
             $_SESSION['qual_' . $qual_id]['type'] = 'location';
             $_SESSION['qual_' . $qual_id]['provider'] = 'Opticomm';
-            $_SESSION['qual_' . $qual_id]['location_id'] = $results[0]->property_id;
+            $_SESSION['qual_' . $qual_id]['property_id'] = $results[0]->property_id;
             $_SESSION['qual_' . $qual_id]['address'] = $_REQUEST['address_entry'] . " " .
                                                         $_REQUEST["suburb"] . " " . $_REQUEST["state"] . " " . $_REQUEST["post_code"];
             $_SESSION['qual_' . $qual_id]['manual'] = $_REQUEST['manual'];
+            $_SESSION['qual_' . $qual_id]['property_class'] = $results[0]->property_class ?: 0;
 
             // Single result, redirect to qual page
             $url = "";

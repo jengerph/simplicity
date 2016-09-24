@@ -61,6 +61,63 @@ class FactoryXiSoapTest extends TestCase
         );
 
         $result = $client->getResults("AddressSearch", $param);
-        var_dump($result[0]);
+        $this->assertNotEmpty($result[0]->property_class);
+    }
+
+    public function testConnectService()
+    {
+        /*
+         * Product code
+         OPHAEB-12 = 12M/1M
+         OPHAEB-25 = 25M/5M
+         OPHAEB-50 = 50M/20M
+         OPHAEB-99 = 100M/40M
+        */
+
+        /* POI
+        HAIS = ACT or NSW
+        CREK = QLD
+        KING = VIC
+        */
+
+        /*
+        12M/1M	250GB	40.50
+        25M/5M	250GB	47.10
+        25M/10M	250GB	51.50
+        50M/20M	250GB	58.10
+
+        12M/1M	Unlimited	41.50
+        25M/5M	Unlimited	50.10
+        25M/510M	Unlimited	55.50
+        25-50M/5-20M	Unlimited	64.10
+
+        setup fee is 62.73 ex
+
+        */
+
+
+        $client = new \XiSoap\FactoryXiSoap("connect.service");
+
+        $param = [
+            "Property_ID" => "833111",
+            "Contact_Name" => "Matthew Enger",
+            "Contact_Phone" => "",
+            "Contact_Mobile" => "",
+            "FNN" => "",
+            "SIP_Username" => "",
+            "SIP_Password" => "",
+            "CLID" => "",
+            "Comment" => "",
+            "Contact_Email" => "m.enger@xi.com.au",
+            "Provider_Ref" => "833111/test",
+            "Product_Type" => "Broadband",
+            "Product_Code" => "OPHAEB-12",
+            "POI" => "HAIS",
+        ];
+
+        $client = new \XiSoap\FactoryXiSoap("connect.service");
+        $result = $client->getResults("ConnectService", $param);
+        $this->assertNotEmpty($result[0]->service_id);
+
     }
 }

@@ -2,21 +2,16 @@
 
 namespace XiSoap;
 
-require_once dirname(__FILE__) . "/ISoapService.php";
+require_once dirname(__FILE__) . "/SoapService.php";
 
-class SearchService implements ISoapService
+class SearchService extends SoapService
 {
     const WDSL = "service_qual.wsdl";
-    private $config;
 
     public function __construct(Array $config)
     {
-        $this->config = $config;
+        parent::__construct($config, self::WDSL);
     }
 
-    public function getWSDL()
-    {
-        return $this->config["wsdl_path"] . "/" . self::WDSL;
-    }
 
 }

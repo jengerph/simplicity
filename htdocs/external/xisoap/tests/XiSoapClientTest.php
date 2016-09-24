@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__) . "/../includes/auth/WsseAuthHeader.php";
 require_once dirname(__FILE__) . "/../includes/XiSoapClient.php";
+require_once dirname(__FILE__) . "/../includes/SearchService.php";
 
 use PHPUnit\Framework\TestCase;
 use XiSoap\XiSoapClient;
@@ -10,7 +11,9 @@ class XiSoapClientTest extends TestCase
 {
     public function testCall()
     {
-        $client = new XiSoapClient("service_qual.wsdl", "menger", "isi0Lixe");
+        $config = include dirname(__FILE__) . "/../config/config.php";
+        $service = new \XiSoap\SearchService($config);
+        $client = new XiSoapClient($service, "menger", "isi0Lixe");
 
         $lot_no = "";
         $unit_no = "";
@@ -32,7 +35,7 @@ class XiSoapClientTest extends TestCase
             "postcode" => ($postcode) ?: ""
         );
 
-        $result = $client->wdslCall("AddressSearch", $param);
+        $result = $client->wsdlCall("AddressSearch", $param);
 
         $this->assertNotEmpty($result);
     }

@@ -7,7 +7,6 @@ use XiSoap\Auth\WsseAuthHeader;
 require_once dirname(__FILE__) . "/auth/WsseAuthHeader.php";
 require_once dirname(__FILE__) . "/XiSoapClient.php";
 require_once dirname(__FILE__) . "/Validate.php";
-require_once dirname(__FILE__) . "/ISoapService.php";
 require_once dirname(__FILE__) . "/SearchService.php";
 require_once dirname(__FILE__) . "/ConnectService.php";
 
