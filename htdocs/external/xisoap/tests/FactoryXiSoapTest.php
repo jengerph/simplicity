@@ -93,6 +93,8 @@ class FactoryXiSoapTest extends TestCase
 
         setup fee is 62.73 ex
 
+        Early termination on 24 month is 200
+
         */
 
 
