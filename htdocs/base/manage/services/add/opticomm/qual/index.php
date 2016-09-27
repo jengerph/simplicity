@@ -74,7 +74,7 @@ $opticommPropertyClass[3] = '3 indicates that the service is active and has an O
 
 $pt->setVar('ORDER_ADDRESS', $qual['address']);
 $pt->setVar('SERVICE_NUMBER', $qual['fnn']);
-$pt->setVar('LOCATIONID', $qual['property_id']);
+$pt->setVar('LOCATIONID', $qual['location_id']);
 $pt->setVar('MANUAL', $qual['manual']);
 $pt->setVar('NBNSERVICEABILITYCLASS', $qual['property_class']);
 $pt->setVar('NBNSERVICEABILITYCLASSTEXT', $opticommPropertyClass[$qual['property_class']]);

@@ -52,7 +52,7 @@
 </binding>
 <service name="ConnectService">
   <port name="ConnectServicePort" binding="tns:ConnectServiceBinding">
-    <soap:address location="http://211.26.34.152:4005/components/com_soapxml/ConnectService.php"/>
+    <soap:address location="https://portal.opticomm.net.au:4005/components/com_soapxml/ConnectService.php"/>
   </port>
 </service>
 </definitions>

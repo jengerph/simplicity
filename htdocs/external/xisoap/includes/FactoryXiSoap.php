@@ -16,6 +16,7 @@ class FactoryXiSoap
     private $config;
     private $validate;
     private $service;
+    private $client;
 
     /**
      * FactoryXiSoap constructor.
@@ -28,7 +29,7 @@ class FactoryXiSoap
             $this->config = include dirname(__FILE__) . "/../config/config.php";
             $this->validate = new Validate();
 
-            if(!$this->validate->validateString($serviceType)) {
+            if (!$this->validate->validateString($serviceType)) {
                 throw new \InvalidArgumentException("Service type must be a string. Refer to the documentation for more information");
             }
 
@@ -55,7 +56,7 @@ class FactoryXiSoap
     {
         $result = $this->getResults($functionName, $values);
 
-        if(is_array($result) && $result[0]->property_id != "") {
+        if (is_array($result) && $result[0]->property_id != "") {
             return true;
         }
 
@@ -73,8 +74,14 @@ class FactoryXiSoap
         $soapClient = new XiSoapClient($this->service, $this->config["username"], $this->config["username"]);
         $soapClient->setHeaders($header);
         $result = $soapClient->wsdlCall($functionName, $this->validate->sanitiseData($values));
+        $this->client = $soapClient;
 
         return $result;
+    }
+
+    public function getClient()
+    {
+        return $this->client;
     }
 
 }

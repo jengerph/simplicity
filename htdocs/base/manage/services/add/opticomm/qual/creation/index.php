@@ -331,6 +331,9 @@ if (isset($_REQUEST['submit2'])) {
 
     	} else {
 
+    	    var_dump($qual['quals'][$_REQUEST['result_id']]['speed']);
+            exit;
+
             // Start connect service request to Opticomm via SOAP
             $client = new \XiSoap\FactoryXiSoap("connect.service");
 
