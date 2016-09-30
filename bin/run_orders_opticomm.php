@@ -91,6 +91,7 @@ while ($cel = each($orders_list)) {
 
                     try {
 
+                        require_once dirname(__FILE__) . "/../includes/xisoap/includes/FactoryXiSoap.php";
                         // Start connect service request to Opticomm via SOAP
                         $client = new \XiSoap\FactoryXiSoap("connect.service");
 
@@ -120,6 +121,10 @@ while ($cel = each($orders_list)) {
 
                         $poi = "";
 
+                        var_dump($orders->order_id);
+                        var_dump($address);
+                        exit;
+
                         $param = [
                             "Property_ID" => $property_id,
                             "Contact_Name" => "Matthew Enger",
@@ -138,7 +143,7 @@ while ($cel = each($orders_list)) {
                         ];
 
                         $client = new \XiSoap\FactoryXiSoap("connect.service");
-                        $response = $client->getResults("ConnectService", $param);
+                        //$response = $client->getResults("ConnectService", $param);
 
                         if (!is_array($response) || count($response) == 0) {
                             die("An error occurred while sending the request to Opticomm. Please contact technical support");

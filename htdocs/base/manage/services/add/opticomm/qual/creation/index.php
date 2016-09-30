@@ -99,7 +99,8 @@ if ( $user->class == 'customer' ) {
   }
 }
 
-$pt->setVar('ORDER_ADDRESS', $qual['address']);
+$address = $qual['address'];
+$pt->setVar('ORDER_ADDRESS', $address);
 $pt->setVar('IDENTIFER', $qual['location_id']);
 $pt->setVar('MANUAL', $qual['manual']);
 
@@ -366,7 +367,7 @@ if (isset($_REQUEST['submit2'])) {
   
     		// serviceSpeed
   	  	$order_attributes->param = "order_serviceSpeed";
-    		$order_attributes->value = $qual['quals'][$_REQUEST['result_id']]['speed'];
+    		$order_attributes->value = $_REQUEST['service_speed'];
     		$order_attributes->create();
 	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
   
@@ -378,7 +379,7 @@ if (isset($_REQUEST['submit2'])) {
     		
     		// nbnLocationID
   	  	$order_attributes->param = "order_opticommPropertyID";
-    		$order_attributes->value = $qual["property_id"];
+    		$order_attributes->value = $qual['location_id'];
     		$order_attributes->create();  			
 	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
@@ -387,51 +388,9 @@ if (isset($_REQUEST['submit2'])) {
     		$order_attributes->value = $qual['manual'];
     		$order_attributes->create();  			
 	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
-
-            /*
-				// DSL Churn
-			  if ( $qual['result']['dslCodesOnLine'] == 'yes' ) {
-
-	    		// order_service_number
-  		  	$order_attributes->param = "order_churn";
-    			$order_attributes->value = 'yes';
-    			$order_attributes->create();  			
-		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
-
-	    		// order_churn_provider
-  		  	$order_attributes->param = "order_churn_provider";
-    			$order_attributes->value = $_REQUEST["order_churn_provider"];
-    			$order_attributes->create();  
-		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
-
-    		}		
-    		
-    		// FTTN
-    		if ($qual['quals'][$_REQUEST['result_id']]['accessType'] == 'NCAS') {
-	    		// Pair
-  		  	$order_attributes->param = "order_ncas_pair";
-    			$order_attributes->value = $_REQUEST['pair'];
-    			$order_attributes->create();  			
-		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
-
-	    		// voiceband_continuity
-  		  	$order_attributes->param = "order_ncas_voiceband_continuity";
-    			$order_attributes->value = $_REQUEST['voiceband_continuity'];
-    			$order_attributes->create();  			
-		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
-
-	    		// voiceband_continuity
-  		  	$order_attributes->param = "order_ncas_splitter_install";
-    			$order_attributes->value = $_REQUEST['splitter_install'];
-    			$order_attributes->create();  			
-		    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
-
-				}
-				*/
   		
 	  		// Do we need to create any additional sub orders (i.e. static IP)
 		  	$extras = array("staticip","ipblock4","ipblock8","ipblock16");
-
 	  	
 	  		while ($cel = each($extras)) {
 	  			
