@@ -147,7 +147,7 @@ if (isset($_REQUEST['submit2'])) {
 
         //ini_set("display_errors", 1);
 
-        require_once dirname(__FILE__) . "/../../../../../external/xisoap/includes/FactoryXiSoap.php";
+        require_once dirname(__FILE__) . "/../../../../../../includes/xisoap/includes/FactoryXiSoap.php";
         $client = new \XiSoap\FactoryXiSoap("search.service"); //search.service is the operation type
 
         $param = array(

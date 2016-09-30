@@ -99,24 +99,7 @@ class FactoryXiSoapTest extends TestCase
 
 
         $client = new \XiSoap\FactoryXiSoap("connect.service");
-/*
-        $param = [
-            "Property_ID" => "833111",
-            "Contact_Name" => "Matthew Enger",
-            "Contact_Phone" => "",
-            "Contact_Mobile" => "",
-            "FNN" => "",
-            "SIP_Username" => "",
-            "SIP_Password" => "",
-            "CLID" => "",
-            "Comment" => "",
-            "Contact_Email" => "m.enger@xi.com.au",
-            "Provider_Ref" => "833111/test",
-            "Product_Type" => "Broadband",
-            "Product_Code" => "OPHAEB-12",
-            "POI" => "HAIS",
-        ];
-*/
+
         $param = [
             "Property_ID" => "600960",
             "Contact_Name" => "Ashleigh Green",
@@ -135,9 +118,9 @@ class FactoryXiSoapTest extends TestCase
         ];
 
         $client = new \XiSoap\FactoryXiSoap("connect.service");
-        $result = $client->getResults("ConnectService", $param);
+        //$result = $client->getResults("ConnectService", $param);
         //var_dump($result->Service_ID);
-        $this->assertNotEmpty($result->Service_ID);
+        //$this->assertNotEmpty($result->Service_ID);
         //var_dump($client->getClient()->getClient()->__getLastRequest());
         //var_dump($client->getClient()->getClient()->__getLastResponse());
 

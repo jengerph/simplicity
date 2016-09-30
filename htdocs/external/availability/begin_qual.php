@@ -13,8 +13,8 @@
 // Get the path of the include files
 include_once "../../setup.inc";
 include_once "website_servicequal.class";
-include_once dirname(__FILE__) . "/../xisoap/includes/FactoryXiSoap.php";
-include_once dirname(__FILE__) . "/../xisoap/includes/Validate.php";
+include_once dirname(__FILE__) . "/../../../includes/xisoap/includes/FactoryXiSoap.php";
+include_once dirname(__FILE__) . "/../../../includes/xisoap/includes/Validate.php";
 
 $return = array();
 

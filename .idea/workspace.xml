@@ -2,12 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43d89922-48ee-4a29-9963-f22c57c5f78e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/run_orders_opticomm.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/config/config.php" afterPath="$PROJECT_DIR$/includes/xisoap/config/config.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/includes/ConnectService.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/ConnectService.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/includes/FactoryXiSoap.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/FactoryXiSoap.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/includes/ISoapService.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/ISoapService.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/includes/SearchService.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/SearchService.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/includes/SoapService.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/SoapService.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/includes/Validate.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/Validate.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/includes/XiSoapClient.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/XiSoapClient.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/includes/auth/WsseAuthHeader.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/auth/WsseAuthHeader.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/index.php" afterPath="$PROJECT_DIR$/includes/xisoap/index.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/phpunit.phar" afterPath="$PROJECT_DIR$/includes/xisoap/phpunit.phar" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/soapui-project.xml" afterPath="$PROJECT_DIR$/includes/xisoap/soapui-project.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/test_request.xml" afterPath="$PROJECT_DIR$/includes/xisoap/test_request.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/tests/FactoryXiSoapTest.php" afterPath="$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/tests/ValidateTest.php" afterPath="$PROJECT_DIR$/includes/xisoap/tests/ValidateTest.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/tests/XiSoapClientTest.php" afterPath="$PROJECT_DIR$/includes/xisoap/tests/XiSoapClientTest.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/wsdl/connect_service.wsdl" afterPath="$PROJECT_DIR$/includes/xisoap/wsdl/connect_service.wsdl" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/wsdl/service_qual.wsdl" afterPath="$PROJECT_DIR$/includes/xisoap/wsdl/service_qual.wsdl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php" afterPath="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/creation/index.php" afterPath="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/creation/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/index.php" afterPath="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/includes/FactoryXiSoap.php" afterPath="$PROJECT_DIR$/htdocs/external/xisoap/includes/FactoryXiSoap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/tests/FactoryXiSoapTest.php" afterPath="$PROJECT_DIR$/htdocs/external/xisoap/tests/FactoryXiSoapTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htdocs/external/xisoap/wsdl/connect_service.wsdl" afterPath="$PROJECT_DIR$/htdocs/external/xisoap/wsdl/connect_service.wsdl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htdocs/external/availability/begin_qual.php" afterPath="$PROJECT_DIR$/htdocs/external/availability/begin_qual.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/creation/index.html" afterPath="$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/creation/index.html" />
     </list>
     <ignored path="simplicity.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,100 +47,40 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1035">
-              <caret line="78" column="63" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1965">
-              <caret line="140" column="33" selection-start-line="140" selection-start-column="33" selection-end-line="140" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/adsl_nbn2/qual/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3660">
-              <caret line="253" column="2" selection-start-line="253" selection-start-column="2" selection-end-line="253" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/base/manage/plans/add/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6780">
-              <caret line="461" column="2" selection-start-line="461" selection-start-column="2" selection-end-line="461" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FactoryXiSoapTest.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/tests/FactoryXiSoapTest.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="XiSoapClient.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/XiSoapClient.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FactoryXiSoap.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/FactoryXiSoap.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1260">
-              <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/creation/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3360">
-              <caret line="233" column="2" selection-start-line="233" selection-start-column="2" selection-end-line="233" selection-end-column="2" />
+            <state relative-caret-position="202">
+              <caret line="658" column="36" selection-start-line="658" selection-start-column="36" selection-end-line="658" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/index.html">
+        <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/creation/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="33" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="33" />
+            <state relative-caret-position="265">
+              <caret line="125" column="20" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="connect_service.wsdl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/wsdl/connect_service.wsdl">
+      <file leaf-file-name="run_orders.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/run_orders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+            <state relative-caret-position="450">
+              <caret line="580" column="42" selection-start-line="580" selection-start-column="42" selection-end-line="580" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="run_orders_opticomm.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bin/run_orders_opticomm.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="67">
+              <caret line="120" column="34" selection-start-line="120" selection-start-column="34" selection-end-line="120" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -136,7 +94,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/htdocs/external/availability/begin_qual.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/templates/eng/base/manage/plans/groups/add/index.html" />
         <option value="$PROJECT_DIR$/htdocs/external/xisoap/tests/XiSoapClientTest.php" />
@@ -146,13 +103,18 @@
         <option value="$PROJECT_DIR$/htdocs/external/xisoap/includes/SoapService.php" />
         <option value="$PROJECT_DIR$/htdocs/external/xisoap/includes/XiSoapClient.php" />
         <option value="$PROJECT_DIR$/templates/eng/base/manage/services/add/adsl_nbn2/qual/creation/index.html" />
-        <option value="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php" />
-        <option value="$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/creation/index.html" />
         <option value="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/index.php" />
-        <option value="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/creation/index.php" />
         <option value="$PROJECT_DIR$/htdocs/external/xisoap/wsdl/connect_service.wsdl" />
         <option value="$PROJECT_DIR$/htdocs/external/xisoap/includes/FactoryXiSoap.php" />
         <option value="$PROJECT_DIR$/htdocs/external/xisoap/tests/FactoryXiSoapTest.php" />
+        <option value="$PROJECT_DIR$/bin/run_orders.php" />
+        <option value="$PROJECT_DIR$/classes/orders.class" />
+        <option value="$PROJECT_DIR$/htdocs/external/availability/begin_qual.php" />
+        <option value="$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php" />
+        <option value="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php" />
+        <option value="$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/creation/index.html" />
+        <option value="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/creation/index.php" />
+        <option value="$PROJECT_DIR$/bin/run_orders_opticomm.php" />
       </list>
     </option>
   </component>
@@ -194,6 +156,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -868,7 +831,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="htdocs" />
+              <option name="myItemId" value="includes" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -882,11 +845,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="htdocs" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="external" />
+              <option name="myItemId" value="includes" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -904,37 +863,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="htdocs" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="external" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xisoap" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wsdl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="htdocs" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="external" />
+              <option name="myItemId" value="includes" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -959,18 +888,6 @@
               <option name="myItemId" value="htdocs" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="external" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xisoap" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="includes" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -987,6 +904,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="external" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="availability" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -1294,6 +1215,48 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="add" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsl_nbn2" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qual" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="creation" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="htdocs" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="plans" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -1328,9 +1291,22 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1341,6 +1317,14 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../leaptel/wp-content/plugins/nbn_availability" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/includes" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bin" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -1407,35 +1391,36 @@
       <workItem from="1474684286485" duration="12876000" />
       <workItem from="1474767630640" duration="911000" />
       <workItem from="1474884073969" duration="7547000" />
-      <workItem from="1474943012016" duration="1620000" />
+      <workItem from="1474943012016" duration="3715000" />
+      <workItem from="1475201066812" duration="10611000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54205000" />
+    <option name="totallyTimeSpent" value="66911000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29256082" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29685265" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1450,45 +1435,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/htdocs/external/availability/progress.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/availability/results.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/availability/progress.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/availability/results.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="22" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_2.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4099">
@@ -1500,6 +1452,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1510,14 +1463,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/auth/WsseAuthHeader.php">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/includes/auth/WsseAuthHeader.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-143">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/Validate.php">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/includes/Validate.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
@@ -1528,13 +1481,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/availability/begin_qual.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="70" column="33" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -1601,45 +1547,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/tests/XiSoapClientTest.php">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/tests/XiSoapClientTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/SoapService.php">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/includes/SoapService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/ISoapService.php">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/includes/ISoapService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/SearchService.php">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/includes/SearchService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/ConnectService.php">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/includes/ConnectService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/adsl_nbn2/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-360">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1647,6 +1586,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1654,6 +1594,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2250">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1473110909000" expanded="true" signature="1618:1666" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="2475:2577" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="3249:3312" ph="INSERT INTO order_attributes... " />
+            <marker date="1473110909000" expanded="true" signature="4568:4604" ph="UPDATE order... " />
+            <marker date="1473110909000" expanded="true" signature="5615:5661" ph="DELETE FROM " />
+            <marker date="1473110909000" expanded="true" signature="6451:6553" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="7181:7229" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="7850:8021" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="8607:8703" ph="SELECT * FRO... order_attributes" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1727,36 +1678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/creation/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="54" column="19" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="33" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1965">
-          <caret line="140" column="33" selection-start-line="140" selection-start-column="33" selection-end-line="140" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/classes/plans.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="496" column="9" selection-start-line="496" selection-start-column="9" selection-end-line="496" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/htdocs/base/manage/plans/add/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6780">
@@ -1765,23 +1686,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="78" column="63" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/adsl_nbn2/qual/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3660">
-          <caret line="253" column="2" selection-start-line="253" selection-start-column="2" selection-end-line="253" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/wsdl/connect_service.wsdl">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/wsdl/connect_service.wsdl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
@@ -1789,15 +1694,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/creation/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3360">
-          <caret line="233" column="2" selection-start-line="233" selection-start-column="2" selection-end-line="233" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/FactoryXiSoap.php">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/includes/FactoryXiSoap.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1260">
           <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
@@ -1805,7 +1702,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/includes/XiSoapClient.php">
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/includes/XiSoapClient.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
@@ -1813,10 +1710,154 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/external/xisoap/tests/FactoryXiSoapTest.php">
+    <entry file="file://$PROJECT_DIR$/classes/orders.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+        <state relative-caret-position="322">
+          <caret line="642" column="3" selection-start-line="642" selection-start-column="3" selection-end-line="642" selection-end-column="3" />
+          <folding>
+            <marker date="1475203653000" expanded="true" signature="1643:1681" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="2434:2479" ph="SELECT order... orders" />
+            <marker date="1475203653000" expanded="true" signature="3185:3271" ph="INSERT INTO orders... " />
+            <marker date="1475203653000" expanded="true" signature="4893:5020" ph="UPDATE order... " />
+            <marker date="1475203653000" expanded="true" signature="5762:5798" ph="DELETE FROM " />
+            <marker date="1475203653000" expanded="true" signature="6588:6706" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="7310:7432" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="8020:8060" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="8554:8574" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="9185:9320" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="10055:10194" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="10900:11051" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="11514:11588" ph="SELECT * FRO... orders" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/external/availability/begin_qual.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/run_orders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="580" column="42" selection-start-line="580" selection-start-column="42" selection-end-line="580" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/adsl_nbn2/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-320">
+          <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/adsl_nbn2/qual/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="308" column="61" selection-start-line="308" selection-start-column="61" selection-end-line="308" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/adsl_nbn2/qual/services_available.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="78" column="63" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="160" column="53" selection-start-line="160" selection-start-column="52" selection-end-line="160" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/adsl_nbn2/qual/creation/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="157" column="16" selection-start-line="157" selection-start-column="16" selection-end-line="157" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/plans.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-13598">
+          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+          <folding>
+            <marker date="1473110909000" expanded="true" signature="1739:1775" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="2522:2564" ph="SELECT plan_... plans" />
+            <marker date="1473110909000" expanded="true" signature="3235:3366" ph="INSERT INTO plans... " />
+            <marker date="1473110909000" expanded="true" signature="5119:5663" ph="UPDATE plans... " />
+            <marker date="1473110909000" expanded="true" signature="7820:7839" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="8325:8367" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="8894:8996" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="9532:9569" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="10070:10106" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="14617:14686" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="16163:16270" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="16870:16957" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="17492:17534" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="18079:18121" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="18893:18918" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="19822:19847" ph="SELECT * FRO... plans" />
+            <marker date="1473110909000" expanded="true" signature="20842:20861" ph="SELECT * FRO... plans" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="23" column="33" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/creation/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="658" column="36" selection-start-line="658" selection-start-column="36" selection-end-line="658" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/creation/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="125" column="20" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/run_orders_opticomm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="120" column="34" selection-start-line="120" selection-start-column="34" selection-end-line="120" selection-end-column="34" />
           <folding />
         </state>
       </provider>

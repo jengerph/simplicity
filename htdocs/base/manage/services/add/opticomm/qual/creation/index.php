@@ -103,6 +103,7 @@ $pt->setVar('ORDER_ADDRESS', $qual['address']);
 $pt->setVar('IDENTIFER', $qual['location_id']);
 $pt->setVar('MANUAL', $qual['manual']);
 
+
 $wholesaler = new wholesalers();
 $wholesaler->wholesaler_id = $customer->wholesaler_id;
 $wholesaler->load();
@@ -163,26 +164,6 @@ if (isset($_REQUEST['submit2'])) {
   
   $error_order = array();
 
- 	if ($qual['quals'][$_REQUEST['result_id']]['accessType'] == 'NCAS') {
-  	
-  	if ($_REQUEST['pair'] == '') {
-	  	$error_order[] = "A pair needs to be selected.";
-	  }
-
-		$_REQUEST['splitter_install'] = strtolower($_REQUEST['splitter_install']);
-  	if ($_REQUEST['splitter_install'] != 'yes' && $_REQUEST['splitter_install'] != 'no') {
-	  	$error_order[] = "Splitter install flag needs to be set.";
-	  }
-	  
-		$_REQUEST['voiceband_continuity'] = strtolower($_REQUEST['voiceband_continuity']);
-  	if ($_REQUEST['voiceband_continuity'] != 'yes' && $_REQUEST['voiceband_continuity'] != 'no') {
-	  	$error_order[] = "Voiceband continuity install flag needs to be set.";
-	  }
-	  
-	  if ($_REQUEST['voiceband_continuity'] == 'yes' && $qual['fnn'] == '') {
-	  	$error_order[] = "Voiceband continuity can't be used if qualification is not done by using Phone Number (FNN).";
-		}
-	}	  	  
   if ( !isset($_REQUEST['order_username']) || $_REQUEST["order_username"] == "" ) {
   	$error_order[] = "Invalid Username.";
   } 
@@ -206,24 +187,10 @@ if (isset($_REQUEST['submit2'])) {
   	$error_order[] = "Invalid Password.";
   }
 
-  if(!isset($_REQUEST["poi"])) {
-      $error_order[] = "POI is invalid";
-  }
-
-  
-  if ( $qual['result']['dslCodesOnLine'] == 'yes' ) {
-  	if ( !isset($_REQUEST["order_churn_provider"]) || $_REQUEST["order_churn_provider"] == "0" ) {
-  		$error_order[] = "Provider invalid.";
-  	}
-  }
-  
   if ( !isset($_REQUEST["order_contact"]) || $_REQUEST["order_contact"] == "" ) {
   	$error_order[] = "Authorized Contact invalid.";
   }
- 
- 
-  		
- 
+
   $vc = $services->validate();
   
   if ( count($error_order) > 0 ) {
@@ -292,7 +259,7 @@ if (isset($_REQUEST['submit2'])) {
 
   		// serviceSpeed
 	  	$service_attr->param = "serviceSpeed";
-  		$service_attr->value = $qual['quals'][$_REQUEST['result_id']]['speed'];
+  		$service_attr->value = $_REQUEST['service_speed'];
   		$service_attr->create();
 
   		// priceZone
@@ -330,37 +297,6 @@ if (isset($_REQUEST['submit2'])) {
     		$services->delete();
 
     	} else {
-
-    	    var_dump($qual['quals'][$_REQUEST['result_id']]['speed']);
-            exit;
-
-            // Start connect service request to Opticomm via SOAP
-            $client = new \XiSoap\FactoryXiSoap("connect.service");
-
-            $param = [
-                "Property_ID" => $qual["property_id"],
-                "Contact_Name" => "Matthew Enger",
-                "Contact_Phone" => "",
-                "Contact_Mobile" => "",
-                "Contact_Email" => "m.enger@xi.com.au",
-                "FNN" => "",
-                "SIP_Username" => "",
-                "SIP_Password" => "",
-                "CLID" => "",
-                "Comment" => "",
-                "Provider_Ref" => $qual["property_id"] . "/" . $order->order_id . "/" . $_REQUEST['order_username'] . "@" . $_REQUEST['order_realms'],
-                "Product_Type" => "Broadband",
-                "Product_Code" => "OPHAEB-12",
-                "POI" => $_REQUEST['poi'],
-            ];
-
-            $client = new \XiSoap\FactoryXiSoap("connect.service");
-            $result = $client->getResults("ConnectService", $param);
-
-            if(!is_array($result) || count($result) == 0) {
-                die("An error occurred while sending the request to Opticomm. Please contact technical support");
-            }
-            // End connect service request to Opticomm
 
     	
     		// Setup Order state
@@ -443,12 +379,6 @@ if (isset($_REQUEST['submit2'])) {
     		// nbnLocationID
   	  	$order_attributes->param = "order_opticommPropertyID";
     		$order_attributes->value = $qual["property_id"];
-    		$order_attributes->create();  			
-	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
-
-    		// order_service_number
-  	  	$order_attributes->param = "order_service_number";
-    		$order_attributes->value = $result[0]->service_id;
     		$order_attributes->create();  			
 	    	$order_comment_text .= $order_attributes->param . ': ' . $order_attributes->value . "\r\n";
 
@@ -563,146 +493,6 @@ if (isset($_REQUEST['submit2'])) {
 	
 }
 
-
-// Churn?
-if ($qual['result']['dslCodesOnLine']) {
-	
-  //provide losing provider
-  $array = getProvider();
-  // $array = array("Provider 1");
-  
-  $losingProviderList = new misc();
-  // sort($array);
-  $losingProviderList_arr = $losingProviderList->make_dropdown("order_churn_provider",$array,"_PROVIDER","Provider");
-  $pt->setVar("PROVIDER_LIST",$losingProviderList_arr);
-  // print_r($losingProviderList_arr);
-  // exit();
-  $pt->parse("CHURN",'churn','true');
-
-}
-
-// NCAS
-if ($qual['quals'][$_REQUEST['result_id']]['accessType'] == 'NCAS') {
-	
-	// Fibre to the Node, pair selection required
-	
-	// Setup pair list
-	$list = '<select name="pair" id="pair">';
-  $list .= '<option value="">Select Pair</option>';
-  $list .= '<option value="new"';
-  
-  if ($_REQUEST['pair'] == 'new') {
-  	$list .= ' selected';
-  }
-  $list .= '>New Copper Pair</option>';
-	
-	$notes = '';
-	// Do we have NBN Pairs?
-	
-	$pairs = $qual['result']['results']['NBN'][$qual['quals'][$_REQUEST['result_id']]['accessType']]['pairs']->nbnCopperPairList;
-	$count = 0;
-	if (is_array($pairs)) {
-	
-		while ($cel = each($pairs)) {
-		  $list .= '<option value="nbn-' . $cel['value']->ID . '"';
-		  if ($_REQUEST['pair'] == 'nbn-' . $cel['value']->ID) {
-		  	$list .= ' selected';
-	  	}
-	  	$list .=  '>' . $cel['value']->ID;
-		  
-		  if ($cel['value']->isCopperActive == 1) {
-		  	
-		  	if (!isset($cel['value']->POTSInterconnect)) {
-		  		echo "NOTE";
-		  		$notes .= $cel['value']->ID . " copper pair has an active service on it. To use this ensure you qualify using the Phone Number (FNN)!<br>";
-		  	} else {
-		  		$list .= ' (' . $cel['value']->POTSInterconnect . ')';
-		  	}
-		  }
-
-			$list .= '</option>';		  
-			
-		  $count++;
-		}
-	} else {
-		
-		if (isset($pairs->ID)) {
-  	  $list .= '<option value="nbn-' . $pairs->ID . '"';
-  	  if ($_REQUEST['pair'] == 'nbn-' . $pairs->ID) {
-  	  	$list .= ' selected';
-  	  }
-  	  $list .= '>' . $pairs->ID;
-  	  
-  	  if ($pairs->isCopperActive == 1) {
-  	  	
-  	  	if (!isset($pairs->POTSInterconnect)) {
-  	  		$notes .= $pairs->ID . " copper pair has an active service on it. To use this ensure you qualify using the Phone Number (FNN)!<br>";
-  	  	} else {
-  	  		$list .= ' (' . $pairs->POTSInterconnect . ')';
-  	  	}
-  	  }
-  		  
-  		$count++;
-  		$list .= '</option>';
-  	}
-	}
-	
-	if ($notes != '') {
-		$pt->setVar('PAIR_NOTICES', $notes);
-	}
-	if ($count == 0) {
-		
-		// Unlisted pair mode
-  	$pairs = $qual['result']['pairs']['telstra'];
-  	
-  	$count = 0;
-  	if (is_array($pairs)) {
-  	
-  		while ($cel = each($pairs)) {
-  		  $list .= '<option value="telstra-' . $cel['value'] . '"';
-  		  
-  		  if ($_REQUEST['pair'] == 'telstra-' . $cel['value']) {
-  		  	$list .= ' selected';
-  		  }
-	  		$list .= '>Unlisted pair ' . $cel['value'] . '</option>';
-
-  		  $count++;
-  		}
-  	} else {
-  		
-  	  $list .= '<option value="telstra-' . $pairs . '"';
-		  if ($_REQUEST['pair'] == 'telstra-' . $pairs) {
-		  	$list .= ' selected';
-		  }
-	  	$list .=  '>Unlisted pair ' . $pairs . '</option>';
-  	    		  
-  		$count++;
-  	}
-	}			
-	$list .= '</select>';
-	
-	$pt->setVar('PAIR_LIST',$list);		
-	
-	
-  $pt->parse("CHURN",'fttn','true');
-  
-  // Splitter
-  if (!isset($_REQUEST['splitter_install'])) {
-  	$_REQUEST['splitter_install'] = 'no';
-  }
-  $pt->setVar('SPLITTER_INSTALL_' . strtoupper($_REQUEST['splitter_install']) . '_SELECT', ' checked');
-
-  // Voiceband continuity
-  if (!isset($_REQUEST['voiceband_continuity'])) {
-  	$_REQUEST['voiceband_continuity'] = 'yes';
-  }
-  $pt->setVar('VOICEBAND_CONTINUITY_' . strtoupper($_REQUEST['voiceband_continuity']) . '_SELECT', ' checked');
-  
-	
-}
-
-
-
 $pt->setVar('WHOLESALE_PLAN', $services->wholesale_plan_id);
 $pt->setVar('RETAIL_PLAN', $services->retail_plan_id);
 $pt->setVar('STATE', ucfirst($services->state));
@@ -726,14 +516,6 @@ $services2->type_id = $services->type_id;
 $services2->load();
 
 $pt->setVar('SERVICE_TYPE_LIST', $services2->description);
-
-//Get a list of retail_plans
-if ( $qual['quals'][$_REQUEST['result_id']]["priceZone"] == "Zone 3" || $qual['quals'][$_REQUEST['result_id']]["priceZone"] == "Zone 2" ) {
-  $qual['quals'][$_REQUEST['result_id']]["priceZone"] = "Zone 2/3";
-}
-if ( $qual['quals'][$_REQUEST['result_id']]["priceZone"] == "Metro" || $qual['quals'][$_REQUEST['result_id']]["priceZone"] == "Regional" ) {
-  $qual['quals'][$_REQUEST['result_id']]["priceZone"] = "";
-}
 
 // Does this wholesaler manage thier own plans?
 if ( $wholesaler->manage_own_plan == "no" ) {
@@ -871,6 +653,13 @@ while ($cel = each($qual['quals'][$_REQUEST['result_id']])) {
 	$pt->setVar('RES_' . strtoupper($cel['key']), $cel['value']);
 }
 
+if(isset($_REQUEST["submit"])) {
+    $selected_plan = $_REQUEST["retail_plan"];
+    $plan = new plans();
+    $plan->plan_id = $selected_plan;
+    $plan->load();
+    $pt->setVar('RES_SPEED', $plan->speed);
+}
 
 
 // Parse the main page
