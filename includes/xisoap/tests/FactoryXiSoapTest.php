@@ -138,4 +138,18 @@ class FactoryXiSoapTest extends TestCase
         //$response = $client->getResults($param);
         //$this->assertNotEmpty($response->Service_ID);
     }
+
+    public function testOrderStatus()
+    {
+        $param = [
+            "Service_ID" => "",
+            "Provider_Ref" => "752774",
+        ];
+
+        $client = new \XiSoap\FactoryXiSoap("order.status");
+        $response = $client->getResults($param);
+        $this->assertNotEmpty($response->Service_ID);
+        //var_dump($response);
+    }
+
 }

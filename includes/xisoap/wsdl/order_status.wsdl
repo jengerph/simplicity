@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:OrderStatus" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:OrderStatus">
+<types>
+<xsd:schema targetNamespace="urn:OrderStatus"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="OrderStatusRequest">
+  <xsd:all>
+   <xsd:element name="Service_ID" type="xsd:string"/>
+   <xsd:element name="Provider_Ref" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="OrderStatusResponse">
+  <xsd:all>
+   <xsd:element name="Status_code" type="xsd:string"/>
+   <xsd:element name="Service_ID" type="xsd:string"/>
+   <xsd:element name="Product_Type" type="xsd:string"/>
+   <xsd:element name="Provider_Ref" type="xsd:string"/>
+   <xsd:element name="Product" type="xsd:string"/>
+   <xsd:element name="Order_Status" type="xsd:string"/>
+   <xsd:element name="Active" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+</xsd:schema>
+</types>
+<message name="OrderStatusRequest">
+  <part name="request" type="tns:OrderStatusRequest" /></message>
+<message name="OrderStatusResponse">
+  <part name="return" type="tns:OrderStatusResponse_Array" /></message>
+<portType name="OrderStatusPortType">
+  <operation name="OrderStatus">
+    <documentation>This is the Property Search</documentation>
+    <input message="tns:OrderStatusRequest"/>
+    <output message="tns:OrderStatusResponse"/>
+  </operation>
+</portType>
+<binding name="OrderStatusBinding" type="tns:OrderStatusPortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="OrderStatus">
+    <soap:operation soapAction="urn:OrderStatus#OrderStatus" style="rpc"/>
+    <input><soap:body use="encoded" namespace="urn:OrderStatus" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="urn:OrderStatus" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+</binding>
+<service name="OrderStatus">
+  <port name="OrderStatusPort" binding="tns:OrderStatusBinding">
+    <soap:address location="https://portal.opticomm.net.au:4005/components/com_soapxml/OrderStatus.php"/>
+  </port>
+</service>
+</definitions>

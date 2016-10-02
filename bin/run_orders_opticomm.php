@@ -342,7 +342,7 @@ while ($cel = each($orders_list)) {
 
                     } else if ($orders->action == 'addon create') {
 
-                        if ($services->type_id == 1 || $services->type_id == 2) {
+                        if ($services->type_id == 1 || $services->type_id == 2 || $services->type_id == 8) {
 
                             $parent_order_id = get_attribute($orders->order_id, "parent_order");
                             $go = 0;
@@ -476,8 +476,250 @@ while ($cel = each($orders_list)) {
         } else if ($orders->status == 'accepted') {
 
             if ($orders->action == 'new' || $orders->action == 'cancel') {
-                //todo check progress Opticomm
-            } // End action = new || action = cancel
+                //check progress Opticomm
+
+                $response = "";
+
+                try {
+
+                    $param = [
+                        "Service_ID" => "",
+                        "Provider_Ref" => $services->service_id,
+                    ];
+
+                    $client = new \XiSoap\FactoryXiSoap("order.status");
+                    $response = $client->getResults($param);
+
+                    if (!is_array($response) || count($response) == 0) {
+                        echo "An error occurred while sending the request to Opticomm. Please contact technical support";
+                    }
+
+                    //var_dump($response);
+
+
+                } catch (SoapFault $exception) {
+                    $comment = new order_comments();
+                    $comment->order_id = $orders->order_id;
+                    $comment->username = 'system';
+                    $comment->comment_visibility = "internal";
+                    $comment->comment = $exception;
+                    $comment->create();
+
+                    $orders->status = 'on hold';
+                    $orders->save();
+
+                    soapDebug($client);
+
+                    $orders_states = new orders_states();
+                    $orders_states->order_id = $orders->order_id;
+                    $orders_states->state_name = 'on hold';
+                    $orders_states->create();
+
+                    $do_accept = 0;
+                }
+
+                if(is_array($response) && $response->Active === "Y") {
+                    // Competed!
+                    echo "COMPLETED!";
+
+                    $orders_states = new orders_states();
+                    $orders_states->order_id = $orders->order_id;
+                    $orders_states->state_name = 'closed';
+                    $orders_states->create();
+
+                    $orders->status = 'closed';
+                    $orders->save();
+
+                    // Is this a decomissioning order?
+
+                    if ($orders->action == 'new' ) {
+                        $services->state = 'active';
+                        $services->start_date = date("Y-m-d H:i:s");
+                        $services->save();
+
+                        // Completion of new service or modification order
+
+                        // Send order receipt:
+                        $mail = new PHPMailer();
+
+                        $mail->From     = "service.delivery@xi.com.au";
+                        $mail->FromName = "X Integration Pty Ltd";
+                        $mail->Subject  = "Service Completion Advice";
+                        $mail->Host     = "127.0.0.1";
+                        $mail->Mailer   = "smtp";
+
+                        $text_body  = "Dear " . ucwords($customer->first_name) . " " . ucwords($customer->last_name) . ",\r\n";
+                        $text_body .= "\r\n";
+                        $text_body .= "X Integration is pleased to advise that successful commissioning of your service has been completed, this service is ready for use and billing has commenced as of " . $services->start_date . "\r\n";
+                        $text_body .= "\r\n";
+                        $text_body .= "For your reference, this email contains information about your service, plus service numbers and attributes for each service on the order.\r\n";
+                        $text_body .= "\r\n";
+                        $text_body .= "Company Name: " . ucwords($customer->company_name) . "\r\n\r\n";
+                        $text_body .= "Customer Name: " . ucwords($customer->first_name) . " " . ucwords($customer->last_name) . "\r\n\r\n";
+                        $text_body .= "Username: " . get_attribute( $orders->order_id, "order_username" ) . "@" . get_attribute( $orders->order_id, "order_realms" ) . "\r\n\r\n";
+                        $text_body .= "Password: " . get_attribute( $orders->order_id, "order_password" ) . "\r\n\r\n";
+                        $text_body .= "Order Reference: " . $orders->order_id . "\r\n\r\n";
+                        $text_body .= "Below is a list of item(s) on this order. " . "\r\n\r\n";
+
+                        $plan_title = new plans();
+                        $plan_title->plan_id = $services->retail_plan_id;
+                        $plan_title->load();
+
+                        $text_body .= "Type of Order: " . ucwords($orders->action) . " - ADSL or NBN Service\r\n\r\n";
+                        $text_body .= "Service Components:\r\n\r\n";
+                        $text_body .= "Service ID: " . $services->service_id . "\r\n";
+                        $text_body .= "Transaction Type: " . ucwords($orders->action) . "\r\n";
+                        $text_body .= "Customer Account Number: " . ucwords($customer->customer_id) . "\r\n";
+
+                        $contract_length = new plan_attributes();
+                        $contract_length->plan_id = $plan_title->plan_id;
+                        $contract_length->param = "contract_length";
+                        $contract_length->get_latest();
+
+                        $text_body .= "Contract Term (Months): " . $contract_length->value . "\r\n\r\n";
+
+                        $text_body .= "Service Number: " . get_attribute( $orders->order_id, "order_service_number" ) . "\r\n";
+                        $text_body .= "Access Location: " . get_attribute( $orders->order_id, "order_address" ) . "\r\n";
+                        $text_body .= "Access Method: " . $plan_title->access_method . "\r\n";
+
+                        $service_types = new service_types();
+                        $service_types->type_id = $plan_title->type_id;
+                        $service_types->load();
+
+                        $text_body .= "Access Technology: " . $service_types->description . "\r\n";
+                        $text_body .= "Access Speed: Up to " . $plan_title->speed . "\r\n\r\n";
+
+                        $text_body .= "If you have any further queries, please don't hesitate to contact X Integration and quote the X Integration Provisioning Reference provided above.\r\n\r\n";
+                        $text_body .= "Service Difficulties:\r\n";
+                        $text_body .= "To report service difficulties or faults please phone the X Integration Help Desk at 1300 789 299 and quote the X Integration Provisioning Reference provided above.\r\n\r\n";
+                        $text_body .= "Kind Regards,\r\n";
+                        $text_body .= "X Integration Service and Provisioning Team\r\n\r\n";
+
+                        //$mail->AddAddress($customer->email);
+                        $mail->AddCC($wholesaler->email);
+                        $mail->AddBCC("notifications@xi.com.au");
+
+
+                        $mail->Body    = $text_body;
+
+                        $comment = new order_comments();
+                        $comment->order_id = $orders->order_id;
+                        $comment->username = 'system';
+                        $comment->comment_visibility = "customer";
+                        $comment->comment = $text_body;
+                        $comment->create();
+
+                        $mail->Send();
+
+
+                    } else {
+
+                        // Send order receipt:
+                        $mail = new PHPMailer();
+
+                        $mail->From = "service.delivery@xi.com.au";
+                        $mail->FromName = "X Integration Pty Ltd";
+                        $mail->Subject = "Service Completion Advice";
+                        $mail->Host = "127.0.0.1";
+                        $mail->Mailer = "smtp";
+
+                        $text_body = "Dear " . ucwords($customer->first_name) . " " . ucwords($customer->last_name) . ",\r\n";
+                        $text_body .= "\r\n";
+                        $text_body .= "X Integration is pleased to advise that successful decomissioning of your service has been completed and billing has stopped as of " . $result['completion_date'] . "\r\n";
+                        $text_body .= "\r\n";
+                        $text_body .= "For your reference, this email contains information about your service, plus service numbers and attributes for each service on the order.\r\n";
+                        $text_body .= "\r\n";
+                        $text_body .= "Company Name: " . ucwords($customer->company_name) . "\r\n\r\n";
+                        $text_body .= "Customer Name: " . ucwords($customer->first_name) . " " . ucwords($customer->last_name) . "\r\n\r\n";
+                        $text_body .= "Username: " . get_attribute($orders->order_id, "order_username") . "@" . get_attribute($orders->order_id, "order_realms") . "\r\n\r\n";
+                        $text_body .= "Password: " . get_attribute($orders->order_id, "order_password") . "\r\n\r\n";
+                        $text_body .= "Order Reference: " . $orders->order_id . "\r\n\r\n";
+                        $text_body .= "Below is a list of item(s) on this order. " . "\r\n\r\n";
+
+                        $plan_title = new plans();
+                        $plan_title->plan_id = $services->retail_plan_id;
+                        $plan_title->load();
+
+                        $text_body .= "Type of Order: " . ucwords($orders->action) . " - ADSL or NBN Service\r\n\r\n";
+                        $text_body .= "Service Components:\r\n\r\n";
+                        $text_body .= "Service ID: " . $services->service_id . "\r\n";
+                        $text_body .= "Transaction Type: " . ucwords($orders->action) . "\r\n";
+                        $text_body .= "Customer Account Number: " . ucwords($customer->customer_id) . "\r\n";
+
+                        $contract_length = new plan_attributes();
+                        $contract_length->plan_id = $plan_title->plan_id;
+                        $contract_length->param = "contract_length";
+                        $contract_length->get_latest();
+
+                        $text_body .= "Contract Term (Months): " . $contract_length->value . "\r\n\r\n";
+
+                        $text_body .= "Service Number: " . get_attribute($orders->order_id, "order_service_number") . "\r\n";
+                        $text_body .= "Access Location: " . get_attribute($orders->order_id, "order_address") . "\r\n";
+                        $text_body .= "Access Method: " . $plan_title->access_method . "\r\n";
+
+                        $service_types = new service_types();
+                        $service_types->type_id = $plan_title->type_id;
+                        $service_types->load();
+
+                        $text_body .= "Access Technology: " . $service_types->description . "\r\n";
+                        $text_body .= "Access Speed: Up to " . $plan_title->speed . "\r\n\r\n";
+
+                        $text_body .= "If you have any further queries, please don't hesitate to contact X Integration and quote the X Integration Provisioning Reference provided above.\r\n\r\n";
+                        $text_body .= "Service Difficulties:\r\n";
+                        $text_body .= "To report service difficulties or faults please phone the X Integration Help Desk at 1300 789 299 and quote the X Integration Provisioning Reference provided above.\r\n\r\n";
+                        $text_body .= "Kind Regards,\r\n";
+                        $text_body .= "X Integration Service and Provisioning Team\r\n\r\n";
+
+                        //$mail->AddAddress($customer->email);
+                        $mail->AddCC($wholesaler->email);
+                        $mail->AddBCC("notifications@xi.com.au");
+
+
+                        $mail->Body = $text_body;
+
+                        $comment = new order_comments();
+                        $comment->order_id = $orders->order_id;
+                        $comment->username = 'system';
+                        $comment->comment_visibility = "customer";
+                        $comment->comment = $text_body;
+                        $comment->create();
+
+                        $mail->Send();
+
+                        $services->state = 'inactive';
+                        $services->finish_date = $result['completion_date'] . " 12:00:00";
+
+
+                        $services->save();
+
+                        // Determine username
+                        $so = new service_attributes();
+                        $so->service_id = $orders->service_id;
+                        $so->param = 'username';
+                        $so->get_attribute();
+
+                        //$username = $so->value;
+
+                        $so2 = new service_attributes();
+                        $so2->service_id = $orders->service_id;
+                        $so2->param = 'realms';
+                        $so2->get_attribute();
+
+                        $username = $so->value . '@' . $so2->value;
+
+                        // Remove radius entries
+                        $radius = new radius();
+                        $radius->username = $username;
+                        $radius->delete();
+
+                    }
+
+                }
+
+
+            }
+
+        } // End action = new || action = cancel
         } // End state = Accepted
     } // ENd type 1 or 2 check
 } // ENd while loop through orders
