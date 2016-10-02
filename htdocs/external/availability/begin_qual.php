@@ -54,7 +54,7 @@ if ($_REQUEST['pass'] == '') {
     $param["house_no"] = $param["house_no"] ?: substr($_GET["autocomplete"], 0, strpos($_GET["autocomplete"], " "));
 
     $factorySoap = new \XiSoap\FactoryXiSoap("search.service");
-    if($factorySoap->hasResults("AddressSearch", $param)) {
+    if($factorySoap->hasResults($param)) {
         $return["qual_id"] = true;
         echo json_encode($return);
         die();

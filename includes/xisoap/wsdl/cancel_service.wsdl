@@ -40,7 +40,7 @@
 </binding>
 <service name="CancelService">
   <port name="CancelServicePort" binding="tns:CancelServiceBinding">
-    <soap:address location="https://portal.opticomm.net.au:4005/components/com_soapxml/CancelService.php"/>
+    <soap:address location="http://210.50.3.29:4005/components/com_soapxml/CancelService.php"/>
   </port>
 </service>
 </definitions>

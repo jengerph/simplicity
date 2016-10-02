@@ -33,7 +33,7 @@ class FactoryXiSoapTest extends TestCase
             "postcode" => ($postcode) ?: ""
         );
 
-        $this->assertNotFalse($client->hasResults("AddressSearch", $param));
+        $this->assertNotFalse($client->hasResults($param));
     }
 
     public function testPropertyClass()
@@ -60,7 +60,7 @@ class FactoryXiSoapTest extends TestCase
             "postcode" => ($postcode) ?: ""
         );
 
-        $result = $client->getResults("AddressSearch", $param);
+        $result = $client->getResults($param);
         $this->assertNotEmpty($result[0]->property_class);
     }
 
@@ -118,11 +118,23 @@ class FactoryXiSoapTest extends TestCase
         ];
 
         $client = new \XiSoap\FactoryXiSoap("connect.service");
-        //$result = $client->getResults("ConnectService", $param);
+        //$result = $client->getResults($param);
         //var_dump($result->Service_ID);
         //$this->assertNotEmpty($result->Service_ID);
         //var_dump($client->getClient()->getClient()->__getLastRequest());
         //var_dump($client->getClient()->getClient()->__getLastResponse());
 
+    }
+
+    public function cancelService()
+    {
+        $param = [
+            "Service_ID" => "",
+            "Cancel_Date" => date("Y-m-d"),
+        ];
+
+        $client = new \XiSoap\FactoryXiSoap("cancel.service");
+        //$response = $client->getResults($param);
+        //$this->assertNotEmpty($response->Service_ID);
     }
 }

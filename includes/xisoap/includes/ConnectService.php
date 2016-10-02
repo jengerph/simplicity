@@ -8,9 +8,11 @@ class ConnectService extends SoapService
 {
     const WDSL = "connect_service.wsdl";
 
+    private $functionName;
+
     public function __construct(Array $config)
     {
-        parent::__construct($config, self::WDSL);
+        $this->functionName = "ConnectService";
+        parent::__construct($config, self::WDSL, $this->functionName);
     }
-
 }

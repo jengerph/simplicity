@@ -18,6 +18,7 @@ class FactoryXiSoap
     private $validate;
     private $service;
     private $client;
+    private $functionName;
 
     /**
      * FactoryXiSoap constructor.
@@ -52,13 +53,12 @@ class FactoryXiSoap
     }
 
     /**
-     * @param $functionName
      * @param array $values
      * @return bool
      */
-    public function hasResults($functionName, Array $values)
+    public function hasResults(Array $values)
     {
-        $result = $this->getResults($functionName, $values);
+        $result = $this->getResults($values);
 
         if (is_array($result) && $result[0]->property_id != "") {
             return true;
@@ -68,12 +68,12 @@ class FactoryXiSoap
     }
 
     /**
-     * @param $functionName
      * @param array $values
      * @return string
      */
-    public function getResults($functionName, Array $values)
+    public function getResults(Array $values)
     {
+        $functionName = $this->service->getFunctionName();
         $header = new WsseAuthHeader($this->config["username"], $this->config["username"]);
         $soapClient = new XiSoapClient($this->service, $this->config["username"], $this->config["username"]);
         $soapClient->setHeaders($header);
