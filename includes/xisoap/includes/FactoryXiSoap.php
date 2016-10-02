@@ -9,6 +9,7 @@ require_once dirname(__FILE__) . "/XiSoapClient.php";
 require_once dirname(__FILE__) . "/Validate.php";
 require_once dirname(__FILE__) . "/SearchService.php";
 require_once dirname(__FILE__) . "/ConnectService.php";
+require_once dirname(__FILE__) . "/CancelService.php";
 
 class FactoryXiSoap
 {
@@ -38,6 +39,9 @@ class FactoryXiSoap
             }
             if ($serviceType === "connect.service") {
                 $this->service = new ConnectService($this->config);
+            }
+            if ($serviceType === "cancel.service") {
+                $this->service = new CancelService($this->config);
             }
 
         } catch (\Exception $e) {
