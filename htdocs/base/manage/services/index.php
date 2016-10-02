@@ -135,12 +135,13 @@ if ( isset($_REQUEST["service_id"]) ) {
 				$pt->parse("SERVICE_STATS","back_link_service_stats","true");
 			}
 		case '2':
+        case '8':
 			if ($user->class == 'admin') {
 				$pt->parse("ADMIN_LINKS","back_link_admin_adsl_nbn","true");
-			} 
+			}
 		case '3':
 		case '4':
-			if ( $service->type_id == 1 || $service->type_id == 2 ) {
+			if ( $service->type_id == 1 || $service->type_id == 2 || $service->type_id == 8 ) {
 				$pt->parse("STATUS_ROW","adsl_nbn_status","true");
 			}
 			

@@ -81,8 +81,6 @@ while ($cel = each($orders_list)) {
                     $property_id = get_attribute($orders->order_id, "order_opticommPropertyID");
                     $service_speed = get_attribute($orders->order_id, "order_serviceSpeed");
                     $service_number = get_attribute($orders->order_id, "order_service_number");
-                    $contact = get_attribute($orders->order_id, "order_contact");
-                    $address = get_attribute($orders->order_id, "order_address");
                     $username = get_attribute($orders->order_id, "order_username");
                     $realm = get_attribute($orders->order_id, "order_realms");
                     $password = get_attribute($orders->order_id, "order_password");
@@ -120,35 +118,47 @@ while ($cel = each($orders_list)) {
                         }
 
                         $poi = "";
-
-                        var_dump($orders->order_id);
-                        var_dump($property_id);
-                        var_dump($address);
-                        var_dump($product_code);
+                        if(strtoupper($customer->state) === "VIC") {
+                            $poi = "POI-05";
+                        }
+                        if(strtoupper($customer->state) === "NSW") {
+                            $poi = "POI-03";
+                        }
+                        if(strtoupper($customer->state) === "QLD") {
+                            $poi = "POI-01";
+                        }
+                        if(strtoupper($customer->state) === "SA") {
+                            $poi = "POI-07";
+                        }
+                        if(strtoupper($customer->state) === "WA") {
+                            $poi = "POI-09";
+                        }
 
                         $param = [
                             "Property_ID" => $property_id,
-                            "Contact_Name" => "Matthew Enger",
-                            "Contact_Phone" => "",
-                            "Contact_Mobile" => "",
-                            "Contact_Email" => "m.enger@xi.com.au",
+                            "Contact_Name" => $customer->first_name . ' ' . $customer->last_name,
+                            "Contact_Phone" => $customer->phone,
+                            "Contact_Mobile" => $customer->mobile,
+                            "Contact_Email" => $customer->email,
                             "FNN" => "",
                             "SIP_Username" => "",
                             "SIP_Password" => "",
                             "CLID" => "",
                             "Comment" => "",
-                            "Provider_Ref" => $property_id,
+                            "Provider_Ref" => $services->service_id,
                             "Product_Type" => "Broadband",
                             "Product_Code" => $product_code,
                             "POI" => $poi,
                         ];
 
                         $client = new \XiSoap\FactoryXiSoap("connect.service");
-                        //$response = $client->getResults("ConnectService", $param);
+                        $response = $client->getResults("ConnectService", $param);
 
                         if (!is_array($response) || count($response) == 0) {
-                            //die("An error occurred while sending the request to Opticomm. Please contact technical support");
+                            echo "An error occurred while sending the request to Opticomm. Please contact technical support";
                         }
+
+                        //var_dump($response);
                         // End connect service request to Opticomm
 
 
@@ -173,12 +183,11 @@ while ($cel = each($orders_list)) {
                         $do_accept = 0;
                     }
 
-                    /*
                     if ($do_accept = 1) {
 
                         // DO we have order ids
                         $service_id = $response->Service_ID;
-                        $text = "Opticomm Service ID:" . "\r\n";
+                        $text = "Opticomm Service ID:" . $service_id . "\r\n";
                         $comment = new order_comments();
                         $comment->order_id = $orders->order_id;
                         $comment->username = 'system';
@@ -233,7 +242,7 @@ while ($cel = each($orders_list)) {
                         $plan_title->plan_id = $services->retail_plan_id;
                         $plan_title->load();
 
-                        $text_body .= "Type of Order: " . ucwords($orders->action) . " - ADSL or NBN Service\r\n\r\n";
+                        $text_body .= "Type of Order: " . ucwords($orders->action) . " - Opticomm Fibre Service\r\n\r\n";
                         $text_body .= "Service Components:\r\n\r\n";
                         $text_body .= "Service ID: " . $services->service_id . "\r\n";
                         $text_body .= "Transaction Type: " . ucwords($orders->action) . "\r\n";
@@ -452,11 +461,9 @@ while ($cel = each($orders_list)) {
         } else if ($orders->status == 'accepted') {
 
             if ($orders->action == 'new' || $orders->action == 'cancel') {
-
+                //todo check progress Opticomm
             } // End action = new || action = cancel
         } // End state = Accepted
-                    */
-                }}}
     } // ENd type 1 or 2 check
 } // ENd while loop through orders
 

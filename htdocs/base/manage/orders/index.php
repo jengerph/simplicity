@@ -128,7 +128,7 @@ for ($a=0; $a < count($orders_array); $a++) {
 				case 'efm':
 				case 'inbound voice':
 				case 'outbound voice':
-
+                case 'opticomm':
 					if ( $order->order_id ) {
 						$pt->setVar('ORDER_ID',$order->order_id);
 						$pt->setVar('CUSTOMER_NAME',$customer->company_name);
