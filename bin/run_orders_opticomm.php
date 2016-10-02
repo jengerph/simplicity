@@ -121,8 +121,9 @@ while ($cel = each($orders_list)) {
 
                         $poi = "";
 
-                        var_dump($orders->order_id);
+                        var_dump($property_id);
                         var_dump($address);
+                        var_dump($product_code);
                         exit;
 
                         $param = [

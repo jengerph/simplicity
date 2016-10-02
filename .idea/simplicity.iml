@@ -7,10 +7,10 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
-          <root url="phar://$MODULE_DIR$/htdocs/external/xisoap/phpunit.phar/" />
+          <root url="phar://$MODULE_DIR$/includes/xisoap/phpunit.phar/" />
         </CLASSES>
         <SOURCES>
-          <root url="phar://$MODULE_DIR$/htdocs/external/xisoap/phpunit.phar/" />
+          <root url="phar://$MODULE_DIR$/includes/xisoap/phpunit.phar/" />
         </SOURCES>
       </library>
     </orderEntry>
