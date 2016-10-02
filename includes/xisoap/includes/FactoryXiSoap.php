@@ -18,7 +18,6 @@ class FactoryXiSoap
     private $validate;
     private $service;
     private $client;
-    private $functionName;
 
     /**
      * FactoryXiSoap constructor.

@@ -126,8 +126,9 @@ class FactoryXiSoapTest extends TestCase
 
     }
 
-    public function cancelService()
+    public function testCancelService()
     {
+        date_default_timezone_set("Australia/Melbourne");
         $param = [
             "Service_ID" => "",
             "Cancel_Date" => date("Y-m-d"),
