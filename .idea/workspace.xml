@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43d89922-48ee-4a29-9963-f22c57c5f78e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/xisoap/includes/FactoryXiSoap.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/FactoryXiSoap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/run_orders_opticomm.php" afterPath="$PROJECT_DIR$/bin/run_orders_opticomm.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php" afterPath="$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php" />
     </list>
     <ignored path="simplicity.iws" />
@@ -24,71 +24,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="run_orders_opticomm.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="run_orders_opticomm.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bin/run_orders_opticomm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="195" column="43" selection-start-line="195" selection-start-column="43" selection-end-line="195" selection-end-column="43" />
+            <state relative-caret-position="292">
+              <caret line="314" column="0" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/service_stats/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-855">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="149" column="18" selection-start-line="149" selection-start-column="18" selection-end-line="149" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FactoryXiSoapTest.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FactoryXiSoapTest.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="138" column="55" selection-start-line="138" selection-start-column="55" selection-end-line="138" selection-end-column="55" />
+            <state relative-caret-position="256">
+              <caret line="130" column="8" selection-start-line="130" selection-start-column="8" selection-end-line="130" selection-end-column="57" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="begin_qual.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/htdocs/external/availability/begin_qual.php">
+      <file leaf-file-name="run_orders.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bin/run_orders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="58" column="34" selection-start-line="58" selection-start-column="34" selection-end-line="58" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cancel_service.wsdl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/includes/xisoap/wsdl/cancel_service.wsdl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-758">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="6766">
+              <caret line="918" column="0" selection-start-line="918" selection-start-column="0" selection-end-line="918" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -121,7 +81,6 @@
         <option value="$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/creation/index.html" />
         <option value="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/creation/index.php" />
         <option value="$PROJECT_DIR$/htdocs/base/manage/orders/index.php" />
-        <option value="$PROJECT_DIR$/bin/run_orders_opticomm.php" />
         <option value="$PROJECT_DIR$/htdocs/base/manage/services/index.php" />
         <option value="$PROJECT_DIR$/includes/xisoap/wsdl/cancel_service.wsdl" />
         <option value="$PROJECT_DIR$/includes/xisoap/includes/ConnectService.php" />
@@ -131,6 +90,7 @@
         <option value="$PROJECT_DIR$/htdocs/external/availability/begin_qual.php" />
         <option value="$PROJECT_DIR$/includes/xisoap/includes/FactoryXiSoap.php" />
         <option value="$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php" />
+        <option value="$PROJECT_DIR$/bin/run_orders_opticomm.php" />
       </list>
     </option>
   </component>
@@ -969,12 +929,12 @@
       <workItem from="1474884073969" duration="7547000" />
       <workItem from="1474943012016" duration="3715000" />
       <workItem from="1475201066812" duration="13918000" />
-      <workItem from="1475368543346" duration="10703000" />
+      <workItem from="1475368543346" duration="11848000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80921000" />
+    <option name="totallyTimeSpent" value="82066000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -1273,14 +1233,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/run_orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11055">
-          <caret line="983" column="0" selection-start-line="983" selection-start-column="0" selection-end-line="983" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/htdocs/base/manage/orders/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1337,22 +1289,6 @@
             <marker date="1473110909000" expanded="true" signature="3967:4128" ph="SELECT radiu... radusergroup" />
             <marker date="1473110909000" expanded="true" signature="4447:4560" ph="SELECT * FRO... radpostauth" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/run_orders_opticomm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="195" column="43" selection-start-line="195" selection-start-column="43" selection-end-line="195" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/service_stats/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-855">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1460,14 +1396,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="149" column="18" selection-start-line="149" selection-start-column="18" selection-end-line="149" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/htdocs/external/availability/begin_qual.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -1484,10 +1412,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="149" column="18" selection-start-line="149" selection-start-column="18" selection-end-line="149" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/service_stats/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-855">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/run_orders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6766">
+          <caret line="918" column="0" selection-start-line="918" selection-start-column="0" selection-end-line="918" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="138" column="55" selection-start-line="138" selection-start-column="55" selection-end-line="138" selection-end-column="55" />
+        <state relative-caret-position="256">
+          <caret line="130" column="8" selection-start-line="130" selection-start-column="8" selection-end-line="130" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/run_orders_opticomm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="314" column="0" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
           <folding />
         </state>
       </provider>

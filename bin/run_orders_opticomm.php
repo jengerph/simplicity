@@ -152,7 +152,7 @@ while ($cel = each($orders_list)) {
                         ];
 
                         $client = new \XiSoap\FactoryXiSoap("connect.service");
-                        $response = $client->getResults("ConnectService", $param);
+                        $response = $client->getResults($param);
 
                         if (!is_array($response) || count($response) == 0) {
                             echo "An error occurred while sending the request to Opticomm. Please contact technical support";
@@ -299,7 +299,22 @@ while ($cel = each($orders_list)) {
 
                         try {
 
-                            //TODO Opticomm cancel service
+                            date_default_timezone_set("Australia/Melbourne");
+
+                            $param = [
+                                "Provider_Ref" => $services->service_id,
+                                "Cancel_Date" => date("Y-m-d"),
+                            ];
+
+                            $client = new \XiSoap\FactoryXiSoap("cancel.service");
+                            $response = $client->getResults($param);
+
+                            if (!is_array($response) || count($response) == 0) {
+                                echo "An error occurred while sending the request to Opticomm. Please contact technical support";
+                            }
+
+                            //var_dump($response);
+
 
                         } catch (SoapFault $exception) {
                             //echo $exception;
