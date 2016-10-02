@@ -121,10 +121,10 @@ while ($cel = each($orders_list)) {
 
                         $poi = "";
 
+                        var_dump($orders->order_id);
                         var_dump($property_id);
                         var_dump($address);
                         var_dump($product_code);
-                        exit;
 
                         $param = [
                             "Property_ID" => $property_id,
@@ -147,7 +147,7 @@ while ($cel = each($orders_list)) {
                         //$response = $client->getResults("ConnectService", $param);
 
                         if (!is_array($response) || count($response) == 0) {
-                            die("An error occurred while sending the request to Opticomm. Please contact technical support");
+                            //die("An error occurred while sending the request to Opticomm. Please contact technical support");
                         }
                         // End connect service request to Opticomm
 
@@ -173,6 +173,7 @@ while ($cel = each($orders_list)) {
                         $do_accept = 0;
                     }
 
+                    /*
                     if ($do_accept = 1) {
 
                         // DO we have order ids
@@ -454,6 +455,8 @@ while ($cel = each($orders_list)) {
 
             } // End action = new || action = cancel
         } // End state = Accepted
+                    */
+                }}}
     } // ENd type 1 or 2 check
 } // ENd while loop through orders
 

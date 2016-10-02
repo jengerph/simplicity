@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43d89922-48ee-4a29-9963-f22c57c5f78e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/simplicity.iml" afterPath="$PROJECT_DIR$/.idea/simplicity.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/run_orders_opticomm.php" afterPath="$PROJECT_DIR$/bin/run_orders_opticomm.php" />
     </list>
@@ -48,7 +47,7 @@
       <file leaf-file-name="run_orders.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/run_orders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8700">
+            <state relative-caret-position="5970">
               <caret line="580" column="42" selection-start-line="580" selection-start-column="42" selection-end-line="580" selection-end-column="42" />
               <folding />
             </state>
@@ -58,9 +57,73 @@
       <file leaf-file-name="run_orders_opticomm.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bin/run_orders_opticomm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-128">
-              <caret line="107" column="48" selection-start-line="107" selection-start-column="48" selection-end-line="107" selection-end-column="48" />
+            <state relative-caret-position="517">
+              <caret line="149" column="30" selection-start-line="149" selection-start-column="30" selection-end-line="149" selection-end-column="30" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.class" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/classes/services.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3765">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1473110909000" expanded="true" signature="1900:1942" ph="SELECT * FRO... services" />
+                <marker date="1473110909000" expanded="true" signature="2728:2779" ph="SELECT servi... services" />
+                <marker date="1473110909000" expanded="true" signature="3488:3648" ph="INSERT INTO services... " />
+                <marker date="1473110909000" expanded="true" signature="5513:6009" ph="UPDATE servi... " />
+                <marker date="1473110909000" expanded="true" signature="8350:8391" ph="SELECT * FRO... services" />
+                <marker date="1473110909000" expanded="true" signature="8934:8974" ph="DELETE FROM " />
+                <marker date="1473110909000" expanded="true" signature="9486:9636" ph="SELECT * FRO... services" />
+                <marker date="1473110909000" expanded="true" signature="10258:10365" ph="SELECT * FRO... services" />
+                <marker date="1473110909000" expanded="true" signature="11046:11192" ph="SELECT * FRO... services" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="orders.class" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/classes/orders.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="97">
+              <caret line="627" column="90" selection-start-line="627" selection-start-column="16" selection-end-line="627" selection-end-column="90" />
+              <folding>
+                <marker date="1475203653000" expanded="true" signature="1643:1681" ph="SELECT * FRO... orders" />
+                <marker date="1475203653000" expanded="true" signature="2434:2479" ph="SELECT order... orders" />
+                <marker date="1475203653000" expanded="true" signature="3185:3271" ph="INSERT INTO orders... " />
+                <marker date="1475203653000" expanded="true" signature="4893:5020" ph="UPDATE order... " />
+                <marker date="1475203653000" expanded="true" signature="5762:5798" ph="DELETE FROM " />
+                <marker date="1475203653000" expanded="true" signature="6588:6706" ph="SELECT * FRO... orders" />
+                <marker date="1475203653000" expanded="true" signature="7310:7432" ph="SELECT * FRO... orders" />
+                <marker date="1475203653000" expanded="true" signature="8020:8060" ph="SELECT * FRO... orders" />
+                <marker date="1475203653000" expanded="true" signature="8554:8574" ph="SELECT * FRO... orders" />
+                <marker date="1475203653000" expanded="true" signature="9185:9320" ph="SELECT * FRO... orders" />
+                <marker date="1475203653000" expanded="true" signature="10055:10194" ph="SELECT * FRO... orders" />
+                <marker date="1475203653000" expanded="true" signature="10900:11051" ph="SELECT * FRO... orders" />
+                <marker date="1475203653000" expanded="true" signature="11514:11588" ph="SELECT * FRO... orders" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="order_attributes.class" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/classes/order_attributes.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-915">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1473110909000" expanded="true" signature="1618:1666" ph="SELECT * FRO... order_attributes" />
+                <marker date="1473110909000" expanded="true" signature="2475:2577" ph="SELECT * FRO... order_attributes" />
+                <marker date="1473110909000" expanded="true" signature="3249:3312" ph="INSERT INTO order_attributes... " />
+                <marker date="1473110909000" expanded="true" signature="4568:4604" ph="UPDATE order... " />
+                <marker date="1473110909000" expanded="true" signature="5615:5661" ph="DELETE FROM " />
+                <marker date="1473110909000" expanded="true" signature="6451:6553" ph="SELECT * FRO... order_attributes" />
+                <marker date="1473110909000" expanded="true" signature="7181:7229" ph="SELECT * FRO... order_attributes" />
+                <marker date="1473110909000" expanded="true" signature="7850:8021" ph="SELECT * FRO... order_attributes" />
+                <marker date="1473110909000" expanded="true" signature="8607:8703" ph="SELECT * FRO... order_attributes" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1279,6 +1342,20 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="classes" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="bin" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -1372,16 +1449,16 @@
       <workItem from="1474884073969" duration="7547000" />
       <workItem from="1474943012016" duration="3715000" />
       <workItem from="1475201066812" duration="13918000" />
-      <workItem from="1475368543346" duration="412000" />
+      <workItem from="1475368543346" duration="3298000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70630000" />
+    <option name="totallyTimeSpent" value="73516000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30114448" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1390,7 +1467,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1421,13 +1498,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_2.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4099">
-          <caret line="309" column="9" selection-start-line="309" selection-start-column="9" selection-end-line="309" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/htdocs/setup.inc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1570,24 +1640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classes/order_attributes.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2250">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1473110909000" expanded="true" signature="1618:1666" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="2475:2577" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="3249:3312" ph="INSERT INTO order_attributes... " />
-            <marker date="1473110909000" expanded="true" signature="4568:4604" ph="UPDATE order... " />
-            <marker date="1473110909000" expanded="true" signature="5615:5661" ph="DELETE FROM " />
-            <marker date="1473110909000" expanded="true" signature="6451:6553" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="7181:7229" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="7850:8021" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="8607:8703" ph="SELECT * FRO... order_attributes" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/adsl_nbn2/qual/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1662,6 +1714,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6780">
           <caret line="461" column="2" selection-start-line="461" selection-start-column="2" selection-end-line="461" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1676,6 +1729,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1260">
           <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1686,32 +1740,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classes/orders.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="642" column="3" selection-start-line="642" selection-start-column="3" selection-end-line="642" selection-end-column="3" />
-          <folding>
-            <marker date="1475203653000" expanded="true" signature="1643:1681" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="2434:2479" ph="SELECT order... orders" />
-            <marker date="1475203653000" expanded="true" signature="3185:3271" ph="INSERT INTO orders... " />
-            <marker date="1475203653000" expanded="true" signature="4893:5020" ph="UPDATE order... " />
-            <marker date="1475203653000" expanded="true" signature="5762:5798" ph="DELETE FROM " />
-            <marker date="1475203653000" expanded="true" signature="6588:6706" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="7310:7432" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="8020:8060" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="8554:8574" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="9185:9320" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="10055:10194" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="10900:11051" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="11514:11588" ph="SELECT * FRO... orders" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/htdocs/external/availability/begin_qual.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1742,6 +1775,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="78" column="63" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1749,6 +1783,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="160" column="53" selection-start-line="160" selection-start-column="52" selection-end-line="160" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1785,13 +1820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/adsl_nbn2/qual/creation/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8330">
@@ -1816,18 +1844,84 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1253">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/services.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3765">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1473110909000" expanded="true" signature="1900:1942" ph="SELECT * FRO... services" />
+            <marker date="1473110909000" expanded="true" signature="2728:2779" ph="SELECT servi... services" />
+            <marker date="1473110909000" expanded="true" signature="3488:3648" ph="INSERT INTO services... " />
+            <marker date="1473110909000" expanded="true" signature="5513:6009" ph="UPDATE servi... " />
+            <marker date="1473110909000" expanded="true" signature="8350:8391" ph="SELECT * FRO... services" />
+            <marker date="1473110909000" expanded="true" signature="8934:8974" ph="DELETE FROM " />
+            <marker date="1473110909000" expanded="true" signature="9486:9636" ph="SELECT * FRO... services" />
+            <marker date="1473110909000" expanded="true" signature="10258:10365" ph="SELECT * FRO... services" />
+            <marker date="1473110909000" expanded="true" signature="11046:11192" ph="SELECT * FRO... services" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/order_attributes.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-915">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1473110909000" expanded="true" signature="1618:1666" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="2475:2577" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="3249:3312" ph="INSERT INTO order_attributes... " />
+            <marker date="1473110909000" expanded="true" signature="4568:4604" ph="UPDATE order... " />
+            <marker date="1473110909000" expanded="true" signature="5615:5661" ph="DELETE FROM " />
+            <marker date="1473110909000" expanded="true" signature="6451:6553" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="7181:7229" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="7850:8021" ph="SELECT * FRO... order_attributes" />
+            <marker date="1473110909000" expanded="true" signature="8607:8703" ph="SELECT * FRO... order_attributes" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bin/run_orders.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8700">
+        <state relative-caret-position="5970">
           <caret line="580" column="42" selection-start-line="580" selection-start-column="42" selection-end-line="580" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/classes/orders.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="627" column="90" selection-start-line="627" selection-start-column="16" selection-end-line="627" selection-end-column="90" />
+          <folding>
+            <marker date="1475203653000" expanded="true" signature="1643:1681" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="2434:2479" ph="SELECT order... orders" />
+            <marker date="1475203653000" expanded="true" signature="3185:3271" ph="INSERT INTO orders... " />
+            <marker date="1475203653000" expanded="true" signature="4893:5020" ph="UPDATE order... " />
+            <marker date="1475203653000" expanded="true" signature="5762:5798" ph="DELETE FROM " />
+            <marker date="1475203653000" expanded="true" signature="6588:6706" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="7310:7432" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="8020:8060" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="8554:8574" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="9185:9320" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="10055:10194" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="10900:11051" ph="SELECT * FRO... orders" />
+            <marker date="1475203653000" expanded="true" signature="11514:11588" ph="SELECT * FRO... orders" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bin/run_orders_opticomm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-128">
-          <caret line="107" column="48" selection-start-line="107" selection-start-column="48" selection-end-line="107" selection-end-column="48" />
+        <state relative-caret-position="517">
+          <caret line="149" column="30" selection-start-line="149" selection-start-column="30" selection-end-line="149" selection-end-column="30" />
           <folding />
         </state>
       </provider>
