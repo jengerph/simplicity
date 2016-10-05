@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43d89922-48ee-4a29-9963-f22c57c5f78e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/includes/xisoap/includes/OrderStatus.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/run_orders_opticomm.php" afterPath="$PROJECT_DIR$/bin/run_orders_opticomm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/xisoap/includes/CancelService.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/CancelService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/xisoap/includes/ConnectService.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/ConnectService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/xisoap/includes/FactoryXiSoap.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/FactoryXiSoap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/xisoap/includes/SearchService.php" afterPath="$PROJECT_DIR$/includes/xisoap/includes/SearchService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php" afterPath="$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php" afterPath="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php" />
     </list>
     <ignored path="simplicity.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,8 +28,8 @@
       <file leaf-file-name="run_orders_opticomm.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bin/run_orders_opticomm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="521" column="32" selection-start-line="521" selection-start-column="32" selection-end-line="521" selection-end-column="32" />
+            <state relative-caret-position="165">
+              <caret line="490" column="22" selection-start-line="490" selection-start-column="22" selection-end-line="490" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -43,8 +38,38 @@
       <file leaf-file-name="FactoryXiSoapTest.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="150" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+            <state relative-caret-position="2100">
+              <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="221" column="69" selection-start-line="221" selection-start-column="69" selection-end-line="221" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="location_id.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/location_id.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="location_id_row.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/location_id_row.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -53,7 +78,7 @@
       <file leaf-file-name="run_orders.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/run_orders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1657">
+            <state relative-caret-position="13545">
               <caret line="903" column="0" selection-start-line="903" selection-start-column="0" selection-end-line="903" selection-end-column="0" />
               <folding />
             </state>
@@ -83,7 +108,6 @@
         <option value="$PROJECT_DIR$/htdocs/external/xisoap/tests/FactoryXiSoapTest.php" />
         <option value="$PROJECT_DIR$/bin/run_orders.php" />
         <option value="$PROJECT_DIR$/classes/orders.class" />
-        <option value="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php" />
         <option value="$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/qual/creation/index.html" />
         <option value="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/qual/creation/index.php" />
         <option value="$PROJECT_DIR$/htdocs/base/manage/orders/index.php" />
@@ -98,6 +122,7 @@
         <option value="$PROJECT_DIR$/includes/xisoap/includes/OrderStatus.php" />
         <option value="$PROJECT_DIR$/includes/xisoap/wsdl/order_status.wsdl" />
         <option value="$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php" />
+        <option value="$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php" />
         <option value="$PROJECT_DIR$/bin/run_orders_opticomm.php" />
       </list>
     </option>
@@ -139,7 +164,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -237,192 +261,6 @@
               <option name="myItemId" value="manage" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wholesalers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eng" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wholesalers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="management" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eng" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wholesalers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="management" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="add" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eng" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wholesalers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="management" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="add" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parent_plan" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eng" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wholesalers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="management" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="add" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="customize" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simplicity" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eng" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -485,6 +323,78 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="adsl_nbn" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eng" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="add" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eng" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="add" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opticomm" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -774,6 +684,70 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="add" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="htdocs" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="add" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opticomm" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simplicity" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="htdocs" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manage" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="plans" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -850,6 +824,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -859,7 +834,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../leaptel/wp-content/plugins/nbn_availability" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../etea-website-new" />
     <property name="WebServerToolWindowFactoryState" value="true" />
   </component>
   <component name="RecentsManager">
@@ -937,19 +912,23 @@
       <workItem from="1474884073969" duration="7547000" />
       <workItem from="1474943012016" duration="3715000" />
       <workItem from="1475201066812" duration="13918000" />
-      <workItem from="1475368543346" duration="13508000" />
+      <workItem from="1475368543346" duration="16072000" />
+      <workItem from="1475446951225" duration="490000" />
+      <workItem from="1475531467906" duration="212000" />
+      <workItem from="1475622449016" duration="171000" />
+      <workItem from="1475658196365" duration="3367000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83726000" />
+    <option name="totallyTimeSpent" value="90530000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3004292" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31759655" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1021,20 +1000,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/location_id.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/location_id_row.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/nbn_yes.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1046,7 +1011,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6780">
           <caret line="461" column="2" selection-start-line="461" selection-start-column="2" selection-end-line="461" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1062,7 +1026,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-320">
           <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1070,7 +1033,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
           <caret line="308" column="61" selection-start-line="308" selection-start-column="61" selection-end-line="308" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1085,15 +1047,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="78" column="63" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="160" column="53" selection-start-line="160" selection-start-column="52" selection-end-line="160" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1101,25 +1054,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-13598">
           <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
-          <folding>
-            <marker date="1473110909000" expanded="true" signature="1739:1775" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="2522:2564" ph="SELECT plan_... plans" />
-            <marker date="1473110909000" expanded="true" signature="3235:3366" ph="INSERT INTO plans... " />
-            <marker date="1473110909000" expanded="true" signature="5119:5663" ph="UPDATE plans... " />
-            <marker date="1473110909000" expanded="true" signature="7820:7839" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="8325:8367" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="8894:8996" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="9532:9569" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="10070:10106" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="14617:14686" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="16163:16270" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="16870:16957" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="17492:17534" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="18079:18121" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="18893:18918" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="19822:19847" ph="SELECT * FRO... plans" />
-            <marker date="1473110909000" expanded="true" signature="20842:20861" ph="SELECT * FRO... plans" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1134,7 +1068,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8330">
           <caret line="157" column="16" selection-start-line="157" selection-start-column="16" selection-end-line="157" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1142,7 +1075,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1170">
           <caret line="78" column="26" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1150,17 +1082,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3765">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1473110909000" expanded="true" signature="1900:1942" ph="SELECT * FRO... services" />
-            <marker date="1473110909000" expanded="true" signature="2728:2779" ph="SELECT servi... services" />
-            <marker date="1473110909000" expanded="true" signature="3488:3648" ph="INSERT INTO services... " />
-            <marker date="1473110909000" expanded="true" signature="5513:6009" ph="UPDATE servi... " />
-            <marker date="1473110909000" expanded="true" signature="8350:8391" ph="SELECT * FRO... services" />
-            <marker date="1473110909000" expanded="true" signature="8934:8974" ph="DELETE FROM " />
-            <marker date="1473110909000" expanded="true" signature="9486:9636" ph="SELECT * FRO... services" />
-            <marker date="1473110909000" expanded="true" signature="10258:10365" ph="SELECT * FRO... services" />
-            <marker date="1473110909000" expanded="true" signature="11046:11192" ph="SELECT * FRO... services" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1168,17 +1089,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-915">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1473110909000" expanded="true" signature="1618:1666" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="2475:2577" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="3249:3312" ph="INSERT INTO order_attributes... " />
-            <marker date="1473110909000" expanded="true" signature="4568:4604" ph="UPDATE order... " />
-            <marker date="1473110909000" expanded="true" signature="5615:5661" ph="DELETE FROM " />
-            <marker date="1473110909000" expanded="true" signature="6451:6553" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="7181:7229" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="7850:8021" ph="SELECT * FRO... order_attributes" />
-            <marker date="1473110909000" expanded="true" signature="8607:8703" ph="SELECT * FRO... order_attributes" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1186,21 +1096,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
           <caret line="627" column="90" selection-start-line="627" selection-start-column="16" selection-end-line="627" selection-end-column="90" />
-          <folding>
-            <marker date="1475203653000" expanded="true" signature="1643:1681" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="2434:2479" ph="SELECT order... orders" />
-            <marker date="1475203653000" expanded="true" signature="3185:3271" ph="INSERT INTO orders... " />
-            <marker date="1475203653000" expanded="true" signature="4893:5020" ph="UPDATE order... " />
-            <marker date="1475203653000" expanded="true" signature="5762:5798" ph="DELETE FROM " />
-            <marker date="1475203653000" expanded="true" signature="6588:6706" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="7310:7432" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="8020:8060" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="8554:8574" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="9185:9320" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="10055:10194" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="10900:11051" ph="SELECT * FRO... orders" />
-            <marker date="1475203653000" expanded="true" signature="11514:11588" ph="SELECT * FRO... orders" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1208,7 +1103,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="133" column="77" selection-start-line="133" selection-start-column="77" selection-end-line="133" selection-end-column="77" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1216,7 +1110,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="276" column="12" selection-start-line="276" selection-start-column="12" selection-end-line="276" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1224,28 +1117,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
-          <folding>
-            <marker date="1473853715000" expanded="true" signature="1560:1688" ph="SELECT * FRO... radacct" />
-            <marker date="1473853715000" expanded="true" signature="2462:2519" ph="SELECT usern... radacct" />
-            <marker date="1473853715000" expanded="true" signature="3502:3534" ph="SELECT * FRO... radacct" />
-            <marker date="1473853715000" expanded="true" signature="4004:4043" ph="SELECT usern... radacct" />
-            <marker date="1473853715000" expanded="true" signature="4514:4564" ph="SELECT * FRO... radacct" />
-            <marker date="1473853715000" expanded="true" signature="5088:5235" ph="SELECT * FRO... radacct" />
-            <marker date="1473853715000" expanded="true" signature="5749:5799" ph="SELECT * FRO... radacct" />
-            <marker date="1473853715000" expanded="true" signature="6211:6258" ph="SELECT * FRO... radcheck" />
-            <marker date="1473853715000" expanded="true" signature="7055:7115" ph="INSERT INTO radius.radcheck... " />
-            <marker date="1473853715000" expanded="true" signature="7378:7431" ph="INSERT INTO radius.radusergroup... " />
-            <marker date="1473853715000" expanded="true" signature="8607:8779" ph="UPDATE radiu... " />
-            <marker date="1473853715000" expanded="true" signature="9752:9797" ph="DELETE FROM " />
-            <marker date="1473853715000" expanded="true" signature="12626:12973" ph="SELECT accti... radacct" />
-            <marker date="1473853715000" expanded="true" signature="13827:13994" ph="SELECT * FRO... radacct" />
-            <marker date="1473853715000" expanded="true" signature="14766:15222" ph="SELECT usern... radacct" />
-            <marker date="1473853715000" expanded="true" signature="16043:16472" ph="SELECT usern... radacct" />
-            <marker date="1473853715000" expanded="true" signature="16952:17067" ph="SELECT * FRO... radacct" />
-            <marker date="1473853715000" expanded="true" signature="18194:18248" ph="SELECT usern... radcheck" />
-            <marker date="1473853715000" expanded="true" signature="18966:19062" ph="SELECT * FRO... radcheck" />
-            <marker date="1473853715000" expanded="true" signature="19755:19802" ph="SELECT * FRO... radreply" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1253,13 +1124,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-75">
           <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding>
-            <marker date="1473110909000" expanded="true" signature="2883:2930" ph="SELECT * FRO... radcheck" />
-            <marker date="1473110909000" expanded="true" signature="3241:3288" ph="SELECT * FRO... radreply" />
-            <marker date="1473110909000" expanded="true" signature="3597:3648" ph="SELECT * FRO... radusergroup" />
-            <marker date="1473110909000" expanded="true" signature="3967:4128" ph="SELECT radiu... radusergroup" />
-            <marker date="1473110909000" expanded="true" signature="4447:4560" ph="SELECT * FRO... radpostauth" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1267,7 +1131,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1050">
           <caret line="151" column="27" selection-start-line="151" selection-start-column="27" selection-end-line="151" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1275,7 +1138,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1283,7 +1145,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1291,7 +1152,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-758">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1299,7 +1159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1307,7 +1166,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-98">
           <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1315,7 +1173,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1331,7 +1188,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1339,7 +1195,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="58" column="34" selection-start-line="58" selection-start-column="34" selection-end-line="58" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1347,7 +1202,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="149" column="18" selection-start-line="149" selection-start-column="18" selection-end-line="149" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1355,7 +1209,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-855">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1363,7 +1216,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1371,7 +1223,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1379,7 +1230,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1387,7 +1237,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" column="45" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1395,7 +1244,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1419,7 +1267,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1427,7 +1274,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="84" column="63" selection-start-line="84" selection-start-column="63" selection-end-line="84" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1441,7 +1287,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/run_orders.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1657">
+        <state relative-caret-position="13545">
           <caret line="903" column="0" selection-start-line="903" selection-start-column="0" selection-end-line="903" selection-end-column="0" />
           <folding />
         </state>
@@ -1449,16 +1295,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/xisoap/tests/FactoryXiSoapTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="150" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+        <state relative-caret-position="2100">
+          <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/location_id.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/eng/base/manage/services/add/opticomm/location_id_row.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/htdocs/base/manage/services/add/opticomm/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="221" column="69" selection-start-line="221" selection-start-column="69" selection-end-line="221" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/run_orders_opticomm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="521" column="32" selection-start-line="521" selection-start-column="32" selection-end-line="521" selection-end-column="32" />
+        <state relative-caret-position="165">
+          <caret line="490" column="22" selection-start-line="490" selection-start-column="22" selection-end-line="490" selection-end-column="22" />
           <folding />
         </state>
       </provider>

@@ -21,6 +21,8 @@ include_once "radius_reply.class";
 include_once "staticip.class";
 include_once "authorised_rep.class";
 
+require_once dirname(__FILE__) . "/../includes/xisoap/includes/FactoryXiSoap.php";
+
 // Do we process new orders?
 $CONTROL_PROCESS_NEW = 1;
 
@@ -89,7 +91,6 @@ while ($cel = each($orders_list)) {
 
                     try {
 
-                        require_once dirname(__FILE__) . "/../includes/xisoap/includes/FactoryXiSoap.php";
                         // Start connect service request to Opticomm via SOAP
                         $client = new \XiSoap\FactoryXiSoap("connect.service");
 
@@ -118,19 +119,19 @@ while ($cel = each($orders_list)) {
                         }
 
                         $poi = "";
-                        if(strtoupper($customer->state) === "VIC") {
+                        if (strtoupper($customer->state) === "VIC") {
                             $poi = "POI-05";
                         }
-                        if(strtoupper($customer->state) === "NSW") {
+                        if (strtoupper($customer->state) === "NSW") {
                             $poi = "POI-03";
                         }
-                        if(strtoupper($customer->state) === "QLD") {
+                        if (strtoupper($customer->state) === "QLD") {
                             $poi = "POI-01";
                         }
-                        if(strtoupper($customer->state) === "SA") {
+                        if (strtoupper($customer->state) === "SA") {
                             $poi = "POI-07";
                         }
-                        if(strtoupper($customer->state) === "WA") {
+                        if (strtoupper($customer->state) === "WA") {
                             $poi = "POI-09";
                         }
 
@@ -155,7 +156,7 @@ while ($cel = each($orders_list)) {
                         $response = $client->getResults($param);
 
                         if (!is_array($response) || count($response) == 0) {
-                            echo "An error occurred while sending the request to Opticomm. Please contact technical support";
+                            echo "An error occurred while sending the request to Opticomm. Please contact technical support. Line 159";
                         }
 
                         //var_dump($response);
@@ -310,7 +311,7 @@ while ($cel = each($orders_list)) {
                             $response = $client->getResults($param);
 
                             if (!is_array($response) || count($response) == 0) {
-                                echo "An error occurred while sending the request to Opticomm. Please contact technical support";
+                                echo "An error occurred while sending the request to Opticomm. Please contact technical support. Line 314";
                             }
 
                             //var_dump($response);
@@ -487,11 +488,13 @@ while ($cel = each($orders_list)) {
                         "Provider_Ref" => $services->service_id,
                     ];
 
+                    //var_dump($param);
+
                     $client = new \XiSoap\FactoryXiSoap("order.status");
                     $response = $client->getResults($param);
 
                     if (!is_array($response) || count($response) == 0) {
-                        echo "An error occurred while sending the request to Opticomm. Please contact technical support";
+                        echo "An error occurred while sending the request to Opticomm. Please contact technical support. Line 495";
                     }
 
                     //var_dump($response);
@@ -518,7 +521,7 @@ while ($cel = each($orders_list)) {
                     $do_accept = 0;
                 }
 
-                if(is_array($response) && $response->Active === "Y") {
+                if (is_array($response) && $response->Active === "Y") {
                     // Competed!
                     echo "COMPLETED!";
 
@@ -532,7 +535,7 @@ while ($cel = each($orders_list)) {
 
                     // Is this a decomissioning order?
 
-                    if ($orders->action == 'new' ) {
+                    if ($orders->action == 'new') {
                         $services->state = 'active';
                         $services->start_date = date("Y-m-d H:i:s");
                         $services->save();
@@ -542,13 +545,13 @@ while ($cel = each($orders_list)) {
                         // Send order receipt:
                         $mail = new PHPMailer();
 
-                        $mail->From     = "service.delivery@xi.com.au";
+                        $mail->From = "service.delivery@xi.com.au";
                         $mail->FromName = "X Integration Pty Ltd";
-                        $mail->Subject  = "Service Completion Advice";
-                        $mail->Host     = "127.0.0.1";
-                        $mail->Mailer   = "smtp";
+                        $mail->Subject = "Service Completion Advice";
+                        $mail->Host = "127.0.0.1";
+                        $mail->Mailer = "smtp";
 
-                        $text_body  = "Dear " . ucwords($customer->first_name) . " " . ucwords($customer->last_name) . ",\r\n";
+                        $text_body = "Dear " . ucwords($customer->first_name) . " " . ucwords($customer->last_name) . ",\r\n";
                         $text_body .= "\r\n";
                         $text_body .= "X Integration is pleased to advise that successful commissioning of your service has been completed, this service is ready for use and billing has commenced as of " . $services->start_date . "\r\n";
                         $text_body .= "\r\n";
@@ -556,8 +559,8 @@ while ($cel = each($orders_list)) {
                         $text_body .= "\r\n";
                         $text_body .= "Company Name: " . ucwords($customer->company_name) . "\r\n\r\n";
                         $text_body .= "Customer Name: " . ucwords($customer->first_name) . " " . ucwords($customer->last_name) . "\r\n\r\n";
-                        $text_body .= "Username: " . get_attribute( $orders->order_id, "order_username" ) . "@" . get_attribute( $orders->order_id, "order_realms" ) . "\r\n\r\n";
-                        $text_body .= "Password: " . get_attribute( $orders->order_id, "order_password" ) . "\r\n\r\n";
+                        $text_body .= "Username: " . get_attribute($orders->order_id, "order_username") . "@" . get_attribute($orders->order_id, "order_realms") . "\r\n\r\n";
+                        $text_body .= "Password: " . get_attribute($orders->order_id, "order_password") . "\r\n\r\n";
                         $text_body .= "Order Reference: " . $orders->order_id . "\r\n\r\n";
                         $text_body .= "Below is a list of item(s) on this order. " . "\r\n\r\n";
 
@@ -578,8 +581,8 @@ while ($cel = each($orders_list)) {
 
                         $text_body .= "Contract Term (Months): " . $contract_length->value . "\r\n\r\n";
 
-                        $text_body .= "Service Number: " . get_attribute( $orders->order_id, "order_service_number" ) . "\r\n";
-                        $text_body .= "Access Location: " . get_attribute( $orders->order_id, "order_address" ) . "\r\n";
+                        $text_body .= "Service Number: " . get_attribute($orders->order_id, "order_service_number") . "\r\n";
+                        $text_body .= "Access Location: " . get_attribute($orders->order_id, "order_address") . "\r\n";
                         $text_body .= "Access Method: " . $plan_title->access_method . "\r\n";
 
                         $service_types = new service_types();
@@ -600,7 +603,7 @@ while ($cel = each($orders_list)) {
                         $mail->AddBCC("notifications@xi.com.au");
 
 
-                        $mail->Body    = $text_body;
+                        $mail->Body = $text_body;
 
                         $comment = new order_comments();
                         $comment->order_id = $orders->order_id;
@@ -716,10 +719,7 @@ while ($cel = each($orders_list)) {
 
                 }
 
-
-            }
-
-        } // End action = new || action = cancel
+            } // End action = new || action = cancel
         } // End state = Accepted
     } // ENd type 1 or 2 check
 } // ENd while loop through orders

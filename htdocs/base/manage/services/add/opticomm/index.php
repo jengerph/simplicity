@@ -150,9 +150,15 @@ if (isset($_REQUEST['submit2'])) {
         require_once dirname(__FILE__) . "/../../../../../../includes/xisoap/includes/FactoryXiSoap.php";
         $client = new \XiSoap\FactoryXiSoap("search.service"); //search.service is the operation type
 
+        $unit_no = ($_POST["unit_level"]) ?: "";
+
+        if(!empty($unit_no) && stripos($unit_no, "unit") !== false) {
+            $unit_no = substr($unit_no, stripos($unit_no, "unit") + 5);
+        }
+
         $param = array(
             "lot_no" => ($_POST["lot_no"]) ?: "",
-            "unit_no" => ($_POST["unit_no"]) ?: "",
+            "unit_no" => $unit_no,
             "house_no" => ($_POST["street_number"]) ?: "",
             "street_type" => ($_POST["street_type"]) ?: "",
             "street_name" => ($_POST["street_name"]) ?: "",
@@ -163,7 +169,7 @@ if (isset($_REQUEST['submit2'])) {
 
         $param["street_name"] = substr($param["street_name"], 0, strrpos($param["street_name"], " "));
 
-        $results = $client->getResults("AddressSearch", $param);
+        $results = $client->getResults($param);
 
         if (sizeof($results) <= 0) {
             die("Address not available on Opticomm");
