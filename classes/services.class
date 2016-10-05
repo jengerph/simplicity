@@ -562,5 +562,23 @@ class services {
 
   }
 
+  function save_identifier($service_id, $identifier)
+  {
+      $service = new services();
+      $service->service_id = $this->service_id;
+      $service->load();
+
+      $query = "UPDATE services SET identifier = " . $this->db->quote($identifier);
+      $query .= " WHERE service_id = " . $this->db->quote($service_id);
+      $result = $this->db->execute_query($query);
+
+      if ($result == 0) {
+
+          return false;
+
+      }
+
+      return true;
+  }
 }
 

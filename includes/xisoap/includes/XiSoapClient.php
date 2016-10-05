@@ -9,13 +9,13 @@ class XiSoapClient
 
     /**
      * XiSoapClient constructor.
-     * @param ISoapService $service
+     * @param SoapService $service
      * @param $username
      * @param $password
      * @param int $soapVersion
      * @internal param $url
      */
-    public function __construct(ISoapService $service, $username, $password, $soapVersion = SOAP_1_1)
+    public function __construct(SoapService $service, $username, $password, $soapVersion = SOAP_1_1)
     {
         try {
             $wsdl = $service->getWSDL();

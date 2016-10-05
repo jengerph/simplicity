@@ -210,6 +210,13 @@ while ($cel = each($orders_list)) {
                         $orders->status = 'accepted';
                         $orders->save();
 
+                        //save service identifier to Opticomm service id
+                        $update_services = new services();
+                        $result = $update_services->save_identifier($services->service_id, $service_id);
+                        if(!$result) {
+                            echo "Could not save identifier. Line 217";
+                        }
+
                         // //create entries to radcheck and radusergroup
                         $radius = new radius();
                         $radius->service_id = $services->service_id;

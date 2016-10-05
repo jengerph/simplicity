@@ -2,9 +2,7 @@
 
 namespace XiSoap;
 
-require_once dirname(__FILE__) . "/ISoapService.php";
-
-abstract class SoapService implements ISoapService
+abstract class SoapService
 {
     private $config;
     private $wsdl;
