@@ -504,7 +504,7 @@ while ($cel = each($orders_list)) {
                         echo "An error occurred while sending the request to Opticomm. Please contact technical support. Line 495";
                     }
 
-                    //var_dump($response);
+                    var_dump($response);
 
 
                 } catch (SoapFault $exception) {
@@ -528,7 +528,7 @@ while ($cel = each($orders_list)) {
                     $do_accept = 0;
                 }
 
-                if (is_array($response) && $response->Active === "Y") {
+                if (is_array($response) && $response[0]->Active === "Y") {
                     // Competed!
                     echo "COMPLETED!";
 
