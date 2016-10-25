@@ -67,7 +67,7 @@ while ($wholesaler = each($wholesalers)) {
 			$s->service_id = $service['value']['service_id'];
 			$s->load();
 			
-			if (($s->type_id == 1 || $s->type_id == 2) && $s->state != 'inactive') {
+			if (($s->type_id == 1 || $s->type_id == 2|| $s->type_id == 8) && $s->state != 'inactive') {
 				
 					// DSL or NBN Circuit
 					
@@ -181,7 +181,7 @@ while ($wholesaler = each($wholesalers)) {
         	}
         	
 
-					if ($plan_attr->value > 0) {
+					//if ($plan_attr->value > 0) {
             $get_month = new accounting();
             $get_month->username = $username . '@' . $realms;
             $get_month->start_date = $start_date;
@@ -216,6 +216,10 @@ while ($wholesaler = each($wholesalers)) {
           	//echo "    - " . $s->service_id . ' - ' . $plan->description . ' - ' . $username . '@' . $realms . ' - ' . $start_date . ' - ' . $finish_date . '-' . $usage . "\n";
           	
         		$row = array();
+        		if ($c->company_name == '') {
+        			$c->company_name = $c->first_name . ' ' . $c->last_name;
+        		}
+        			
           	$row[] = $c->company_name;
           	$row[] = $s->service_id;
           	$row[] = $s->identifier;
@@ -242,7 +246,7 @@ while ($wholesaler = each($wholesalers)) {
 	          		$warn_services[] = $row;
 	          	}
 	          }
-					}  
+					//}  
         	
 
 
