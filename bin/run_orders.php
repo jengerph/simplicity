@@ -125,6 +125,8 @@ while ($cel = each($orders_list)) {
 							if (get_attribute( $orders->order_id, "order_nbnLocationID" ) != '') {
 								// NBN ID
 								$qparams['qualifyNationalWholesaleBroadbandProductRequest']['nbnLocationID'] = get_attribute( $orders->order_id, "order_nbnLocationID" );
+								$qparams['qualifyNationalWholesaleBroadbandProductRequest']['customerAuthorisationDate'] = date('Y-m-d', $misc->date_ts($orders->start . ' 06:00:00'));
+								 
 							} else {
 								// Telstra ID
 								$qparams['qualifyNationalWholesaleBroadbandProductRequest']['telstraLocationID'] = get_attribute( $orders->order_id, "order_telstraLocationID" );
