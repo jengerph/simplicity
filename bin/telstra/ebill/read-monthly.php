@@ -4,8 +4,14 @@
 // Read file from telstra
 
 include "/var/www/simplicity/htdocs/setup.inc";
+include_once("class.phpmailer.php");
 
 $filename = $argv[1];
+$sql = $argv[2];
+
+if ($sql == '') {
+	$sql = 0;
+}
 
 
 $fh = fopen($filename,'r');
@@ -14,10 +20,22 @@ $linecount = 0;
 $inv_start = '';
 $invoice = array();
 
+$counters = array();
+$invoices = array();
+
+$file_seq = '';
+$file_date = '';
+
 while ($line = fgets($fh)) {
 
 	if (strlen($line) > 3) {
   	$rec = array();
+
+  	if (!isset($counters[substr($line, 0, 3)])) {
+  		$counters[substr($line, 0, 3)] = 0;
+  	}
+  	
+  	$counters[substr($line, 0, 3)]++;
   	
   	if ($linecount == 0) {
   		
@@ -29,6 +47,9 @@ while ($line = fgets($fh)) {
   		$rec['File Sequence Number'] = substr($line, 11, 4);
   		$rec['File event date'] = substr($line, 15, 6);
   		$rec['Filler'] = substr($line, 21, 727);
+
+  		$file_seq = $rec['File Sequence Number'];
+			$file_date = $rec['File event date'];
   		
   	} else if (substr($line, 0, 3) == 'FTR') {
   	
@@ -213,6 +234,8 @@ while ($line = fgets($fh)) {
         $inv_start[8] = '';
         $inv_start[9] = '';
         $inv_start[10] = $rec['Doc Ref Nbr'];
+        
+        $invoices[] = $rec;
         
         
   		} else if ($rec['Section Type'] == 'MS') {
@@ -481,3 +504,52 @@ while ($line = fgets($fh)) {
 }
 fclose($fh);
 
+
+echo "Summary for " . $file_seq . ' - ' . $file_date . ": \n";
+while ($cel = each($counters)) {
+	
+	echo $cel['key'] .  ' - ' . $cel['value'] . ' record(s)' . "\n";
+}
+
+if ($sql == 1) {
+	
+		// Send email
+  $mail = new PHPMailer();
+
+  $mail->From = "service.delivery@xi.com.au";
+  $mail->FromName = "X Integration Pty Ltd";
+  $mail->Subject = "Telstra EBill Monthly File Receievd - $filename";
+  $mail->Host = "127.0.0.1";
+  $mail->Mailer = "smtp";
+
+	$mail->IsHTML(true);  
+	
+  $mail->Body = "<pre>Summary for " . $file_seq . ' - ' . $file_date . ": \r\n";
+  
+  reset($counters);
+	while ($cel = each($counters)) {
+	
+		$mail->Body .= $cel['key'] .  ' - ' . $cel['value'] . ' record(s)' . "\r\n";
+	}
+
+  $mail->Body .= "\r\nInvoices receieved:\r\n";
+  
+  reset($invoices);
+	while ($cel = each($invoices)) {
+
+  	while ($cel2 = each($cel['value'])) {
+  		
+  		$mail->Body .= sprintf("%40s   %s\n", $cel2['key'], $cel2['value']);
+  	}
+  	
+  	$mail->Body .= "\n";
+  	$mail->Body .= "===========================================================\n";
+	
+	}
+
+  $mail->AddAddress('notifications@xi.com.au');
+  $mail->AddAddress('accounts@xi.com.au');
+
+  $mail->Send();
+	
+}
