@@ -11,6 +11,7 @@
             <xsd:enumeration value="Call Termination Service" />
             <xsd:enumeration value="RezLine" />
             <xsd:enumeration value="Hub Aggregation Circuit" />
+            <xsd:enumeration value="Home Broadband Bundle" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

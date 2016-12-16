@@ -21,6 +21,7 @@
     <xsd:include schemaLocation="DSLTransfer.xsd" />
     <xsd:include schemaLocation="RadiusEntry.xsd" />
     <xsd:include schemaLocation="NCASDetails.xsd" />
+    <xsd:include schemaLocation="ServiceTransferDetails.xsd" />
 
     <xsd:complexType name="NationalWholesaleBroadbandService">
         <xsd:sequence>
@@ -121,6 +122,12 @@
                     <xsd:documentation xml:lang="en">A NBN appointment ID</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            <xsd:element name="serviceTransferDetails" type="wsg:ServiceTransferDetails" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Details required by NBNCo to transfer a service from one customer to another customer, or from one service provider to another service provider, or to REVERSE a previous transfer</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="uniVlanId" type="wsg:UniVlanId" minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>

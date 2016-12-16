@@ -28,6 +28,7 @@
             <xsd:enumeration value="EFM 4 Wire" />
             <xsd:enumeration value="EFM 6 Wire" />
             <xsd:enumeration value="EFM 8 Wire" />
+            <xsd:enumeration value="ADSL2+ (MSAN)" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

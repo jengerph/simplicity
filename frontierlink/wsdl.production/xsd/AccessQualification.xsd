@@ -9,6 +9,7 @@
     <xsd:include schemaLocation="Speed.xsd" />
     <xsd:include schemaLocation="ServiceSpeedList.xsd" />
     <xsd:include schemaLocation="NBNCopperPairList.xsd" />
+    <xsd:include schemaLocation="NBNNetworkTerminationDeviceList.xsd" />
     <xsd:include schemaLocation="elements/QualificationID.xsd" />
     <xsd:include schemaLocation="elements/TestResult.xsd" />
     <xsd:include schemaLocation="elements/AccessMethod.xsd" />
@@ -70,6 +71,11 @@
             <xsd:element name="nbnNewDevelopmentsChargeApplies" type="wsg:NBNNewDevelopmentsChargeApplies" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">NBN new developments charge applies.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="nbnNetworkTerminationDeviceList" type="wsg:NBNNetworkTerminationDeviceList" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A complex list of NBN Network Termination Devices.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>

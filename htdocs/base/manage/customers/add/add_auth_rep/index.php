@@ -7,6 +7,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
 // HISTORY:
+//	Date			Id			Description of change
+//	--------	------	---------------------------------------------------------------------
+//	20161214 	jenger 	adding first authorised representative details now defaults details 
+//										from customer details
+//
 // $Log$
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -257,6 +262,17 @@ if ( isset($_REQUEST["ar_birthdate"]) && !empty($_REQUEST["ar_birthdate"]) ) {
 } else {
 	$birthdate = "";
 }
+
+// 20161214 begin
+$authorised_rep->customer_id = $customers->customer_id;
+if (!$authorised_rep->get_contacts()) {
+	$authorised_rep->first_name = $customers->first_name;
+	$authorised_rep->surname = $customers->last_name;
+	$birthdate = date("d/m/Y", strtotime($customers->birthdate));
+	$authorised_rep->email = $customers->email;
+	$authorised_rep->contact_number = $customers->mobile;	
+}
+// 20161214 end
 
 $pt->setVar('CUSTOMER_ID', $customers->customer_id);
 $pt->setVar('AR_FIRST_NAME', $authorised_rep->first_name);
