@@ -83,7 +83,12 @@ if (!isset($qual['result'])) {
   $nbnServiceabilityClass[11] = '11 indicates that the location is serviceable by copper, active node present';
   $nbnServiceabilityClass[12] = '12 indicates that the location is serviceable by copper, jumpering is required';
   $nbnServiceabilityClass[13] = '13 indicates that the location is serviceable by copper, infrastructure in place';
-  
+ 
+  $nbnServiceabilityClass[20] = '20 indicates that the location is planned to be serviced by HFC, outside plant does not exist';
+  $nbnServiceabilityClass[21] = '21 indicates that the location is serviceable by HFC, the location has a street TAP but requires a lead-in, PCD, internal tie cable, and wall-plate/socket';
+  $nbnServiceabilityClass[22] = '22 indicates that the location is serviceable by HFC, the location has a street TAP, lead-in and PCD in place, but no internal tie-cables with wall plates/sockets';
+  $nbnServiceabilityClass[23] = '23 indicates that the location is serviceable by HFC, the location has a wall-plate/socket but no HFC NTD';
+  $nbnServiceabilityClass[24] = '24 indicates that the location is serviceable by HFC, the location has a wall-plate/socket and HFC NTD and is Ready to Connect';
   
   $arr = array();
   $arr['displayAddress'] = $fnn;

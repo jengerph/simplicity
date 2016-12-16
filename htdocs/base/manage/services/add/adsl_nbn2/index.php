@@ -118,7 +118,7 @@ if (isset($_REQUEST['submit2'])) {
 		// Location has been selected
   	$_SESSION['qual_' . $qual_id] = array();
   	$_SESSION['qual_' . $qual_id]['customer_id']=$cust->customer_id;
-   	$_SESSION['qual_' . $qual_id]['provider']='Telstra';
+   	$_SESSION['qual_' . $qual_id]['provider']='NBN';
   	$_SESSION['qual_' . $qual_id]['type']='location';
   	$_SESSION['qual_' . $qual_id]['location_id']=$_REQUEST['location_id'];
   	$_SESSION['qual_' . $qual_id]['manual']=$_REQUEST['manual'];
@@ -212,7 +212,7 @@ if (isset($_REQUEST['submit2'])) {
   	// First lookup address in telstra database
  		$params2 = array();
   	$params2['serviceProvider'] = array();
-  	$params2['serviceProvider'][0] = 'Telstra';
+  	$params2['serviceProvider'][0] = 'NBN';
     $params2['address'] = array();
 
 		// Unit level fix
@@ -272,7 +272,7 @@ if (isset($_REQUEST['submit2'])) {
     	$_SESSION['qual_' . $qual_id] = array();
     	$_SESSION['qual_' . $qual_id]['customer_id']=$cust->customer_id;
     	$_SESSION['qual_' . $qual_id]['type']='location';
-    	$_SESSION['qual_' . $qual_id]['provider']='Telstra';
+    	$_SESSION['qual_' . $qual_id]['provider']='NBN';
     	$_SESSION['qual_' . $qual_id]['location_id']=$response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation->locationId;
 	  	$_SESSION['qual_' . $qual_id]['manual']=$_REQUEST['manual'];
     	
