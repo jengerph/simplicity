@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+   
+    <xsd:include schemaLocation="Reversal.xsd"/>
+    <xsd:include schemaLocation="ServiceTransfer.xsd"/>
+    
+    <xsd:complexType name="ServiceTransferDetails">
+	    <xsd:choice>
+	    	<xsd:element name= "serviceTransfer" type="wsg:ServiceTransfer" />
+	    	<xsd:element name= "connectOutstanding" type="wsg:ServiceTransfer" />
+	    	<xsd:element name= "reversal" type="wsg:Reversal" />
+	    </xsd:choice>
+    </xsd:complexType>
+</xsd:schema>

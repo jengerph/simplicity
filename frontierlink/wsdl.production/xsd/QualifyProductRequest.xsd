@@ -9,6 +9,7 @@
     <xsd:include schemaLocation="QualifyRequestXpressProductRequest.xsd" />
     <xsd:include schemaLocation="QualifyELanProductRequest.xsd" />
     <xsd:include schemaLocation="QualifyELineProductRequest.xsd" />
+    <xsd:include schemaLocation="QualifyHomeBroadbandBundleProductRequest.xsd" />
 
     <xsd:element name="QualifyProductRequest" type="wsg:QualifyProductRequest" />
 
@@ -33,6 +34,11 @@
                 <xsd:element name="qualifyELineProductRequest" type="wsg:QualifyELineProductRequest">
                     <xsd:annotation>
                         <xsd:documentation xml:lang="en">A complex type capturing required data for ELine qualification</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="qualifyHomeBroadbandBundleProductRequest" type="wsg:QualifyHomeBroadbandBundleProductRequest">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex type capturing required data for Home broadband qualification</xsd:documentation>
                     </xsd:annotation>
                 </xsd:element>
             </xsd:choice>

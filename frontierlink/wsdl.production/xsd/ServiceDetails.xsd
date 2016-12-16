@@ -11,6 +11,7 @@
     <xsd:include schemaLocation="RequestXpressService.xsd" />
     <xsd:include schemaLocation="RezLineService.xsd" />
     <xsd:include schemaLocation="HubAggregationCircuitService.xsd" />
+    <xsd:include schemaLocation="HomeBroadbandBundleService.xsd" />
 
     <xsd:complexType name="ServiceDetails">
         <xsd:annotation>
@@ -46,6 +47,11 @@
                 <xsd:element name="hubAggregationCircuitService" type="wsg:HubAggregationCircuitService">
                     <xsd:annotation>
                         <xsd:documentation xml:lang="en"> A complex definition of details relating to the Hub Aggregation Service for Layer 2 FTTB Product Type</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="homeBroadbandBundleService" type="wsg:HomeBroadbandBundleService">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en"> A complex definition of details relating to the Home broadband bundle Product Type.</xsd:documentation>
                     </xsd:annotation>
                 </xsd:element>
             </xsd:choice>

@@ -12,6 +12,7 @@
     <xsd:include schemaLocation="VoiceProductOrderDetails.xsd" />
     <xsd:include schemaLocation="CtsProductOrderDetails.xsd" />
     <xsd:include schemaLocation="RezLineProductOrderDetails.xsd" />
+    <xsd:include schemaLocation="HomeBroadbandBundleProductOrderDetails.xsd" />
 
     <xsd:complexType name="ServiceOrderDetail">
         <xsd:sequence>
@@ -49,6 +50,11 @@
                 <xsd:element name="RezLineProductOrderDetails" type="wsg:RezLineProductOrderDetails">
                     <xsd:annotation>
                         <xsd:documentation xml:lang="en">A complex definition of RezLine service details</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="HomeBroadbandBundleProductOrderDetails" type="wsg:HomeBroadbandBundleProductOrderDetails">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A complex definition of Home Broadband Bundle service details</xsd:documentation>
                     </xsd:annotation>
                 </xsd:element>
             </xsd:choice>

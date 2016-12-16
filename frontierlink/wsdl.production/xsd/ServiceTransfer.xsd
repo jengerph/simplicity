@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+   
+    <xsd:include schemaLocation="elements/CrossPort.xsd"/>
+    <xsd:include schemaLocation="elements/CustomerAuthorityDateTime.xsd"/>
+    <xsd:include schemaLocation="elements/NtdId.xsd"/>
+    <xsd:include schemaLocation="elements/ParallelCutover.xsd"/>
+    <xsd:include schemaLocation="elements/PortId.xsd"/>
+    <xsd:include schemaLocation="elements/Porting.xsd"/>
+    
+    <xsd:complexType name="ServiceTransfer">
+        <xsd:sequence>
+            <xsd:element name="ntdId" type="wsg:NtdId" minOccurs="0"/>
+            <xsd:element name="portId" type="wsg:PortId" minOccurs="0"/>
+            <xsd:element name="customerAuthorityDateTime" type="wsg:CustomerAuthorityDateTime" />
+            <xsd:element name="porting" type="wsg:Porting" >
+            	<annotation>
+                    <xsd:documentation xml:lang="en">Determine if LNP needs to be done for any VOIP service that is running on the data port</xsd:documentation>
+                </annotation>
+            </xsd:element>
+            <xsd:element name="parallelCutover" type="wsg:ParallelCutover">
+                <annotation>
+                    <xsd:documentation xml:lang="en">Defines if service on from port will remain active for 4 hours when new service is turned up (true) or service is cut-over immediately (false)</xsd:documentation>
+                </annotation>
+            </xsd:element>
+            <xsd:element name="crossPort" type="wsg:CrossPort">
+                <annotation>
+                    <xsd:documentation xml:lang="en">Defines if you are transferring to another port on NTD (true), or to the same port (false)</xsd:documentation>
+                </annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.aapt.com.au/FrontierLink/xsd"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:wsg="http://www.aapt.com.au/FrontierLink/xsd"
+            elementFormDefault="qualified">
+
+	<xsd:include schemaLocation="elements/PortId.xsd"/>
+	<xsd:include schemaLocation="elements/UniId.xsd"/>
+	<xsd:include schemaLocation="elements/UniType.xsd"/>
+	<xsd:include schemaLocation="elements/Status.xsd"/>
+	
+    <xsd:complexType name="NBNUserNetworkInterfaceDetails">
+       	<xsd:sequence>
+        	<xsd:element name="uniId" type="wsg:UniId" />
+			<xsd:element name="uniType" type="wsg:UniType" />
+			<xsd:element name="portId" type="wsg:PortId" />
+			<xsd:element name="status" type="wsg:Status" />
+		</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
