@@ -492,5 +492,34 @@ class accounting {
 
   }
 
+   /* function get_user_period()
+  **
+  ** DESCRIPTION: loads data from table
+  **
+  ** PARAMETERS:
+  ** - none
+  **
+  ** RETURNS:
+  ** - array all accounting details in the table for a user
+  ** 
+  */
+
+  function get_user_period($username, $start, $finish){
+     
+
+      $query = "SELECT SUM(acctinputoctets) as input, SUM(acctoutputoctets) as output FROM accounting.radacct_breakdown WHERE username=" . $this->db->quote($username) . " AND dt >= " . $this->db->quote($start . ' 00:00:00') . " AND dt<=" . $this->db->quote($finish . ' 23:59:59');
+      $result = $this->db->execute_query($query);
+      $a = array();
+
+      if ($result != 0 ) {
+
+        $row = $this->db->fetch_row_array($result);
+        
+        return $row;
+      }
+
+    return $a;
+
+  }
 }
 

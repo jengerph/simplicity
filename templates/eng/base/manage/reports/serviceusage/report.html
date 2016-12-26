@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<!-- choose a theme file -->
+<link rel="stylesheet" href="/templates/theme.blue.css">
+<!-- load jQuery and tablesorter scripts -->
+<script type="text/javascript" src="/templates/jquery.tablesorter.js"></script>
+
+<!-- tablesorter widgets (optional) -->
+<script type="text/javascript" src="/templates/jquery.tablesorter.widgets.js"></script>
+<script language="javascript">
+$(function(){
+  $("#myTable").tablesorter({
+	     theme: 'blue',
+		 widgets: ['zebra']
+  });
+});
+</script>
+<style type="text/css">
+<!--
+.style6 {color: #000099}
+.style8 {color: #000099; font-weight: bold; }
+-->
+</style>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h1 align="center">Service Usage Report</h1>
+<h2 align="center">{REPORT_START_DATE} to {REPORT_FINISH_DATE} for {WHOLESALER}</h2>
+<table width="100%" border="0" cellspacing="2" cellpadding="2" id="myTable" class="tablesorter">
+  <thead>
+    <tr>
+      <td><strong>Customer</strong></td>
+      <td><strong>Service</strong></td>
+      <td><strong>Wholesale Plan</strong></td>
+      <td><strong>Retail Plan</strong></td>
+      <td><strong>Username</strong></td>
+      <td><strong>Download</strong></td>
+      <td><strong>Upload</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    {ROWS}
+  </tbody>
+</table>
+
+Total Download: {TOTAL_DOWNLOAD} gb<br>
+Total Upload: {TOTAL_UPLOAD} gb<br>
+Service count: {TOTAL_SERVICES}<br>
+Average Download: {AVERAGE_DOWNLOAD} gb<br>
+Average Upload: {AVERAGE_UPLOAD} gb<br>
+
+</body>
+</html>

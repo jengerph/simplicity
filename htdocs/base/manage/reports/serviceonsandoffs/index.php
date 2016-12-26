@@ -84,7 +84,7 @@ if (isset($_REQUEST['submit'])) {
 			$pt->setVar(strtoupper($cel2['key']), $cel2['value']);
 		}
 		
-		// FIx customer
+		// Fix customer
 		if ($cel['value']['company_name'] == '') {
 			$pt->setVar('CUSTOMER', $cel['value']['first_name'] . ' ' . $cel['value']['last_name']);
 		} else{

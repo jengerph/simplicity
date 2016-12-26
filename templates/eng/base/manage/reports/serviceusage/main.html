@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="/templates/jquery-ui.css">
+<script src="/templates/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( "#start_date" ).datepicker({
+		dateFormat: "dd/mm/yy"
+	});
+    $( "#finish_date" ).datepicker({
+  		dateFormat: "dd/mm/yy"
+  	});
+  } );
+  </script>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h1>Service Usage Report</h1>
+<form id="form1" name="form1" action="{SELF}" method="GET">
+  <table border="0" cellspacing="2" cellpadding="2">
+    <tbody>
+      <tr>
+        <td><strong>Wholesaler:</strong></td>
+        <td>{WHOLESALER_LIST}</td>
+      </tr>
+      <tr>
+        <td><strong>Start Date:</strong></td>
+        <td>
+        <input type="text" name="start_date" id="start_date" value="{START_DATE}"></td>
+      </tr>
+      <tr>
+        <td><strong>Finish Date:</strong></td>
+        <td><input type="text" name="finish_date" id="finish_date" value="{FINISH_DATE}"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center"><input type="submit" name="submit" id="submit" value="Go"></td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+<p>&nbsp;</p>
+</body>
+</html>
