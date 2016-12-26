@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="/templates/jquery-ui.css">
+<script src="/templates/jquery-ui.js"></script>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h1 align="center">Service Ons and Offs Report</h1>
+<h2 align="center">{REPORT_START_DATE} to {REPORT_FINISH_DATE} for {WHOLESALER}</h2>
+<table width="100%" border="0" cellspacing="2" cellpadding="2">
+  <tbody>
+    <tr>
+      <td><strong>Start Date</strong></td>
+      <td><strong>Finish Date</strong></td>
+      <td><strong>Customer</strong></td>
+      <td><strong>Service</strong></td>
+      <td><strong>Status</strong></td>
+      <td><strong>Wholesale Plan</strong></td>
+      <td><strong>Retail Plan</strong></td>
+    </tr>
+    {ROWS}
+  </tbody>
+</table>
+<br>
+Ons: {ONS}<br>
+Offs: {OFFS}
+
+</body>
+</html>
