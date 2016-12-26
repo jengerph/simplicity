@@ -40,6 +40,7 @@ if (!$wsq->exist()) {
 		$return['nbn_wireless'] = $wsq->result_nbn_wireless;
 		$return['nbn_fiber'] = $wsq->result_nbn_fiber;
 		$return['nbn_fttn'] = $wsq->result_nbn_fttn;
+		$return['nbn_hfc'] = $wsq->result_nbn_hfc;
 	}
 		
 }

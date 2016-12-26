@@ -28,76 +28,77 @@ if (!$wsq->exist()) {
 }
 
 if ($wsq->status == 'pending') {
-	
+
 	// Change to processing
 	$wsq->status = 'progressing';
 	$wsq->save();
-	
+
 	// Format address
-	 if (isset($wsq->level)) {
-  	
-  	// We have sub address information
-  	$bits = explode(' ', $wsq->level);
-  	$unitNumber = trim($bits[1]);
-  	$unitType =trim( $bits[0]);
-  }
-  
-  if ($unitType == 'L' || $unitType == 'Level') {
-  	
-  	// Level not unit
-  	$levelNumber = $unitNumber;
-  	$levelType = $unitType;
-  	$unitNumber = '';
-  	$unitType = '';
-  	
-  }
-  
-  $space = strrpos($wsq->street_name, ' ');
-  $streetName = trim(substr($wsq->street_name, 0, $space));
-  $streetType = trim(substr($wsq->street_name, $space+1));
-  
-  $dash = strrpos($wsq->street_number, '-');
-  if ($dash !== false) {
-  	$streetNumber = trim(substr($wsq->street_number, 0, $dash));
-  } else {
-  	$streetNumber  = $wsq->street_number;
-  }
-  
-  $params = array();
-  
-  $params['ruralMailNumber'] = '';
-  $params['ruralMailType'] = '';
-  $params['ruralNumber'] = '';
-  $params['levelNumber'] = $levelNumber;
-  $params['levelType'] = $levelType;
-  $params['unitNumber'] = $unitNumber;
-  $params['unitType'] = $unitType;
-  $params['planNumber'] = '';
-  $params['lotNumber'] = '';
-  $params['streetNumber'] = $streetNumber;
-  $params['streetNumberSuffix'] ='';
-  $params['siteName'] = '';
-  $params['streetName'] = $streetName;
-  $params['streetType'] = $streetType;
-  $params['streetTypeSufix'] = '';
-  $params['suburb'] = $wsq->locality;
-  $params['state'] = $wsq->state;
-  $params['postcode'] = $wsq->postcode;
-  //print_r($params);
-  
-  // Determine Telstra and NBN Co ID Numbers
-  
-	$locationid = servicequal_address1($params);
-	
+	if (isset($wsq->level)) {
+
+		// We have sub address information
+		$bits = explode(' ', $wsq->level);
+		$unitNumber = trim($bits[1]);
+		$unitType =trim( $bits[0]);
+	}
+
+	if ($unitType == 'L' || $unitType == 'Level') {
+
+		// Level not unit
+		$levelNumber = $unitNumber;
+		$levelType = $unitType;
+		$unitNumber = '';
+		$unitType = '';
+
+	}
+
+	$space = strrpos($wsq->street_name, ' ');
+	$streetName = trim(substr($wsq->street_name, 0, $space));
+	$streetType = trim(substr($wsq->street_name, $space+1));
+
+	$dash = strrpos($wsq->street_number, '-');
+	if ($dash !== false) {
+		$streetNumber = trim(substr($wsq->street_number, 0, $dash));
+	} else {
+		$streetNumber  = $wsq->street_number;
+	}
+
+	$params = array();
+
+	$params['ruralMailNumber'] = '';
+	$params['ruralMailType'] = '';
+	$params['ruralNumber'] = '';
+	$params['levelNumber'] = $levelNumber;
+	$params['levelType'] = $levelType;
+	$params['unitNumber'] = $unitNumber;
+	$params['unitType'] = $unitType;
+	$params['planNumber'] = '';
+	$params['lotNumber'] = '';
+	$params['streetNumber'] = $streetNumber;
+	$params['streetNumberSuffix'] ='';
+	$params['siteName'] = '';
+	$params['streetName'] = $streetName;
+	$params['streetType'] = $streetType;
+	$params['streetTypeSufix'] = '';
+	$params['suburb'] = $wsq->locality;
+	$params['state'] = $wsq->state;
+	$params['postcode'] = $wsq->postcode;
+	//print_r($params);
+
+	// Determine Telstra and NBN Co ID Numbers
+
+	$locationid = servicequal_address1_nbn($params);
+
 	//echo "Location ID: $locationid" . "\n";
-	
+	//exit();
+
 	// Lets do the servcie qual now to see what is available
-	
-	$qual = servicequal_address2('Telstra', $locationid);
-	
-	
+
+	$qual = servicequal_address2('NBN', $locationid);
+
+	//print_r($qual);
 	while ($method = each($qual['accessQualificationList'])) {
-	
+
 		if ($method['value']['accessMethod'] == 'AAPT ADSL2+' || $method['value']['accessMethod'] == 'On Net ADSL2+ Annex A (Type ii)') {
 			if ($method['value']['qualificationResult'] == 'PASS') {
 				$wsq->result_adsl_onnet = 'yes';
@@ -124,31 +125,118 @@ if ($wsq->status == 'pending') {
 					$wsq->result_nbn_fttn = 'yes';
 				}
 			}
+			if ($method['value']['accessType'] == 'NHAS') {
+				if ($method['value']['qualificationResult'] == 'PASS') {
+					$wsq->result_nbn_hfc = 'yes';
+				}
+			}
 		}
-		
-		
 	}
-	
-	if ($wsq->result_nbn_fiber == 'yes' || $wsq->result_nbn_wireless == 'yes' || $wsq->result_nbn_fttn == 'yes') {
+
+	if ($wsq->result_nbn_fiber == 'yes' || $wsq->result_nbn_wireless == 'yes' || $wsq->result_nbn_fttn == 'yes' || $wsq->result_nbn_hfc == 'yes') {
 		$wsq->result_adsl_onnet = 'no';
 		$wsq->result_adsl_offnet = 'no';
+	} else {
+
+		//echo "Begin ADSL:\n\n";
+		// Do ADSL
+		$locationid = servicequal_address1($params);
+		//echo "Location ID: $locationid" . "\n";
+		//exit();
+
+		// Lets do the servcie qual now to see what is available
+
+		$qual = servicequal_address2('Telstra', $locationid);
+
+		while ($method = each($qual['accessQualificationList'])) {
+
+			if ($method['value']['accessMethod'] == 'AAPT ADSL2+' || $method['value']['accessMethod'] == 'On Net ADSL2+ Annex A (Type ii)') {
+				if ($method['value']['qualificationResult'] == 'PASS') {
+					$wsq->result_adsl_onnet = 'yes';
+				}
+			}
+			if ($method['value']['accessMethod'] == 'Telstra L2IG') {
+				if ($method['value']['qualificationResult'] == 'PASS') {
+					$wsq->result_adsl_offnet = 'yes';
+				}
+			}
+			if ($method['value']['accessMethod'] == 'NBN') {
+				if ($method['value']['accessType'] == 'NFAS') {
+					if ($method['value']['qualificationResult'] == 'PASS') {
+						$wsq->result_nbn_fiber = 'yes';
+					}
+				}
+				if ($method['value']['accessType'] == 'NWAS') {
+					if ($method['value']['qualificationResult'] == 'PASS') {
+						$wsq->result_nbn_wireless = 'yes';
+					}
+				}
+				if ($method['value']['accessType'] == 'NCAS') {
+					if ($method['value']['qualificationResult'] == 'PASS') {
+						$wsq->result_nbn_fttn = 'yes';
+					}
+				}
+				if ($method['value']['accessType'] == 'NHAS') {
+					if ($method['value']['qualificationResult'] == 'PASS') {
+						$wsq->result_nbn_hfc = 'yes';
+					}
+				}
+			}
+		}
+
 	}
-	
+
 	$wsq->status = 'complete';
 
 	$wsq->save();
-	
+
 	//print_r($qual);
-	
+
 	//echo "Complete";
 	exit();
-	
+
 } else {
-	
+
 	echo "Qual in incorrect state to complete";
 	exit();
 }
 
+
+function servicequal_address1_nbn($address){
+
+  $config = new config();
+
+  $client = new SoapClient($config->frontier_dir . "/wsdl/FrontierLink.wsdl", array('local_cert'     => $config->frontier_dir . "/cert/frontierlink-cert.xi.com.au.cer",'trace'=>1));
+
+  $params = array();
+  $params['address'] = $address;
+  $params['serviceProvider'] = array();
+  $params['serviceProvider'][0] = 'NBN';
+	//echo "Matt:\n";
+  //print_r($params); 
+  try{
+          $response = $client->findServiceProviderLocationId($params);         
+     }
+  catch (SoapFault $exception) {
+
+  }
+
+	//print_r($response);
+	//echo "Matt";
+	//exit();
+  
+  if (sizeof($response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation) == 1) {
+  	
+  	return $response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation->locationId;
+  } else {
+  	
+  	// Return last response
+  	return $response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation[sizeof($response->serviceProviderLocationList->serviceProviderLocationList->locationList->addressInformation)-1]->locationId;
+  }
+  
+  
+  
+}
 
 function servicequal_address1($address){
 
@@ -169,7 +257,7 @@ function servicequal_address1($address){
 
   }
 
-	print_r($response);
+	//print_r($response);
 	//echo "Matt";
 	//exit();
   
@@ -217,7 +305,7 @@ function servicequal_address2($serviceProvider,$id){
 
   }
   
-  print_r($response);
+  //print_r($response);
   //echo "REQUEST:\n" . $client->__getLastRequest() . "\n";
 
   $arr = array();
@@ -255,7 +343,7 @@ function servicequal_address2($serviceProvider,$id){
   }
 
 
-	print_r($arr);
+	//print_r($arr);
   if ( count($arr) > 0 ) {
     return $arr;
   } else {
