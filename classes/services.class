@@ -14,6 +14,8 @@ include_once "config.class";
 include_once "validate.class";
 include_once "audit.class";
 include_once "service_temp.class";
+require_once "plans.class";
+require_once "plan_attributes.class";
 
 class services {
   
@@ -597,5 +599,127 @@ class services {
   	return $a;
   
   }
+
+  function get_service_bill($wholesaler_id, $start) {
+  
+  	$start .= '-01';
+  	
+  	$datebits = explode('-', $start);
+  	$datebits[1]--;
+  	if ($datebits[1] == 0) {
+  		$datebits[1] = 12;
+  		$datebits[0]--;
+  	}
+  	$prevstart = $datebits[0] . '-' . $datebits[1] . '-01';
+  	
+  	
+  	$query = "SELECT services.service_id FROM services, customers WHERE customers.customer_id = services.customer_id AND customers.wholesaler_id = " . $this->db->quote($wholesaler_id) . " AND ((start_date < '$start 00:00:00' and finish_date = '0000-00-00 00:00:00' AND services.state = 'active') OR (finish_date >= '$prevstart 00:00:00' and finish_date < '$start 00:00:00' and services.state = 'inactive'))";
+  	
+  	
+    $result = $this->db->execute_query($query);
+    
+    if ($result != 0 ) {
+
+      while($row = $this->db->fetch_row_array($result)) {
+        $a[] = $row['service_id'];
+      }
+    }
+
+  	return $a;
+  
+  }
+  
+  function bill_service_wholesale($service_id, $start) {
+
+  	$misc = new misc();
+
+		// Setup TS Values
+  	$start .= '-01';
+  	$startts = $misc->date_ts($start . ' 00:00:00');
+  	  	
+  	$finish = date('Y-m-t', $startts);
+  	$finishts = $misc->date_ts($finish . ' 23:59:59');
+  	
+  	// Previous month
+  	
+  	$prev_startts = $startts - 86400;
+  	$prev_start = date('Y-m-01', $prev_startts);
+  	$prev_startts = $misc->date_ts($prev_start . ' 23:59:59');  	
+
+  	$prev_finish = date('Y-m-t', $prev_startts);
+  	$prev_finishts = $misc->date_ts($prev_finish . ' 23:59:59');  	
+
+  	
+  	$this->service_id = $service_id;
+  	$this->load();
+  	
+  	if ($this->state == 'creation') {
+  		// Not ready
+  		return;
+  	}
+  	
+  	$service_startts = $misc->date_ts($this->start_date);
+  	if ($this->state == 'active') {
+  		$service_finishts = 0;
+  	} else {
+  		$service_finishts = $misc->date_ts($this->finish_date);
+  	}
+  	
+  	$plan = new plans();
+  	$plan->plan_id = $this->wholesale_plan_id;
+  	
+  	if (!$plan->exist()) {
+  		
+  		echo "Plan does not exist for service " . $service_id;
+  		return;
+  		//exit();
+  	}
+  	
+  	$plan->load();
+  	
+  	
+  	$pa = new plan_attributes();
+  	$pa->plan_id = $plan->plan_id;
+  	$attributesin = $pa->get_plan_attributes();
+  	$attributes = array();
+  	
+  	while ($cel = each($attributesin)) {
+  		$attributes[$cel['value']['param']] = $cel['value']['value'];
+  	}
+  	
+  	
+  	
+  	$ret = array();
+  	
+  	// Monthly service fees
+  	if ($service_startts < $startts && ($service_finishts == 0  || $service_finishts > $finishts)) {
+  		
+  		// Normal month
+  		$arr = array();
+  		$arr['description'] = 'Plan service fee - ' . $plan->description . ' - period ' . $start  . ' to ' . $finish;
+			$arr['amount'] = sprintf("%0.4f", $attributes['monthly_cost']);
+		
+			$ret[] = $arr;
+			
+			// Do we need to do a partial month charge for previous month
+			if ($service_startts > $prev_startts) {
+				
+				
+				// Yes
+	  		$arr = array();
+  			$arr['description'] = 'Plan service fee - ' . $plan->description . ' - period ' . date('Y-m-d', $service_startts)  . ' to ' . $prev_finish;
+  			
+  			$days = date('t', $prev_finishts) - date('d', $service_startts);
+  			
+				$arr['amount'] = sprintf("%0.4f", $days * ($attributes['monthly_cost'] / date('t', $prev_finishts)));
+		
+				$ret[] = $arr;
+			}
+				
+		}
+		
+		return $ret;
+  	
+	}
 }
 
