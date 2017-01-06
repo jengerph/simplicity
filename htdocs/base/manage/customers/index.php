@@ -75,6 +75,7 @@ $pt->setFile(array("welcome_banner" => "base/welcome_banner.html",
 					"status_normal" => "base/manage/customers/status_normal.html",
 					"agent_links" => "base/manage/customers/agent_links.html",
 					"agent_column" => "base/manage/customers/agent_column.html",
+					"bpay_table" => "base/manage/customers/bpay_table.html",
 					"credit_card_link" => "base/manage/customers/credit_card_link.html"));
 
 if (!isset($_REQUEST['inactive'])) {
@@ -114,7 +115,9 @@ if ($user->class == 'admin' && isset($_REQUEST["customer_id"])) {
 		$pt->setVar('CUSTOMER_ID', $customers->customer_id);
 		$pt->setVar('CUSTOMER_NAME', $customer_name);
 		$pt->setVar('CS_WHOLESALER', $wholesaler->company_name);
-		$pt->setVar('CS_PHONE', $customers->phone);
+		$pt->setVar('CS_HOME_PHONE', $customers->phone);
+		$pt->setVar('CS_MOBILE_PHONE', $customers->mobile);
+		$pt->setVar('CS_EMAIL', $customers->email);
 		$pt->setVar('CS_TYPE', ucfirst($customers->type));
 		$pt->setVar("CUSTOMER_KIND",ucfirst($customers->kind));
 		$customer_agent = new customers();
@@ -130,6 +133,16 @@ if ($user->class == 'admin' && isset($_REQUEST["customer_id"])) {
 			$pt->parse("AGENT_COLUMN","agent_column","true");
 		}
 		$pt->setVar('CS_ACTIVE', ucfirst($customers->active));
+		
+		if ($wholesaler->bpay != '') {
+			
+			// Enable BPAY
+			$pt->setVar('BPAY_BILLER_CODE', $wholesaler->bpay);
+			$pt->setVar('BPAY_REFERENCE', $misc->generateBpayRef(100000000 + $customers->customer_id));
+			
+			$pt->parse('BPAY_TABLE','bpay_table');
+		}
+			
 
 		$my_services = new services();
 		$my_services->customer_id = $customers->customer_id;

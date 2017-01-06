@@ -42,6 +42,7 @@ class wholesalers {
   var $xero_session_handle;
   var $xero_name;
   var $xero_apikey;
+  var $bpay;
   
   
   var $db;
@@ -295,8 +296,8 @@ class wholesalers {
     $ws->load();
     
     // Create the property search
-    $query = "INSERT INTO wholesalers (company_name, email, active, phone, address1, address2, city, state, postcode, abn, require_ar_download, require_ar_idcheck, customer_billing, manage_own_plan, block_customer_order_notif, allow_credit_card)";
-    $query .= " VALUES (" . $this->db->quote($this->company_name) . "," . $this->db->quote($this->email) . "," . $this->db->quote($this->active) . "," . $this->db->quote($this->phone) . "," . $this->db->quote($this->address1) . "," . $this->db->quote($this->address2) . "," . $this->db->quote($this->city) . "," . $this->db->quote($this->state) . "," . $this->db->quote($this->postcode) . "," . $this->db->quote($this->abn) . "," . $this->db->quote($this->require_ar_download) . "," . $this->db->quote($this->require_ar_idcheck) . "," . $this->db->quote($this->customer_billing) . "," . $this->db->quote($this->manage_own_plan) . "," . $this->db->quote($this->block_customer_order_notif) . "," . $this->db->quote($this->allow_credit_card) . ")";
+    $query = "INSERT INTO wholesalers (company_name, email, active, phone, address1, address2, city, state, postcode, abn, require_ar_download, require_ar_idcheck, customer_billing, manage_own_plan, block_customer_order_notif, allow_credit_card,bpay)";
+    $query .= " VALUES (" . $this->db->quote($this->company_name) . "," . $this->db->quote($this->email) . "," . $this->db->quote($this->active) . "," . $this->db->quote($this->phone) . "," . $this->db->quote($this->address1) . "," . $this->db->quote($this->address2) . "," . $this->db->quote($this->city) . "," . $this->db->quote($this->state) . "," . $this->db->quote($this->postcode) . "," . $this->db->quote($this->abn) . "," . $this->db->quote($this->require_ar_download) . "," . $this->db->quote($this->require_ar_idcheck) . "," . $this->db->quote($this->customer_billing) . "," . $this->db->quote($this->manage_own_plan) . "," . $this->db->quote($this->block_customer_order_notif) . "," . $this->db->quote($this->allow_credit_card) . "," . $this->db->quote($this->bpay) . ")";
 
     $result = $this->db->execute_query($query);
     
@@ -464,7 +465,7 @@ class wholesalers {
       $ws->load();
 
     $query = "UPDATE wholesalers SET company_name = " . $this->db->quote($this->company_name) . ", email = " . $this->db->quote($this->email) . ", active = " . $this->db->quote($this->active) . ", phone = " . $this->db->quote($this->phone) . ", address1 = " . $this->db->quote($this->address1) . ", address2 = " . $this->db->quote($this->address2) . ", city = " . $this->db->quote($this->city) . ", state = " . $this->db->quote($this->state) . ", postcode = " . $this->db->quote($this->postcode) . ", abn = " . $this->db->quote($this->abn) . ", require_ar_download = " . $this->db->quote($this->require_ar_download) . ", require_ar_idcheck = " . $this->db->quote($this->require_ar_idcheck) . ", customer_billing = " . $this->db->quote($this->customer_billing) . ", manage_own_plan = " . $this->db->quote($this->manage_own_plan) . ", block_customer_order_notif = " . $this->db->quote($this->block_customer_order_notif) . ", allow_credit_card = " . $this->db->quote($this->allow_credit_card);
-    $query .=  ", xero_oauth_token = " . $this->db->quote($this->xero_oauth_token) . ", xero_oauth_token_secret = " . $this->db->quote($this->xero_oauth_token_secret) . ", xero_access_token = " . $this->db->quote($this->xero_access_token) . ", xero_access_token_secret = " . $this->db->quote($this->xero_access_token_secret) . ", xero_session_handle = " . $this->db->quote($this->xero_session_handle) . ", xero_name = " . $this->db->quote($this->xero_name) . ", xero_apikey = " . $this->db->quote($this->xero_apikey);
+    $query .=  ", xero_oauth_token = " . $this->db->quote($this->xero_oauth_token) . ", xero_oauth_token_secret = " . $this->db->quote($this->xero_oauth_token_secret) . ", xero_access_token = " . $this->db->quote($this->xero_access_token) . ", xero_access_token_secret = " . $this->db->quote($this->xero_access_token_secret) . ", xero_session_handle = " . $this->db->quote($this->xero_session_handle) . ", xero_name = " . $this->db->quote($this->xero_name) . ", xero_apikey = " . $this->db->quote($this->xero_apikey) . ", bpay = " . $this->db->quote($this->bpay);
     $query .= " WHERE wholesaler_id = " . $this->db->quote($this->wholesaler_id);
     
     //echo $query;

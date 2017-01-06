@@ -14,15 +14,22 @@
 				<td>{CUSTOMER_KIND}</td>
 			</tr>
 			<tr>
-				<td><strong>Phone</strong></td>
-				<td>{CS_PHONE}</td>
+				<td><strong>Home Phone</strong></td>
+				<td>{CS_HOME_PHONE}</td>
 				<td><strong>ACTIVE</strong></td>
 				<td>{CS_ACTIVE}</td>
 				{AGENT_COLUMN}
 			</tr>
-		</table>
+			<tr>
+				<td><strong>Mobile</strong></td>
+				<td>{CS_MOBILE_PHONE}</td>
+				<td><strong>Email</strong></td>
+				<td>{CS_EMAIL}</td>
+			</tr>
+	</table>
+	    {BPAY_TABLE}
 	</div>
-	<div>Services: <small><a href="/base/manage/services/add/?customer_id={CUSTOMER_ID}">Add a service</a></small>
+<div>Services: <small><a href="/base/manage/services/add/?customer_id={CUSTOMER_ID}">Add a service</a></small>
 		<!-- <ul style="margin-left: 10px;">{SERVICES_LI}</ul> -->
 		{SERVICES_TABLE}
 	</div>

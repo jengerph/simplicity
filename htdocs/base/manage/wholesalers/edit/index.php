@@ -108,6 +108,7 @@ if (isset($_REQUEST['submit'])) {
 	$wholesaler->manage_own_plan = $_REQUEST["manage_own_plan"];
 	$wholesaler->block_customer_order_notif = $_REQUEST["block_customer_order_notif"];
 	$wholesaler->allow_credit_card = $_REQUEST["allow_credit_card"];
+	$wholesaler->bpay = $_REQUEST["bpay"];
 	
 	$vc = $wholesaler->validate();
 
@@ -215,6 +216,7 @@ $pt->setVar('ADDRESS2', $wholesaler->address2);
 $pt->setVar('CITY', $wholesaler->city);
 $pt->setVar('POSTCODE', $wholesaler->postcode);
 $pt->setVar('ABN', $wholesaler->abn);
+$pt->setVar('BPAY', $wholesaler->bpay);
 $pt->setVar('ACTIVE',ucfirst($wholesaler->active));
 $pt->setVar('STATE',$wholesaler->state);
 $pt->setVar('ACTIVE_' . strtoupper($wholesaler->active) . '_SELECT', ' checked');
