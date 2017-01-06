@@ -121,6 +121,7 @@ $services = new wholesaler_service_types();
 					$pt->setVar('CUSTOMER_PHONE', $customers_list[$i]["phone"]);
 					$pt->setVar('ADSL_COUNT', services_count($customers_list[$i]["customer_id"],'1'));
 					$pt->setVar('NBN_COUNT', services_count($customers_list[$i]["customer_id"],'2'));
+					$pt->setVar('OPTICOMM_COUNT', services_count($customers_list[$i]["customer_id"],'8'));
 					$pt->setVar('OUTBOUND_VOICE_COUNT', services_count($customers_list[$i]["customer_id"],'6'));
 					$pt->setVar('INBOUND_VOICE_COUNT', services_count($customers_list[$i]["customer_id"],'5'));
 					$pt->setVar('WEB_HOSTING_COUNT', services_count($customers_list[$i]["customer_id"],'3'));
