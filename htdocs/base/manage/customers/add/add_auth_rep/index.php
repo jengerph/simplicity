@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
 // htdocs/base/manage/customers/add/add_auth_rep/index.php - Add Authorised Representative
-// $Id$
+// $Id: 576c6896ba9ea8f53ae4a97f93e501ad7b73f459 $
 //
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -132,7 +132,8 @@ if (isset($_REQUEST['submit'])) {
 	}
 	$authorised_rep->email = $_REQUEST['ar_email'];
 	$authorised_rep->contact_number = $_REQUEST['ar_contact_number'];
-
+	$authorised_rep->auth_rep_active = 'yes';
+	
 	$secondary_count = 0;
 
 	foreach($_REQUEST as $key => $value) {
