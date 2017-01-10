@@ -1,8 +1,8 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 //
-// htdocs/base/manage/customers/edit/edit_auth_rep/index.php - Edit Authorised Representative
-// $Id$
+// htdocs/base/manage/customers/edit/edit_auth_rep/index.php - Manage Authorised Representative
+// $Id: 22edd549feffe7eb4cdc1332150bfd896d929a21 $
 //
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -79,6 +79,8 @@ if ( $user->class == 'customer' ) {
 $authorised_reps = new authorised_rep();
 $authorised_reps->customer_id = $customer->customer_id;
 $auth_rep_arr = $authorised_reps->get_contacts();
+$ar=0;
+$dr=0;
 
 for ($a=0; $a < count($auth_rep_arr); $a++) { 
 
@@ -86,8 +88,30 @@ for ($a=0; $a < count($auth_rep_arr); $a++) {
 
 	$pt->setVar("AUTHORISED_REP_ID",$auth_rep_arr[$a]["id"]);
 	$pt->setVar("AUTHORISED_REP",$auth_rep_name);
-	$pt->parse("ROWS","rows","true");
+
+	if ($auth_rep_arr[$a]["auth_rep_active"] == 'yes') {
+		$pt->setVar("ACTIVE_INACTIVE",'Deactivate');
+		$pt->parse("ROWS_ACTIVATED","rows","true");
+		$ar++;
+	} else {
+		$pt->setVar("ACTIVE_INACTIVE",'Activate'); 
+		$pt->parse("ROWS_DEACTIVATED","rows","true");
+		$dr++;
+	}
+
 }
+
+if ($ar != 0) {
+	$pt->setVar("ACTIVATED_REPRESENTATIVES_BANNER",'Authorised &nbspRepresentatives:');
+} else {
+	$pt->setVar("ACTIVATED_REPRESENTATIVES_BANNER",'Authorised &nbspRepresentatives:');
+}	
+if ($dr != 0) {
+	$pt->setVar("DEACTIVATED_REPRESENTATIVES_BANNER",'Deactivated Representatives:');
+} else {
+	$pt->setVar("DEACTIVATED_REPRESENTATIVES_BANNER",'');
+}	
+
 
 $pt->setVar("CUSTOMER_ID",$customer->customer_id);
 
