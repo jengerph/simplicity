@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
 // authorised_rep.class - Class for accessing authorised_rep details
-// $Id$
+// $Id: e6c65e213d41787f04b6ce4b0e9e22effbbf2007 $
 //
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -29,6 +29,7 @@ class authorised_rep {
   var $file;
   var $email;
   var $contact_number;
+  var	$auth_rep_active;
   
   var $db;
   var $server_name;
@@ -186,8 +187,8 @@ class authorised_rep {
     }
 
     // Create the account
-    $query = "INSERT INTO authorised_rep (customer_id, title, first_name, middle_name, surname, birthdate, position, primary_id, primary_id_number, email, contact_number)";
-    $query .= " VALUES (" . $this->db->quote($this->customer_id) . ", " . $this->db->quote($this->title) . ", ". $this->db->quote($this->first_name) . ", " . $this->db->quote($this->middle_name) . ", " . $this->db->quote($this->surname) . ", " . $this->db->quote($this->birthdate) . ", " . $this->db->quote($this->position) . ", " . $this->db->quote($this->primary_id) . ", " . $this->db->quote($this->primary_id_number) . ", " . $this->db->quote($this->email) . ", " . $this->db->quote($this->contact_number) . ")";
+    $query = "INSERT INTO authorised_rep (customer_id, title, first_name, middle_name, surname, birthdate, position, primary_id, primary_id_number, email, contact_number, auth_rep_active)";
+    $query .= " VALUES (" . $this->db->quote($this->customer_id) . ", " . $this->db->quote($this->title) . ", ". $this->db->quote($this->first_name) . ", " . $this->db->quote($this->middle_name) . ", " . $this->db->quote($this->surname) . ", " . $this->db->quote($this->birthdate) . ", " . $this->db->quote($this->position) . ", " . $this->db->quote($this->primary_id) . ", " . $this->db->quote($this->primary_id_number) . ", " . $this->db->quote($this->email) . ", " . $this->db->quote($this->contact_number) . ", " . $this->db->quote($this->auth_rep_active) . ")";
     $result = $this->db->execute_query($query);
     
     if ($result == 0) {
@@ -356,7 +357,7 @@ class authorised_rep {
       $previous->customer_id = $this->customer_id;
       $previous->load();
     
-    $query = "UPDATE authorised_rep SET customer_id = " . $this->db->quote($this->customer_id) . ", title = " . $this->db->quote($this->title) . ", first_name = " . $this->db->quote($this->first_name) . ", middle_name = " . $this->db->quote($this->middle_name) . ", surname = " . $this->db->quote($this->surname) . ", birthdate = " . $this->db->quote($this->birthdate) . ", position = " . $this->db->quote($this->position) . ", primary_id = " . $this->db->quote($this->primary_id) . ", primary_id_number = " . $this->db->quote($this->primary_id_number) . ", email = " . $this->db->quote($this->email) . ", contact_number = " . $this->db->quote($this->contact_number);
+    $query = "UPDATE authorised_rep SET customer_id = " . $this->db->quote($this->customer_id) . ", title = " . $this->db->quote($this->title) . ", first_name = " . $this->db->quote($this->first_name) . ", middle_name = " . $this->db->quote($this->middle_name) . ", surname = " . $this->db->quote($this->surname) . ", birthdate = " . $this->db->quote($this->birthdate) . ", position = " . $this->db->quote($this->position) . ", primary_id = " . $this->db->quote($this->primary_id) . ", primary_id_number = " . $this->db->quote($this->primary_id_number) . ", email = " . $this->db->quote($this->email) . ", contact_number = " . $this->db->quote($this->contact_number) . ", auth_rep_active = " . $this->db->quote($this->auth_rep_active);
     $query .= " WHERE id = " . $this->db->quote($this->id);
     $result = $this->db->execute_query($query);
     
@@ -680,6 +681,4 @@ class authorised_rep {
     }
   }
 
-
 }
-
